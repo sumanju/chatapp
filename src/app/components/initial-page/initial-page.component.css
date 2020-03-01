@@ -1,0 +1,15 @@
+.structure {
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to right, #000046, #1CB5E0);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.text {
+  font-weight: bolder;
+  font-style: italic;
+  color: aliceblue;
+  font-size: 2rem;
+}
