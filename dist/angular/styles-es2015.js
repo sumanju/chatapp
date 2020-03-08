@@ -376,8 +376,8 @@ if (content.locals) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/suman.mandal/Music/temp/chatapp/node_modules/@angular/material/prebuilt-themes/indigo-pink.css */"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css");
-module.exports = __webpack_require__(/*! /home/suman.mandal/Music/temp/chatapp/src/styles.css */"./src/styles.css");
+__webpack_require__(/*! /home/suman.mandal/Videos/app-project/angular/node_modules/@angular/material/prebuilt-themes/indigo-pink.css */"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css");
+module.exports = __webpack_require__(/*! /home/suman.mandal/Videos/app-project/angular/src/styles.css */"./src/styles.css");
 
 
 /***/ })

@@ -10,12 +10,8 @@ const app = express()
       app.use(cors())
       app.use(routeList)
 
-// app.use(express.static(path.join(__dirname, "../dist/angular/")))
+app.use(express.static(path.join(__dirname, "../dist/angular/")))
 
-// const login = require('./src/routes/login.js')
-// app.use('/', login)
-
-// app.use(routeList)
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
   res.header(
@@ -25,7 +21,6 @@ app.use(function (req, res, next) {
   next()
 })
 
- 
 const port = process.env.PORT || 5000
 
 app.listen(port, (req, res) => {
