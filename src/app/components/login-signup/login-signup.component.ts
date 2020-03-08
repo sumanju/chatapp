@@ -6,6 +6,7 @@ import {  FormBuilder,
         }                   from '@angular/forms';
 import { Router 
         }                   from '@angular/router';
+import { AppServiceService } from 'src/app/app-service.service';
 
 @Component({
   selector    : 'app-login-signup',
@@ -29,8 +30,9 @@ export class LoginSignupComponent implements OnInit {
 
   })
 
-  constructor(private fb      : FormBuilder,
-              private router  : Router) {
+  constructor(private fb          : FormBuilder,
+              private router      : Router,
+              private dataService : AppServiceService) {
   }
 
   ngOnInit() {
@@ -46,12 +48,21 @@ export class LoginSignupComponent implements OnInit {
     this.toggle = false
   }  
 
-  logInCB() {
-    console.log(this.loginFormGroup.value, this.loginFormGroup.status)
-    this.router.navigate(['/LandingPage'])
+  logIn() {
+    this.dataService.logIn(this.loginFormGroup.value).subscribe(res=>{
+      console.log(res)      
+    },error=>{
+      console.log(error)      
+    })
+    // this.router.navigate(['/LandingPage'])
   }
 
-  signUpCB() {
-    console.log('resp')
+  signUp() {
+    this.dataService.signUp(this.signupFormFroup.value).subscribe(res=>{
+      console.log(res)      
+    },error=>{
+      console.log(error)      
+    })
+    // this.router.navigate(['/LandingPage'])
   }
 }

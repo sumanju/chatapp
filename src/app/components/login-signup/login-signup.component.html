@@ -4,11 +4,11 @@
   <div class="body">
     <mat-card class="login-box">
       <div class="tab">
-        <div [ngClass]="toggle ? 'tab-cont-active' : 'tab-cont-not-active'" style="border-right: none;" (click)="logInForm($event)">Log In</div>
-        <div [ngClass]="!toggle ? 'tab-cont-active' : 'tab-cont-not-active'" style="margin-left: 1px;" (click)="signupForm($event)">Sign Up</div>
+        <div [ngClass]="toggle ? 'tab-cont-active' : 'tab-cont-not-active'"  (click)="logInForm($event)">Log In</div>
+        <div [ngClass]="!toggle ? 'tab-cont-active' : 'tab-cont-not-active'" style="margin-left: 1px;"  (click)="signupForm($event)">Sign Up</div>
       </div>
-      <div *ngIf="toggle;else signUp" >  
-        <form [formGroup]="loginFormGroup" (ngSubmit)="logInCB()" class="login-form">
+      <div *ngIf="toggle;else signup" >  
+        <form [formGroup]="loginFormGroup" (ngSubmit)="logIn()" class="login-form">
 
           <mat-form-field class="text-form-field-li"  appearance="outline">
             <mat-label>User Id</mat-label>
@@ -19,25 +19,15 @@
             <mat-label>Password</mat-label>
             <input type="password" formControlName="password"  matInput>
           </mat-form-field>
-          
-          <!-- <input  class="text-form-field-li" 
-                  type="text"     
-                  formControlName="userId"
-                  placeholder="User Name"
-                  required>
-          <input  class="text-form-field-li" 
-                  type="password"
-                  placeholder="Password"
-                  formControlName="password"
-                  required> -->
-          <input class="submit-button" [disabled]="!loginFormGroup.valid" type="submit"  value="Log In">
+          <input [ngClass]="loginFormGroup.valid ? 'submit-button' : 'submit-button-disable'" 
+                 [disabled]="!loginFormGroup.valid" type="submit"  value="Log In">
         </form>
       </div>
     </mat-card>
   </div>
   
-  <ng-template #signUp>
-    <form [formGroup]="signupFormFroup" (ngSubmit)="signUpCB()" class="login-form">
+  <ng-template #signup>
+    <form [formGroup]="signupFormFroup" (ngSubmit)="signUp()" class="login-form">
 
       <mat-form-field class="text-form-field-su"  appearance="outline">
         <mat-label>Name</mat-label>
@@ -53,13 +43,23 @@
         <mat-label>Password</mat-label>
         <input type="password" formControlName="password" matInput>
       </mat-form-field>
-
       <mat-form-field class="text-form-field-su"  appearance="outline">
         <mat-label>Contact</mat-label>
         <input formControlName="phoneNo" type="number" matInput>
-      </mat-form-field>
+      </mat-form-field>                  
+      <input [ngClass]="signupFormFroup.valid ? 'submit-button' : 'submit-button-disable'" [disabled]="!signupFormFroup.valid" type="submit"  value="Sign Up">
+    </form>
+  </ng-template>
+</div>
 
-      <!-- <input  class="text-form-field-su" 
+
+
+
+
+
+<!-- temp html
+
+  <input  class="text-form-field-su" 
                   type="text"     
                   formControlName="name"
                   placeholder="name"
@@ -78,9 +78,17 @@
                   type="number"     
                   formControlName="phoneNo"
                   placeholder="contact"
-                  required>  -->
-                  
-      <input class="submit-button" [disabled]="!loginFormGroup.valid" type="submit"  value="Sign Up">
-    </form>
-  </ng-template>
-</div>
+                  required>  
+
+      <input  class="text-form-field-li" 
+                  type="text"     
+                  formControlName="userId"
+                  placeholder="User Name"
+                  required>
+          <input  class="text-form-field-li" 
+                  type="password"
+                  placeholder="Password"
+                  formControlName="password"
+                  required> 
+
+-->
