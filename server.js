@@ -4,7 +4,7 @@ const bodyParser  = require('body-parser')
 const cors        = require('cors')
 const routeList   = require('./app-server/route-list')
 
-// const dist = require('./')
+const dist = require('./')
 const app = express()
       app.use(bodyParser.json())
       app.use(cors())
@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, "./dist/angular/")))
 
 app.get('*', function(req,res) {
     
-  res.sendFile(path.join(__dirname,'/dist/angular/index.html'));
+  res.sendFile(path.join(__dirname,'./dist/angular/index.html'));
   });
  
 
