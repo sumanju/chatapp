@@ -47,7 +47,13 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-middleware": "^3.4.2",
+    "nodemon": "^2.0.2",
+    "path": "^0.12.7"
   },
   "engines": {
     "node": "10.16.3",

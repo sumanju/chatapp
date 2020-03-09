@@ -2,15 +2,15 @@ const express     = require('express')
 const path        = require('path')
 const bodyParser  = require('body-parser')
 const cors        = require('cors')
-const routeList   = require('./route-list')
+const routeList   = require('./app-server/route-list')
 
-
+// const dist = require('./')
 const app = express()
       app.use(bodyParser.json())
       app.use(cors())
       app.use(routeList)
 
-app.use(express.static(path.join(__dirname, "../dist/angular/")))
+app.use(express.static(path.join(__dirname, "./dist/angular/")))
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
