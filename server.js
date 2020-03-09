@@ -21,9 +21,8 @@ const app = express()
 app.use(express.static(path.join(__dirname, "./dist/angular/")))
 
 app.get('*', function(req,res) {
-    
   res.sendFile(path.join(__dirname,'/dist/angular/index.html'));
-  });
+});
  
 
 const port = process.env.PORT || 8080

@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class AppServiceService {
 
-  private baseUrl = 'http://localhost:5000/'
+  // private baseUrl = 'http://localhost:5000/';
+  private baseUrl = 'https://chatapp212.herokuapp.com/';
+
 
   constructor(private httpClient : HttpClient) { }
 

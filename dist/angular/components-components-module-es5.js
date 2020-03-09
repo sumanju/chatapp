@@ -90220,8 +90220,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function AppServiceService(httpClient) {
         _classCallCheck(this, AppServiceService);
 
-        this.httpClient = httpClient;
-        this.baseUrl = 'http://localhost:5000/';
+        this.httpClient = httpClient; // private baseUrl = 'http://localhost:5000/';
+
+        this.baseUrl = 'https://chatapp212.herokuapp.com/';
       }
 
       _createClass(AppServiceService, [{

@@ -59256,7 +59256,8 @@ __webpack_require__.r(__webpack_exports__);
 let AppServiceService = class AppServiceService {
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.baseUrl = 'http://localhost:5000/';
+        // private baseUrl = 'http://localhost:5000/';
+        this.baseUrl = 'https://chatapp212.herokuapp.com/';
     }
     logIn(logInValues) {
         return this.httpClient.post(`${this.baseUrl}login`, logInValues);
