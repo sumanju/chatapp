@@ -15,7 +15,10 @@ import { AppServiceService } from 'src/app/app-service.service';
 })
 export class LoginSignupComponent implements OnInit {
 
-  toggle  :  boolean = true
+  apiState      : boolean = false
+
+  toggle        : boolean = true
+  signupStatus  : boolean = false
 
   loginFormGroup = this.fb.group({
     userId    : ['', Validators.required],
@@ -37,16 +40,10 @@ export class LoginSignupComponent implements OnInit {
 
   ngOnInit() {
   }
-  
 
-///////////////////////////////// CALL BACKS /////////////////////////////////////////  
-  logInForm(event ) {
-    this.toggle = true
-  }
-  
-  signupForm(event) {
-    this.toggle = false
-  }  
+////////////////////////////////////////////////////////////////////////////////
+//                          API
+////////////////////////////////////////////////////////////////////////////////
 
   logIn() {
     this.dataService.logIn(this.loginFormGroup.value).subscribe(res=>{
@@ -58,11 +55,31 @@ export class LoginSignupComponent implements OnInit {
   }
 
   signUp() {
-    this.dataService.signUp(this.signupFormFroup.value).subscribe(res=>{
-      console.log(res)      
+    this.apiState = true
+    this.dataService.signUp(this.signupFormFroup.value).subscribe(res => {
+      this.apiState = false
+      if (res.status) {
+        this.signupStatus = true
+        setTimeout(() => {
+          this.signupStatus = false
+        }, 3000)
+      }
+      console.log(res)
     },error=>{
       console.log(error)      
     })
-    // this.router.navigate(['/LandingPage'])
   }
+  
+////////////////////////////////////////////////////////////////////////////////
+//                          API
+////////////////////////////////////////////////////////////////////////////////
+
+  logInForm(event) {
+    this.toggle = true
+  }
+  
+  signupForm(event) {
+    this.toggle = false
+  }  
+
 }

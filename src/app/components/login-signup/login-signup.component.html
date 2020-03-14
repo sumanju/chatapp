@@ -1,3 +1,13 @@
+<div *ngIf="apiState" class="api-progress">
+  <img class="api-progress-img" src="../../../assets/giphy.gif"/>
+</div>
+
+<div *ngIf="signupStatus" class="popup-signup">
+  <mat-card class="popup-content">
+    succesfully sign up
+  </mat-card>
+</div>
+
 <div class="structure">
   <div class=" header">
   </div>
@@ -51,8 +61,6 @@
     </form>
   </ng-template>
 </div>
-
-
 
 
 

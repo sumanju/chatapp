@@ -1,8 +1,25 @@
 const express = require('express')
+const conn    = require('../db-connection/mysql-db')
 const router  = express.Router()
 
   router.post('/signup', (req, res) => {
-      console.log(req.body)
+    const data = req.body,
+          queryString = `INSERT INTO user_info 
+                         values(\'${data.name}\',\'${data.userId}\',\'${data.password}\',\'${data.phoneNo}\')`
+
+    conn.connect((err) => {
+      if (!!err) {
+        res.status(400).send({
+          status : false
+        })
+      } else {
+        conn.query(queryString)
+        res.status(200).send({
+          status : true
+        })
+      }
+    })
+
   })
 
   module.exports = router
