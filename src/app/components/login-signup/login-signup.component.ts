@@ -46,9 +46,12 @@ export class LoginSignupComponent implements OnInit {
 ////////////////////////////////////////////////////////////////////////////////
 
   logIn() {
+    this.apiState = true
     this.dataService.logIn(this.loginFormGroup.value).subscribe(res=>{
-      console.log(res)      
+      this.apiState = false 
+      console.log(res)
     },error=>{
+      this.apiState = false
       console.log(error)      
     })
     // this.router.navigate(['/LandingPage'])
@@ -64,14 +67,13 @@ export class LoginSignupComponent implements OnInit {
           this.signupStatus = false
         }, 3000)
       }
-      console.log(res)
     },error=>{
-      console.log(error)      
+      this.apiState = false      
     })
   }
   
 ////////////////////////////////////////////////////////////////////////////////
-//                          API
+//                          HTML
 ////////////////////////////////////////////////////////////////////////////////
 
   logInForm(event) {

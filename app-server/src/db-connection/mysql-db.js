@@ -8,4 +8,10 @@ const connection = mysql.createConnection({
   port      : '3306'
 })
 
-module.exports = connection
+connection.connect(err => {
+  if (!!err) {
+    throw err
+  }
+})
+
+module.exports  = connection
