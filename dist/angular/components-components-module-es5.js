@@ -90152,7 +90152,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"structure\">\n  <div class=\"header\">\n\n  </div>\n  <div class=\"body\">\n   \n  </div>\n</div>";
+    __webpack_exports__["default"] = "<div class=\"structure\">\n  <div class=\"header\">\n  </div>\n\n  <div class=\"body\">\n\n    <div class=\"status\">\n    </div>\n\n    <div class=\"msg-body\">\n      <ng-container *ngFor=\"let val of msgData; index as ind\">\n        <div class=\"msg-cont\">\n          <div class=\"profile-img\">\n            <img src=\"\" alt=\"none\">\n          </div>\n          <div class=\"profile-name\">\n            {{ val.name }}\n          </div>\n        </div>\n        <mat-divider></mat-divider>\n      </ng-container>\n    </div>\n\n  </div>\n\n</div>";
     /***/
   },
 
@@ -90415,7 +90415,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     ComponentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       declarations: [_login_signup_login_signup_component__WEBPACK_IMPORTED_MODULE_3__["LoginSignupComponent"], _landing_page_landing_page_component__WEBPACK_IMPORTED_MODULE_7__["LandingPageComponent"], _initial_page_initial_page_component__WEBPACK_IMPORTED_MODULE_8__["InitialPageComponent"]],
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatCardModule"], _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatInputModule"], _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatFormFieldModule"], _components_routing__WEBPACK_IMPORTED_MODULE_4__["AppComponentRouting"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["ReactiveFormsModule"]]
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatCardModule"], _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatInputModule"], _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDividerModule"], _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatFormFieldModule"], _components_routing__WEBPACK_IMPORTED_MODULE_4__["AppComponentRouting"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["ReactiveFormsModule"]]
     })], ComponentsModule);
     /***/
   },
@@ -90540,7 +90540,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".structure {\n  background-color:#c4c4c4;\n  height: 100vh;\n  width: 100vw;\n}\n\n.header {\n  height: 10vh;\n  width: 100vw;\n  background-image: -webkit-gradient(linear, left top, right top, from(#000046), to(#1CB5E0));\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n}\n\n.body {\n  height: 90vh;\n  width: 100vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9sYW5kaW5nLXBhZ2UvbGFuZGluZy1wYWdlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx3QkFBd0I7RUFDeEIsYUFBYTtFQUNiLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1osMkZBQTZEO0VBQTdELDZEQUE2RDtBQUMvRDs7QUFFQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1osb0JBQWE7RUFBYixhQUFhO0VBQ2IsOEJBQTZCO1VBQTdCLDZCQUE2QjtFQUM3Qix5QkFBbUI7VUFBbkIsbUJBQW1CO0FBQ3JCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9sYW5kaW5nLXBhZ2UvbGFuZGluZy1wYWdlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc3RydWN0dXJlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjojYzRjNGM0O1xuICBoZWlnaHQ6IDEwMHZoO1xuICB3aWR0aDogMTAwdnc7XG59XG5cbi5oZWFkZXIge1xuICBoZWlnaHQ6IDEwdmg7XG4gIHdpZHRoOiAxMDB2dztcbiAgYmFja2dyb3VuZC1pbWFnZTogbGluZWFyLWdyYWRpZW50KHRvIHJpZ2h0LCAjMDAwMDQ2LCAjMUNCNUUwKTtcbn1cblxuLmJvZHkge1xuICBoZWlnaHQ6IDkwdmg7XG4gIHdpZHRoOiAxMDB2dztcbiAgZGlzcGxheTogZmxleDtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG59Il19 */";
+    __webpack_exports__["default"] = ".structure {\n  background-color: white;\n  height: 100vh;\n  width: 100vw;\n  \n}\n\n.header {\n  height: 10vh;\n  width: 100vw;\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0vh;\n  background-image: -webkit-gradient(linear, left top, right top, from(#000046), to(#1CB5E0));\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n}\n\n.body {\n  height: 90vh;\n  width: 100vw;\n}\n\n.status {\n  height: 10vh;\n  width: 100vw;\n  position: -webkit-sticky;\n  position: sticky;\n  top: 10vh;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n          flex-direction: row;\n  background-color: black;\n}\n\n.msg-body {\n  width: 100%;\n}\n\n.msg-cont {\n  width: 100vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.profile-img {\n  height: 10vh;\n  width: 20vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.profile-name {\n  height: 10vh;\n  width: 80vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9sYW5kaW5nLXBhZ2UvbGFuZGluZy1wYWdlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx1QkFBdUI7RUFDdkIsYUFBYTtFQUNiLFlBQVk7O0FBRWQ7O0FBRUE7RUFDRSxZQUFZO0VBQ1osWUFBWTtFQUNaLHdCQUFnQjtFQUFoQixnQkFBZ0I7RUFDaEIsUUFBUTtFQUNSLDJGQUE2RDtFQUE3RCw2REFBNkQ7QUFDL0Q7O0FBRUE7RUFDRSxZQUFZO0VBQ1osWUFBWTtBQUNkOztBQUVBO0VBQ0UsWUFBWTtFQUNaLFlBQVk7RUFDWix3QkFBZ0I7RUFBaEIsZ0JBQWdCO0VBQ2hCLFNBQVM7RUFDVCxvQkFBYTtFQUFiLGFBQWE7RUFDYiw4QkFBbUI7RUFBbkIsNkJBQW1CO1VBQW5CLG1CQUFtQjtFQUNuQix1QkFBdUI7QUFDekI7O0FBRUE7RUFDRSxXQUFXO0FBQ2I7O0FBRUE7RUFDRSxZQUFZO0VBQ1osb0JBQWE7RUFBYixhQUFhO0VBQ2IseUJBQW1CO1VBQW5CLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixXQUFXO0VBQ1gsb0JBQWE7RUFBYixhQUFhO0VBQ2IsOEJBQTZCO1VBQTdCLDZCQUE2QjtFQUM3Qix5QkFBbUI7VUFBbkIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLFdBQVc7RUFDWCxvQkFBYTtFQUFiLGFBQWE7RUFDYix5QkFBbUI7VUFBbkIsbUJBQW1CO0FBQ3JCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9sYW5kaW5nLXBhZ2UvbGFuZGluZy1wYWdlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc3RydWN0dXJlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gIGhlaWdodDogMTAwdmg7XG4gIHdpZHRoOiAxMDB2dztcbiAgXG59XG5cbi5oZWFkZXIge1xuICBoZWlnaHQ6IDEwdmg7XG4gIHdpZHRoOiAxMDB2dztcbiAgcG9zaXRpb246IHN0aWNreTtcbiAgdG9wOiAwdmg7XG4gIGJhY2tncm91bmQtaW1hZ2U6IGxpbmVhci1ncmFkaWVudCh0byByaWdodCwgIzAwMDA0NiwgIzFDQjVFMCk7XG59XG5cbi5ib2R5IHtcbiAgaGVpZ2h0OiA5MHZoO1xuICB3aWR0aDogMTAwdnc7XG59XG5cbi5zdGF0dXMge1xuICBoZWlnaHQ6IDEwdmg7XG4gIHdpZHRoOiAxMDB2dztcbiAgcG9zaXRpb246IHN0aWNreTtcbiAgdG9wOiAxMHZoO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcbn1cblxuLm1zZy1ib2R5IHtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi5tc2ctY29udCB7XG4gIHdpZHRoOiAxMDB2dztcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLnByb2ZpbGUtaW1nIHtcbiAgaGVpZ2h0OiAxMHZoO1xuICB3aWR0aDogMjB2dztcbiAgZGlzcGxheTogZmxleDtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG59XG5cbi5wcm9maWxlLW5hbWUge1xuICBoZWlnaHQ6IDEwdmg7XG4gIHdpZHRoOiA4MHZ3O1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4iXX0= */";
     /***/
   },
 
@@ -90590,6 +90590,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         this.dataService = dataService;
         this.apiState = false;
+        this.msgData = [];
       }
 
       _createClass(LandingPageComponent, [{
@@ -90610,7 +90611,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             cookie: document.cookie
           }).subscribe(function (res) {
             _this358.apiState = false;
-            console.log(res);
+            _this358.userInfo = res.userInfo;
+            _this358.msgData = res.msgInfo;
           }, function (error) {
             _this358.apiState = false;
             console.log(error);

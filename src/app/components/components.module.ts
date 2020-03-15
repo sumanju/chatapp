@@ -12,7 +12,8 @@ import { MatCardModule,
 				 MatFormField, 
 				 MatFormFieldModule, 
 				 MatFormFieldControl,
-				 MatInputModule
+				 MatInputModule,
+				 MatDividerModule
 				}                          from '@angular/material';
 import { LandingPageComponent 
 				} 												 from './landing-page/landing-page.component';
@@ -27,6 +28,7 @@ import { InitialPageComponent
     							CommonModule,
 									MatCardModule,
 									MatInputModule,
+									MatDividerModule,
 									MatFormFieldModule,
     							AppComponentRouting,
     							ReactiveFormsModule

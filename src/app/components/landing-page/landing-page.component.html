@@ -1,8 +1,26 @@
 <div class="structure">
   <div class="header">
+  </div>
+
+  <div class="body">
+
+    <div class="status">
+    </div>
+
+    <div class="msg-body">
+      <ng-container *ngFor="let val of msgData; index as ind">
+        <div class="msg-cont">
+          <div class="profile-img">
+            <img src="" alt="none">
+          </div>
+          <div class="profile-name">
+            {{ val.name }}
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </ng-container>
+    </div>
 
   </div>
-  <div class="body">
-   
-  </div>
+
 </div>

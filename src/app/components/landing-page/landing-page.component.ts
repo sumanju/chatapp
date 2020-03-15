@@ -11,15 +11,15 @@ import { AppServiceService
 })
 export class LandingPageComponent implements OnInit {
 
-  apiState : boolean = false
+  apiState : boolean  = false
+  userInfo : Object     
+  msgData  : any[]    = []
 
   constructor(private dataService : AppServiceService) { }
 
   ngOnInit() {
     this.getUserDetailes()
   }
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
 //                                  API
@@ -28,14 +28,13 @@ private getUserDetailes() {
   this.apiState = true
   this.dataService.getUserInfo({cookie : document.cookie}).subscribe(res => {
     this.apiState = false
-    console.log(res)
+    this.userInfo = res.userInfo
+    this.msgData  = res.msgInfo
   }, error => {
     this.apiState = false
     console.log(error)
   })
 }
-
-
 
 
 
