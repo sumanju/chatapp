@@ -90172,7 +90172,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"structure\">\n  <div class=\" header\">\n  </div>\n  <div class=\"body\">\n    <mat-card class=\"login-box\">\n      <div class=\"tab\">\n        <div [ngClass]=\"toggle ? 'tab-cont-active' : 'tab-cont-not-active'\"  (click)=\"logInForm($event)\">Log In</div>\n        <div [ngClass]=\"!toggle ? 'tab-cont-active' : 'tab-cont-not-active'\" style=\"margin-left: 1px;\"  (click)=\"signupForm($event)\">Sign Up</div>\n      </div>\n      <div *ngIf=\"toggle;else signup\" >  \n        <form [formGroup]=\"loginFormGroup\" (ngSubmit)=\"logIn()\" class=\"login-form\">\n\n          <mat-form-field class=\"text-form-field-li\"  appearance=\"outline\">\n            <mat-label>User Id</mat-label>\n            <input formControlName=\"userId\" matInput>\n          </mat-form-field>\n\n          <mat-form-field class=\"text-form-field-li\"  appearance=\"outline\">\n            <mat-label>Password</mat-label>\n            <input type=\"password\" formControlName=\"password\"  matInput>\n          </mat-form-field>\n          <input [ngClass]=\"loginFormGroup.valid ? 'submit-button' : 'submit-button-disable'\" \n                 [disabled]=\"!loginFormGroup.valid\" type=\"submit\"  value=\"Log In\">\n        </form>\n      </div>\n    </mat-card>\n  </div>\n  \n  <ng-template #signup>\n    <form [formGroup]=\"signupFormFroup\" (ngSubmit)=\"signUp()\" class=\"login-form\">\n\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>Name</mat-label>\n        <input formControlName=\"name\" matInput>\n      </mat-form-field>\n\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>User Id</mat-label>\n        <input formControlName=\"userId\" matInput>\n      </mat-form-field>\n\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>Password</mat-label>\n        <input type=\"password\" formControlName=\"password\" matInput>\n      </mat-form-field>\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>Contact</mat-label>\n        <input formControlName=\"phoneNo\" type=\"number\" matInput>\n      </mat-form-field>                  \n      <input [ngClass]=\"signupFormFroup.valid ? 'submit-button' : 'submit-button-disable'\" [disabled]=\"!signupFormFroup.valid\" type=\"submit\"  value=\"Sign Up\">\n    </form>\n  </ng-template>\n</div>\n\n\n\n\n\n\n<!-- temp html\n\n  <input  class=\"text-form-field-su\" \n                  type=\"text\"     \n                  formControlName=\"name\"\n                  placeholder=\"name\"\n                  required>  \n      <input  class=\"text-form-field-su\" \n                  type=\"text\"     \n                  formControlName=\"userId\"\n                  placeholder=\"User Name\"\n                  required>  \n      <input  class=\"text-form-field-su\" \n                  type=\"password\"     \n                  formControlName=\"password\"\n                  placeholder=\"password\"\n                  required>  \n      <input  class=\"text-form-field-su\" \n                  type=\"number\"     \n                  formControlName=\"phoneNo\"\n                  placeholder=\"contact\"\n                  required>  \n\n      <input  class=\"text-form-field-li\" \n                  type=\"text\"     \n                  formControlName=\"userId\"\n                  placeholder=\"User Name\"\n                  required>\n          <input  class=\"text-form-field-li\" \n                  type=\"password\"\n                  placeholder=\"Password\"\n                  formControlName=\"password\"\n                  required> \n\n-->";
+    __webpack_exports__["default"] = "<div *ngIf=\"apiState\" class=\"api-progress\">\n  <img class=\"api-progress-img\" src=\"../../../assets/giphy.gif\"/>\n</div>\n\n<div *ngIf=\"signupStatus\" class=\"popup-signup\">\n  <mat-card class=\"popup-content\">\n    succesfully sign up\n  </mat-card>\n</div>\n\n<div class=\"structure\">\n  <div class=\" header\">\n  </div>\n  <div class=\"body\">\n    <mat-card class=\"login-box\">\n      <div class=\"tab\">\n        <div [ngClass]=\"toggle ? 'tab-cont-active' : 'tab-cont-not-active'\"  (click)=\"logInForm($event)\">Log In</div>\n        <div [ngClass]=\"!toggle ? 'tab-cont-active' : 'tab-cont-not-active'\" style=\"margin-left: 1px;\"  (click)=\"signupForm($event)\">Sign Up</div>\n      </div>\n      <div *ngIf=\"toggle;else signup\" >  \n        <form [formGroup]=\"loginFormGroup\" (ngSubmit)=\"logIn()\" class=\"login-form\">\n\n          <mat-form-field class=\"text-form-field-li\"  appearance=\"outline\">\n            <mat-label>User Id</mat-label>\n            <input formControlName=\"userId\" matInput>\n          </mat-form-field>\n\n          <mat-form-field class=\"text-form-field-li\"  appearance=\"outline\">\n            <mat-label>Password</mat-label>\n            <input type=\"password\" formControlName=\"password\"  matInput>\n          </mat-form-field>\n          <input [ngClass]=\"loginFormGroup.valid ? 'submit-button' : 'submit-button-disable'\" \n                 [disabled]=\"!loginFormGroup.valid\" type=\"submit\"  value=\"Log In\">\n        </form>\n      </div>\n    </mat-card>\n  </div>\n  \n  <ng-template #signup>\n    <form [formGroup]=\"signupFormFroup\" (ngSubmit)=\"signUp()\" class=\"login-form\">\n\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>Name</mat-label>\n        <input formControlName=\"name\" matInput>\n      </mat-form-field>\n\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>User Id</mat-label>\n        <input formControlName=\"userId\" matInput>\n      </mat-form-field>\n\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>Password</mat-label>\n        <input type=\"password\" formControlName=\"password\" matInput>\n      </mat-form-field>\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>Contact</mat-label>\n        <input formControlName=\"phoneNo\" type=\"number\" matInput>\n      </mat-form-field>                  \n      <input [ngClass]=\"signupFormFroup.valid ? 'submit-button' : 'submit-button-disable'\" [disabled]=\"!signupFormFroup.valid\" type=\"submit\"  value=\"Sign Up\">\n    </form>\n  </ng-template>\n</div>\n\n\n\n\n<!-- temp html\n\n  <input  class=\"text-form-field-su\" \n                  type=\"text\"     \n                  formControlName=\"name\"\n                  placeholder=\"name\"\n                  required>  \n      <input  class=\"text-form-field-su\" \n                  type=\"text\"     \n                  formControlName=\"userId\"\n                  placeholder=\"User Name\"\n                  required>  \n      <input  class=\"text-form-field-su\" \n                  type=\"password\"     \n                  formControlName=\"password\"\n                  placeholder=\"password\"\n                  required>  \n      <input  class=\"text-form-field-su\" \n                  type=\"number\"     \n                  formControlName=\"phoneNo\"\n                  placeholder=\"contact\"\n                  required>  \n\n      <input  class=\"text-form-field-li\" \n                  type=\"text\"     \n                  formControlName=\"userId\"\n                  placeholder=\"User Name\"\n                  required>\n          <input  class=\"text-form-field-li\" \n                  type=\"password\"\n                  placeholder=\"Password\"\n                  formControlName=\"password\"\n                  required> \n\n-->";
     /***/
   },
 
@@ -90217,12 +90217,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var AppServiceService =
     /*#__PURE__*/
     function () {
+      // private baseUrl = 'https://chatapp212.herokuapp.com/';
       function AppServiceService(httpClient) {
         _classCallCheck(this, AppServiceService);
 
-        this.httpClient = httpClient; // private baseUrl = 'http://localhost:5000/';
-
-        this.baseUrl = 'https://chatapp212.herokuapp.com/';
+        this.httpClient = httpClient;
+        this.baseUrl = 'http://localhost:5000/';
       }
 
       _createClass(AppServiceService, [{
@@ -90234,6 +90234,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "signUp",
         value: function signUp(signUpvales) {
           return this.httpClient.post("".concat(this.baseUrl, "signup"), signUpvales);
+        }
+      }, {
+        key: "getUserInfo",
+        value: function getUserInfo(userinfo) {
+          return this.httpClient.post("".concat(this.baseUrl, "getuserinfo"), userinfo);
         }
       }]);
 
@@ -90570,21 +90575,57 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var src_app_app_service_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/app/app-service.service */
+    "./src/app/app-service.service.ts");
 
     var LandingPageComponent =
     /*#__PURE__*/
     function () {
-      function LandingPageComponent() {
+      function LandingPageComponent(dataService) {
         _classCallCheck(this, LandingPageComponent);
+
+        this.dataService = dataService;
+        this.apiState = false;
       }
 
       _createClass(LandingPageComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          this.getUserDetailes();
+        } ////////////////////////////////////////////////////////////////////////////////
+        //                                  API
+        ////////////////////////////////////////////////////////////////////////////////
+
+      }, {
+        key: "getUserDetailes",
+        value: function getUserDetailes() {
+          var _this358 = this;
+
+          this.apiState = true;
+          this.dataService.getUserInfo({
+            cookie: document.cookie
+          }).subscribe(function (res) {
+            _this358.apiState = false;
+            console.log(res);
+          }, function (error) {
+            _this358.apiState = false;
+            console.log(error);
+          });
+        }
       }]);
 
       return LandingPageComponent;
     }();
+
+    LandingPageComponent.ctorParameters = function () {
+      return [{
+        type: src_app_app_service_service__WEBPACK_IMPORTED_MODULE_2__["AppServiceService"]
+      }];
+    };
 
     LandingPageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-landing-page',
@@ -90614,7 +90655,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".structure {\n  background-color:#c4c4c4;\n  height: 100vh;\n  width: 100vw;\n}\n\n.header {\n  height: 10vh;\n  width: 100vw;\n  background-image: -webkit-gradient(linear, left top, right top, from(#000046), to(#1CB5E0));\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n}\n\n.body {\n  height: 90vh;\n  width: 100vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.login-box {\n  width: calc(100% - 15px);\n  height: calc(100% - 15px);\n  background-color: white;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n}\n\n.login-form-header {\n  text-align: center;\n  font-size: 2rem;\n  margin-top: 3vh;\n}\n\n.login-form {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  display: flex;  \n  -webkit-box-align: center;  \n          align-items: center;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n}\n\n.text-form-field-li {\n  height: 4vh;\n  width: 94%;\n  margin-top: 8vh;\n  border-radius: 15px;\n  border-color: #c4c4c4;\n  padding: 3px 3%;\n  font-size: 14px;\n}\n\n.text-form-field-su {\n  height: 4vh;\n  width: 94%;\n  margin-top: 8vh;\n  border-radius: 15px;\n  border-color: #c4c4c4;\n  padding: 3px 3%;\n  font-size: 14px;\n}\n\n.submit-button {\n  position: absolute;\n  z-index: 1000;\n  top: 85%;\n  height: 8vh;\n  width: 50%;\n  color: white;\n  background-image: -webkit-gradient(linear, left top, right top, from(#000046), to(#1CB5E0));\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n  border-radius: 20px;\n  font-size: 1rem;\n  font-style: italic ;\n}\n\n.submit-button-disable {\n  position: absolute;\n  z-index: 1000;\n  top: 85%;\n  height: 8vh;\n  width: 50%;\n  color: white;\n  background-color: #cccccc;\n  color: #666666;\n  border-radius: 20px;\n  font-size: 1rem;\n  font-style: italic ;\n}\n\n.tab {\n  height: 8%;\n  width: 100%;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n          flex-direction: row;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n  align-self: center;\n}\n\n.tab-cont-not-active {\n  height: 100%;\n  width: calc(50% - 2px);\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n}\n\n.tab-cont-active {\n  height: 100%;\n  width: calc(50% - 2px);\n  background-image: -webkit-gradient(linear, left top, right top, from(#000046), to(#1CB5E0));\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n  color: white;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n}\n\n/* GLOBAL CSS */\n\nmat-card {\n  padding: 0;\n  margin: 0;\n}\n\nmat-form-field {\n  line-height: 1.2;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9sb2dpbi1zaWdudXAvbG9naW4tc2lnbnVwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx3QkFBd0I7RUFDeEIsYUFBYTtFQUNiLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1osMkZBQTZEO0VBQTdELDZEQUE2RDtBQUMvRDs7QUFFQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1osb0JBQWE7RUFBYixhQUFhO0VBQ2IsOEJBQTZCO1VBQTdCLDZCQUE2QjtFQUM3Qix5QkFBbUI7VUFBbkIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0Usd0JBQXdCO0VBQ3hCLHlCQUF5QjtFQUN6Qix1QkFBdUI7RUFDdkIsb0JBQWE7RUFBYixhQUFhO0VBQ2IsNEJBQXNCO0VBQXRCLDZCQUFzQjtVQUF0QixzQkFBc0I7QUFDeEI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsZUFBZTtFQUNmLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxvQkFBYTtFQUFiLGFBQWE7RUFDYiw0QkFBc0I7RUFBdEIsNkJBQXNCO1VBQXRCLHNCQUFzQjtFQUN0QixhQUFhO0VBQ2IseUJBQW1CO1VBQW5CLG1CQUFtQjtFQUNuQiw4QkFBNkI7VUFBN0IsNkJBQTZCO0FBQy9COztBQUVBO0VBQ0UsV0FBVztFQUNYLFVBQVU7RUFDVixlQUFlO0VBQ2YsbUJBQW1CO0VBQ25CLHFCQUFxQjtFQUNyQixlQUFlO0VBQ2YsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxVQUFVO0VBQ1YsZUFBZTtFQUNmLG1CQUFtQjtFQUNuQixxQkFBcUI7RUFDckIsZUFBZTtFQUNmLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsYUFBYTtFQUNiLFFBQVE7RUFDUixXQUFXO0VBQ1gsVUFBVTtFQUNWLFlBQVk7RUFDWiwyRkFBNkQ7RUFBN0QsNkRBQTZEO0VBQzdELG1CQUFtQjtFQUNuQixlQUFlO0VBQ2YsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLGFBQWE7RUFDYixRQUFRO0VBQ1IsV0FBVztFQUNYLFVBQVU7RUFDVixZQUFZO0VBQ1oseUJBQXlCO0VBQ3pCLGNBQWM7RUFDZCxtQkFBbUI7RUFDbkIsZUFBZTtFQUNmLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLFVBQVU7RUFDVixXQUFXO0VBQ1gsb0JBQWE7RUFBYixhQUFhO0VBQ2IsOEJBQW1CO0VBQW5CLDZCQUFtQjtVQUFuQixtQkFBbUI7RUFDbkIsOEJBQTZCO1VBQTdCLDZCQUE2QjtFQUM3Qix5QkFBbUI7VUFBbkIsbUJBQW1CO0VBQ25CLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixzQkFBc0I7RUFDdEIsb0JBQWE7RUFBYixhQUFhO0VBQ2IseUJBQW1CO1VBQW5CLG1CQUFtQjtFQUNuQiw4QkFBNkI7VUFBN0IsNkJBQTZCO0FBQy9COztBQUVBO0VBQ0UsWUFBWTtFQUNaLHNCQUFzQjtFQUN0QiwyRkFBNkQ7RUFBN0QsNkRBQTZEO0VBQzdELFlBQVk7RUFDWixvQkFBYTtFQUFiLGFBQWE7RUFDYix5QkFBbUI7VUFBbkIsbUJBQW1CO0VBQ25CLDhCQUE2QjtVQUE3Qiw2QkFBNkI7QUFDL0I7O0FBR0EsZUFBZTs7QUFDZjtFQUNFLFVBQVU7RUFDVixTQUFTO0FBQ1g7O0FBRUE7RUFDRSxnQkFBZ0I7QUFDbEIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2xvZ2luLXNpZ251cC9sb2dpbi1zaWdudXAuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zdHJ1Y3R1cmUge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiNjNGM0YzQ7XG4gIGhlaWdodDogMTAwdmg7XG4gIHdpZHRoOiAxMDB2dztcbn1cblxuLmhlYWRlciB7XG4gIGhlaWdodDogMTB2aDtcbiAgd2lkdGg6IDEwMHZ3O1xuICBiYWNrZ3JvdW5kLWltYWdlOiBsaW5lYXItZ3JhZGllbnQodG8gcmlnaHQsICMwMDAwNDYsICMxQ0I1RTApO1xufVxuXG4uYm9keSB7XG4gIGhlaWdodDogOTB2aDtcbiAgd2lkdGg6IDEwMHZ3O1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLmxvZ2luLWJveCB7XG4gIHdpZHRoOiBjYWxjKDEwMCUgLSAxNXB4KTtcbiAgaGVpZ2h0OiBjYWxjKDEwMCUgLSAxNXB4KTtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG59XG5cbi5sb2dpbi1mb3JtLWhlYWRlciB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1zaXplOiAycmVtO1xuICBtYXJnaW4tdG9wOiAzdmg7XG59XG5cbi5sb2dpbi1mb3JtIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgZGlzcGxheTogZmxleDsgIFxuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbn1cblxuLnRleHQtZm9ybS1maWVsZC1saSB7XG4gIGhlaWdodDogNHZoO1xuICB3aWR0aDogOTQlO1xuICBtYXJnaW4tdG9wOiA4dmg7XG4gIGJvcmRlci1yYWRpdXM6IDE1cHg7XG4gIGJvcmRlci1jb2xvcjogI2M0YzRjNDtcbiAgcGFkZGluZzogM3B4IDMlO1xuICBmb250LXNpemU6IDE0cHg7XG59XG5cbi50ZXh0LWZvcm0tZmllbGQtc3Uge1xuICBoZWlnaHQ6IDR2aDtcbiAgd2lkdGg6IDk0JTtcbiAgbWFyZ2luLXRvcDogOHZoO1xuICBib3JkZXItcmFkaXVzOiAxNXB4O1xuICBib3JkZXItY29sb3I6ICNjNGM0YzQ7XG4gIHBhZGRpbmc6IDNweCAzJTtcbiAgZm9udC1zaXplOiAxNHB4O1xufVxuXG4uc3VibWl0LWJ1dHRvbiB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgei1pbmRleDogMTAwMDtcbiAgdG9wOiA4NSU7XG4gIGhlaWdodDogOHZoO1xuICB3aWR0aDogNTAlO1xuICBjb2xvcjogd2hpdGU7XG4gIGJhY2tncm91bmQtaW1hZ2U6IGxpbmVhci1ncmFkaWVudCh0byByaWdodCwgIzAwMDA0NiwgIzFDQjVFMCk7XG4gIGJvcmRlci1yYWRpdXM6IDIwcHg7XG4gIGZvbnQtc2l6ZTogMXJlbTtcbiAgZm9udC1zdHlsZTogaXRhbGljIDtcbn1cblxuLnN1Ym1pdC1idXR0b24tZGlzYWJsZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgei1pbmRleDogMTAwMDtcbiAgdG9wOiA4NSU7XG4gIGhlaWdodDogOHZoO1xuICB3aWR0aDogNTAlO1xuICBjb2xvcjogd2hpdGU7XG4gIGJhY2tncm91bmQtY29sb3I6ICNjY2NjY2M7XG4gIGNvbG9yOiAjNjY2NjY2O1xuICBib3JkZXItcmFkaXVzOiAyMHB4O1xuICBmb250LXNpemU6IDFyZW07XG4gIGZvbnQtc3R5bGU6IGl0YWxpYyA7XG59XG5cbi50YWIge1xuICBoZWlnaHQ6IDglO1xuICB3aWR0aDogMTAwJTtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGFsaWduLXNlbGY6IGNlbnRlcjtcbn1cblxuLnRhYi1jb250LW5vdC1hY3RpdmUge1xuICBoZWlnaHQ6IDEwMCU7XG4gIHdpZHRoOiBjYWxjKDUwJSAtIDJweCk7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xufVxuXG4udGFiLWNvbnQtYWN0aXZlIHtcbiAgaGVpZ2h0OiAxMDAlO1xuICB3aWR0aDogY2FsYyg1MCUgLSAycHgpO1xuICBiYWNrZ3JvdW5kLWltYWdlOiBsaW5lYXItZ3JhZGllbnQodG8gcmlnaHQsICMwMDAwNDYsICMxQ0I1RTApO1xuICBjb2xvcjogd2hpdGU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xufVxuXG5cbi8qIEdMT0JBTCBDU1MgKi9cbm1hdC1jYXJkIHtcbiAgcGFkZGluZzogMDtcbiAgbWFyZ2luOiAwO1xufVxuXG5tYXQtZm9ybS1maWVsZCB7XG4gIGxpbmUtaGVpZ2h0OiAxLjI7XG59Il19 */";
+    __webpack_exports__["default"] = ".structure {\n  background-color:#c4c4c4;\n  height: 100vh;\n  width: 100vw;\n}\n\n.header {\n  height: 10vh;\n  width: 100vw;\n  background-image: -webkit-gradient(linear, left top, right top, from(#000046), to(#1CB5E0));\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n}\n\n.body {\n  height: 90vh;\n  width: 100vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.login-box {\n  width: calc(100% - 15px);\n  height: calc(100% - 15px);\n  background-color: white;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n}\n\n.login-form-header {\n  text-align: center;\n  font-size: 2rem;\n  margin-top: 3vh;\n}\n\n.login-form {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  display: flex;  \n  -webkit-box-align: center;  \n          align-items: center;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n}\n\n.text-form-field-li {\n  height: 4vh;\n  width: 94%;\n  margin-top: 8vh;\n  border-radius: 15px;\n  border-color: #c4c4c4;\n  padding: 3px 3%;\n  font-size: 14px;\n}\n\n.text-form-field-su {\n  height: 4vh;\n  width: 94%;\n  margin-top: 8vh;\n  border-radius: 15px;\n  border-color: #c4c4c4;\n  padding: 3px 3%;\n  font-size: 14px;\n}\n\n.submit-button {\n  position: absolute;\n  z-index: 1000;\n  top: 85%;\n  height: 8vh;\n  width: 50%;\n  color: white;\n  background-image: -webkit-gradient(linear, left top, right top, from(#000046), to(#1CB5E0));\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n  border-radius: 20px;\n  font-size: 1rem;\n  font-style: italic ;\n}\n\n.submit-button-disable {\n  position: absolute;\n  z-index: 1000;\n  top: 85%;\n  height: 8vh;\n  width: 50%;\n  color: white;\n  background-color: #cccccc;\n  color: #666666;\n  border-radius: 20px;\n  font-size: 1rem;\n  font-style: italic ;\n}\n\n.tab {\n  height: 8%;\n  width: 100%;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n          flex-direction: row;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n  align-self: center;\n}\n\n.tab-cont-not-active {\n  height: 100%;\n  width: calc(50% - 2px);\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n}\n\n.tab-cont-active {\n  height: 100%;\n  width: calc(50% - 2px);\n  background-image: -webkit-gradient(linear, left top, right top, from(#000046), to(#1CB5E0));\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n  color: white;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n}\n\n.popup-signup {\n  z-index: 3000;\n  position: absolute;\n  top: 0;\n  background-color: black;\n  opacity: 0.6;\n  height: 100vh;\n  width: 100vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.popup-content {\n  height: 10vh;\n  width: 55vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n  background-color: white;\n}\n\n.api-progress {\n  z-index: 3000;\n  position: absolute;\n  top: 0;\n  background-color: black;\n  opacity: 0.6;\n  height: 100vh;\n  width: 100vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.api-progress-img {\n  height: 40vh;\n}\n\n/* GLOBAL CSS */\n\nmat-card {\n  padding: 0;\n  margin: 0;\n}\n\nmat-form-field {\n  line-height: 1.2;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9sb2dpbi1zaWdudXAvbG9naW4tc2lnbnVwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx3QkFBd0I7RUFDeEIsYUFBYTtFQUNiLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1osMkZBQTZEO0VBQTdELDZEQUE2RDtBQUMvRDs7QUFFQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1osb0JBQWE7RUFBYixhQUFhO0VBQ2IsOEJBQTZCO1VBQTdCLDZCQUE2QjtFQUM3Qix5QkFBbUI7VUFBbkIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0Usd0JBQXdCO0VBQ3hCLHlCQUF5QjtFQUN6Qix1QkFBdUI7RUFDdkIsb0JBQWE7RUFBYixhQUFhO0VBQ2IsNEJBQXNCO0VBQXRCLDZCQUFzQjtVQUF0QixzQkFBc0I7QUFDeEI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsZUFBZTtFQUNmLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxvQkFBYTtFQUFiLGFBQWE7RUFDYiw0QkFBc0I7RUFBdEIsNkJBQXNCO1VBQXRCLHNCQUFzQjtFQUN0QixhQUFhO0VBQ2IseUJBQW1CO1VBQW5CLG1CQUFtQjtFQUNuQiw4QkFBNkI7VUFBN0IsNkJBQTZCO0FBQy9COztBQUVBO0VBQ0UsV0FBVztFQUNYLFVBQVU7RUFDVixlQUFlO0VBQ2YsbUJBQW1CO0VBQ25CLHFCQUFxQjtFQUNyQixlQUFlO0VBQ2YsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxVQUFVO0VBQ1YsZUFBZTtFQUNmLG1CQUFtQjtFQUNuQixxQkFBcUI7RUFDckIsZUFBZTtFQUNmLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsYUFBYTtFQUNiLFFBQVE7RUFDUixXQUFXO0VBQ1gsVUFBVTtFQUNWLFlBQVk7RUFDWiwyRkFBNkQ7RUFBN0QsNkRBQTZEO0VBQzdELG1CQUFtQjtFQUNuQixlQUFlO0VBQ2YsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLGFBQWE7RUFDYixRQUFRO0VBQ1IsV0FBVztFQUNYLFVBQVU7RUFDVixZQUFZO0VBQ1oseUJBQXlCO0VBQ3pCLGNBQWM7RUFDZCxtQkFBbUI7RUFDbkIsZUFBZTtFQUNmLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLFVBQVU7RUFDVixXQUFXO0VBQ1gsb0JBQWE7RUFBYixhQUFhO0VBQ2IsOEJBQW1CO0VBQW5CLDZCQUFtQjtVQUFuQixtQkFBbUI7RUFDbkIsOEJBQTZCO1VBQTdCLDZCQUE2QjtFQUM3Qix5QkFBbUI7VUFBbkIsbUJBQW1CO0VBQ25CLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixzQkFBc0I7RUFDdEIsb0JBQWE7RUFBYixhQUFhO0VBQ2IseUJBQW1CO1VBQW5CLG1CQUFtQjtFQUNuQiw4QkFBNkI7VUFBN0IsNkJBQTZCO0FBQy9COztBQUVBO0VBQ0UsWUFBWTtFQUNaLHNCQUFzQjtFQUN0QiwyRkFBNkQ7RUFBN0QsNkRBQTZEO0VBQzdELFlBQVk7RUFDWixvQkFBYTtFQUFiLGFBQWE7RUFDYix5QkFBbUI7VUFBbkIsbUJBQW1CO0VBQ25CLDhCQUE2QjtVQUE3Qiw2QkFBNkI7QUFDL0I7O0FBRUE7RUFDRSxhQUFhO0VBQ2Isa0JBQWtCO0VBQ2xCLE1BQU07RUFDTix1QkFBdUI7RUFDdkIsWUFBWTtFQUNaLGFBQWE7RUFDYixZQUFZO0VBQ1osb0JBQWE7RUFBYixhQUFhO0VBQ2IsOEJBQTZCO1VBQTdCLDZCQUE2QjtFQUM3Qix5QkFBbUI7VUFBbkIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLFdBQVc7RUFDWCxvQkFBYTtFQUFiLGFBQWE7RUFDYiw4QkFBNkI7VUFBN0IsNkJBQTZCO0VBQzdCLHlCQUFtQjtVQUFuQixtQkFBbUI7RUFDbkIsdUJBQXVCO0FBQ3pCOztBQUVBO0VBQ0UsYUFBYTtFQUNiLGtCQUFrQjtFQUNsQixNQUFNO0VBQ04sdUJBQXVCO0VBQ3ZCLFlBQVk7RUFDWixhQUFhO0VBQ2IsWUFBWTtFQUNaLG9CQUFhO0VBQWIsYUFBYTtFQUNiLDhCQUE2QjtVQUE3Qiw2QkFBNkI7RUFDN0IseUJBQW1CO1VBQW5CLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQSxlQUFlOztBQUNmO0VBQ0UsVUFBVTtFQUNWLFNBQVM7QUFDWDs7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbG9naW4tc2lnbnVwL2xvZ2luLXNpZ251cC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnN0cnVjdHVyZSB7XG4gIGJhY2tncm91bmQtY29sb3I6I2M0YzRjNDtcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgd2lkdGg6IDEwMHZ3O1xufVxuXG4uaGVhZGVyIHtcbiAgaGVpZ2h0OiAxMHZoO1xuICB3aWR0aDogMTAwdnc7XG4gIGJhY2tncm91bmQtaW1hZ2U6IGxpbmVhci1ncmFkaWVudCh0byByaWdodCwgIzAwMDA0NiwgIzFDQjVFMCk7XG59XG5cbi5ib2R5IHtcbiAgaGVpZ2h0OiA5MHZoO1xuICB3aWR0aDogMTAwdnc7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4ubG9naW4tYm94IHtcbiAgd2lkdGg6IGNhbGMoMTAwJSAtIDE1cHgpO1xuICBoZWlnaHQ6IGNhbGMoMTAwJSAtIDE1cHgpO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbn1cblxuLmxvZ2luLWZvcm0taGVhZGVyIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBmb250LXNpemU6IDJyZW07XG4gIG1hcmdpbi10b3A6IDN2aDtcbn1cblxuLmxvZ2luLWZvcm0ge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBkaXNwbGF5OiBmbGV4OyAgXG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xufVxuXG4udGV4dC1mb3JtLWZpZWxkLWxpIHtcbiAgaGVpZ2h0OiA0dmg7XG4gIHdpZHRoOiA5NCU7XG4gIG1hcmdpbi10b3A6IDh2aDtcbiAgYm9yZGVyLXJhZGl1czogMTVweDtcbiAgYm9yZGVyLWNvbG9yOiAjYzRjNGM0O1xuICBwYWRkaW5nOiAzcHggMyU7XG4gIGZvbnQtc2l6ZTogMTRweDtcbn1cblxuLnRleHQtZm9ybS1maWVsZC1zdSB7XG4gIGhlaWdodDogNHZoO1xuICB3aWR0aDogOTQlO1xuICBtYXJnaW4tdG9wOiA4dmg7XG4gIGJvcmRlci1yYWRpdXM6IDE1cHg7XG4gIGJvcmRlci1jb2xvcjogI2M0YzRjNDtcbiAgcGFkZGluZzogM3B4IDMlO1xuICBmb250LXNpemU6IDE0cHg7XG59XG5cbi5zdWJtaXQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB6LWluZGV4OiAxMDAwO1xuICB0b3A6IDg1JTtcbiAgaGVpZ2h0OiA4dmg7XG4gIHdpZHRoOiA1MCU7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgYmFja2dyb3VuZC1pbWFnZTogbGluZWFyLWdyYWRpZW50KHRvIHJpZ2h0LCAjMDAwMDQ2LCAjMUNCNUUwKTtcbiAgYm9yZGVyLXJhZGl1czogMjBweDtcbiAgZm9udC1zaXplOiAxcmVtO1xuICBmb250LXN0eWxlOiBpdGFsaWMgO1xufVxuXG4uc3VibWl0LWJ1dHRvbi1kaXNhYmxlIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB6LWluZGV4OiAxMDAwO1xuICB0b3A6IDg1JTtcbiAgaGVpZ2h0OiA4dmg7XG4gIHdpZHRoOiA1MCU7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2NjY2NjYztcbiAgY29sb3I6ICM2NjY2NjY7XG4gIGJvcmRlci1yYWRpdXM6IDIwcHg7XG4gIGZvbnQtc2l6ZTogMXJlbTtcbiAgZm9udC1zdHlsZTogaXRhbGljIDtcbn1cblxuLnRhYiB7XG4gIGhlaWdodDogOCU7XG4gIHdpZHRoOiAxMDAlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgYWxpZ24tc2VsZjogY2VudGVyO1xufVxuXG4udGFiLWNvbnQtbm90LWFjdGl2ZSB7XG4gIGhlaWdodDogMTAwJTtcbiAgd2lkdGg6IGNhbGMoNTAlIC0gMnB4KTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XG59XG5cbi50YWItY29udC1hY3RpdmUge1xuICBoZWlnaHQ6IDEwMCU7XG4gIHdpZHRoOiBjYWxjKDUwJSAtIDJweCk7XG4gIGJhY2tncm91bmQtaW1hZ2U6IGxpbmVhci1ncmFkaWVudCh0byByaWdodCwgIzAwMDA0NiwgIzFDQjVFMCk7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XG59XG5cbi5wb3B1cC1zaWdudXAge1xuICB6LWluZGV4OiAzMDAwO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMDtcbiAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XG4gIG9wYWNpdHk6IDAuNjtcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgd2lkdGg6IDEwMHZ3O1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLnBvcHVwLWNvbnRlbnQge1xuICBoZWlnaHQ6IDEwdmg7XG4gIHdpZHRoOiA1NXZ3O1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG59XG5cbi5hcGktcHJvZ3Jlc3Mge1xuICB6LWluZGV4OiAzMDAwO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMDtcbiAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XG4gIG9wYWNpdHk6IDAuNjtcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgd2lkdGg6IDEwMHZ3O1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLmFwaS1wcm9ncmVzcy1pbWcge1xuICBoZWlnaHQ6IDQwdmg7XG59XG5cbi8qIEdMT0JBTCBDU1MgKi9cbm1hdC1jYXJkIHtcbiAgcGFkZGluZzogMDtcbiAgbWFyZ2luOiAwO1xufVxuXG5tYXQtZm9ybS1maWVsZCB7XG4gIGxpbmUtaGVpZ2h0OiAxLjI7XG59Il19 */";
     /***/
   },
 
@@ -90677,7 +90718,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.fb = fb;
         this.router = router;
         this.dataService = dataService;
+        this.apiState = false;
         this.toggle = true;
+        this.signupStatus = false;
         this.loginFormGroup = this.fb.group({
           userId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
           password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
@@ -90692,7 +90735,46 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(LoginSignupComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {} ///////////////////////////////// CALL BACKS /////////////////////////////////////////  
+        value: function ngOnInit() {} ////////////////////////////////////////////////////////////////////////////////
+        //                          API
+        ////////////////////////////////////////////////////////////////////////////////
+
+      }, {
+        key: "logIn",
+        value: function logIn() {
+          var _this359 = this;
+
+          this.apiState = true;
+          this.dataService.logIn(this.loginFormGroup.value).subscribe(function (res) {
+            _this359.apiState = false;
+
+            _this359.router.navigate(['/LandingPage']);
+          }, function (error) {
+            _this359.apiState = false;
+            console.log(error);
+          });
+        }
+      }, {
+        key: "signUp",
+        value: function signUp() {
+          var _this360 = this;
+
+          this.apiState = true;
+          this.dataService.signUp(this.signupFormFroup.value).subscribe(function (res) {
+            _this360.apiState = false;
+
+            if (res.status) {
+              _this360.signupStatus = true;
+              setTimeout(function () {
+                _this360.signupStatus = false;
+              }, 3000);
+            }
+          }, function (error) {
+            _this360.apiState = false;
+          });
+        } ////////////////////////////////////////////////////////////////////////////////
+        //                          HTML
+        ////////////////////////////////////////////////////////////////////////////////
 
       }, {
         key: "logInForm",
@@ -90703,24 +90785,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "signupForm",
         value: function signupForm(event) {
           this.toggle = false;
-        }
-      }, {
-        key: "logIn",
-        value: function logIn() {
-          this.dataService.logIn(this.loginFormGroup.value).subscribe(function (res) {
-            console.log(res);
-          }, function (error) {
-            console.log(error);
-          }); // this.router.navigate(['/LandingPage'])
-        }
-      }, {
-        key: "signUp",
-        value: function signUp() {
-          this.dataService.signUp(this.signupFormFroup.value).subscribe(function (res) {
-            console.log(res);
-          }, function (error) {
-            console.log(error);
-          }); // this.router.navigate(['/LandingPage'])
         }
       }]);
 

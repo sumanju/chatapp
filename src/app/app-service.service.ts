@@ -21,5 +21,8 @@ export class AppServiceService {
     return this.httpClient.post<any>(`${this.baseUrl}signup`, signUpvales)
   }
 
+  getUserInfo(userinfo) : Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}getuserinfo`, userinfo)
+  }
 
 }
