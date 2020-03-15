@@ -48,8 +48,9 @@ export class LoginSignupComponent implements OnInit {
   logIn() {
     this.apiState = true
     this.dataService.logIn(this.loginFormGroup.value).subscribe(res=>{
-      this.apiState = false 
-      this.router.navigate(['/LandingPage'])
+      this.apiState = false
+      if (res.status) 
+        this.router.navigate(['/LandingPage'])
     },error=>{
       this.apiState = false
       console.log(error)      

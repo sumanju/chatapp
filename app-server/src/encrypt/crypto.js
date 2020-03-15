@@ -10,14 +10,14 @@ class Crypto {
 
   static encryption(raw) {
     let cipher     =  crypto.createCipheriv('aes-256-cbc', KEY, iv)
-    let encrypted  =  cipher.update(raw, 'utf-8', 'hex')
+    let encrypted  =  cipher.update(String(raw), 'utf-8', 'hex')
     encrypted +=  cipher.final('hex')
     return encrypted  
   }
 
   static decryption(enc) {
     let dichpher  =  crypto.createDecipheriv('aes-256-cbc', KEY, iv)
-    let decrypted   = dichpher.update(enc, 'hex', 'utf-8')  
+    let decrypted   = dichpher.update(String(enc), 'hex', 'utf-8')  
     decrypted += dichpher.final('utf-8')
     return decrypted
   }
