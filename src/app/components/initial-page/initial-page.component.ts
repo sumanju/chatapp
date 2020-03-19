@@ -19,8 +19,10 @@ export class InitialPageComponent implements OnInit {
   }
 
   isHttpsUrl() {
-    if (document.documentURI.slice(0, 5) !== 'https')
+    if (document.documentURI.slice(0, 5) != "https")  {
       window.location.replace('https://chatapp212.herokuapp.com')
+    }
+    return
   }
 
   networkStatus() {
