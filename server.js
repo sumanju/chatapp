@@ -22,12 +22,6 @@ const app = express()
 
 app.use(express.static(path.join(__dirname, "./dist/angular/")))
 
-
-
-http.get('/', function (req, res) {
-  res.redirect('https://' + req.get('host') + req.url);
-})
-
 app.get('*', function(req,res) {
   res.sendFile(path.join(__dirname,'/dist/angular/index.html'))
 })
