@@ -22,13 +22,14 @@ const app = express()
 
 app.use(express.static(path.join(__dirname, "./dist/angular/")))
 
-app.get('*', function(req,res) {
-  res.sendFile(path.join(__dirname,'/dist/angular/index.html'))
-})
 
 
 http.get('/', function (req, res) {
   res.redirect('https://' + req.get('host') + req.url);
+})
+
+app.get('*', function(req,res) {
+  res.sendFile(path.join(__dirname,'/dist/angular/index.html'))
 })
 
 const port = process.env.PORT || 5000
