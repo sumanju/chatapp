@@ -13,8 +13,14 @@ export class InitialPageComponent implements OnInit {
 
   constructor(private router : Router) { }
 
-  ngOnInit() {
-    this.networkStatus()
+  async ngOnInit() {
+    await this.isHttpsUrl()
+    await this.networkStatus()
+  }
+
+  isHttpsUrl() {
+    if (document.documentURI.slice(0, 5) !== 'https')
+      window.location.replace('https://chatapp212.herokuapp.com')
   }
 
   networkStatus() {
