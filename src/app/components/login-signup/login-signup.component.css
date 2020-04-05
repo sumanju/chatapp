@@ -135,6 +135,7 @@
   justify-content: space-evenly;
   align-items: center;
   background-color: white;
+  opacity: 1;
 }
 
 .api-progress, .inv-login {

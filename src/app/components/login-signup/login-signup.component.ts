@@ -74,6 +74,13 @@ export class LoginSignupComponent implements OnInit {
       this.apiState = false
       if (res.status) {
         this.signupStatus = true
+        this.signupFormFroup.setValue({
+          name      : null,
+          userId    : null,
+          password  : null,
+          phoneNo   : null
+        })
+        this.toggle =true
         setTimeout(() => {
           this.signupStatus = false
         }, 3000)
