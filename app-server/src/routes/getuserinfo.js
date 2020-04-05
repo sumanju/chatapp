@@ -5,7 +5,6 @@ const manu    = require("../common-func/string-manup")
 const router  = express.Router()
 
 router.post('/getuserinfo', (req, res) => {
-  console.log(req.body.userInfo)
   const encData       = req.body.userInfo,
         decryData     = encrypt.decryption(encData),
         queryString1  = `SELECT * FROM user_info WHERE user_id  = '${decryData}'`,

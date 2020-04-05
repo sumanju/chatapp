@@ -19,6 +19,7 @@ export class LoginSignupComponent implements OnInit {
 
   toggle        : boolean = true
   signupStatus  : boolean = false
+  invLogIn      : boolean = false
 
   loginFormGroup = this.fb.group({
     userId    : ['', Validators.required],
@@ -39,7 +40,7 @@ export class LoginSignupComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem('userInfo') !== undefined)  {
+    if (localStorage.getItem('userInfo') != undefined)  {
       this.router.navigate(['/LandingPage'])
     }
   }
@@ -53,8 +54,13 @@ export class LoginSignupComponent implements OnInit {
     this.dataService.logIn(this.loginFormGroup.value).subscribe(res=>{
       this.apiState = false
       if (res.status) {
-        localStorage.setItem('userInfo', res.userId)
+        localStorage.setItem('userInfo', res.data)
         this.router.navigate(['/LandingPage'])
+      } else if (res.error == 'INVALID_LOGIN') {
+        this.invLogIn = true
+        setTimeout(()=> {
+          this.invLogIn = false
+        }, 2000)
       }
     },error=>{
       this.apiState = false

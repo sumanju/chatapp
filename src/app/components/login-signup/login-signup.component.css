@@ -137,7 +137,7 @@
   background-color: white;
 }
 
-.api-progress {
+.api-progress, .inv-login {
   z-index: 3000;
   position: absolute;
   top: 0;
@@ -153,6 +153,7 @@
 .api-progress-img {
   height: 40vh;
 }
+
 
 /* GLOBAL CSS */
 mat-card {

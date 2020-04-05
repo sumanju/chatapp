@@ -18,11 +18,14 @@ router.post('/login', (req, res) => {
         if (row[0] != null) {
           res.status(200).send({
             status  : true,
-            userId  : encrypt.encryption(data.userId)
+            data    : encrypt.encryption(data.userId),
+            error   : null
           })
         } else {
-          res.status(400).send({
-            status : false
+          res.status(200).send({
+            status : false,
+            data   :  null,
+            error  : 'INVALID_LOGIN'
           })
         } 
       }
