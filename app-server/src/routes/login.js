@@ -6,7 +6,7 @@ const router  = express.Router()
 router.post('/login', (req, res) => {
   const data        = req.body,
         queryString = `SELECT * FROM user_info
-                       WHERE user_id = '${data.userId}' AND password = '${data.password}'`
+                       WHERE user_id = \'${data.userId}\' AND password = \'${data.password}\'`
 
   try {
     conn.query(queryString, (err, row) => {
@@ -15,9 +15,16 @@ router.post('/login', (req, res) => {
           status : false
         })
       } else {
-        res.status(200).cookie("username", encrypt.encryption(data.userId)).send({
-          status  : true
-        })
+        if (row[0] != null) {
+          res.status(200).send({
+            status  : true,
+            userId  : encrypt.encryption(data.userId)
+          })
+        } else {
+          res.status(400).send({
+            status : false
+          })
+        } 
       }
     })
   } catch (err) {

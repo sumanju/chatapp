@@ -26,7 +26,7 @@ export class LandingPageComponent implements OnInit {
 ////////////////////////////////////////////////////////////////////////////////
 private getUserDetailes() {
   this.apiState = true
-  this.dataService.getUserInfo({cookie : document.cookie}).subscribe(res => {
+  this.dataService.getUserInfo({userInfo : localStorage.getItem('userInfo')}).subscribe(res => {
     this.apiState = false
     this.userInfo = res.userInfo
     this.msgData  = res.msgInfo

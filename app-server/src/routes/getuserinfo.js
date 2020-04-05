@@ -5,8 +5,9 @@ const manu    = require("../common-func/string-manup")
 const router  = express.Router()
 
 router.post('/getuserinfo', (req, res) => {
-  const encData       = req.body.cookie,
-        decryData     = encrypt.decryption(String(manu.getObjectValueFromCookieString(encData, "username"))),
+  console.log(req.body.userInfo)
+  const encData       = req.body.userInfo,
+        decryData     = encrypt.decryption(encData),
         queryString1  = `SELECT * FROM user_info WHERE user_id  = '${decryData}'`,
         queryString2  = `SELECT user_id , name  FROM user_info WHERE NOT user_id  = '${decryData}'`
 
