@@ -17,6 +17,7 @@ class Crypto {
 
   static decryption(enc) {
     let dichpher  =  crypto.createDecipheriv('aes-256-cbc', KEY, iv)
+    dichpher.setAutoPadding(false)
     let decrypted   = dichpher.update(String(enc), 'hex', 'utf-8')  
     decrypted += dichpher.final('utf-8')
     return decrypted

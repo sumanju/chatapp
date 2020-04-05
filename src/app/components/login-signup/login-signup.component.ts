@@ -39,6 +39,9 @@ export class LoginSignupComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('userInfo') !== undefined)  {
+      this.router.navigate(['/LandingPage'])
+    }
   }
 
 ////////////////////////////////////////////////////////////////////////////////
