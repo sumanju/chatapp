@@ -19,10 +19,13 @@ import { LandingPageComponent
 				} 												 from './landing-page/landing-page.component';
 import { InitialPageComponent 
 				} 												 from './initial-page/initial-page.component';
+import { ProfileInfoComponent } from './profile-info/profile-info.component';
 
 @NgModule({
 	declarations: [	LoginSignupComponent, 
-									LandingPageComponent, InitialPageComponent
+									LandingPageComponent, 
+									InitialPageComponent, 
+									ProfileInfoComponent
 								],
   imports			: [
     							CommonModule,

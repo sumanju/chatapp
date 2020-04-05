@@ -9,13 +9,12 @@ router.post('/getuserinfo', (req, res) => {
         decryData     = encrypt.decryption(encData),
         queryString1  = `SELECT * FROM user_info WHERE user_id  = '${decryData}'`,
         queryString2  = `SELECT user_id , name  FROM user_info WHERE NOT user_id  = '${decryData}'`
-
   try {
     conn.query(queryString1, (err, userInfo) => {
       if (!!err) {
         res.status(400).send({ status : false })
       } else {
-        
+
         try {
           conn.query(queryString2 , (err, msgInfo) => {
             if (!!err){

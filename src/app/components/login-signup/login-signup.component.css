@@ -21,7 +21,7 @@
 .login-box {
   width: calc(100% - 15px);
   height: calc(100% - 15px);
-  background-color: white;
+  background-color: whitesmoke;
   display: flex;
   flex-direction: column;
 }
