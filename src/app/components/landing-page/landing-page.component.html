@@ -5,7 +5,7 @@
 
   <div class="body">
 
-    <app-profile-info class="body" *ngIf='isShowProfile' [profileData]='userInfo'></app-profile-info>
+    <app-profile-info *ngIf='isShowProfile' [profileData]='userInfo'></app-profile-info>
 
     <div *ngIf='!isShowProfile' class="body">
       <div class="nav-header">
