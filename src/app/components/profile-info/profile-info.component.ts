@@ -21,9 +21,13 @@ export class ProfileInfoComponent implements OnInit {
 //                            HTML
 ////////////////////////////////////////////////////////////////////////////////
 
+  onUpload() {
+
+  }
+
   logout() {
     localStorage.removeItem('userInfo')
     this.router.navigate(['/LoginSignupPage'])
   }
-  
+
 }

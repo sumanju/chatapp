@@ -1,5 +1,17 @@
 <div class="container">
-  <img class="profile-img" src="../../../assets/default-image.jpeg">
+  <div class="profile-img-body">
+
+    <div class="upld-profile-img">
+      <label for="image-input">  
+        <img class="upld-profile-img" (click)="onUpload()" src="../../../assets/upload-image.png">
+      </label>
+      <input id="image-input" type="file" accept="image/*"/>
+    </div>
+
+
+    <img class="profile-img" src="../../../assets/default-image.jpeg">
+  </div>
+
   <div class="profile-name">
     {{ profileInfo[0].name }}
   </div>

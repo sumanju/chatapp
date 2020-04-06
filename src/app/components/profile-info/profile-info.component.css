@@ -5,15 +5,29 @@
   overflow: hidden;
 }
 
+.profile-img-body {
+  height: 30vh;
+  width : 30vh;
+  margin-top: 10vh;
+}
+
 .profile-img {
   height: 30vh;
   width : 30vh;
   border-radius: 60vh;
-  margin-top: 10vh;
+}
+
+.upld-profile-img {
+  position: absolute;
+  width: 8vh;
+}
+
+.upld-profile-img>input {
+  display: none;
 }
 
 .profile-name {
-  height: 10%;
+  height: 10vh;
   display: flex;
   align-items: center;
 }

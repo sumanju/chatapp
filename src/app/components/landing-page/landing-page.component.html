@@ -3,27 +3,28 @@
     <img *ngIf="!isShowProfile" class="profile" (click)="showProfile()" src="../../../assets/default-image.jpeg"/>
   </div>
 
-  <div class="body">
+  <app-profile-info *ngIf='isShowProfile' class="body" [profileData]='userInfo'></app-profile-info>
 
-    <app-profile-info *ngIf='isShowProfile' [profileData]='userInfo'></app-profile-info>
-
-    <div *ngIf='!isShowProfile' class="body">
-      <div class="nav-header">
-        <div (click)="activeNav(activeStatus.HOME)" [ngClass]=" activeHeader.home ? 'nav-header-item-active' : 'nav-header-item-inactive'">
-          HOME
-        </div>
-        <div (click)="activeNav(activeStatus.CHAT)" [ngClass]=" activeHeader.chat ? 'nav-header-item-active' : 'nav-header-item-inactive'">
-          CHAT
-        </div>
-        <div (click)="activeNav(activeStatus.FRIENDS)" [ngClass]=" activeHeader.friends ? 'nav-header-item-active' : 'nav-header-item-inactive'">
-          FRIENDS
-        </div>
+  <div *ngIf='!isShowProfile' class="body">
+    <div class="nav-header">
+      <div (click)="activeNav(activeStatus.HOME)" [ngClass]=" activeHeader.home ? 'nav-header-item-active' : 'nav-header-item-inactive'">
+        HOME
       </div>
-
-      <div class="msg-body"></div>
-
+      <div (click)="activeNav(activeStatus.CHAT)" [ngClass]=" activeHeader.chat ? 'nav-header-item-active' : 'nav-header-item-inactive'">
+        CHAT
+      </div>
+      <div (click)="activeNav(activeStatus.FRIENDS)" [ngClass]=" activeHeader.friends ? 'nav-header-item-active' : 'nav-header-item-inactive'">
+        FRIENDS
+      </div>
     </div>
 
+    <div *ngIf="activeHeader.home" class="home-body"> 
+    
+    </div>
+
+    <div *ngIf="activeHeader.chat" class="chat-body">  </div>
+
+    <div *ngIf="activeHeader.friends" class="friend-body"> </div>
   </div>
 
 </div>
