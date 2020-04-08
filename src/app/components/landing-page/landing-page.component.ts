@@ -56,9 +56,9 @@ export class LandingPageComponent implements OnInit {
   private getUserDetailes() {
     this.apiState = true
     this.dataService.getUserInfo({userInfo : localStorage.getItem('userInfo')}).subscribe(res => {
-      this.apiState = false
       this.userInfo = res.userInfo
       this.msgData  = res.msgInfo
+      this.apiState = false
     }, error => {
       this.apiState = false
     })
@@ -67,11 +67,10 @@ export class LandingPageComponent implements OnInit {
   private getUserProfileImage() {
     this.apiState = true
     this.dataService.getUserProfileImage({userId : localStorage.getItem('userInfo')}).subscribe(res => {
-      this.apiState = false
       if (res.status) {
         this.userProfileImage = res.image.image
-        console.log(this.userProfileImage)
       }
+      this.apiState = false
     }, error => {
       this.apiState = false
     })
