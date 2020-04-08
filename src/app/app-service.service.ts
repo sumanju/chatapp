@@ -24,4 +24,11 @@ export class AppServiceService {
     return this.httpClient.post<any>(`${this.baseUrl}getuserinfo`, userinfo)
   }
 
+  saveUserProfileImage(userImage) : Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}profileImage`,userImage)
+  }
+
+  getUserProfileImage(userinfo) : Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}getProfileImage`,userinfo)
+  }
 }

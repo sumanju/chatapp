@@ -1,9 +1,14 @@
+<div *ngIf="apiState" class="api-progress">
+  <img class="api-progress-img" src="../../../assets/giphy.gif"/>
+</div>
+
 <div class="structure">
   <div class="header">
-    <img *ngIf="!isShowProfile" class="profile" (click)="showProfile()" src="../../../assets/default-image.jpeg"/>
+    <img *ngIf="!isShowProfile && userProfileImage == undefined" class="profile" (click)="showProfile()" src="../../../assets/default-image.jpeg"/>
+    <img *ngIf="!isShowProfile && userProfileImage != undefined" class="profile" (click)="showProfile()" src="{{ userProfileImage }}"/>
   </div>
 
-  <app-profile-info *ngIf='isShowProfile' class="body" [profileData]='userInfo'></app-profile-info>
+  <app-profile-info *ngIf='isShowProfile' class="body" [userProfileImage]='userProfileImage'  [profileData]='userInfo'></app-profile-info>
 
   <div *ngIf='!isShowProfile' class="body">
     <div class="nav-header">
@@ -18,13 +23,12 @@
       </div>
     </div>
 
-    <div *ngIf="activeHeader.home" class="home-body"> 
-    
-    </div>
+    <div *ngIf="activeHeader.home" class="home-body">  </div>
 
     <div *ngIf="activeHeader.chat" class="chat-body">  </div>
 
     <div *ngIf="activeHeader.friends" class="friend-body"> </div>
+
   </div>
 
 </div>

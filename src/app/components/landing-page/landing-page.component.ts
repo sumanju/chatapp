@@ -4,6 +4,7 @@ import {  Component,
 import { AppServiceService 
        }                    from 'src/app/app-service.service';
 import { Router } from '@angular/router';
+import { ImageProcessing } from 'src/utility/utility-image';
 
 export enum ActiveStatus {
   HOME,
@@ -29,6 +30,7 @@ export class LandingPageComponent implements OnInit {
   apiState        : boolean             = false
   userInfo        : Object                
   msgData         : any[]               = []
+  userProfileImage: string
   activeHeader    : ActiveState    
   isShowProfile   : boolean             = false  
 
@@ -45,6 +47,7 @@ export class LandingPageComponent implements OnInit {
       friends : false
     }
     this.getUserDetailes()
+    this.getUserProfileImage()
   }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -52,18 +55,27 @@ export class LandingPageComponent implements OnInit {
 ////////////////////////////////////////////////////////////////////////////////
   private getUserDetailes() {
     this.apiState = true
-    console.log('func invoke')
     this.dataService.getUserInfo({userInfo : localStorage.getItem('userInfo')}).subscribe(res => {
       this.apiState = false
       this.userInfo = res.userInfo
       this.msgData  = res.msgInfo
-      console.log(this.userInfo, this.msgData)
     }, error => {
       this.apiState = false
     })
-
   }
 
+  private getUserProfileImage() {
+    this.apiState = true
+    this.dataService.getUserProfileImage({userId : localStorage.getItem('userInfo')}).subscribe(res => {
+      this.apiState = false
+      if (res.status) {
+        this.userProfileImage = res.image.image
+        console.log(this.userProfileImage)
+      }
+    }, error => {
+      this.apiState = false
+    })
+  }
 
 ////////////////////////////////////////////////////////////////////////////////
 //                                  HTML

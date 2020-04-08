@@ -22,8 +22,8 @@ router.post('/getuserinfo', (req, res) => {
             } else {
               res.status(200).send({ 
                 status    : true,
-                userInfo  : userInfo,
-                msgInfo   : msgInfo
+                userInfo  : userInfo[0],
+                msgInfo   : msgInfo[0]
               })
             }
           })

@@ -1,19 +1,21 @@
+
 <div class="container">
   <div class="profile-img-body">
 
     <div class="upld-profile-img">
       <label for="image-input">  
-        <img class="upld-profile-img" (click)="onUpload()" src="../../../assets/upload-image.png">
+        <img class="upld-profile-img" src="../../../assets/upload-image.png">
       </label>
-      <input id="image-input" type="file" accept="image/*"/>
+      <input id="image-input" type="file" (change)="onUpload($event)" accept="image/*"/>
     </div>
 
+    <img *ngIf="userProfileImage != undefined" class="profile-img" src="{{ userProfileImage }}">
+    <img *ngIf="userProfileImage == undefined" class="profile-img" src="../../../assets/default-image.jpeg">
 
-    <img class="profile-img" src="../../../assets/default-image.jpeg">
   </div>
 
-  <div class="profile-name">
-    {{ profileInfo[0].name }}
+  <div *ngIf="profileInfo.name != undefined" class="profile-name">
+    {{ profileInfo.name }}
   </div>
   <div class="log-out">
     <mat-card (click)="logout()" class="log-out-button">
