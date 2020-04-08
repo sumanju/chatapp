@@ -15,11 +15,16 @@ export class InitialPageComponent implements OnInit {
 
   async ngOnInit() {
     await this.networkStatus()
+    await this.clearLocalStorage()
   }
   
   networkStatus() {
     setTimeout(()=> {
       this.router.navigate(['./LoginSignupPage'])
     }, 1000)
+  }
+
+  clearLocalStorage() {
+    localStorage.removeItem('userInfo')
   }
 }
