@@ -58,7 +58,7 @@ export class ImageProcessing {
           canvas.height = height
 
           canvas.getContext('2d').drawImage(image, 0, 0, width, height)
-          resizedImage = canvas.toDataURL('image/jpeg', 0.7)
+          resizedImage = canvas.toDataURL('image/jpeg', 0.1)
           resolve(resizedImage)
         }
       }

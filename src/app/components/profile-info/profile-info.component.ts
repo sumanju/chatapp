@@ -57,7 +57,7 @@ export class ProfileInfoComponent implements OnInit {
 
   async onUpload(event) {
     const imageBase64 = await ImageProcessing.getCompressedImage(event.target.files[0]) as string
-    console.log('image-bro', imageBase64)
+    console.log('image-bro', imageBase64.length)
     this.setProfileImage(imageBase64)
   }
 
