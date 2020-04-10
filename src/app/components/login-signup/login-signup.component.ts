@@ -8,6 +8,12 @@ import { Router
         }                   from '@angular/router';
 import { AppServiceService } from 'src/app/app-service.service';
 
+enum Operation {
+  HOME,
+  LOGIN,
+  SIGNUP
+}
+
 @Component({
   selector    : 'app-login-signup',
   templateUrl : './login-signup.component.html',
@@ -15,11 +21,12 @@ import { AppServiceService } from 'src/app/app-service.service';
 })
 export class LoginSignupComponent implements OnInit {
 
-  apiState      : boolean = false
+  STATE        : typeof Operation = Operation
 
-  toggle        : boolean = true
-  signupStatus  : boolean = false
-  invLogIn      : boolean = false
+  toggle        : Operation 
+  apiState      : boolean   = false
+  signupStatus  : boolean   = false
+  invLogIn      : boolean   = false
 
   loginFormGroup = this.fb.group({
     userId    : ['', Validators.required],
@@ -40,6 +47,7 @@ export class LoginSignupComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.toggle = this.STATE.HOME
     if (localStorage.getItem('userInfo') != undefined)  {
       this.router.navigate(['/LandingPage'])
     }
@@ -80,7 +88,7 @@ export class LoginSignupComponent implements OnInit {
           password  : null,
           phoneNo   : null
         })
-        this.toggle =true
+        this.toggle = this.STATE.LOGIN
         setTimeout(() => {
           this.signupStatus = false
         }, 3000)
@@ -95,11 +103,11 @@ export class LoginSignupComponent implements OnInit {
 ////////////////////////////////////////////////////////////////////////////////
 
   logInForm(event) {
-    this.toggle = true
+    this.toggle = this.STATE.LOGIN
   }
   
   signupForm(event) {
-    this.toggle = false
+    this.toggle = this.STATE.SIGNUP
   }  
 
 }
