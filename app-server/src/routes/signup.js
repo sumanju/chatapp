@@ -6,7 +6,7 @@ const router  = express.Router()
     const data = req.body,
           queryString = `INSERT INTO user_info 
                          values(\'${data.name}\',\'${data.userId}\',\'${data.password}\',\'${data.phoneNo}\')`
-   
+    
     try {
       conn.query(queryString, (err) => {
         if (!!err) {

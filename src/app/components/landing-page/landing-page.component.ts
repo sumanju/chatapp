@@ -106,7 +106,6 @@ export class LandingPageComponent implements OnInit {
 
   showProfile() {
     this.isShowProfile = true
-    console.log(this.isShowProfile)
   }
   
 }
