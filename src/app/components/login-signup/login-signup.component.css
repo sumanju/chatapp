@@ -46,7 +46,7 @@
 .submit-button {
   position: absolute;
   z-index: 1000;
-  bottom: 20px;
+  bottom: 60px;
   padding: 8px 0;
   width: 45%;
   color: white;
@@ -59,7 +59,7 @@
 .submit-button-disable {
   position: absolute;
   z-index: 1000;
-  bottom: 20px;
+  bottom: 80px;
   padding: 8px 0;
   width: 45%;
   color: white;
@@ -140,11 +140,13 @@
 
 
 /* GLOBAL CSS */
+
+
 mat-card {
   padding: 0;
   margin: 0;
 }
 
-mat-form-field {
-  line-height: 1.2;
+.mat-form-field-wrapper {
+  padding-bottom: 0;
 }
