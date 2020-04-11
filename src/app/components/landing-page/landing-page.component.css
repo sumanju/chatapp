@@ -1,14 +1,11 @@
 .structure {
-  background-color: whitesmoke;
+  background-color:#ffffff;
   height: 100vh;
   width: 100vw;
-  
 }
 
 .header {
   width: 100vw;
-  position: sticky;
-  top: 0vh;
   background-color: #ffffff;
   display: flex;
   align-items: center;
@@ -22,15 +19,27 @@
   margin-left: calc(85vw - 10px);
 }
 
+.api-progress, .inv-login {
+  z-index: 3000;
+  position: absolute;
+  top: 0;
+  background-color: black;
+  opacity: 0.6;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .body {
-  height: 90vh;
   width: 100vw;
 }
 
 .nav-header {
   width: 100vw;
   position: sticky;
-  top: 8vh;
+  top: 0;
   display: flex;
   flex-direction: row;
   background-image: linear-gradient(to right, #000046, #1CB5E0);
@@ -91,20 +100,38 @@
   align-items: center;
 }
 
-.api-progress, .inv-login {
-  z-index: 3000;
-  position: absolute;
-  top: 0;
-  background-color: black;
-  opacity: 0.6;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
 .api-progress-img {
   height: 40vh;
 }
 
+/* chat */
+.chat-body {
+  height: 100%;
+  width: 100%;
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
+
+/* people */
+.people-body {
+  height: 100%;
+  width: 100%;
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.people-rec {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+}
+
+.people-img {
+  height: 8vh;
+  width: 8vh;
+  border-radius: 24vh;
+  padding: 16px 16px;
+}

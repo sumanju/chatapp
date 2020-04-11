@@ -15,7 +15,7 @@ export enum ActiveStatus {
 interface ActiveState {
   home    : boolean,
   chat    : boolean,
-  friends : boolean
+  people  : boolean
 }
 
 @Component({
@@ -32,7 +32,8 @@ export class LandingPageComponent implements OnInit {
   msgData         : any[]               = []
   userProfileImage: string
   activeHeader    : ActiveState    
-  isShowProfile   : boolean             = false  
+  isShowProfile   : boolean             = false
+  peopleInfo      : object[]            = []  
 
   constructor(private dataService : AppServiceService,
               private router      : Router) { }
@@ -44,10 +45,11 @@ export class LandingPageComponent implements OnInit {
     this.activeHeader = {
       home    : true,
       chat    : false,
-      friends : false
+      people  : false
     }
     this.getUserDetailes()
     this.getUserProfileImage()
+    this.getPeopleInfo()
   }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -75,6 +77,18 @@ export class LandingPageComponent implements OnInit {
     })
   }
 
+  getPeopleInfo() {
+    this.apiState  = true
+    this.dataService.getPeopleInfo({userId : localStorage.getItem('userInfo')}).subscribe(res => {
+      if (res.status) {
+        this.peopleInfo = res.usersData
+      }
+      console.log(this.peopleInfo)
+    }, err => {
+      this.apiState = false
+    })
+  }
+
 ////////////////////////////////////////////////////////////////////////////////
 //                                  HTML
 ////////////////////////////////////////////////////////////////////////////////
@@ -84,21 +98,21 @@ export class LandingPageComponent implements OnInit {
       this.activeHeader = {
         home    : true,
         chat    : false,
-        friends : false
+        people  : false
       }
     } 
     if (state === ActiveStatus.CHAT) {
       this.activeHeader = {
         home    : false,
         chat    : true,
-        friends : false
+        people  : false
       }
     }
     if (state === ActiveStatus.PEOPLE) {
       this.activeHeader = {
         home    : false,
         chat    : false,
-        friends : true
+        people  : true
       }
     }
   }

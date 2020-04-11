@@ -31,4 +31,8 @@ export class AppServiceService {
   getUserProfileImage(userinfo) : Observable<any> {
     return this.httpClient.post<any>(`${this.baseUrl}getProfileImage`,userinfo)
   }
+
+  getPeopleInfo(userId) : Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}getpeoplelist`, userId)
+  }
 }

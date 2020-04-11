@@ -4,7 +4,6 @@
 
 <div class="structure">
   <div class="header">
-    
     <img *ngIf="!isShowProfile && userProfileImage == undefined" class="profile" (click)="showProfile()" src="../../../assets/default-image.jpeg"/>
     <img *ngIf="!isShowProfile && userProfileImage != undefined" class="profile" (click)="showProfile()" src="{{ userProfileImage }}"/>
   </div>
@@ -12,6 +11,7 @@
   <app-profile-info *ngIf='isShowProfile' class="body" [userProfileImage]='userProfileImage'  [profileData]='userInfo'></app-profile-info>
 
   <div *ngIf='!isShowProfile' class="body">
+
     <div class="nav-header">
       <div (click)="activeNav(activeStatus.HOME)" [ngClass]=" activeHeader.home ? 'nav-header-item-active' : 'nav-header-item-inactive'">
         HOME
@@ -19,21 +19,29 @@
       <div (click)="activeNav(activeStatus.CHAT)" [ngClass]=" activeHeader.chat ? 'nav-header-item-active' : 'nav-header-item-inactive'">
         CHAT
       </div>
-      <div (click)="activeNav(activeStatus.PEOPLE)" [ngClass]=" activeHeader.friends ? 'nav-header-item-active' : 'nav-header-item-inactive'">
+      <div (click)="activeNav(activeStatus.PEOPLE)" [ngClass]=" activeHeader.people ? 'nav-header-item-active' : 'nav-header-item-inactive'">
         PEOPLE
       </div>
     </div>
 
-    <div *ngIf="activeHeader.home" class="home-body">  
-      
+<!-- hoem body  -->
+    <div *ngIf="activeHeader.home" class="home-body">
+ 
     </div>
 
+<!-- chat body -->
     <div *ngIf="activeHeader.chat" class="chat-body">
 
     </div>
-
-    <div *ngIf="activeHeader.friends" class="friend-body">
-      
+<!-- people info -->
+    <div *ngIf="activeHeader.people" class="people-body">
+      <div *ngFor="let data of peopleInfo;index as i">
+        <div class="people-rec">
+          <img *ngIf="data['image'] == undefined" class="people-img" src="../../../assets/default-image.jpeg">
+          <img *ngIf="data['image'] != undefined" class="people-img" src="{{ data.image }}"/>
+          <div class="people-name"> {{ data["name"] }} </div>
+        </div>
+      </div>
     </div>
 
   </div>
