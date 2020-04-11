@@ -16,8 +16,9 @@
 
 .profile {
   height: 10vw;
+  width: 10vw;
   padding: 10px 10px;
-  border-radius: 12vh;
+  border-radius: 10vh;
   margin-left: calc(85vw - 10px);
 }
 
