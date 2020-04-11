@@ -35,4 +35,12 @@ export class AppServiceService {
   getPeopleInfo(userId) : Observable<any> {
     return this.httpClient.post<any>(`${this.baseUrl}getpeoplelist`, userId)
   }
+
+  getChatList(userInfo) : Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}getchatlist`, userInfo)
+  }
+
+  sendMsg(userInfo) : Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}sendmsg`, userInfo)
+  }
 }

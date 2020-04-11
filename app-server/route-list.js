@@ -7,7 +7,9 @@ const logIn         = require('./src/routes/login'),
       getuserinfo   = require('./src/routes/getuserinfo'),
       profileImg    = require('./src/routes/profileImage'),
       getUserProImg = require('./src/routes/getProfileImage'),
-      getPeopleInfo = require('./src/routes/getpeoplelist')
+      getPeopleInfo = require('./src/routes/getpeoplelist'),
+      getChatList   = require('./src/routes/getchatlist'),
+      sendMsg       = require('./src/routes/sendmsg')
 
 //       MIDDLE WARE
   app.use('/', logIn)
@@ -16,5 +18,7 @@ const logIn         = require('./src/routes/login'),
   app.use('/', profileImg)
   app.use('/', getUserProImg)
   app.use('/', getPeopleInfo)
+  app.use('/', getChatList)
+  app.use('/', sendMsg)
 
 module.exports = app

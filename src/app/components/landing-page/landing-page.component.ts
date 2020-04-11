@@ -3,8 +3,8 @@ import {  Component,
        }                   from '@angular/core';
 import { AppServiceService 
        }                    from 'src/app/app-service.service';
-import { Router } from '@angular/router';
-import { ImageProcessing } from 'src/utility/utility-image';
+import { Router }           from '@angular/router';
+import { ImageProcessing }  from 'src/utility/utility-image';
 
 export enum ActiveStatus {
   HOME,
@@ -18,11 +18,18 @@ interface ActiveState {
   people  : boolean
 }
 
+interface ChatData {
+  userId    : string,
+  image     : string,
+  name      : string
+}
+
 @Component({
   selector    : 'app-landing-page',
   templateUrl : './landing-page.component.html',
   styleUrls   : ['./landing-page.component.css']
 })
+
 export class LandingPageComponent implements OnInit { 
 
   activeStatus    : typeof ActiveStatus = ActiveStatus
@@ -34,11 +41,13 @@ export class LandingPageComponent implements OnInit {
   activeHeader    : ActiveState    
   isShowProfile   : boolean             = false
   peopleInfo      : object[]            = []  
+  chatData        : ChatData             
 
   constructor(private dataService : AppServiceService,
               private router      : Router) { }
 
   ngOnInit() {
+    localStorage.removeItem('chatinfo')
     if (localStorage.getItem('userInfo') == undefined) {
       this.router.navigate(['/LoginSignupPage'])
     }
@@ -92,6 +101,15 @@ export class LandingPageComponent implements OnInit {
 ////////////////////////////////////////////////////////////////////////////////
 //                                  HTML
 ////////////////////////////////////////////////////////////////////////////////
+
+  selectPeople(index) {
+    localStorage.setItem('chatinfo',JSON.stringify({
+      userId : this.peopleInfo[index]['user_id'],
+      name   : this.peopleInfo[index]['name'],
+      image  :  this.peopleInfo[index]['image']
+    }))
+    this.router.navigate(['/ChatPage'])
+  }
 
   activeNav(state) {
     if (state === ActiveStatus.HOME) {

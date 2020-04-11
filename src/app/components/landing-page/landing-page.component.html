@@ -8,6 +8,7 @@
     <img *ngIf="!isShowProfile && userProfileImage != undefined" class="profile" (click)="showProfile()" src="{{ userProfileImage }}"/>
   </div>
 
+  <!--user profile child comp-->
   <app-profile-info *ngIf='isShowProfile' class="body" [userProfileImage]='userProfileImage'  [profileData]='userInfo'></app-profile-info>
 
   <div *ngIf='!isShowProfile' class="body">
@@ -24,7 +25,7 @@
       </div>
     </div>
 
-<!-- hoem body  -->
+<!-- home body  -->
     <div *ngIf="activeHeader.home" class="home-body">
  
     </div>
@@ -35,10 +36,10 @@
     </div>
 <!-- people info -->
     <div *ngIf="activeHeader.people" class="people-body">
-      <div *ngFor="let data of peopleInfo;index as i">
+      <div *ngFor="let data of peopleInfo;index as index" (click)="selectPeople(index)">
         <div class="people-rec">
           <img *ngIf="data['image'] == undefined" class="people-img" src="../../../assets/default-image.jpeg">
-          <img *ngIf="data['image'] != undefined" class="people-img" src="{{ data.image }}"/>
+          <img *ngIf="data['image'] != undefined" class="people-img" src="{{ data['image'] }}"/>
           <div class="people-name"> {{ data["name"] }} </div>
         </div>
       </div>
