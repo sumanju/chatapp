@@ -4,6 +4,7 @@
 
 <div class="structure">
   <div class="header">
+    
     <img *ngIf="!isShowProfile && userProfileImage == undefined" class="profile" (click)="showProfile()" src="../../../assets/default-image.jpeg"/>
     <img *ngIf="!isShowProfile && userProfileImage != undefined" class="profile" (click)="showProfile()" src="{{ userProfileImage }}"/>
   </div>
@@ -18,16 +19,22 @@
       <div (click)="activeNav(activeStatus.CHAT)" [ngClass]=" activeHeader.chat ? 'nav-header-item-active' : 'nav-header-item-inactive'">
         CHAT
       </div>
-      <div (click)="activeNav(activeStatus.FRIENDS)" [ngClass]=" activeHeader.friends ? 'nav-header-item-active' : 'nav-header-item-inactive'">
-        FRIENDS
+      <div (click)="activeNav(activeStatus.PEOPLE)" [ngClass]=" activeHeader.friends ? 'nav-header-item-active' : 'nav-header-item-inactive'">
+        PEOPLE
       </div>
     </div>
 
-    <div *ngIf="activeHeader.home" class="home-body">  </div>
+    <div *ngIf="activeHeader.home" class="home-body">  
 
-    <div *ngIf="activeHeader.chat" class="chat-body">  </div>
+    </div>
 
-    <div *ngIf="activeHeader.friends" class="friend-body"> </div>
+    <div *ngIf="activeHeader.chat" class="chat-body">
+
+    </div>
+
+    <div *ngIf="activeHeader.friends" class="friend-body">  
+      
+    </div>
 
   </div>
 

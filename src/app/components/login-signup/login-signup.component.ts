@@ -27,6 +27,7 @@ export class LoginSignupComponent implements OnInit {
   apiState      : boolean   = false
   signupStatus  : boolean   = false
   invLogIn      : boolean   = false
+  invSignup     : boolean   = false
 
   loginFormGroup = this.fb.group({
     userId    : ['', Validators.required],
@@ -91,7 +92,12 @@ export class LoginSignupComponent implements OnInit {
         this.toggle = this.STATE.LOGIN
         setTimeout(() => {
           this.signupStatus = false
-        }, 3000)
+        }, 2000)
+      } else {
+        this.invSignup = true
+        setTimeout(() => {
+          this.invSignup = false
+        }, 2000)
       }
     },error=>{
       this.apiState = false      

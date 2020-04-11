@@ -9,7 +9,7 @@ import { ImageProcessing } from 'src/utility/utility-image';
 export enum ActiveStatus {
   HOME,
   CHAT,
-  FRIENDS
+  PEOPLE
 }
 
 interface ActiveState {
@@ -57,7 +57,6 @@ export class LandingPageComponent implements OnInit {
     this.apiState = true
     this.dataService.getUserInfo({userInfo : localStorage.getItem('userInfo')}).subscribe(res => {
       this.userInfo = res.userInfo
-      this.msgData  = res.msgInfo
       this.apiState = false
     }, error => {
       this.apiState = false
@@ -95,7 +94,7 @@ export class LandingPageComponent implements OnInit {
         friends : false
       }
     }
-    if (state === ActiveStatus.FRIENDS) {
+    if (state === ActiveStatus.PEOPLE) {
       this.activeHeader = {
         home    : false,
         chat    : false,

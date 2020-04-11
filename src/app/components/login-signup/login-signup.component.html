@@ -14,6 +14,12 @@
   </mat-card>
 </div>
 
+<div *ngIf="invSignup" class="inv-login">
+    <mat-card class="popup-content">
+      Username already exist
+    </mat-card>
+  </div>
+
 <div class="structure">
 
   <div *ngIf="toggle === STATE.HOME" class="login-box">
@@ -30,7 +36,7 @@
     </div>
     <form [formGroup]="loginFormGroup" (ngSubmit)="logIn()" class="login-form">
       <mat-form-field class="text-form-field-li"  appearance="outline">
-        <mat-label>User Id</mat-label>
+        <mat-label>User Name</mat-label>
         <input formControlName="userId" matInput>
       </mat-form-field>
       <mat-form-field class="text-form-field-li"  appearance="outline">
@@ -53,7 +59,7 @@
         <input formControlName="name" matInput>
       </mat-form-field>
       <mat-form-field class="text-form-field-su"  appearance="outline">
-        <mat-label>User Id</mat-label>
+        <mat-label>User Name</mat-label>
         <input formControlName="userId" matInput>
       </mat-form-field>
       <mat-form-field class="text-form-field-su"  appearance="outline">
