@@ -84,7 +84,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 ////////////////////////////////////////////////////////////////////////////////
 
   send() {
-    this.sendMsg(this.msgForm.get('msg').value)
+    if (this.msgForm.get('msg').value)
+      this.sendMsg(this.msgForm.get('msg').value)
   }
   
 }

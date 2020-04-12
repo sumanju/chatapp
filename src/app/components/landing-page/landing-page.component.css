@@ -129,7 +129,8 @@
 }
 
 .body-nm {
-  padding: 6px 16px;
+  width: 80vw;
+  margin-left: 12px;
   font-size: 16px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bolder;

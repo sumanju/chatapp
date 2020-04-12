@@ -79,7 +79,7 @@ export class LandingPageComponent implements OnInit {
   private getUserProfileImage() {
     this.apiState = true
     this.dataService.getUserProfileImage({userId : localStorage.getItem('userInfo')}).subscribe(res => {
-      if (res.status) {
+      if (res.status && res.image) {
         this.userProfileImage = res.image.image
       }
       this.apiState = false

@@ -25,7 +25,7 @@ export class InitialPageComponent implements OnInit {
   networkStatus() {
     setTimeout(()=> {
       this.router.navigate(['./LoginSignupPage'])
-    }, 1000)
+    }, 4000)
   }
 
   clearLocalStorage() {

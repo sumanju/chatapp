@@ -7,9 +7,18 @@
   align-items: center;
 }
 
-.text {
+.text1 {
   font-weight: bolder;
   font-style: italic;
   color: aliceblue;
   font-size: 2rem;
+}
+
+.text2 {
+  position: absolute;
+  margin-top: 65vw;
+  font-weight: bolder;
+  font-style: italic;
+  color: aliceblue;
+  font-size: 1rem;
 }
