@@ -43,4 +43,12 @@ export class AppServiceService {
   sendMsg(userInfo) : Observable<any> {
     return this.httpClient.post<any>(`${this.baseUrl}sendmsg`, userInfo)
   }
+
+  setTimeLineImage(userImage) : Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}settimelineimage`, userImage)
+  } 
+
+  getTimeLineImage(userId)  : Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}gettimelineimage`, userId)
+  }
 }

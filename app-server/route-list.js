@@ -2,23 +2,27 @@
   const app     = express()
 
 //       ROUTES LIST
-const logIn         = require('./src/routes/login'),
-      signUp        = require('./src/routes/signup'),
-      getuserinfo   = require('./src/routes/getuserinfo'),
-      profileImg    = require('./src/routes/profileImage'),
-      getUserProImg = require('./src/routes/getProfileImage'),
-      getPeopleInfo = require('./src/routes/getpeoplelist'),
-      getChatList   = require('./src/routes/getchatlist'),
-      sendMsg       = require('./src/routes/sendmsg')
+const logIn           = require('./src/routes/login'),
+      signUp          = require('./src/routes/signup'),
+      getuserinfo     = require('./src/routes/getuserinfo'),
+      profileImg      = require('./src/routes/profileImage'),
+      getUserProImg   = require('./src/routes/getProfileImage'),
+      getPeopleInfo   = require('./src/routes/getpeoplelist'),
+      getChatList     = require('./src/routes/getchatlist'),
+      sendMsg         = require('./src/routes/sendmsg'),
+      setTimeLineImg  = require('./src/routes/settimelineimage'),
+      getTimeLineImg  = require('./src/routes/gettimelineimage')
 
 //       MIDDLE WARE
-  app.use('/', logIn)
-  app.use('/', signUp)
-  app.use('/', getuserinfo)
-  app.use('/', profileImg)
-  app.use('/', getUserProImg)
-  app.use('/', getPeopleInfo)
-  app.use('/', getChatList)
-  app.use('/', sendMsg)
+  app.use('/',  logIn)
+  app.use('/',  signUp)
+  app.use('/',  getuserinfo)
+  app.use('/',  profileImg)
+  app.use('/',  getUserProImg)
+  app.use('/',  getPeopleInfo)
+  app.use('/',  getChatList)
+  app.use('/',  sendMsg)
+  app.use('/',  setTimeLineImg)
+  app.use('/',  getTimeLineImg)
 
 module.exports = app

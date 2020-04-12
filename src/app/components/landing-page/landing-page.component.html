@@ -4,6 +4,12 @@
 
 <div class="structure">
   <div class="header">
+    
+    <label for="image-input">  
+      <img class="img-upld" src="../../../assets/upload-image.png">
+    </label>
+    <input id="image-input" type="file" (change)="onUpload($event)" accept="image/*" style="display: none;"/>
+     
     <img *ngIf="!isShowProfile && userProfileImage == undefined" class="profile" (click)="showProfile()" src="../../../assets/default-image.jpeg"/>
     <img *ngIf="!isShowProfile && userProfileImage != undefined" class="profile" (click)="showProfile()" src="{{ userProfileImage }}"/>
   </div>
@@ -27,7 +33,12 @@
 
 <!-- home body  -->
     <div *ngIf="activeHeader.home" class="home-body">
- 
+      <div *ngFor="let data of timeLine;index as index">
+        <div class="home-cont">
+          <div class="body-nm"> {{ data['name'] }} </div>
+          <img class="body-img" src="{{ data['image'] }}">
+        </div>
+      </div>
     </div>
 
 <!-- chat body -->

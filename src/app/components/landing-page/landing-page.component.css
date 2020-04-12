@@ -11,6 +11,15 @@
   align-items: center;
 }
 
+.img-upld {
+  position: absolute;
+  height: 10vw;
+  width: 10vw;
+  top: 0;
+  padding: 10px 10px;
+  border-radius: 10vh;
+}
+
 .profile {
   height: 10vw;
   width: 10vw;
@@ -111,6 +120,21 @@
   border: none;
   display: flex;
   flex-direction: column;
+}
+
+/* home cont */
+.home-cont {
+  width: 100vw;
+  margin-top: 24px;
+}
+
+.body-nm {
+  margin-left: 10px;
+}
+
+.body-img {
+  margin-top: 8px;
+  width: 100%;
 }
 
 /* people */

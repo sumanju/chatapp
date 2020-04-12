@@ -41,7 +41,8 @@ export class LandingPageComponent implements OnInit {
   activeHeader    : ActiveState    
   isShowProfile   : boolean             = false
   peopleInfo      : object[]            = []  
-  chatData        : ChatData             
+  chatData        : ChatData   
+  timeLine        : Object[]            = []          
 
   constructor(private dataService : AppServiceService,
               private router      : Router) { }
@@ -59,6 +60,7 @@ export class LandingPageComponent implements OnInit {
     this.getUserDetailes()
     this.getUserProfileImage()
     this.getPeopleInfo()
+    this.getTimeLineImage()
   }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -86,7 +88,7 @@ export class LandingPageComponent implements OnInit {
     })
   }
 
-  getPeopleInfo() {
+  private getPeopleInfo() {
     this.apiState  = true
     this.dataService.getPeopleInfo({userId : localStorage.getItem('userInfo')}).subscribe(res => {
       if (res.status) {
@@ -94,6 +96,29 @@ export class LandingPageComponent implements OnInit {
       }
       console.log(this.peopleInfo)
     }, err => {
+      this.apiState = false
+    })
+  }
+
+  private getTimeLineImage() {
+    this.apiState = true
+    this.dataService.getTimeLineImage({userId : localStorage.getItem('userInfo')}).subscribe(res => {
+      if (res.status) {
+        this.timeLine = res.data
+      }
+      this.apiState = false
+    })
+  }
+
+  private setTimeLineImage(imageBase64) {
+    this.apiState = true
+    this.dataService.setTimeLineImage({userId : localStorage.getItem('userInfo'),
+                                       image  : imageBase64,
+                                       name   : this.userInfo['name']}).subscribe(res => {
+      if (res.status) {
+        alert('successfully upload')
+        this.apiState = false
+      }
       this.apiState = false
     })
   }
@@ -138,5 +163,11 @@ export class LandingPageComponent implements OnInit {
   showProfile() {
     this.isShowProfile = true
   }
+
+  async onUpload(event) {
+    const imageBase64 = await ImageProcessing.getCompressedImage(event.target.files[0]) as string
+    this.setTimeLineImage(imageBase64)
+  }
+
   
 }
