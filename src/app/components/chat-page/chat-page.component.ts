@@ -1,5 +1,6 @@
 import { Component, 
-         OnInit 
+         OnInit,
+         OnDestroy 
        }                      from '@angular/core'
 import { AppServiceService }  from 'src/app/app-service.service'
 import { FormBuilder, 
@@ -19,11 +20,12 @@ export interface ChatPageParams {
   styleUrls   : ['./chat-page.component.css']
 })
 
-export class ChatPageComponent implements OnInit {
-
+export class ChatPageComponent implements OnInit, OnDestroy {
+ 
   chatData  : any
   chatList  : object[]  = []
   msgForm   : FormGroup 
+  interval  : any
 
   constructor(private chatDetails : AppServiceService,
               private formuilder  : FormBuilder) { 
@@ -35,10 +37,14 @@ export class ChatPageComponent implements OnInit {
 
   ngOnInit() {
     this.chatData = JSON.parse(localStorage.getItem('chatinfo'))
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.getChatList()
     }, 1000)
     this.getChatList()
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.interval)
   }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -74,4 +80,5 @@ export class ChatPageComponent implements OnInit {
   send() {
     this.sendMsg(this.msgForm.get('msg').value)
   }
+  
 }
