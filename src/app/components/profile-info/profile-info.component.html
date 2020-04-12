@@ -3,10 +3,10 @@
   <div class="profile-img-body">
 
     <div class="upld-profile-img">
-      <label for="image-input">  
+      <label for="image-profile">  
         <img class="upld-profile-img" src="../../../assets/upload-image.png">
       </label>
-      <input id="image-input" type="file" (change)="onUpload($event)" accept="image/*"/>
+      <input id="image-profile" type="file" (change)="onUpload($event)" accept="image/*"/>
     </div>
 
     <img *ngIf="userProfileImage != undefined" class="profile-img" src="{{ userProfileImage }}">

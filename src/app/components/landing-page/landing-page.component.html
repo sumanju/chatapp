@@ -6,7 +6,7 @@
   <div class="header">
     
     <label for="image-input">  
-      <img class="img-upld" src="../../../assets/upload-image.png">
+      <img *ngIf="!isShowProfile" class="img-upld" src="../../../assets/upload-image.png">
     </label>
     <input id="image-input" type="file" (change)="onUpload($event)" accept="image/*" style="display: none;"/>
      
