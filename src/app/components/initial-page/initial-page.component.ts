@@ -14,8 +14,12 @@ export class InitialPageComponent implements OnInit {
   constructor(private router : Router) { }
 
   async ngOnInit() {
-    await this.networkStatus()
-    await this.clearLocalStorage()
+    if (screen.width < 520 && screen.height < 850) {
+      await this.networkStatus()      
+      await this.clearLocalStorage()
+    } else {
+      alert('Not for WebView')
+    }
   }
   
   networkStatus() {
