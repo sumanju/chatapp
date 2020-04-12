@@ -60,7 +60,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         this.chatList = res.data
       }
     })
-    if (this.currLength !== this.chatList.length) {
+    if (this.currLength !== this.chatList.length && this.chatList.length > 6) {
       window.scrollTo(0,document.querySelector(".msg-cont").scrollHeight);
       this.currLength = this.chatList.length
     }
