@@ -125,11 +125,14 @@
 /* home cont */
 .home-cont {
   width: 100vw;
-  margin-top: 24px;
+  margin-top: 36px;
 }
 
 .body-nm {
-  margin-left: 10px;
+  padding: 6px 16px;
+  font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
 }
 
 .body-img {
