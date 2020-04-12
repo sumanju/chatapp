@@ -14,7 +14,7 @@ export class InitialPageComponent implements OnInit {
   constructor(private router : Router) { }
 
   async ngOnInit() {
-    if (screen.width < 520 && screen.height < 850) {
+    if (screen.width < 800 && screen.height < 1000) {
       await this.networkStatus()      
       await this.clearLocalStorage()
     } else {
