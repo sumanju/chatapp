@@ -22,10 +22,11 @@ export interface ChatPageParams {
 
 export class ChatPageComponent implements OnInit, OnDestroy {
  
-  chatData  : any
-  chatList  : object[]  = []
-  msgForm   : FormGroup 
-  interval  : any
+  chatData    : any
+  chatList    : object[]  = []
+  msgForm     : FormGroup 
+  interval    : any
+  currLength  : number
 
   constructor(private chatDetails : AppServiceService,
               private formuilder  : FormBuilder) { 
@@ -36,6 +37,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.currLength = 0
     this.chatData = JSON.parse(localStorage.getItem('chatinfo'))
     this.interval = setInterval(() => {
       this.getChatList()
@@ -58,6 +60,10 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         this.chatList = res.data
       }
     })
+    if (this.currLength !== this.chatList.length) {
+      window.scrollTo(0,document.querySelector(".msg-cont").scrollHeight);
+      this.currLength = this.chatList.length
+    }
   }
 
   sendMsg(msg : string) {
