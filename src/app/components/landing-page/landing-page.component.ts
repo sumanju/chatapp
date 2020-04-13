@@ -42,7 +42,8 @@ export class LandingPageComponent implements OnInit {
   isShowProfile   : boolean             = false
   peopleInfo      : object[]            = []  
   chatData        : ChatData   
-  timeLine        : Object[]            = []          
+  timeLine        : Object[]            = [] 
+  chatHistory     : object[]            = []         
 
   constructor(private dataService : AppServiceService,
               private router      : Router) { }
@@ -57,10 +58,11 @@ export class LandingPageComponent implements OnInit {
       chat    : false,
       people  : false
     }
-    this.getUserDetailes()
     this.getUserProfileImage()
+    this.getUserDetailes()
     this.getPeopleInfo()
     this.getTimeLineImage()
+    this.getChatHistory()
   }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -123,6 +125,16 @@ export class LandingPageComponent implements OnInit {
     })
   }
 
+  getChatHistory() {
+    this.apiState  = true
+    this.dataService.getChatHistory({userId : localStorage.getItem('userInfo')}).subscribe(res => {
+      if (res.status) {
+        this.chatHistory = res.data
+      }
+      this.apiState = false
+    })
+  }
+
 ////////////////////////////////////////////////////////////////////////////////
 //                                  HTML
 ////////////////////////////////////////////////////////////////////////////////
@@ -132,6 +144,15 @@ export class LandingPageComponent implements OnInit {
       userId : this.peopleInfo[index]['user_id'],
       name   : this.peopleInfo[index]['name'],
       image  :  this.peopleInfo[index]['image']
+    }))
+    this.router.navigate(['/ChatPage'])
+  }
+
+  selectChatHistory(index) {
+    localStorage.setItem('chatinfo',JSON.stringify({
+      userId : this.chatHistory[index]['userId'],
+      name   : this.chatHistory[index]['name'],
+      image  :  this.chatHistory[index]['image']
     }))
     this.router.navigate(['/ChatPage'])
   }

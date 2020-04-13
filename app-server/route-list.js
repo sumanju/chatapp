@@ -11,7 +11,8 @@ const logIn           = require('./src/routes/login'),
       getChatList     = require('./src/routes/getchatlist'),
       sendMsg         = require('./src/routes/sendmsg'),
       setTimeLineImg  = require('./src/routes/settimelineimage'),
-      getTimeLineImg  = require('./src/routes/gettimelineimage')
+      getTimeLineImg  = require('./src/routes/gettimelineimage'),
+      getChatHistory  = require('./src/routes/getChatHistory')
 
 //       MIDDLE WARE
   app.use('/',  logIn)
@@ -24,5 +25,6 @@ const logIn           = require('./src/routes/login'),
   app.use('/',  sendMsg)
   app.use('/',  setTimeLineImg)
   app.use('/',  getTimeLineImg)
+  app.use('/',  getChatHistory)
 
 module.exports = app

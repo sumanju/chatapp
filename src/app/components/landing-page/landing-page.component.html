@@ -43,7 +43,13 @@
 
 <!-- chat body -->
     <div *ngIf="activeHeader.chat" class="chat-body">
-
+      <div *ngFor="let data of chatHistory;index as index" (click)="selectChatHistory(index)">
+        <div class="people-rec">
+          <img *ngIf="data['image'] == undefined" class="people-img" src="../../../assets/default-image.jpeg">
+          <img *ngIf="data['image'] != undefined" class="people-img" src="{{ data['image'] }}"/>
+          <div class="people-name"> {{ data["name"] }} </div>
+        </div>
+      </div>
     </div>
 <!-- people info -->
     <div *ngIf="activeHeader.people" class="people-body">
