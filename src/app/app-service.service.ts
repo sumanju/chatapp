@@ -8,8 +8,8 @@ import * as io        from 'socket.io-client'
 })
 export class AppServiceService {
 
-  private baseUrl = 'http://localhost:5000/';
-  // private baseUrl = 'https://chatapp212.herokuapp.com/';
+  // private baseUrl = 'http://localhost:5000/';
+  private baseUrl = 'https://chatapp212.herokuapp.com/';
   private socket  : any
 
   constructor(private httpClient : HttpClient) { 
