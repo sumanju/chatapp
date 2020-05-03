@@ -1,32 +1,42 @@
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _possibleConstructorReturn(self, call) { if (call && (typeof call === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
 
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (typeof call === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -396,9 +406,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * content.
      */
 
-    var AriaDescriber =
-    /*#__PURE__*/
-    function () {
+    var AriaDescriber = /*#__PURE__*/function () {
       /**
        * @param {?} _document
        */
@@ -557,7 +565,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             messagesContainer.removeChild(messageElement);
           }
 
-          messageRegistry.delete(message);
+          messageRegistry["delete"](message);
         }
         /**
          * Creates the global container for all aria-describedby messages.
@@ -800,9 +808,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T
      */
 
-    var ListKeyManager =
-    /*#__PURE__*/
-    function () {
+    var ListKeyManager = /*#__PURE__*/function () {
       /**
        * @param {?} _items
        */
@@ -1382,15 +1388,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var ActiveDescendantKeyManager =
-    /*#__PURE__*/
-    function (_ListKeyManager) {
+    var ActiveDescendantKeyManager = /*#__PURE__*/function (_ListKeyManager) {
       _inherits(ActiveDescendantKeyManager, _ListKeyManager);
+
+      var _super = _createSuper(ActiveDescendantKeyManager);
 
       function ActiveDescendantKeyManager() {
         _classCallCheck(this, ActiveDescendantKeyManager);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(ActiveDescendantKeyManager).apply(this, arguments));
+        return _super.apply(this, arguments);
       }
 
       _createClass(ActiveDescendantKeyManager, [{
@@ -1425,17 +1431,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var FocusKeyManager =
-    /*#__PURE__*/
-    function (_ListKeyManager2) {
+    var FocusKeyManager = /*#__PURE__*/function (_ListKeyManager2) {
       _inherits(FocusKeyManager, _ListKeyManager2);
+
+      var _super2 = _createSuper(FocusKeyManager);
 
       function FocusKeyManager() {
         var _this4;
 
         _classCallCheck(this, FocusKeyManager);
 
-        _this4 = _possibleConstructorReturn(this, _getPrototypeOf(FocusKeyManager).apply(this, arguments));
+        _this4 = _super2.apply(this, arguments);
         _this4._origin = 'program';
         return _this4;
       }
@@ -1490,9 +1496,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var InteractivityChecker =
-    /*#__PURE__*/
-    function () {
+    var InteractivityChecker = /*#__PURE__*/function () {
       /**
        * @param {?} _platform
        */
@@ -1842,9 +1846,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var FocusTrap =
-    /*#__PURE__*/
-    function () {
+    var FocusTrap = /*#__PURE__*/function () {
       /**
        * @param {?} _element
        * @param {?} _checker
@@ -2309,9 +2311,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var FocusTrapFactory =
-    /*#__PURE__*/
-    function () {
+    var FocusTrapFactory = /*#__PURE__*/function () {
       /**
        * @param {?} _checker
        * @param {?} _ngZone
@@ -2379,9 +2379,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Directive for trapping focus within a region.
      */
 
-    var CdkTrapFocus =
-    /*#__PURE__*/
-    function () {
+    var CdkTrapFocus = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} _focusTrapFactory
@@ -2550,9 +2548,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
-    var LiveAnnouncer =
-    /*#__PURE__*/
-    function () {
+    var LiveAnnouncer = /*#__PURE__*/function () {
       /**
        * @param {?} elementToken
        * @param {?} _ngZone
@@ -2773,9 +2769,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * with a wider range of browsers and screen readers.
      */
 
-    var CdkAriaLive =
-    /*#__PURE__*/
-    function () {
+    var CdkAriaLive = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} _liveAnnouncer
@@ -2935,9 +2929,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Monitors mouse and keyboard events to determine the cause of focus events.
      */
 
-    var FocusMonitor =
-    /*#__PURE__*/
-    function () {
+    var FocusMonitor = /*#__PURE__*/function () {
       /**
        * @param {?} _ngZone
        * @param {?} _platform
@@ -3171,7 +3163,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             this._setClasses(nativeElement);
 
-            this._elementInfo.delete(nativeElement);
+            this._elementInfo["delete"](nativeElement);
 
             this._decrementMonitoredElementCount();
           }
@@ -3506,9 +3498,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * 2) cdkMonitorSubtreeFocus: considers an element focused if it or any of its children are focused.
      */
 
-    var CdkMonitorFocus =
-    /*#__PURE__*/
-    function () {
+    var CdkMonitorFocus = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} _focusMonitor
@@ -3720,9 +3710,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Directive whose purpose is to manage the expanded state of CdkAccordionItem children.
      */
 
-    var CdkAccordion =
-    /*#__PURE__*/
-    function () {
+    var CdkAccordion = /*#__PURE__*/function () {
       function CdkAccordion() {
         _classCallCheck(this, CdkAccordion);
 
@@ -3847,9 +3835,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * events and attributes needed to be managed by a CdkAccordion parent.
      */
 
-    var CdkAccordionItem =
-    /*#__PURE__*/
-    function () {
+    var CdkAccordionItem = /*#__PURE__*/function () {
       /**
        * @param {?} accordion
        * @param {?} _changeDetectorRef
@@ -4253,9 +4239,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var Directionality =
-    /*#__PURE__*/
-    function () {
+    var Directionality = /*#__PURE__*/function () {
       /**
        * @param {?=} _document
        */
@@ -4345,9 +4329,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Directionality to get the closest direction.
      */
 
-    var Dir =
-    /*#__PURE__*/
-    function () {
+    var Dir = /*#__PURE__*/function () {
       function Dir() {
         _classCallCheck(this, Dir);
 
@@ -4825,10 +4807,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var ArrayDataSource =
-    /*#__PURE__*/
-    function (_DataSource) {
+    var ArrayDataSource = /*#__PURE__*/function (_DataSource) {
       _inherits(ArrayDataSource, _DataSource);
+
+      var _super3 = _createSuper(ArrayDataSource);
 
       /**
        * @param {?} _data
@@ -4838,7 +4820,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, ArrayDataSource);
 
-        _this20 = _possibleConstructorReturn(this, _getPrototypeOf(ArrayDataSource).call(this));
+        _this20 = _super3.call(this);
         _this20._data = _data;
         return _this20;
       }
@@ -4879,9 +4861,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var SelectionModel =
-    /*#__PURE__*/
-    function () {
+    var SelectionModel = /*#__PURE__*/function () {
       /**
        * @param {?=} _multiple
        * @param {?=} initiallySelectedValues
@@ -5141,7 +5121,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "_unmarkSelected",
         value: function _unmarkSelected(value) {
           if (this.isSelected(value)) {
-            this._selection.delete(value);
+            this._selection["delete"](value);
 
             if (this._emitChanges) {
               this._deselectedToEmit.push(value);
@@ -5225,9 +5205,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var UniqueSelectionDispatcher =
-    /*#__PURE__*/
-    function () {
+    var UniqueSelectionDispatcher = /*#__PURE__*/function () {
       function UniqueSelectionDispatcher() {
         _classCallCheck(this, UniqueSelectionDispatcher);
 
@@ -5244,28 +5222,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(UniqueSelectionDispatcher, [{
         key: "notify",
         value: function notify(id, name) {
-          var _iteratorNormalCompletion = true;
-          var _didIteratorError = false;
-          var _iteratorError = undefined;
+          var _iterator = _createForOfIteratorHelper(this._listeners),
+              _step;
 
           try {
-            for (var _iterator = this._listeners[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
               var listener = _step.value;
               listener(id, name);
             }
           } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
+            _iterator.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-              }
-            } finally {
-              if (_didIteratorError) {
-                throw _iteratorError;
-              }
-            }
+            _iterator.f();
           }
         }
         /**
@@ -6604,9 +6572,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * A utility for calling matchMedia queries.
      */
 
-    var MediaMatcher =
-    /*#__PURE__*/
-    function () {
+    var MediaMatcher = /*#__PURE__*/function () {
       /**
        * @param {?} _platform
        */
@@ -6733,9 +6699,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var BreakpointObserver =
-    /*#__PURE__*/
-    function () {
+    var BreakpointObserver = /*#__PURE__*/function () {
       /**
        * @param {?} _mediaMatcher
        * @param {?} _zone
@@ -7119,9 +7083,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MutationObserverFactory =
-    /*#__PURE__*/
-    function () {
+    var MutationObserverFactory = /*#__PURE__*/function () {
       function MutationObserverFactory() {
         _classCallCheck(this, MutationObserverFactory);
       }
@@ -7160,9 +7122,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * An injectable service that allows watching elements for changes to their content.
      */
 
-    var ContentObserver =
-    /*#__PURE__*/
-    function () {
+    var ContentObserver = /*#__PURE__*/function () {
       /**
        * @param {?} _mutationObserverFactory
        */
@@ -7323,7 +7283,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             stream.complete();
 
-            this._observedElements.delete(element);
+            this._observedElements["delete"](element);
           }
         }
       }]);
@@ -7359,9 +7319,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * its associated element has changed.
      */
 
-    var CdkObserveContent =
-    /*#__PURE__*/
-    function () {
+    var CdkObserveContent = /*#__PURE__*/function () {
       /**
        * @param {?} _contentObserver
        * @param {?} _elementRef
@@ -7847,9 +7805,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var BlockScrollStrategy =
-    /*#__PURE__*/
-    function () {
+    var BlockScrollStrategy = /*#__PURE__*/function () {
       /**
        * @param {?} _viewportRuler
        * @param {?} document
@@ -8003,9 +7959,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CloseScrollStrategy =
-    /*#__PURE__*/
-    function () {
+    var CloseScrollStrategy = /*#__PURE__*/function () {
       /**
        * @param {?} _scrollDispatcher
        * @param {?} _ngZone
@@ -8142,9 +8096,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var NoopScrollStrategy =
-    /*#__PURE__*/
-    function () {
+    var NoopScrollStrategy = /*#__PURE__*/function () {
       function NoopScrollStrategy() {
         _classCallCheck(this, NoopScrollStrategy);
       }
@@ -8254,9 +8206,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var RepositionScrollStrategy =
-    /*#__PURE__*/
-    function () {
+    var RepositionScrollStrategy = /*#__PURE__*/function () {
       /**
        * @param {?} _scrollDispatcher
        * @param {?} _viewportRuler
@@ -8691,9 +8641,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var OverlayKeyboardDispatcher =
-    /*#__PURE__*/
-    function () {
+    var OverlayKeyboardDispatcher = /*#__PURE__*/function () {
       /**
        * @param {?} document
        */
@@ -8870,9 +8818,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Container inside which all overlays will render.
      */
 
-    var OverlayContainer =
-    /*#__PURE__*/
-    function () {
+    var OverlayContainer = /*#__PURE__*/function () {
       /**
        * @param {?} document
        */
@@ -9007,9 +8953,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Used to manipulate or dispose of said overlay.
      */
 
-    var OverlayRef =
-    /*#__PURE__*/
-    function () {
+    var OverlayRef = /*#__PURE__*/function () {
       /**
        * @param {?} _portalOutlet
        * @param {?} _host
@@ -9796,9 +9740,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * of the overlay.
      */
 
-    var FlexibleConnectedPositionStrategy =
-    /*#__PURE__*/
-    function () {
+    var FlexibleConnectedPositionStrategy = /*#__PURE__*/function () {
       /**
        * @param {?} connectedTo
        * @param {?} _viewportRuler
@@ -10002,12 +9944,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var fallback; // Go through each of the preferred positions looking for a good fit.
           // If a good fit is found, it will be applied immediately.
 
-          var _iteratorNormalCompletion2 = true;
-          var _didIteratorError2 = false;
-          var _iteratorError2 = undefined;
+          var _iterator2 = _createForOfIteratorHelper(this._preferredPositions),
+              _step2;
 
           try {
-            for (var _iterator2 = this._preferredPositions[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
               var pos = _step2.value;
 
               // Get the exact (x, y) coordinate for the point-of-origin on the origin element.
@@ -10066,18 +10007,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             // one that has the greatest area available modified by the position's weight
 
           } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
+            _iterator2.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                _iterator2.return();
-              }
-            } finally {
-              if (_didIteratorError2) {
-                throw _iteratorError2;
-              }
-            }
+            _iterator2.f();
           }
 
           if (flexibleFits.length) {
@@ -10086,12 +10018,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             /** @type {?} */
 
             var bestScore = -1;
-            var _iteratorNormalCompletion3 = true;
-            var _didIteratorError3 = false;
-            var _iteratorError3 = undefined;
+
+            var _iterator3 = _createForOfIteratorHelper(flexibleFits),
+                _step3;
 
             try {
-              for (var _iterator3 = flexibleFits[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+              for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
                 var fit = _step3.value;
 
                 /** @type {?} */
@@ -10103,18 +10035,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 }
               }
             } catch (err) {
-              _didIteratorError3 = true;
-              _iteratorError3 = err;
+              _iterator3.e(err);
             } finally {
-              try {
-                if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
-                  _iterator3.return();
-                }
-              } finally {
-                if (_didIteratorError3) {
-                  throw _iteratorError3;
-                }
-              }
+              _iterator3.f();
             }
 
             this._isPushed = false;
@@ -11519,9 +11442,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var ConnectedPositionStrategy =
-    /*#__PURE__*/
-    function () {
+    var ConnectedPositionStrategy = /*#__PURE__*/function () {
       /**
        * @param {?} originPos
        * @param {?} overlayPos
@@ -11835,9 +11756,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * element to become blurry.
      */
 
-    var GlobalPositionStrategy =
-    /*#__PURE__*/
-    function () {
+    var GlobalPositionStrategy = /*#__PURE__*/function () {
       function GlobalPositionStrategy() {
         _classCallCheck(this, GlobalPositionStrategy);
 
@@ -12192,9 +12111,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var OverlayPositionBuilder =
-    /*#__PURE__*/
-    function () {
+    var OverlayPositionBuilder = /*#__PURE__*/function () {
       /**
        * @param {?} _viewportRuler
        * @param {?} _document
@@ -12306,9 +12223,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * An overlay *is* a PortalOutlet, so any kind of Portal can be loaded into one.
      */
 
-    var Overlay =
-    /*#__PURE__*/
-    function () {
+    var Overlay = /*#__PURE__*/function () {
       /**
        * @param {?} scrollStrategies
        * @param {?} _overlayContainer
@@ -12539,9 +12454,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkConnectedOverlay =
-    /*#__PURE__*/
-    function () {
+    var CdkConnectedOverlay = /*#__PURE__*/function () {
       // TODO(jelbourn): inputs for size, scroll behavior, animation, etc.
 
       /**
@@ -13176,10 +13089,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Should be provided in the root component.
      */
 
-    var FullscreenOverlayContainer =
-    /*#__PURE__*/
-    function (_OverlayContainer) {
+    var FullscreenOverlayContainer = /*#__PURE__*/function (_OverlayContainer) {
       _inherits(FullscreenOverlayContainer, _OverlayContainer);
+
+      var _super4 = _createSuper(FullscreenOverlayContainer);
 
       /**
        * @param {?} _document
@@ -13187,7 +13100,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function FullscreenOverlayContainer(_document) {
         _classCallCheck(this, FullscreenOverlayContainer);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(FullscreenOverlayContainer).call(this, _document));
+        return _super4.call(this, _document);
       }
       /**
        * @return {?}
@@ -14015,9 +13928,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var Portal =
-    /*#__PURE__*/
-    function () {
+    var Portal = /*#__PURE__*/function () {
       function Portal() {
         _classCallCheck(this, Portal);
       }
@@ -14095,10 +14006,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var ComponentPortal =
-    /*#__PURE__*/
-    function (_Portal) {
+    var ComponentPortal = /*#__PURE__*/function (_Portal) {
       _inherits(ComponentPortal, _Portal);
+
+      var _super5 = _createSuper(ComponentPortal);
 
       /**
        * @param {?} component
@@ -14111,7 +14022,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, ComponentPortal);
 
-        _this50 = _possibleConstructorReturn(this, _getPrototypeOf(ComponentPortal).call(this));
+        _this50 = _super5.call(this);
         _this50.component = component;
         _this50.viewContainerRef = viewContainerRef;
         _this50.injector = injector;
@@ -14127,10 +14038,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var TemplatePortal =
-    /*#__PURE__*/
-    function (_Portal2) {
+    var TemplatePortal = /*#__PURE__*/function (_Portal2) {
       _inherits(TemplatePortal, _Portal2);
+
+      var _super6 = _createSuper(TemplatePortal);
 
       /**
        * @param {?} template
@@ -14142,7 +14053,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, TemplatePortal);
 
-        _this51 = _possibleConstructorReturn(this, _getPrototypeOf(TemplatePortal).call(this));
+        _this51 = _super6.call(this);
         _this51.templateRef = template;
         _this51.viewContainerRef = viewContainerRef;
         _this51.context = context;
@@ -14195,9 +14106,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var BasePortalOutlet =
-    /*#__PURE__*/
-    function () {
+    var BasePortalOutlet = /*#__PURE__*/function () {
       function BasePortalOutlet() {
         _classCallCheck(this, BasePortalOutlet);
 
@@ -14316,15 +14225,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var BasePortalHost =
-    /*#__PURE__*/
-    function (_BasePortalOutlet) {
+    var BasePortalHost = /*#__PURE__*/function (_BasePortalOutlet) {
       _inherits(BasePortalHost, _BasePortalOutlet);
+
+      var _super7 = _createSuper(BasePortalHost);
 
       function BasePortalHost() {
         _classCallCheck(this, BasePortalHost);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(BasePortalHost).apply(this, arguments));
+        return _super7.apply(this, arguments);
       }
 
       return BasePortalHost;
@@ -14340,10 +14249,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var DomPortalOutlet =
-    /*#__PURE__*/
-    function (_BasePortalOutlet2) {
+    var DomPortalOutlet = /*#__PURE__*/function (_BasePortalOutlet2) {
       _inherits(DomPortalOutlet, _BasePortalOutlet2);
+
+      var _super8 = _createSuper(DomPortalOutlet);
 
       /**
        * @param {?} outletElement
@@ -14356,7 +14265,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, DomPortalOutlet);
 
-        _this52 = _possibleConstructorReturn(this, _getPrototypeOf(DomPortalOutlet).call(this));
+        _this52 = _super8.call(this);
         _this52.outletElement = outletElement;
         _this52._componentFactoryResolver = _componentFactoryResolver;
         _this52._appRef = _appRef;
@@ -14504,15 +14413,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var DomPortalHost =
-    /*#__PURE__*/
-    function (_DomPortalOutlet) {
+    var DomPortalHost = /*#__PURE__*/function (_DomPortalOutlet) {
       _inherits(DomPortalHost, _DomPortalOutlet);
+
+      var _super9 = _createSuper(DomPortalHost);
 
       function DomPortalHost() {
         _classCallCheck(this, DomPortalHost);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(DomPortalHost).apply(this, arguments));
+        return _super9.apply(this, arguments);
       }
 
       return DomPortalHost;
@@ -14528,10 +14437,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkPortal =
-    /*#__PURE__*/
-    function (_TemplatePortal) {
+    var CdkPortal = /*#__PURE__*/function (_TemplatePortal) {
       _inherits(CdkPortal, _TemplatePortal);
+
+      var _super10 = _createSuper(CdkPortal);
 
       /**
        * @param {?} templateRef
@@ -14540,7 +14449,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function CdkPortal(templateRef, viewContainerRef) {
         _classCallCheck(this, CdkPortal);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(CdkPortal).call(this, templateRef, viewContainerRef));
+        return _super10.call(this, templateRef, viewContainerRef);
       }
 
       return CdkPortal;
@@ -14568,15 +14477,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var TemplatePortalDirective =
-    /*#__PURE__*/
-    function (_CdkPortal) {
+    var TemplatePortalDirective = /*#__PURE__*/function (_CdkPortal) {
       _inherits(TemplatePortalDirective, _CdkPortal);
+
+      var _super11 = _createSuper(TemplatePortalDirective);
 
       function TemplatePortalDirective() {
         _classCallCheck(this, TemplatePortalDirective);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(TemplatePortalDirective).apply(this, arguments));
+        return _super11.apply(this, arguments);
       }
 
       return TemplatePortalDirective;
@@ -14601,10 +14510,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * `<ng-template [cdkPortalOutlet]="greeting"></ng-template>`
      */
 
-    var CdkPortalOutlet =
-    /*#__PURE__*/
-    function (_BasePortalOutlet3) {
+    var CdkPortalOutlet = /*#__PURE__*/function (_BasePortalOutlet3) {
       _inherits(CdkPortalOutlet, _BasePortalOutlet3);
+
+      var _super12 = _createSuper(CdkPortalOutlet);
 
       /**
        * @param {?} _componentFactoryResolver
@@ -14615,7 +14524,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, CdkPortalOutlet);
 
-        _this55 = _possibleConstructorReturn(this, _getPrototypeOf(CdkPortalOutlet).call(this));
+        _this55 = _super12.call(this);
         _this55._componentFactoryResolver = _componentFactoryResolver;
         _this55._viewContainerRef = _viewContainerRef;
         /**
@@ -14799,15 +14708,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@breaking-change 9.0.0
      */
 
-    var PortalHostDirective =
-    /*#__PURE__*/
-    function (_CdkPortalOutlet) {
+    var PortalHostDirective = /*#__PURE__*/function (_CdkPortalOutlet) {
       _inherits(PortalHostDirective, _CdkPortalOutlet);
+
+      var _super13 = _createSuper(PortalHostDirective);
 
       function PortalHostDirective() {
         _classCallCheck(this, PortalHostDirective);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(PortalHostDirective).apply(this, arguments));
+        return _super13.apply(this, arguments);
       }
 
       return PortalHostDirective;
@@ -14848,9 +14757,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@docs-private
      */
 
-    var PortalInjector =
-    /*#__PURE__*/
-    function () {
+    var PortalInjector = /*#__PURE__*/function () {
       /**
        * @param {?} _parentInjector
        * @param {?} _customTokens
@@ -15085,9 +14992,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Virtual scrolling strategy for lists with items of known fixed size.
      */
 
-    var FixedSizeVirtualScrollStrategy =
-    /*#__PURE__*/
-    function () {
+    var FixedSizeVirtualScrollStrategy = /*#__PURE__*/function () {
       /**
        * @param {?} itemSize The size of the items in the virtually scrolling list.
        * @param {?} minBufferPx The minimum amount of buffer (in pixels) before needing to render more
@@ -15318,9 +15223,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkFixedSizeVirtualScroll =
-    /*#__PURE__*/
-    function () {
+    var CdkFixedSizeVirtualScroll = /*#__PURE__*/function () {
       function CdkFixedSizeVirtualScroll() {
         _classCallCheck(this, CdkFixedSizeVirtualScroll);
 
@@ -15447,9 +15350,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Scrollable references emit a scrolled event.
      */
 
-    var ScrollDispatcher =
-    /*#__PURE__*/
-    function () {
+    var ScrollDispatcher = /*#__PURE__*/function () {
       /**
        * @param {?} _ngZone
        * @param {?} _platform
@@ -15518,7 +15419,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (scrollableReference) {
             scrollableReference.unsubscribe();
-            this.scrollContainers.delete(scrollable);
+            this.scrollContainers["delete"](scrollable);
           }
         }
         /**
@@ -15779,9 +15680,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * can be listened to through the service.
      */
 
-    var CdkScrollable =
-    /*#__PURE__*/
-    function () {
+    var CdkScrollable = /*#__PURE__*/function () {
       /**
        * @param {?} elementRef
        * @param {?} scrollDispatcher
@@ -16052,10 +15951,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * A viewport that virtualizes its scrolling with the help of `CdkVirtualForOf`.
      */
 
-    var CdkVirtualScrollViewport =
-    /*#__PURE__*/
-    function (_CdkScrollable) {
+    var CdkVirtualScrollViewport = /*#__PURE__*/function (_CdkScrollable) {
       _inherits(CdkVirtualScrollViewport, _CdkScrollable);
+
+      var _super14 = _createSuper(CdkVirtualScrollViewport);
 
       /**
        * @param {?} elementRef
@@ -16070,7 +15969,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, CdkVirtualScrollViewport);
 
-        _this63 = _possibleConstructorReturn(this, _getPrototypeOf(CdkVirtualScrollViewport).call(this, elementRef, scrollDispatcher, ngZone, dir));
+        _this63 = _super14.call(this, elementRef, scrollDispatcher, ngZone, dir);
         _this63.elementRef = elementRef;
         _this63._changeDetectorRef = _changeDetectorRef;
         _this63._scrollStrategy = _scrollStrategy;
@@ -16633,28 +16532,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           var runAfterChangeDetection = this._runAfterChangeDetection;
           this._runAfterChangeDetection = [];
-          var _iteratorNormalCompletion4 = true;
-          var _didIteratorError4 = false;
-          var _iteratorError4 = undefined;
+
+          var _iterator4 = _createForOfIteratorHelper(runAfterChangeDetection),
+              _step4;
 
           try {
-            for (var _iterator4 = runAfterChangeDetection[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+            for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
               var fn = _step4.value;
               fn();
             }
           } catch (err) {
-            _didIteratorError4 = true;
-            _iteratorError4 = err;
+            _iterator4.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion4 && _iterator4.return != null) {
-                _iterator4.return();
-              }
-            } finally {
-              if (_didIteratorError4) {
-                throw _iteratorError4;
-              }
-            }
+            _iterator4.f();
           }
         }
         /**
@@ -16747,7 +16637,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _contentWrapper: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['contentWrapper', {
-          static: true
+          "static": true
         }]
       }]
     };
@@ -16785,9 +16675,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkVirtualForOf =
-    /*#__PURE__*/
-    function () {
+    var CdkVirtualForOf = /*#__PURE__*/function () {
       /**
        * @param {?} _viewContainerRef
        * @param {?} _template
@@ -16997,28 +16885,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           this._destroyed.complete();
 
-          var _iteratorNormalCompletion5 = true;
-          var _didIteratorError5 = false;
-          var _iteratorError5 = undefined;
+          var _iterator5 = _createForOfIteratorHelper(this._templateCache),
+              _step5;
 
           try {
-            for (var _iterator5 = this._templateCache[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+            for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
               var view = _step5.value;
               view.destroy();
             }
           } catch (err) {
-            _didIteratorError5 = true;
-            _iteratorError5 = err;
+            _iterator5.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion5 && _iterator5.return != null) {
-                _iterator5.return();
-              }
-            } finally {
-              if (_didIteratorError5) {
-                throw _iteratorError5;
-              }
-            }
+            _iterator5.f();
           }
         }
         /**
@@ -17447,9 +17325,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@docs-private
      */
 
-    var ViewportRuler =
-    /*#__PURE__*/
-    function () {
+    var ViewportRuler = /*#__PURE__*/function () {
       /**
        * @param {?} _platform
        * @param {?} ngZone
@@ -17827,9 +17703,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkStepHeader =
-    /*#__PURE__*/
-    function () {
+    var CdkStepHeader = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        */
@@ -17947,9 +17821,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var MAT_STEPPER_GLOBAL_OPTIONS = STEPPER_GLOBAL_OPTIONS;
 
-    var CdkStep =
-    /*#__PURE__*/
-    function () {
+    var CdkStep = /*#__PURE__*/function () {
       /**
        * \@breaking-change 8.0.0 remove the `?` after `stepperOptions`
        * @param {?} _stepper
@@ -18153,13 +18025,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       stepLabel: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [CdkStepLabel, {
-          static: false
+          "static": false
         }]
       }],
       content: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["TemplateRef"], {
-          static: true
+          "static": true
         }]
       }],
       stepControl: [{
@@ -18196,9 +18068,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }]
     };
 
-    var CdkStepper =
-    /*#__PURE__*/
-    function () {
+    var CdkStepper = /*#__PURE__*/function () {
       /**
        * @param {?} _dir
        * @param {?} _changeDetectorRef
@@ -18715,9 +18585,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Button that moves to the next step in a stepper workflow.
      */
 
-    var CdkStepperNext =
-    /*#__PURE__*/
-    function () {
+    var CdkStepperNext = /*#__PURE__*/function () {
       /**
        * @param {?} _stepper
        */
@@ -18781,9 +18649,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Button that moves to the previous step in a stepper workflow.
      */
 
-    var CdkStepperPrevious =
-    /*#__PURE__*/
-    function () {
+    var CdkStepperPrevious = /*#__PURE__*/function () {
       /**
        * @param {?} _stepper
        */
@@ -19134,84 +19000,81 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
     function mixinHasStickyInput(base) {
-      return (
-        /*#__PURE__*/
-        function (_base) {
-          _inherits(_class, _base);
+      return /*#__PURE__*/function (_base) {
+        _inherits(_class, _base);
+
+        var _super15 = _createSuper(_class);
+
+        /**
+         * @param {...?} args
+         */
+        function _class() {
+          var _this75;
+
+          _classCallCheck(this, _class);
+
+          for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+            args[_key6] = arguments[_key6];
+          }
+
+          _this75 = _super15.call.apply(_super15, [this].concat(args));
+          _this75._sticky = false;
+          /**
+           * Whether the sticky input has changed since it was last checked.
+           */
+
+          _this75._hasStickyChanged = false;
+          return _this75;
+        }
+        /**
+         * Whether sticky positioning should be applied.
+         * @return {?}
+         */
+
+
+        _createClass(_class, [{
+          key: "hasStickyChanged",
 
           /**
-           * @param {...?} args
+           * Whether the sticky value has changed since this was last called.
+           * @return {?}
            */
-          function _class() {
-            var _getPrototypeOf2;
-
-            var _this75;
-
-            _classCallCheck(this, _class);
-
-            for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-              args[_key6] = arguments[_key6];
-            }
-
-            _this75 = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(_class)).call.apply(_getPrototypeOf2, [this].concat(args)));
-            _this75._sticky = false;
-            /**
-             * Whether the sticky input has changed since it was last checked.
-             */
-
-            _this75._hasStickyChanged = false;
-            return _this75;
+          value: function hasStickyChanged() {
+            /** @type {?} */
+            var hasStickyChanged = this._hasStickyChanged;
+            this._hasStickyChanged = false;
+            return hasStickyChanged;
           }
           /**
-           * Whether sticky positioning should be applied.
+           * Resets the dirty check for cases where the sticky state has been used without checking.
            * @return {?}
            */
 
+        }, {
+          key: "resetStickyChanged",
+          value: function resetStickyChanged() {
+            this._hasStickyChanged = false;
+          }
+        }, {
+          key: "sticky",
+          get: function get() {
+            return this._sticky;
+          }
+          /**
+           * @param {?} v
+           * @return {?}
+           */
+          ,
+          set: function set(v) {
+            /** @type {?} */
+            var prevValue = this._sticky;
+            this._sticky = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_0__["coerceBooleanProperty"])(v);
+            this._hasStickyChanged = prevValue !== this._sticky;
+          }
+        }]);
 
-          _createClass(_class, [{
-            key: "hasStickyChanged",
-
-            /**
-             * Whether the sticky value has changed since this was last called.
-             * @return {?}
-             */
-            value: function hasStickyChanged() {
-              /** @type {?} */
-              var hasStickyChanged = this._hasStickyChanged;
-              this._hasStickyChanged = false;
-              return hasStickyChanged;
-            }
-            /**
-             * Resets the dirty check for cases where the sticky state has been used without checking.
-             * @return {?}
-             */
-
-          }, {
-            key: "resetStickyChanged",
-            value: function resetStickyChanged() {
-              this._hasStickyChanged = false;
-            }
-          }, {
-            key: "sticky",
-            get: function get() {
-              return this._sticky;
-            }
-            /**
-             * @param {?} v
-             * @return {?}
-             */
-            ,
-            set: function set(v) {
-              /** @type {?} */
-              var prevValue = this._sticky;
-              this._sticky = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_0__["coerceBooleanProperty"])(v);
-              this._hasStickyChanged = prevValue !== this._sticky;
-            }
-          }]);
-
-          return _class;
-        }(base)
-      );
+        return _class;
+      }(base);
     }
     /**
      * @fileoverview added by tsickle
@@ -19330,17 +19193,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkColumnDef =
-    /*#__PURE__*/
-    function (_CdkColumnDefBase2) {
+    var CdkColumnDef = /*#__PURE__*/function (_CdkColumnDefBase2) {
       _inherits(CdkColumnDef, _CdkColumnDefBase2);
+
+      var _super16 = _createSuper(CdkColumnDef);
 
       function CdkColumnDef() {
         var _this76;
 
         _classCallCheck(this, CdkColumnDef);
 
-        _this76 = _possibleConstructorReturn(this, _getPrototypeOf(CdkColumnDef).apply(this, arguments));
+        _this76 = _super16.apply(this, arguments);
         _this76._stickyEnd = false;
         return _this76;
       }
@@ -19421,19 +19284,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       cell: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ContentChild"],
         args: [CdkCellDef, {
-          static: false
+          "static": false
         }]
       }],
       headerCell: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ContentChild"],
         args: [CdkHeaderCellDef, {
-          static: false
+          "static": false
         }]
       }],
       footerCell: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ContentChild"],
         args: [CdkFooterCellDef, {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -19458,10 +19321,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkHeaderCell =
-    /*#__PURE__*/
-    function (_BaseCdkCell) {
+    var CdkHeaderCell = /*#__PURE__*/function (_BaseCdkCell) {
       _inherits(CdkHeaderCell, _BaseCdkCell);
+
+      var _super17 = _createSuper(CdkHeaderCell);
 
       /**
        * @param {?} columnDef
@@ -19470,7 +19333,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function CdkHeaderCell(columnDef, elementRef) {
         _classCallCheck(this, CdkHeaderCell);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(CdkHeaderCell).call(this, columnDef, elementRef));
+        return _super17.call(this, columnDef, elementRef);
       }
 
       return CdkHeaderCell;
@@ -19500,10 +19363,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkFooterCell =
-    /*#__PURE__*/
-    function (_BaseCdkCell2) {
+    var CdkFooterCell = /*#__PURE__*/function (_BaseCdkCell2) {
       _inherits(CdkFooterCell, _BaseCdkCell2);
+
+      var _super18 = _createSuper(CdkFooterCell);
 
       /**
        * @param {?} columnDef
@@ -19512,7 +19375,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function CdkFooterCell(columnDef, elementRef) {
         _classCallCheck(this, CdkFooterCell);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(CdkFooterCell).call(this, columnDef, elementRef));
+        return _super18.call(this, columnDef, elementRef);
       }
 
       return CdkFooterCell;
@@ -19542,10 +19405,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkCell =
-    /*#__PURE__*/
-    function (_BaseCdkCell3) {
+    var CdkCell = /*#__PURE__*/function (_BaseCdkCell3) {
       _inherits(CdkCell, _BaseCdkCell3);
+
+      var _super19 = _createSuper(CdkCell);
 
       /**
        * @param {?} columnDef
@@ -19554,7 +19417,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function CdkCell(columnDef, elementRef) {
         _classCallCheck(this, CdkCell);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(CdkCell).call(this, columnDef, elementRef));
+        return _super19.call(this, columnDef, elementRef);
       }
 
       return CdkCell;
@@ -19598,9 +19461,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @abstract
      */
 
-    var BaseRowDef =
-    /*#__PURE__*/
-    function () {
+    var BaseRowDef = /*#__PURE__*/function () {
       /**
        * @param {?} template
        * @param {?} _differs
@@ -19670,15 +19531,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkHeaderRowDefBase =
-    /*#__PURE__*/
-    function (_BaseRowDef) {
+    var CdkHeaderRowDefBase = /*#__PURE__*/function (_BaseRowDef) {
       _inherits(CdkHeaderRowDefBase, _BaseRowDef);
+
+      var _super20 = _createSuper(CdkHeaderRowDefBase);
 
       function CdkHeaderRowDefBase() {
         _classCallCheck(this, CdkHeaderRowDefBase);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(CdkHeaderRowDefBase).apply(this, arguments));
+        return _super20.apply(this, arguments);
       }
 
       return CdkHeaderRowDefBase;
@@ -19693,10 +19554,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkHeaderRowDef =
-    /*#__PURE__*/
-    function (_CdkHeaderRowDefBase2) {
+    var CdkHeaderRowDef = /*#__PURE__*/function (_CdkHeaderRowDefBase2) {
       _inherits(CdkHeaderRowDef, _CdkHeaderRowDefBase2);
+
+      var _super21 = _createSuper(CdkHeaderRowDef);
 
       /**
        * @param {?} template
@@ -19705,7 +19566,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function CdkHeaderRowDef(template, _differs) {
         _classCallCheck(this, CdkHeaderRowDef);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(CdkHeaderRowDef).call(this, template, _differs));
+        return _super21.call(this, template, _differs);
       } // Prerender fails to recognize that ngOnChanges in a part of this class through inheritance.
       // Explicitly define it so that the method is called as part of the Angular lifecycle.
 
@@ -19747,15 +19608,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkFooterRowDefBase =
-    /*#__PURE__*/
-    function (_BaseRowDef2) {
+    var CdkFooterRowDefBase = /*#__PURE__*/function (_BaseRowDef2) {
       _inherits(CdkFooterRowDefBase, _BaseRowDef2);
+
+      var _super22 = _createSuper(CdkFooterRowDefBase);
 
       function CdkFooterRowDefBase() {
         _classCallCheck(this, CdkFooterRowDefBase);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(CdkFooterRowDefBase).apply(this, arguments));
+        return _super22.apply(this, arguments);
       }
 
       return CdkFooterRowDefBase;
@@ -19770,10 +19631,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkFooterRowDef =
-    /*#__PURE__*/
-    function (_CdkFooterRowDefBase2) {
+    var CdkFooterRowDef = /*#__PURE__*/function (_CdkFooterRowDefBase2) {
       _inherits(CdkFooterRowDef, _CdkFooterRowDefBase2);
+
+      var _super23 = _createSuper(CdkFooterRowDef);
 
       /**
        * @param {?} template
@@ -19782,7 +19643,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function CdkFooterRowDef(template, _differs) {
         _classCallCheck(this, CdkFooterRowDef);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(CdkFooterRowDef).call(this, template, _differs));
+        return _super23.call(this, template, _differs);
       } // Prerender fails to recognize that ngOnChanges in a part of this class through inheritance.
       // Explicitly define it so that the method is called as part of the Angular lifecycle.
 
@@ -19826,10 +19687,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkRowDef =
-    /*#__PURE__*/
-    function (_BaseRowDef3) {
+    var CdkRowDef = /*#__PURE__*/function (_BaseRowDef3) {
       _inherits(CdkRowDef, _BaseRowDef3);
+
+      var _super24 = _createSuper(CdkRowDef);
 
       // TODO(andrewseguin): Add an input for providing a switch function to determine
       //   if this template should be used.
@@ -19841,7 +19702,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function CdkRowDef(template, _differs) {
         _classCallCheck(this, CdkRowDef);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(CdkRowDef).call(this, template, _differs));
+        return _super24.call(this, template, _differs);
       }
 
       return CdkRowDef;
@@ -19869,9 +19730,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkCellOutlet =
-    /*#__PURE__*/
-    function () {
+    var CdkCellOutlet = /*#__PURE__*/function () {
       /**
        * @param {?} _viewContainer
        */
@@ -20009,9 +19868,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@docs-private
      */
 
-    var StickyStyler =
-    /*#__PURE__*/
-    function () {
+    var StickyStyler = /*#__PURE__*/function () {
       /**
        * @param {?} _isNativeHtmlTable Whether the sticky logic should be based on a table
        *     that uses the native `<table>` element.
@@ -20043,12 +19900,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(StickyStyler, [{
         key: "clearStickyPositioning",
         value: function clearStickyPositioning(rows, stickyDirections) {
-          var _iteratorNormalCompletion6 = true;
-          var _didIteratorError6 = false;
-          var _iteratorError6 = undefined;
+          var _iterator6 = _createForOfIteratorHelper(rows),
+              _step6;
 
           try {
-            for (var _iterator6 = rows[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+            for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
               var row = _step6.value;
 
               // If the row isn't an element (e.g. if it's an `ng-container`),
@@ -20069,18 +19925,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               }
             }
           } catch (err) {
-            _didIteratorError6 = true;
-            _iteratorError6 = err;
+            _iterator6.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion6 && _iterator6.return != null) {
-                _iterator6.return();
-              }
-            } finally {
-              if (_didIteratorError6) {
-                throw _iteratorError6;
-              }
-            }
+            _iterator6.f();
           }
         }
         /**
@@ -20139,12 +19986,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
           var isRtl = this.direction === 'rtl';
-          var _iteratorNormalCompletion7 = true;
-          var _didIteratorError7 = false;
-          var _iteratorError7 = undefined;
+
+          var _iterator7 = _createForOfIteratorHelper(rows),
+              _step7;
 
           try {
-            for (var _iterator7 = rows[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+            for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
               var row = _step7.value;
 
               for (var i = 0; i < numCells; i++) {
@@ -20163,18 +20010,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               }
             }
           } catch (err) {
-            _didIteratorError7 = true;
-            _iteratorError7 = err;
+            _iterator7.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion7 && _iterator7.return != null) {
-                _iterator7.return();
-              }
-            } finally {
-              if (_didIteratorError7) {
-                throw _iteratorError7;
-              }
-            }
+            _iterator7.f();
           }
         }
         /**
@@ -20287,28 +20125,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "_removeStickyStyle",
         value: function _removeStickyStyle(element, stickyDirections) {
-          var _iteratorNormalCompletion8 = true;
-          var _didIteratorError8 = false;
-          var _iteratorError8 = undefined;
+          var _iterator8 = _createForOfIteratorHelper(stickyDirections),
+              _step8;
 
           try {
-            for (var _iterator8 = stickyDirections[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+            for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
               var dir = _step8.value;
               element.style[dir] = '';
             }
           } catch (err) {
-            _didIteratorError8 = true;
-            _iteratorError8 = err;
+            _iterator8.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion8 && _iterator8.return != null) {
-                _iterator8.return();
-              }
-            } finally {
-              if (_didIteratorError8) {
-                throw _iteratorError8;
-              }
-            }
+            _iterator8.f();
           }
 
           element.style.zIndex = this._getCalculatedZIndex(element); // If the element no longer has any more sticky directions, remove sticky positioning and
@@ -20375,12 +20203,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           /** @type {?} */
 
           var zIndex = 0;
-          var _iteratorNormalCompletion9 = true;
-          var _didIteratorError9 = false;
-          var _iteratorError9 = undefined;
+
+          var _iterator9 = _createForOfIteratorHelper(STICKY_DIRECTIONS),
+              _step9;
 
           try {
-            for (var _iterator9 = STICKY_DIRECTIONS[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+            for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
               var dir = _step9.value;
 
               if (element.style[dir]) {
@@ -20388,18 +20216,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               }
             }
           } catch (err) {
-            _didIteratorError9 = true;
-            _iteratorError9 = err;
+            _iterator9.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion9 && _iterator9.return != null) {
-                _iterator9.return();
-              }
-            } finally {
-              if (_didIteratorError9) {
-                throw _iteratorError9;
-              }
-            }
+            _iterator9.f();
           }
 
           return zIndex ? "".concat(zIndex) : '';
@@ -20698,9 +20517,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T
      */
 
-    var CdkTable =
-    /*#__PURE__*/
-    function () {
+    var CdkTable = /*#__PURE__*/function () {
       /**
        * @param {?} _differs
        * @param {?} _changeDetectorRef
@@ -21047,7 +20864,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "removeColumnDef",
         value: function removeColumnDef(columnDef) {
-          this._customColumnDefs.delete(columnDef);
+          this._customColumnDefs["delete"](columnDef);
         }
         /**
          * Adds a row definition that was not included as part of the content children.
@@ -21069,7 +20886,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "removeRowDef",
         value: function removeRowDef(rowDef) {
-          this._customRowDefs.delete(rowDef);
+          this._customRowDefs["delete"](rowDef);
         }
         /**
          * Adds a header row definition that was not included as part of the content children.
@@ -21093,7 +20910,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "removeHeaderRowDef",
         value: function removeHeaderRowDef(headerRowDef) {
-          this._customHeaderRowDefs.delete(headerRowDef);
+          this._customHeaderRowDefs["delete"](headerRowDef);
 
           this._headerRowDefChanged = true;
         }
@@ -21119,7 +20936,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "removeFooterRowDef",
         value: function removeFooterRowDef(footerRowDef) {
-          this._customFooterRowDefs.delete(footerRowDef);
+          this._customFooterRowDefs["delete"](footerRowDef);
 
           this._footerRowDefChanged = true;
         }
@@ -21819,12 +21636,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var context = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
           // TODO(andrewseguin): enforce that one outlet was instantiated from createEmbeddedView
           outlet.viewContainer.createEmbeddedView(rowDef.template, context, index);
-          var _iteratorNormalCompletion10 = true;
-          var _didIteratorError10 = false;
-          var _iteratorError10 = undefined;
+
+          var _iterator10 = _createForOfIteratorHelper(this._getCellTemplates(rowDef)),
+              _step10;
 
           try {
-            for (var _iterator10 = this._getCellTemplates(rowDef)[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+            for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
               var cellTemplate = _step10.value;
 
               if (CdkCellOutlet.mostRecentCellOutlet) {
@@ -21832,18 +21649,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               }
             }
           } catch (err) {
-            _didIteratorError10 = true;
-            _iteratorError10 = err;
+            _iterator10.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion10 && _iterator10.return != null) {
-                _iterator10.return();
-              }
-            } finally {
-              if (_didIteratorError10) {
-                throw _iteratorError10;
-              }
-            }
+            _iterator10.f();
           }
 
           this._changeDetectorRef.markForCheck();
@@ -22188,19 +21996,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _rowOutlet: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"],
         args: [DataRowOutlet, {
-          static: true
+          "static": true
         }]
       }],
       _headerRowOutlet: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"],
         args: [HeaderRowOutlet, {
-          static: true
+          "static": true
         }]
       }],
       _footerRowOutlet: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"],
         args: [FooterRowOutlet, {
-          static: true
+          "static": true
         }]
       }],
       _contentColumnDefs: [{
@@ -22254,9 +22062,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T
      */
 
-    var CdkTextColumn =
-    /*#__PURE__*/
-    function () {
+    var CdkTextColumn = /*#__PURE__*/function () {
       /**
        * @param {?} _table
        * @param {?} _options
@@ -22436,19 +22242,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       columnDef: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"],
         args: [CdkColumnDef, {
-          static: true
+          "static": true
         }]
       }],
       cell: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"],
         args: [CdkCellDef, {
-          static: true
+          "static": true
         }]
       }],
       headerCell: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"],
         args: [CdkHeaderCellDef, {
-          static: true
+          "static": true
         }]
       }]
     };
@@ -22582,9 +22388,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * https://medium.com/\@brunn/detecting-autofilled-fields-in-javascript-aed598d25da7
      */
 
-    var AutofillMonitor =
-    /*#__PURE__*/
-    function () {
+    var AutofillMonitor = /*#__PURE__*/function () {
       /**
        * @param {?} _platform
        * @param {?} _ngZone
@@ -22716,7 +22520,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             element.classList.remove('cdk-text-field-autofill-monitored');
             element.classList.remove('cdk-text-field-autofilled');
 
-            this._monitoredElements.delete(element);
+            this._monitoredElements["delete"](element);
           }
         }
         /**
@@ -22772,9 +22576,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * A directive that can be used to monitor the autofill state of an input.
      */
 
-    var CdkAutofill =
-    /*#__PURE__*/
-    function () {
+    var CdkAutofill = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} _autofillMonitor
@@ -22853,9 +22655,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Directive to automatically resize a textarea to fit its content.
      */
 
-    var CdkTextareaAutosize =
-    /*#__PURE__*/
-    function () {
+    var CdkTextareaAutosize = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} _platform
@@ -23480,9 +23280,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var BaseTreeControl =
-    /*#__PURE__*/
-    function () {
+    var BaseTreeControl = /*#__PURE__*/function () {
       function BaseTreeControl() {
         _classCallCheck(this, BaseTreeControl);
 
@@ -23606,10 +23404,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var FlatTreeControl =
-    /*#__PURE__*/
-    function (_BaseTreeControl) {
+    var FlatTreeControl = /*#__PURE__*/function (_BaseTreeControl) {
       _inherits(FlatTreeControl, _BaseTreeControl);
+
+      var _super25 = _createSuper(FlatTreeControl);
 
       /**
        * Construct with flat tree data node functions getLevel and isExpandable.
@@ -23621,7 +23419,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, FlatTreeControl);
 
-        _this92 = _possibleConstructorReturn(this, _getPrototypeOf(FlatTreeControl).call(this));
+        _this92 = _super25.call(this);
         _this92.getLevel = getLevel;
         _this92.isExpandable = isExpandable;
         return _this92;
@@ -23686,10 +23484,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var NestedTreeControl =
-    /*#__PURE__*/
-    function (_BaseTreeControl2) {
+    var NestedTreeControl = /*#__PURE__*/function (_BaseTreeControl2) {
       _inherits(NestedTreeControl, _BaseTreeControl2);
+
+      var _super26 = _createSuper(NestedTreeControl);
 
       /**
        * Construct with nested tree function getChildren.
@@ -23700,7 +23498,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, NestedTreeControl);
 
-        _this93 = _possibleConstructorReturn(this, _getPrototypeOf(NestedTreeControl).call(this));
+        _this93 = _super26.call(this);
         _this93.getChildren = getChildren;
         return _this93;
       }
@@ -23789,29 +23587,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (children) {
-              var _iteratorNormalCompletion11 = true;
-              var _didIteratorError11 = false;
-              var _iteratorError11 = undefined;
+              var _iterator11 = _createForOfIteratorHelper(children),
+                  _step11;
 
               try {
-                for (var _iterator11 = children[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
+                for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
                   var child = _step11.value;
 
                   _this95._getDescendants(descendants, child);
                 }
               } catch (err) {
-                _didIteratorError11 = true;
-                _iteratorError11 = err;
+                _iterator11.e(err);
               } finally {
-                try {
-                  if (!_iteratorNormalCompletion11 && _iterator11.return != null) {
-                    _iterator11.return();
-                  }
-                } finally {
-                  if (_didIteratorError11) {
-                    throw _iteratorError11;
-                  }
-                }
+                _iterator11.f();
               }
             });
           }
@@ -23996,9 +23784,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CdkTree =
-    /*#__PURE__*/
-    function () {
+    var CdkTree = /*#__PURE__*/function () {
       /**
        * @param {?} _differs
        * @param {?} _changeDetectorRef
@@ -24221,7 +24007,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               /** @type {?} */
               adjustedPreviousIndex);
 
-              _this97._levels.delete(item.item);
+              _this97._levels["delete"](item.item);
             } else {
               /** @type {?} */
               var view = viewContainer.get(
@@ -24376,7 +24162,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _nodeOutlet: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"],
         args: [CdkTreeNodeOutlet, {
-          static: true
+          "static": true
         }]
       }],
       _nodeDefs: [{
@@ -24389,9 +24175,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T
      */
 
-    var CdkTreeNode =
-    /*#__PURE__*/
-    function () {
+    var CdkTreeNode = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} _tree
@@ -24608,10 +24392,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T
      */
 
-    var CdkNestedTreeNode =
-    /*#__PURE__*/
-    function (_CdkTreeNode) {
+    var CdkNestedTreeNode = /*#__PURE__*/function (_CdkTreeNode) {
       _inherits(CdkNestedTreeNode, _CdkTreeNode);
+
+      var _super27 = _createSuper(CdkNestedTreeNode);
 
       /**
        * @param {?} _elementRef
@@ -24623,7 +24407,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, CdkNestedTreeNode);
 
-        _this99 = _possibleConstructorReturn(this, _getPrototypeOf(CdkNestedTreeNode).call(this, _elementRef, _tree));
+        _this99 = _super27.call(this, _elementRef, _tree);
         _this99._elementRef = _elementRef;
         _this99._tree = _tree;
         _this99._differs = _differs;
@@ -24815,9 +24599,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T
      */
 
-    var CdkTreeNodePadding =
-    /*#__PURE__*/
-    function () {
+    var CdkTreeNodePadding = /*#__PURE__*/function () {
       /**
        * @param {?} _treeNode
        * @param {?} _tree
@@ -25037,9 +24819,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T
      */
 
-    var CdkTreeNodeToggle =
-    /*#__PURE__*/
-    function () {
+    var CdkTreeNodeToggle = /*#__PURE__*/function () {
       /**
        * @param {?} _tree
        * @param {?} _treeNode
@@ -25734,9 +25514,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var CheckboxControlValueAccessor =
-    /*#__PURE__*/
-    function () {
+    var CheckboxControlValueAccessor = /*#__PURE__*/function () {
       /**
        * @param {?} _renderer
        * @param {?} _elementRef
@@ -25913,9 +25691,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var DefaultValueAccessor =
-    /*#__PURE__*/
-    function () {
+    var DefaultValueAccessor = /*#__PURE__*/function () {
       /**
        * @param {?} _renderer
        * @param {?} _elementRef
@@ -26113,9 +25889,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var AbstractControlDirective =
-    /*#__PURE__*/
-    function () {
+    var AbstractControlDirective = /*#__PURE__*/function () {
       function AbstractControlDirective() {
         _classCallCheck(this, AbstractControlDirective);
       }
@@ -26406,15 +26180,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var ControlContainer =
-    /*#__PURE__*/
-    function (_AbstractControlDirec) {
+    var ControlContainer = /*#__PURE__*/function (_AbstractControlDirec) {
       _inherits(ControlContainer, _AbstractControlDirec);
+
+      var _super28 = _createSuper(ControlContainer);
 
       function ControlContainer() {
         _classCallCheck(this, ControlContainer);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(ControlContainer).apply(this, arguments));
+        return _super28.apply(this, arguments);
       }
 
       _createClass(ControlContainer, [{
@@ -26468,17 +26242,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var NgControl =
-    /*#__PURE__*/
-    function (_AbstractControlDirec2) {
+    var NgControl = /*#__PURE__*/function (_AbstractControlDirec2) {
       _inherits(NgControl, _AbstractControlDirec2);
+
+      var _super29 = _createSuper(NgControl);
 
       function NgControl() {
         var _this103;
 
         _classCallCheck(this, NgControl);
 
-        _this103 = _possibleConstructorReturn(this, _getPrototypeOf(NgControl).apply(this, arguments));
+        _this103 = _super29.apply(this, arguments);
         /**
          * \@description
          * The parent form for the control.
@@ -26562,9 +26336,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var AbstractControlStatus =
-    /*#__PURE__*/
-    function () {
+    var AbstractControlStatus = /*#__PURE__*/function () {
       /**
        * @param {?} cd
        */
@@ -26679,10 +26451,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var NgControlStatus =
-    /*#__PURE__*/
-    function (_AbstractControlStatu) {
+    var NgControlStatus = /*#__PURE__*/function (_AbstractControlStatu) {
       _inherits(NgControlStatus, _AbstractControlStatu);
+
+      var _super30 = _createSuper(NgControlStatus);
 
       /**
        * @param {?} cd
@@ -26690,7 +26462,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function NgControlStatus(cd) {
         _classCallCheck(this, NgControlStatus);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(NgControlStatus).call(this, cd));
+        return _super30.call(this, cd);
       }
 
       return NgControlStatus;
@@ -26726,10 +26498,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var NgControlStatusGroup =
-    /*#__PURE__*/
-    function (_AbstractControlStatu2) {
+    var NgControlStatusGroup = /*#__PURE__*/function (_AbstractControlStatu2) {
       _inherits(NgControlStatusGroup, _AbstractControlStatu2);
+
+      var _super31 = _createSuper(NgControlStatusGroup);
 
       /**
        * @param {?} cd
@@ -26737,7 +26509,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function NgControlStatusGroup(cd) {
         _classCallCheck(this, NgControlStatusGroup);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(NgControlStatusGroup).call(this, cd));
+        return _super31.call(this, cd);
       }
 
       return NgControlStatusGroup;
@@ -26862,9 +26634,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var Validators =
-    /*#__PURE__*/
-    function () {
+    var Validators = /*#__PURE__*/function () {
       function Validators() {
         _classCallCheck(this, Validators);
       }
@@ -27528,9 +27298,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var NumberValueAccessor =
-    /*#__PURE__*/
-    function () {
+    var NumberValueAccessor = /*#__PURE__*/function () {
       /**
        * @param {?} _renderer
        * @param {?} _elementRef
@@ -27679,9 +27447,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Class used by Angular to track radio buttons. For internal use only.
      */
 
-    var RadioControlRegistry =
-    /*#__PURE__*/
-    function () {
+    var RadioControlRegistry = /*#__PURE__*/function () {
       function RadioControlRegistry() {
         _classCallCheck(this, RadioControlRegistry);
 
@@ -27787,9 +27553,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var RadioControlValueAccessor =
-    /*#__PURE__*/
-    function () {
+    var RadioControlValueAccessor = /*#__PURE__*/function () {
       /**
        * @param {?} _renderer
        * @param {?} _elementRef
@@ -28040,9 +27804,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var RangeValueAccessor =
-    /*#__PURE__*/
-    function () {
+    var RangeValueAccessor = /*#__PURE__*/function () {
       /**
        * @param {?} _renderer
        * @param {?} _elementRef
@@ -28190,9 +27952,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
-    var ReactiveErrors =
-    /*#__PURE__*/
-    function () {
+    var ReactiveErrors = /*#__PURE__*/function () {
       function ReactiveErrors() {
         _classCallCheck(this, ReactiveErrors);
       }
@@ -28363,9 +28123,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var SelectControlValueAccessor =
-    /*#__PURE__*/
-    function () {
+    var SelectControlValueAccessor = /*#__PURE__*/function () {
       /**
        * @param {?} _renderer
        * @param {?} _elementRef
@@ -28587,9 +28345,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var NgSelectOption =
-    /*#__PURE__*/
-    function () {
+    var NgSelectOption = /*#__PURE__*/function () {
       /**
        * @param {?} _element
        * @param {?} _renderer
@@ -28633,7 +28389,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "ngOnDestroy",
         value: function ngOnDestroy() {
           if (this._select) {
-            this._select._optionMap.delete(this.id);
+            this._select._optionMap["delete"](this.id);
 
             this._select.writeValue(this._select.value);
           }
@@ -28801,9 +28557,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var SelectMultipleControlValueAccessor =
-    /*#__PURE__*/
-    function () {
+    var SelectMultipleControlValueAccessor = /*#__PURE__*/function () {
       /**
        * @param {?} _renderer
        * @param {?} _elementRef
@@ -29101,9 +28855,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var ɵNgSelectMultipleOption =
-    /*#__PURE__*/
-    function () {
+    var ɵNgSelectMultipleOption = /*#__PURE__*/function () {
       /**
        * @param {?} _element
        * @param {?} _renderer
@@ -29161,7 +28913,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "ngOnDestroy",
         value: function ngOnDestroy() {
           if (this._select) {
-            this._select._optionMap.delete(this.id);
+            this._select._optionMap["delete"](this.id);
 
             this._select.writeValue(this._select.value);
           }
@@ -29819,9 +29571,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var AbstractControl =
-    /*#__PURE__*/
-    function () {
+    var AbstractControl = /*#__PURE__*/function () {
       /**
        * Initialize the AbstractControl instance.
        *
@@ -30986,10 +30736,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var FormControl =
-    /*#__PURE__*/
-    function (_AbstractControl) {
+    var FormControl = /*#__PURE__*/function (_AbstractControl) {
       _inherits(FormControl, _AbstractControl);
+
+      var _super32 = _createSuper(FormControl);
 
       /**
        * Creates a new `FormControl` instance.
@@ -31013,7 +30763,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, FormControl);
 
-        _this110 = _possibleConstructorReturn(this, _getPrototypeOf(FormControl).call(this, coerceToValidator(validatorOrOpts), coerceToAsyncValidator(asyncValidator, validatorOrOpts)));
+        _this110 = _super32.call(this, coerceToValidator(validatorOrOpts), coerceToAsyncValidator(asyncValidator, validatorOrOpts));
         /**
          * \@internal
          */
@@ -31340,10 +31090,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var FormGroup =
-    /*#__PURE__*/
-    function (_AbstractControl2) {
+    var FormGroup = /*#__PURE__*/function (_AbstractControl2) {
       _inherits(FormGroup, _AbstractControl2);
+
+      var _super33 = _createSuper(FormGroup);
 
       /**
        * Creates a new `FormGroup` instance.
@@ -31363,7 +31113,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, FormGroup);
 
-        _this112 = _possibleConstructorReturn(this, _getPrototypeOf(FormGroup).call(this, coerceToValidator(validatorOrOpts), coerceToAsyncValidator(asyncValidator, validatorOrOpts)));
+        _this112 = _super33.call(this, coerceToValidator(validatorOrOpts), coerceToAsyncValidator(asyncValidator, validatorOrOpts));
         _this112.controls = controls;
 
         _this112._initObservables();
@@ -31985,10 +31735,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var FormArray =
-    /*#__PURE__*/
-    function (_AbstractControl3) {
+    var FormArray = /*#__PURE__*/function (_AbstractControl3) {
       _inherits(FormArray, _AbstractControl3);
+
+      var _super34 = _createSuper(FormArray);
 
       /**
        * Creates a new `FormArray` instance.
@@ -32008,7 +31758,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, FormArray);
 
-        _this119 = _possibleConstructorReturn(this, _getPrototypeOf(FormArray).call(this, coerceToValidator(validatorOrOpts), coerceToAsyncValidator(asyncValidator, validatorOrOpts)));
+        _this119 = _super34.call(this, coerceToValidator(validatorOrOpts), coerceToAsyncValidator(asyncValidator, validatorOrOpts));
         _this119.controls = controls;
 
         _this119._initObservables();
@@ -32543,28 +32293,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "_allControlsDisabled",
         value: function _allControlsDisabled() {
-          var _iteratorNormalCompletion12 = true;
-          var _didIteratorError12 = false;
-          var _iteratorError12 = undefined;
+          var _iterator12 = _createForOfIteratorHelper(this.controls),
+              _step12;
 
           try {
-            for (var _iterator12 = this.controls[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
+            for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
               var control = _step12.value;
               if (control.enabled) return false;
             }
           } catch (err) {
-            _didIteratorError12 = true;
-            _iteratorError12 = err;
+            _iterator12.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion12 && _iterator12.return != null) {
-                _iterator12.return();
-              }
-            } finally {
-              if (_didIteratorError12) {
-                throw _iteratorError12;
-              }
-            }
+            _iterator12.f();
           }
 
           return this.controls.length > 0 || this.disabled;
@@ -32692,10 +32432,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var NgForm =
-    /*#__PURE__*/
-    function (_ControlContainer) {
+    var NgForm = /*#__PURE__*/function (_ControlContainer) {
       _inherits(NgForm, _ControlContainer);
+
+      var _super35 = _createSuper(NgForm);
 
       /**
        * @param {?} validators
@@ -32706,7 +32446,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, NgForm);
 
-        _this124 = _possibleConstructorReturn(this, _getPrototypeOf(NgForm).call(this));
+        _this124 = _super35.call(this);
         /**
          * \@description
          * Returns whether the form submission has been triggered.
@@ -33102,9 +32842,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var TemplateDrivenErrors =
-    /*#__PURE__*/
-    function () {
+    var TemplateDrivenErrors = /*#__PURE__*/function () {
       function TemplateDrivenErrors() {
         _classCallCheck(this, TemplateDrivenErrors);
       }
@@ -33234,15 +32972,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var AbstractFormGroupDirective =
-    /*#__PURE__*/
-    function (_ControlContainer2) {
+    var AbstractFormGroupDirective = /*#__PURE__*/function (_ControlContainer2) {
       _inherits(AbstractFormGroupDirective, _ControlContainer2);
+
+      var _super36 = _createSuper(AbstractFormGroupDirective);
 
       function AbstractFormGroupDirective() {
         _classCallCheck(this, AbstractFormGroupDirective);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(AbstractFormGroupDirective).apply(this, arguments));
+        return _super36.apply(this, arguments);
       }
 
       _createClass(AbstractFormGroupDirective, [{
@@ -33391,10 +33129,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var NgModelGroup =
-    /*#__PURE__*/
-    function (_AbstractFormGroupDir) {
+    var NgModelGroup = /*#__PURE__*/function (_AbstractFormGroupDir) {
       _inherits(NgModelGroup, _AbstractFormGroupDir);
+
+      var _super37 = _createSuper(NgModelGroup);
 
       /**
        * @param {?} parent
@@ -33406,7 +33144,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, NgModelGroup);
 
-        _this130 = _possibleConstructorReturn(this, _getPrototypeOf(NgModelGroup).call(this));
+        _this130 = _super37.call(this);
         _this130._parent = parent;
         _this130._validators = validators;
         _this130._asyncValidators = asyncValidators;
@@ -33610,10 +33348,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var NgModel =
-    /*#__PURE__*/
-    function (_NgControl) {
+    var NgModel = /*#__PURE__*/function (_NgControl) {
       _inherits(NgModel, _NgControl);
+
+      var _super38 = _createSuper(NgModel);
 
       /**
        * @param {?} parent
@@ -33626,7 +33364,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, NgModel);
 
-        _this131 = _possibleConstructorReturn(this, _getPrototypeOf(NgModel).call(this));
+        _this131 = _super38.call(this);
         _this131.control = new FormControl();
         /**
          * \@internal
@@ -34111,10 +33849,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var FormControlDirective =
-    /*#__PURE__*/
-    function (_NgControl2) {
+    var FormControlDirective = /*#__PURE__*/function (_NgControl2) {
       _inherits(FormControlDirective, _NgControl2);
+
+      var _super39 = _createSuper(FormControlDirective);
 
       /**
        * @param {?} validators
@@ -34127,7 +33865,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, FormControlDirective);
 
-        _this134 = _possibleConstructorReturn(this, _getPrototypeOf(FormControlDirective).call(this));
+        _this134 = _super39.call(this);
         _this134._ngModelWarningConfig = _ngModelWarningConfig;
         /**
          * @deprecated as of v6
@@ -34397,10 +34135,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var FormGroupDirective =
-    /*#__PURE__*/
-    function (_ControlContainer3) {
+    var FormGroupDirective = /*#__PURE__*/function (_ControlContainer3) {
       _inherits(FormGroupDirective, _ControlContainer3);
+
+      var _super40 = _createSuper(FormGroupDirective);
 
       /**
        * @param {?} _validators
@@ -34411,7 +34149,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, FormGroupDirective);
 
-        _this135 = _possibleConstructorReturn(this, _getPrototypeOf(FormGroupDirective).call(this));
+        _this135 = _super40.call(this);
         _this135._validators = _validators;
         _this135._asyncValidators = _asyncValidators;
         /**
@@ -34910,10 +34648,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var FormGroupName =
-    /*#__PURE__*/
-    function (_AbstractFormGroupDir2) {
+    var FormGroupName = /*#__PURE__*/function (_AbstractFormGroupDir2) {
       _inherits(FormGroupName, _AbstractFormGroupDir2);
+
+      var _super41 = _createSuper(FormGroupName);
 
       /**
        * @param {?} parent
@@ -34925,7 +34663,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, FormGroupName);
 
-        _this138 = _possibleConstructorReturn(this, _getPrototypeOf(FormGroupName).call(this));
+        _this138 = _super41.call(this);
         _this138._parent = parent;
         _this138._validators = validators;
         _this138._asyncValidators = asyncValidators;
@@ -35037,10 +34775,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var FormArrayName =
-    /*#__PURE__*/
-    function (_ControlContainer4) {
+    var FormArrayName = /*#__PURE__*/function (_ControlContainer4) {
       _inherits(FormArrayName, _ControlContainer4);
+
+      var _super42 = _createSuper(FormArrayName);
 
       /**
        * @param {?} parent
@@ -35052,7 +34790,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, FormArrayName);
 
-        _this139 = _possibleConstructorReturn(this, _getPrototypeOf(FormArrayName).call(this));
+        _this139 = _super42.call(this);
         _this139._parent = parent;
         _this139._validators = validators;
         _this139._asyncValidators = asyncValidators;
@@ -35342,10 +35080,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var FormControlName =
-    /*#__PURE__*/
-    function (_NgControl3) {
+    var FormControlName = /*#__PURE__*/function (_NgControl3) {
       _inherits(FormControlName, _NgControl3);
+
+      var _super43 = _createSuper(FormControlName);
 
       /**
        * @param {?} parent
@@ -35359,7 +35097,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, FormControlName);
 
-        _this140 = _possibleConstructorReturn(this, _getPrototypeOf(FormControlName).call(this));
+        _this140 = _super43.call(this);
         _this140._ngModelWarningConfig = _ngModelWarningConfig;
         _this140._added = false;
         /**
@@ -35751,9 +35489,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var RequiredValidator =
-    /*#__PURE__*/
-    function () {
+    var RequiredValidator = /*#__PURE__*/function () {
       function RequiredValidator() {
         _classCallCheck(this, RequiredValidator);
       }
@@ -35848,15 +35584,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var CheckboxRequiredValidator =
-    /*#__PURE__*/
-    function (_RequiredValidator) {
+    var CheckboxRequiredValidator = /*#__PURE__*/function (_RequiredValidator) {
       _inherits(CheckboxRequiredValidator, _RequiredValidator);
+
+      var _super44 = _createSuper(CheckboxRequiredValidator);
 
       function CheckboxRequiredValidator() {
         _classCallCheck(this, CheckboxRequiredValidator);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(CheckboxRequiredValidator).apply(this, arguments));
+        return _super44.apply(this, arguments);
       }
 
       _createClass(CheckboxRequiredValidator, [{
@@ -35927,9 +35663,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@ngModule ReactiveFormsModule
      */
 
-    var EmailValidator =
-    /*#__PURE__*/
-    function () {
+    var EmailValidator = /*#__PURE__*/function () {
       function EmailValidator() {
         _classCallCheck(this, EmailValidator);
       }
@@ -36054,9 +35788,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var MinLengthValidator =
-    /*#__PURE__*/
-    function () {
+    var MinLengthValidator = /*#__PURE__*/function () {
       function MinLengthValidator() {
         _classCallCheck(this, MinLengthValidator);
       }
@@ -36177,9 +35909,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var MaxLengthValidator =
-    /*#__PURE__*/
-    function () {
+    var MaxLengthValidator = /*#__PURE__*/function () {
       function MaxLengthValidator() {
         _classCallCheck(this, MaxLengthValidator);
       }
@@ -36302,9 +36032,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var PatternValidator =
-    /*#__PURE__*/
-    function () {
+    var PatternValidator = /*#__PURE__*/function () {
       function PatternValidator() {
         _classCallCheck(this, PatternValidator);
       }
@@ -36449,9 +36177,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var FormBuilder =
-    /*#__PURE__*/
-    function () {
+    var FormBuilder = /*#__PURE__*/function () {
       function FormBuilder() {
         _classCallCheck(this, FormBuilder);
       }
@@ -36659,9 +36385,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var FormsModule =
-    /*#__PURE__*/
-    function () {
+    var FormsModule = /*#__PURE__*/function () {
       function FormsModule() {
         _classCallCheck(this, FormsModule);
       }
@@ -36710,9 +36434,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@publicApi
      */
 
-    var ReactiveFormsModule =
-    /*#__PURE__*/
-    function () {
+    var ReactiveFormsModule = /*#__PURE__*/function () {
       function ReactiveFormsModule() {
         _classCallCheck(this, ReactiveFormsModule);
       }
@@ -37031,10 +36753,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       };
     }
 
-    var MatAutocomplete =
-    /*#__PURE__*/
-    function (_MatAutocompleteMixin) {
+    var MatAutocomplete = /*#__PURE__*/function (_MatAutocompleteMixin) {
       _inherits(MatAutocomplete, _MatAutocompleteMixin);
+
+      var _super45 = _createSuper(MatAutocomplete);
 
       /**
        * @param {?} _changeDetectorRef
@@ -37046,7 +36768,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatAutocomplete);
 
-        _this143 = _possibleConstructorReturn(this, _getPrototypeOf(MatAutocomplete).call(this));
+        _this143 = _super45.call(this);
         _this143._changeDetectorRef = _changeDetectorRef;
         _this143._elementRef = _elementRef;
         /**
@@ -37264,13 +36986,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       template: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
         args: [_angular_core__WEBPACK_IMPORTED_MODULE_2__["TemplateRef"], {
-          static: true
+          "static": true
         }]
       }],
       panel: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
         args: ['panel', {
-          static: false
+          "static": false
         }]
       }],
       options: [{
@@ -37418,9 +37140,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       return Error('Attempting to open an undefined instance of `mat-autocomplete`. ' + 'Make sure that the id passed to the `matAutocomplete` is correct and that ' + 'you\'re attempting to open it after the ngAfterContentInit hook.');
     }
 
-    var MatAutocompleteTrigger =
-    /*#__PURE__*/
-    function () {
+    var MatAutocompleteTrigger = /*#__PURE__*/function () {
       /**
        * @param {?} _element
        * @param {?} _overlay
@@ -38606,10 +38326,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatBadge =
-    /*#__PURE__*/
-    function (_MatBadgeMixinBase2) {
+    var MatBadge = /*#__PURE__*/function (_MatBadgeMixinBase2) {
       _inherits(MatBadge, _MatBadgeMixinBase2);
+
+      var _super46 = _createSuper(MatBadge);
 
       /**
        * @param {?} _ngZone
@@ -38623,7 +38343,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatBadge);
 
-        _this151 = _possibleConstructorReturn(this, _getPrototypeOf(MatBadge).call(this));
+        _this151 = _super46.call(this);
         _this151._ngZone = _ngZone;
         _this151._elementRef = _elementRef;
         _this151._ariaDescriber = _ariaDescriber;
@@ -39306,10 +39026,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@docs-private
      */
 
-    var MatBottomSheetContainer =
-    /*#__PURE__*/
-    function (_angular_cdk_portal__) {
+    var MatBottomSheetContainer = /*#__PURE__*/function (_angular_cdk_portal__) {
       _inherits(MatBottomSheetContainer, _angular_cdk_portal__);
+
+      var _super47 = _createSuper(MatBottomSheetContainer);
 
       /**
        * @param {?} _elementRef
@@ -39324,7 +39044,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatBottomSheetContainer);
 
-        _this152 = _possibleConstructorReturn(this, _getPrototypeOf(MatBottomSheetContainer).call(this));
+        _this152 = _super47.call(this);
         _this152._elementRef = _elementRef;
         _this152._changeDetectorRef = _changeDetectorRef;
         _this152._focusTrapFactory = _focusTrapFactory;
@@ -39644,7 +39364,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _portalOutlet: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: [_angular_cdk_portal__WEBPACK_IMPORTED_MODULE_3__["CdkPortalOutlet"], {
-          static: true
+          "static": true
         }]
       }]
     };
@@ -39676,9 +39396,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T, R
      */
 
-    var MatBottomSheetRef =
-    /*#__PURE__*/
-    function () {
+    var MatBottomSheetRef = /*#__PURE__*/function () {
       /**
        * @param {?} containerInstance
        * @param {?} _overlayRef
@@ -39878,9 +39596,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Service to trigger Material Design bottom sheets.
      */
 
-    var MatBottomSheet =
-    /*#__PURE__*/
-    function () {
+    var MatBottomSheet = /*#__PURE__*/function () {
       /**
        * @param {?} _overlay
        * @param {?} _injector
@@ -40337,9 +40053,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatButtonToggleGroup =
-    /*#__PURE__*/
-    function () {
+    var MatButtonToggleGroup = /*#__PURE__*/function () {
       /**
        * @param {?} _changeDetector
        * @param {?=} defaultOptions
@@ -40900,10 +40614,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatButtonToggle =
-    /*#__PURE__*/
-    function (_MatButtonToggleMixin) {
+    var MatButtonToggle = /*#__PURE__*/function (_MatButtonToggleMixin) {
       _inherits(MatButtonToggle, _MatButtonToggleMixin);
+
+      var _super48 = _createSuper(MatButtonToggle);
 
       /**
        * @param {?} toggleGroup
@@ -40919,7 +40633,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatButtonToggle);
 
-        _this159 = _possibleConstructorReturn(this, _getPrototypeOf(MatButtonToggle).call(this));
+        _this159 = _super48.call(this);
         _this159._changeDetectorRef = _changeDetectorRef;
         _this159._elementRef = _elementRef;
         _this159._focusMonitor = _focusMonitor;
@@ -41181,7 +40895,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _buttonElement: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"],
         args: ['button', {
-          static: false
+          "static": false
         }]
       }],
       id: [{
@@ -41351,10 +41065,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatButton =
-    /*#__PURE__*/
-    function (_MatButtonMixinBase2) {
+    var MatButton = /*#__PURE__*/function (_MatButtonMixinBase2) {
       _inherits(MatButton, _MatButtonMixinBase2);
+
+      var _super49 = _createSuper(MatButton);
 
       /**
        * @param {?} elementRef
@@ -41366,7 +41080,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatButton);
 
-        _this160 = _possibleConstructorReturn(this, _getPrototypeOf(MatButton).call(this, elementRef));
+        _this160 = _super49.call(this, elementRef);
         _this160._focusMonitor = _focusMonitor;
         _this160._animationMode = _animationMode;
         /**
@@ -41381,12 +41095,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         _this160.isIconButton = _this160._hasHostAttributes('mat-icon-button'); // For each of the variant selectors that is present in the button's host
         // attributes, add the correct corresponding class.
 
-        var _iteratorNormalCompletion13 = true;
-        var _didIteratorError13 = false;
-        var _iteratorError13 = undefined;
+        var _iterator13 = _createForOfIteratorHelper(BUTTON_HOST_ATTRIBUTES),
+            _step13;
 
         try {
-          for (var _iterator13 = BUTTON_HOST_ATTRIBUTES[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
+          for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
             var attr = _step13.value;
 
             if (_this160._hasHostAttributes(attr)) {
@@ -41398,18 +41111,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           // the class is applied to derived classes.
 
         } catch (err) {
-          _didIteratorError13 = true;
-          _iteratorError13 = err;
+          _iterator13.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion13 && _iterator13.return != null) {
-              _iterator13.return();
-            }
-          } finally {
-            if (_didIteratorError13) {
-              throw _iteratorError13;
-            }
-          }
+          _iterator13.f();
         }
 
         elementRef.nativeElement.classList.add('mat-button-base');
@@ -41532,7 +41236,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       ripple: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"],
         args: [_angular_material_core__WEBPACK_IMPORTED_MODULE_2__["MatRipple"], {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -41540,10 +41244,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Material design anchor button.
      */
 
-    var MatAnchor =
-    /*#__PURE__*/
-    function (_MatButton) {
+    var MatAnchor = /*#__PURE__*/function (_MatButton) {
       _inherits(MatAnchor, _MatButton);
+
+      var _super50 = _createSuper(MatAnchor);
 
       /**
        * @param {?} focusMonitor
@@ -41553,7 +41257,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function MatAnchor(focusMonitor, elementRef, animationMode) {
         _classCallCheck(this, MatAnchor);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatAnchor).call(this, elementRef, focusMonitor, animationMode));
+        return _super50.call(this, elementRef, focusMonitor, animationMode);
       }
       /**
        * @param {?} event
@@ -42340,10 +42044,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatCheckbox =
-    /*#__PURE__*/
-    function (_MatCheckboxMixinBase2) {
+    var MatCheckbox = /*#__PURE__*/function (_MatCheckboxMixinBase2) {
       _inherits(MatCheckbox, _MatCheckboxMixinBase2);
+
+      var _super51 = _createSuper(MatCheckbox);
 
       /**
        * @param {?} elementRef
@@ -42359,7 +42063,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatCheckbox);
 
-        _this162 = _possibleConstructorReturn(this, _getPrototypeOf(MatCheckbox).call(this, elementRef));
+        _this162 = _super51.call(this, elementRef);
         _this162._changeDetectorRef = _changeDetectorRef;
         _this162._focusMonitor = _focusMonitor;
         _this162._ngZone = _ngZone;
@@ -42957,13 +42661,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _inputElement: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['input', {
-          static: false
+          "static": false
         }]
       }],
       ripple: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: [_angular_material_core__WEBPACK_IMPORTED_MODULE_4__["MatRipple"], {
-          static: false
+          "static": false
         }]
       }],
       checked: [{
@@ -43000,15 +42704,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * work with `mat-checkbox`.
      */
 
-    var MatCheckboxRequiredValidator =
-    /*#__PURE__*/
-    function (_angular_forms__WEBPA) {
+    var MatCheckboxRequiredValidator = /*#__PURE__*/function (_angular_forms__WEBPA) {
       _inherits(MatCheckboxRequiredValidator, _angular_forms__WEBPA);
+
+      var _super52 = _createSuper(MatCheckboxRequiredValidator);
 
       function MatCheckboxRequiredValidator() {
         _classCallCheck(this, MatCheckboxRequiredValidator);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatCheckboxRequiredValidator).apply(this, arguments));
+        return _super52.apply(this, arguments);
       }
 
       return MatCheckboxRequiredValidator;
@@ -43313,10 +43017,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Material design styled Chip component. Used inside the MatChipList component.
      */
 
-    var MatChip =
-    /*#__PURE__*/
-    function (_MatChipMixinBase2) {
+    var MatChip = /*#__PURE__*/function (_MatChipMixinBase2) {
       _inherits(MatChip, _MatChipMixinBase2);
+
+      var _super53 = _createSuper(MatChip);
 
       /**
        * @param {?} _elementRef
@@ -43332,7 +43036,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatChip);
 
-        _this164 = _possibleConstructorReturn(this, _getPrototypeOf(MatChip).call(this, _elementRef));
+        _this164 = _super53.call(this, _elementRef);
         _this164._elementRef = _elementRef;
         _this164._ngZone = _ngZone;
         _this164._changeDetectorRef = _changeDetectorRef;
@@ -43804,13 +43508,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       avatar: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ContentChild"],
         args: [MatChipAvatar, {
-          static: false
+          "static": false
         }]
       }],
       trailingIcon: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ContentChild"],
         args: [MatChipTrailingIcon, {
-          static: false
+          "static": false
         }]
       }],
       removeIcon: [{
@@ -43822,7 +43526,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         function () {
           return MatChipRemove;
         }), {
-          static: false
+          "static": false
         }]
       }],
       selected: [{
@@ -43861,9 +43565,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * styles to properly center the icon within the chip.
      */
 
-    var MatChipRemove =
-    /*#__PURE__*/
-    function () {
+    var MatChipRemove = /*#__PURE__*/function () {
       /**
        * @param {?} _parentChip
        */
@@ -43984,10 +43686,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatChipList =
-    /*#__PURE__*/
-    function (_MatChipListMixinBase2) {
+    var MatChipList = /*#__PURE__*/function (_MatChipListMixinBase2) {
       _inherits(MatChipList, _MatChipListMixinBase2);
+
+      var _super54 = _createSuper(MatChipList);
 
       /**
        * @param {?} _elementRef
@@ -44003,7 +43705,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatChipList);
 
-        _this166 = _possibleConstructorReturn(this, _getPrototypeOf(MatChipList).call(this, _defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl));
+        _this166 = _super54.call(this, _defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
         _this166._elementRef = _elementRef;
         _this166._changeDetectorRef = _changeDetectorRef;
         _this166._dir = _dir;
@@ -45344,9 +45046,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * May be placed inside or outside of an `<mat-chip-list>`.
      */
 
-    var MatChipInput =
-    /*#__PURE__*/
-    function () {
+    var MatChipInput = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} _defaultOptions
@@ -46200,9 +45900,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * This module should be imported to each top-level component module (e.g., MatTabsModule).
      */
 
-    var MatCommonModule =
-    /*#__PURE__*/
-    function () {
+    var MatCommonModule = /*#__PURE__*/function () {
       /**
        * @param {?} _sanityChecksEnabled
        * @param {?=} _hammerLoader
@@ -46396,52 +46094,49 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
     function mixinDisabled(base) {
-      return (
-        /*#__PURE__*/
-        function (_base2) {
-          _inherits(_class2, _base2);
+      return /*#__PURE__*/function (_base2) {
+        _inherits(_class2, _base2);
 
-          /**
-           * @param {...?} args
-           */
-          function _class2() {
-            var _getPrototypeOf3;
+        var _super55 = _createSuper(_class2);
 
-            var _this179;
+        /**
+         * @param {...?} args
+         */
+        function _class2() {
+          var _this179;
 
-            _classCallCheck(this, _class2);
+          _classCallCheck(this, _class2);
 
-            for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-              args[_key8] = arguments[_key8];
-            }
+          for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+            args[_key8] = arguments[_key8];
+          }
 
-            _this179 = _possibleConstructorReturn(this, (_getPrototypeOf3 = _getPrototypeOf(_class2)).call.apply(_getPrototypeOf3, [this].concat(args)));
-            _this179._disabled = false;
-            return _this179;
+          _this179 = _super55.call.apply(_super55, [this].concat(args));
+          _this179._disabled = false;
+          return _this179;
+        }
+        /**
+         * @return {?}
+         */
+
+
+        _createClass(_class2, [{
+          key: "disabled",
+          get: function get() {
+            return this._disabled;
           }
           /**
+           * @param {?} value
            * @return {?}
            */
+          ,
+          set: function set(value) {
+            this._disabled = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_4__["coerceBooleanProperty"])(value);
+          }
+        }]);
 
-
-          _createClass(_class2, [{
-            key: "disabled",
-            get: function get() {
-              return this._disabled;
-            }
-            /**
-             * @param {?} value
-             * @return {?}
-             */
-            ,
-            set: function set(value) {
-              this._disabled = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_4__["coerceBooleanProperty"])(value);
-            }
-          }]);
-
-          return _class2;
-        }(base)
-      );
+        return _class2;
+      }(base);
     }
     /**
      * @fileoverview added by tsickle
@@ -46458,67 +46153,64 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
     function mixinColor(base, defaultColor) {
-      return (
-        /*#__PURE__*/
-        function (_base3) {
-          _inherits(_class3, _base3);
+      return /*#__PURE__*/function (_base3) {
+        _inherits(_class3, _base3);
 
-          _createClass(_class3, [{
-            key: "color",
+        var _super56 = _createSuper(_class3);
 
-            /**
-             * @return {?}
-             */
-            get: function get() {
-              return this._color;
-            }
-            /**
-             * @param {?} value
-             * @return {?}
-             */
-            ,
-            set: function set(value) {
-              /** @type {?} */
-              var colorPalette = value || defaultColor;
+        _createClass(_class3, [{
+          key: "color",
 
-              if (colorPalette !== this._color) {
-                if (this._color) {
-                  this._elementRef.nativeElement.classList.remove("mat-".concat(this._color));
-                }
+          /**
+           * @return {?}
+           */
+          get: function get() {
+            return this._color;
+          }
+          /**
+           * @param {?} value
+           * @return {?}
+           */
+          ,
+          set: function set(value) {
+            /** @type {?} */
+            var colorPalette = value || defaultColor;
 
-                if (colorPalette) {
-                  this._elementRef.nativeElement.classList.add("mat-".concat(colorPalette));
-                }
-
-                this._color = colorPalette;
+            if (colorPalette !== this._color) {
+              if (this._color) {
+                this._elementRef.nativeElement.classList.remove("mat-".concat(this._color));
               }
+
+              if (colorPalette) {
+                this._elementRef.nativeElement.classList.add("mat-".concat(colorPalette));
+              }
+
+              this._color = colorPalette;
             }
-            /**
-             * @param {...?} args
-             */
+          }
+          /**
+           * @param {...?} args
+           */
 
-          }]);
+        }]);
 
-          function _class3() {
-            var _getPrototypeOf4;
+        function _class3() {
+          var _this180;
 
-            var _this180;
+          _classCallCheck(this, _class3);
 
-            _classCallCheck(this, _class3);
-
-            for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-              args[_key9] = arguments[_key9];
-            }
-
-            _this180 = _possibleConstructorReturn(this, (_getPrototypeOf4 = _getPrototypeOf(_class3)).call.apply(_getPrototypeOf4, [this].concat(args))); // Set the default color that can be specified from the mixin.
-
-            _this180.color = defaultColor;
-            return _this180;
+          for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+            args[_key9] = arguments[_key9];
           }
 
-          return _class3;
-        }(base)
-      );
+          _this180 = _super56.call.apply(_super56, [this].concat(args)); // Set the default color that can be specified from the mixin.
+
+          _this180.color = defaultColor;
+          return _this180;
+        }
+
+        return _class3;
+      }(base);
     }
     /**
      * @fileoverview added by tsickle
@@ -46534,53 +46226,50 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
     function mixinDisableRipple(base) {
-      return (
-        /*#__PURE__*/
-        function (_base4) {
-          _inherits(_class4, _base4);
+      return /*#__PURE__*/function (_base4) {
+        _inherits(_class4, _base4);
 
-          /**
-           * @param {...?} args
-           */
-          function _class4() {
-            var _getPrototypeOf5;
+        var _super57 = _createSuper(_class4);
 
-            var _this181;
+        /**
+         * @param {...?} args
+         */
+        function _class4() {
+          var _this181;
 
-            _classCallCheck(this, _class4);
+          _classCallCheck(this, _class4);
 
-            for (var _len10 = arguments.length, args = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-              args[_key10] = arguments[_key10];
-            }
+          for (var _len10 = arguments.length, args = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+            args[_key10] = arguments[_key10];
+          }
 
-            _this181 = _possibleConstructorReturn(this, (_getPrototypeOf5 = _getPrototypeOf(_class4)).call.apply(_getPrototypeOf5, [this].concat(args)));
-            _this181._disableRipple = false;
-            return _this181;
+          _this181 = _super57.call.apply(_super57, [this].concat(args));
+          _this181._disableRipple = false;
+          return _this181;
+        }
+        /**
+         * Whether the ripple effect is disabled or not.
+         * @return {?}
+         */
+
+
+        _createClass(_class4, [{
+          key: "disableRipple",
+          get: function get() {
+            return this._disableRipple;
           }
           /**
-           * Whether the ripple effect is disabled or not.
+           * @param {?} value
            * @return {?}
            */
+          ,
+          set: function set(value) {
+            this._disableRipple = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_4__["coerceBooleanProperty"])(value);
+          }
+        }]);
 
-
-          _createClass(_class4, [{
-            key: "disableRipple",
-            get: function get() {
-              return this._disableRipple;
-            }
-            /**
-             * @param {?} value
-             * @return {?}
-             */
-            ,
-            set: function set(value) {
-              this._disableRipple = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_4__["coerceBooleanProperty"])(value);
-            }
-          }]);
-
-          return _class4;
-        }(base)
-      );
+        return _class4;
+      }(base);
     }
     /**
      * @fileoverview added by tsickle
@@ -46598,53 +46287,50 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     function mixinTabIndex(base) {
       var defaultTabIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      return (
-        /*#__PURE__*/
-        function (_base5) {
-          _inherits(_class5, _base5);
+      return /*#__PURE__*/function (_base5) {
+        _inherits(_class5, _base5);
 
-          /**
-           * @param {...?} args
-           */
-          function _class5() {
-            var _getPrototypeOf6;
+        var _super58 = _createSuper(_class5);
 
-            var _this182;
+        /**
+         * @param {...?} args
+         */
+        function _class5() {
+          var _this182;
 
-            _classCallCheck(this, _class5);
+          _classCallCheck(this, _class5);
 
-            for (var _len11 = arguments.length, args = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
-              args[_key11] = arguments[_key11];
-            }
+          for (var _len11 = arguments.length, args = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+            args[_key11] = arguments[_key11];
+          }
 
-            _this182 = _possibleConstructorReturn(this, (_getPrototypeOf6 = _getPrototypeOf(_class5)).call.apply(_getPrototypeOf6, [this].concat(args)));
-            _this182._tabIndex = defaultTabIndex;
-            return _this182;
+          _this182 = _super58.call.apply(_super58, [this].concat(args));
+          _this182._tabIndex = defaultTabIndex;
+          return _this182;
+        }
+        /**
+         * @return {?}
+         */
+
+
+        _createClass(_class5, [{
+          key: "tabIndex",
+          get: function get() {
+            return this.disabled ? -1 : this._tabIndex;
           }
           /**
+           * @param {?} value
            * @return {?}
            */
+          ,
+          set: function set(value) {
+            // If the specified tabIndex value is null or undefined, fall back to the default value.
+            this._tabIndex = value != null ? value : defaultTabIndex;
+          }
+        }]);
 
-
-          _createClass(_class5, [{
-            key: "tabIndex",
-            get: function get() {
-              return this.disabled ? -1 : this._tabIndex;
-            }
-            /**
-             * @param {?} value
-             * @return {?}
-             */
-            ,
-            set: function set(value) {
-              // If the specified tabIndex value is null or undefined, fall back to the default value.
-              this._tabIndex = value != null ? value : defaultTabIndex;
-            }
-          }]);
-
-          return _class5;
-        }(base)
-      );
+        return _class5;
+      }(base);
     }
     /**
      * @fileoverview added by tsickle
@@ -46661,74 +46347,71 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
     function mixinErrorState(base) {
-      return (
-        /*#__PURE__*/
-        function (_base6) {
-          _inherits(_class6, _base6);
+      return /*#__PURE__*/function (_base6) {
+        _inherits(_class6, _base6);
 
-          /**
-           * @param {...?} args
-           */
-          function _class6() {
-            var _getPrototypeOf7;
+        var _super59 = _createSuper(_class6);
 
-            var _this183;
+        /**
+         * @param {...?} args
+         */
+        function _class6() {
+          var _this183;
 
-            _classCallCheck(this, _class6);
+          _classCallCheck(this, _class6);
 
-            for (var _len12 = arguments.length, args = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
-              args[_key12] = arguments[_key12];
-            }
-
-            _this183 = _possibleConstructorReturn(this, (_getPrototypeOf7 = _getPrototypeOf(_class6)).call.apply(_getPrototypeOf7, [this].concat(args)));
-            /**
-             * Whether the component is in an error state.
-             */
-
-            _this183.errorState = false;
-            /**
-             * Stream that emits whenever the state of the input changes such that the wrapping
-             * `MatFormField` needs to run change detection.
-             */
-
-            _this183.stateChanges = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
-            return _this183;
+          for (var _len12 = arguments.length, args = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+            args[_key12] = arguments[_key12];
           }
+
+          _this183 = _super59.call.apply(_super59, [this].concat(args));
           /**
-           * @return {?}
+           * Whether the component is in an error state.
            */
 
+          _this183.errorState = false;
+          /**
+           * Stream that emits whenever the state of the input changes such that the wrapping
+           * `MatFormField` needs to run change detection.
+           */
 
-          _createClass(_class6, [{
-            key: "updateErrorState",
-            value: function updateErrorState() {
-              /** @type {?} */
-              var oldState = this.errorState;
-              /** @type {?} */
+          _this183.stateChanges = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
+          return _this183;
+        }
+        /**
+         * @return {?}
+         */
 
-              var parent = this._parentFormGroup || this._parentForm;
-              /** @type {?} */
 
-              var matcher = this.errorStateMatcher || this._defaultErrorStateMatcher;
-              /** @type {?} */
+        _createClass(_class6, [{
+          key: "updateErrorState",
+          value: function updateErrorState() {
+            /** @type {?} */
+            var oldState = this.errorState;
+            /** @type {?} */
 
-              var control = this.ngControl ?
-              /** @type {?} */
-              this.ngControl.control : null;
-              /** @type {?} */
+            var parent = this._parentFormGroup || this._parentForm;
+            /** @type {?} */
 
-              var newState = matcher.isErrorState(control, parent);
+            var matcher = this.errorStateMatcher || this._defaultErrorStateMatcher;
+            /** @type {?} */
 
-              if (newState !== oldState) {
-                this.errorState = newState;
-                this.stateChanges.next();
-              }
+            var control = this.ngControl ?
+            /** @type {?} */
+            this.ngControl.control : null;
+            /** @type {?} */
+
+            var newState = matcher.isErrorState(control, parent);
+
+            if (newState !== oldState) {
+              this.errorState = newState;
+              this.stateChanges.next();
             }
-          }]);
+          }
+        }]);
 
-          return _class6;
-        }(base)
-      );
+        return _class6;
+      }(base);
     }
     /**
      * @fileoverview added by tsickle
@@ -46744,99 +46427,96 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
     function mixinInitialized(base) {
-      return (
-        /*#__PURE__*/
-        function (_base7) {
-          _inherits(_class7, _base7);
+      return /*#__PURE__*/function (_base7) {
+        _inherits(_class7, _base7);
 
+        var _super60 = _createSuper(_class7);
+
+        /**
+         * @param {...?} args
+         */
+        function _class7() {
+          var _this184;
+
+          _classCallCheck(this, _class7);
+
+          for (var _len13 = arguments.length, args = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
+            args[_key13] = arguments[_key13];
+          }
+
+          _this184 = _super60.call.apply(_super60, [this].concat(args));
           /**
-           * @param {...?} args
+           * Whether this directive has been marked as initialized.
            */
-          function _class7() {
-            var _getPrototypeOf8;
 
-            var _this184;
+          _this184._isInitialized = false;
+          /**
+           * List of subscribers that subscribed before the directive was initialized. Should be notified
+           * during _markInitialized. Set to null after pending subscribers are notified, and should
+           * not expect to be populated after.
+           */
 
-            _classCallCheck(this, _class7);
+          _this184._pendingSubscribers = [];
+          /**
+           * Observable stream that emits when the directive initializes. If already initialized, the
+           * subscriber is stored to be notified once _markInitialized is called.
+           */
 
-            for (var _len13 = arguments.length, args = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
-              args[_key13] = arguments[_key13];
+          _this184.initialized = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Observable"](
+          /**
+          * @param {?} subscriber
+          * @return {?}
+          */
+          function (subscriber) {
+            // If initialized, immediately notify the subscriber. Otherwise store the subscriber to notify
+            // when _markInitialized is called.
+            if (_this184._isInitialized) {
+              _this184._notifySubscriber(subscriber);
+            } else {
+              /** @type {?} */
+              _this184._pendingSubscribers.push(subscriber);
+            }
+          });
+          return _this184;
+        }
+        /**
+         * Marks the state as initialized and notifies pending subscribers. Should be called at the end
+         * of ngOnInit.
+         * \@docs-private
+         * @return {?}
+         */
+
+
+        _createClass(_class7, [{
+          key: "_markInitialized",
+          value: function _markInitialized() {
+            if (this._isInitialized) {
+              throw Error('This directive has already been marked as initialized and ' + 'should not be called twice.');
             }
 
-            _this184 = _possibleConstructorReturn(this, (_getPrototypeOf8 = _getPrototypeOf(_class7)).call.apply(_getPrototypeOf8, [this].concat(args)));
-            /**
-             * Whether this directive has been marked as initialized.
-             */
+            this._isInitialized = true;
 
-            _this184._isInitialized = false;
-            /**
-             * List of subscribers that subscribed before the directive was initialized. Should be notified
-             * during _markInitialized. Set to null after pending subscribers are notified, and should
-             * not expect to be populated after.
-             */
+            /** @type {?} */
+            this._pendingSubscribers.forEach(this._notifySubscriber);
 
-            _this184._pendingSubscribers = [];
-            /**
-             * Observable stream that emits when the directive initializes. If already initialized, the
-             * subscriber is stored to be notified once _markInitialized is called.
-             */
-
-            _this184.initialized = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Observable"](
-            /**
-            * @param {?} subscriber
-            * @return {?}
-            */
-            function (subscriber) {
-              // If initialized, immediately notify the subscriber. Otherwise store the subscriber to notify
-              // when _markInitialized is called.
-              if (_this184._isInitialized) {
-                _this184._notifySubscriber(subscriber);
-              } else {
-                /** @type {?} */
-                _this184._pendingSubscribers.push(subscriber);
-              }
-            });
-            return _this184;
+            this._pendingSubscribers = null;
           }
           /**
-           * Marks the state as initialized and notifies pending subscribers. Should be called at the end
-           * of ngOnInit.
-           * \@docs-private
+           * Emits and completes the subscriber stream (should only emit once).
+           * @param {?} subscriber
            * @return {?}
            */
 
+        }, {
+          key: "_notifySubscriber",
+          value: function _notifySubscriber(subscriber) {
+            subscriber.next();
+            subscriber.complete();
+          }
+        }]);
 
-          _createClass(_class7, [{
-            key: "_markInitialized",
-            value: function _markInitialized() {
-              if (this._isInitialized) {
-                throw Error('This directive has already been marked as initialized and ' + 'should not be called twice.');
-              }
-
-              this._isInitialized = true;
-
-              /** @type {?} */
-              this._pendingSubscribers.forEach(this._notifySubscriber);
-
-              this._pendingSubscribers = null;
-            }
-            /**
-             * Emits and completes the subscriber stream (should only emit once).
-             * @param {?} subscriber
-             * @return {?}
-             */
-
-          }, {
-            key: "_notifySubscriber",
-            value: function _notifySubscriber(subscriber) {
-              subscriber.next();
-              subscriber.complete();
-            }
-          }]);
-
-          return _class7;
-        }(base)
-      );
+        return _class7;
+      }(base);
     }
     /**
      * @fileoverview added by tsickle
@@ -46885,9 +46565,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template D
      */
 
-    var DateAdapter =
-    /*#__PURE__*/
-    function () {
+    var DateAdapter = /*#__PURE__*/function () {
       function DateAdapter() {
         _classCallCheck(this, DateAdapter);
 
@@ -47104,21 +46782,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var NativeDateAdapter =
-    /*#__PURE__*/
-    function (_DateAdapter) {
+    var NativeDateAdapter = /*#__PURE__*/function (_DateAdapter) {
       _inherits(NativeDateAdapter, _DateAdapter);
+
+      var _super61 = _createSuper(NativeDateAdapter);
 
       /**
        * @param {?} matDateLocale
        * @param {?} platform
        */
       function NativeDateAdapter(matDateLocale, platform) {
-        var _this185;
+        var _thisSuper, _this185;
 
         _classCallCheck(this, NativeDateAdapter);
 
-        _this185 = _possibleConstructorReturn(this, _getPrototypeOf(NativeDateAdapter).call(this));
+        _this185 = _super61.call(this);
         /**
          * Whether to use `timeZone: 'utc'` with `Intl.DateTimeFormat` when formatting dates.
          * Without this `Intl.DateTimeFormat` sometimes chooses the wrong timeZone, which can throw off
@@ -47133,7 +46811,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _this185.useUtcForDisplay = true;
 
-        _get(_getPrototypeOf(NativeDateAdapter.prototype), "setLocale", _assertThisInitialized(_this185)).call(_assertThisInitialized(_this185), matDateLocale); // IE does its own time zone correction, so we disable this on IE.
+        _get((_thisSuper = _assertThisInitialized(_this185), _getPrototypeOf(NativeDateAdapter.prototype)), "setLocale", _thisSuper).call(_thisSuper, matDateLocale); // IE does its own time zone correction, so we disable this on IE.
 
 
         _this185.useUtcForDisplay = !platform.TRIDENT;
@@ -47682,9 +47360,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Error state matcher that matches when a control is invalid and dirty.
      */
 
-    var ShowOnDirtyErrorStateMatcher =
-    /*#__PURE__*/
-    function () {
+    var ShowOnDirtyErrorStateMatcher = /*#__PURE__*/function () {
       function ShowOnDirtyErrorStateMatcher() {
         _classCallCheck(this, ShowOnDirtyErrorStateMatcher);
       }
@@ -47712,9 +47388,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Provider that defines how form controls behave with regards to displaying error messages.
      */
 
-    var ErrorStateMatcher =
-    /*#__PURE__*/
-    function () {
+    var ErrorStateMatcher = /*#__PURE__*/function () {
       function ErrorStateMatcher() {
         _classCallCheck(this, ErrorStateMatcher);
       }
@@ -47796,10 +47470,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Adjusts configuration of our gesture library, Hammer.
      */
 
-    var GestureConfig =
-    /*#__PURE__*/
-    function (_angular_platform_bro) {
+    var GestureConfig = /*#__PURE__*/function (_angular_platform_bro) {
       _inherits(GestureConfig, _angular_platform_bro);
+
+      var _super62 = _createSuper(GestureConfig);
 
       /**
        * @param {?=} _hammerOptions
@@ -47810,7 +47484,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, GestureConfig);
 
-        _this189 = _possibleConstructorReturn(this, _getPrototypeOf(GestureConfig).call(this));
+        _this189 = _super62.call(this);
         _this189._hammerOptions = _hammerOptions;
         /**
          * List of new event names to add to the gesture support list
@@ -48082,9 +47756,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Reference to a previously launched ripple element.
      */
 
-    var RippleRef =
-    /*#__PURE__*/
-    function () {
+    var RippleRef = /*#__PURE__*/function () {
       /**
        * @param {?} _renderer
        * @param {?} element
@@ -48156,9 +47828,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@docs-private
      */
 
-    var RippleRenderer =
-    /*#__PURE__*/
-    function () {
+    var RippleRenderer = /*#__PURE__*/function () {
       /**
        * @param {?} _target
        * @param {?} _ngZone
@@ -48382,7 +48052,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "fadeOutRipple",
         value: function fadeOutRipple(rippleRef) {
           /** @type {?} */
-          var wasActive = this._activeRipples.delete(rippleRef);
+          var wasActive = this._activeRipples["delete"](rippleRef);
 
           if (rippleRef === this._mostRecentTransientRipple) {
             this._mostRecentTransientRipple = null;
@@ -48566,9 +48236,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var MAT_RIPPLE_GLOBAL_OPTIONS = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('mat-ripple-global-options');
 
-    var MatRipple =
-    /*#__PURE__*/
-    function () {
+    var MatRipple = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} ngZone
@@ -48948,17 +48616,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Component that is used to group instances of `mat-option`.
      */
 
-    var MatOptgroup =
-    /*#__PURE__*/
-    function (_MatOptgroupMixinBase2) {
+    var MatOptgroup = /*#__PURE__*/function (_MatOptgroupMixinBase2) {
       _inherits(MatOptgroup, _MatOptgroupMixinBase2);
+
+      var _super63 = _createSuper(MatOptgroup);
 
       function MatOptgroup() {
         var _this194;
 
         _classCallCheck(this, MatOptgroup);
 
-        _this194 = _possibleConstructorReturn(this, _getPrototypeOf(MatOptgroup).apply(this, arguments));
+        _this194 = _super63.apply(this, arguments);
         /**
          * Unique id for the underlying label.
          */
@@ -49034,9 +48702,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Single option inside of a `<mat-select>` element.
      */
 
-    var MatOption =
-    /*#__PURE__*/
-    function () {
+    var MatOption = /*#__PURE__*/function () {
       /**
        * @param {?} _element
        * @param {?} _changeDetectorRef
@@ -49849,9 +49515,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatDatepickerIntl =
-    /*#__PURE__*/
-    function () {
+    var MatDatepickerIntl = /*#__PURE__*/function () {
       function MatDatepickerIntl() {
         _classCallCheck(this, MatDatepickerIntl);
 
@@ -49977,9 +49641,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatCalendarBody =
-    /*#__PURE__*/
-    function () {
+    var MatCalendarBody = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} _ngZone
@@ -50170,9 +49832,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template D
      */
 
-    var MatMonthView =
-    /*#__PURE__*/
-    function () {
+    var MatMonthView = /*#__PURE__*/function () {
       /**
        * @param {?} _changeDetectorRef
        * @param {?} _dateFormats
@@ -50397,9 +50057,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @param {?} i
           * @return {?}
           */
-          function (long, i) {
+          function (_long, i) {
             return {
-              long: long,
+              "long": _long,
               narrow: narrowWeekdays[i]
             };
           });
@@ -50659,7 +50319,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _matCalendarBody: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: [MatCalendarBody, {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -50680,9 +50340,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template D
      */
 
-    var MatMultiYearView =
-    /*#__PURE__*/
-    function () {
+    var MatMultiYearView = /*#__PURE__*/function () {
       /**
        * @param {?} _changeDetectorRef
        * @param {?} _dateAdapter
@@ -51091,7 +50749,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _matCalendarBody: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: [MatCalendarBody, {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -51182,9 +50840,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatYearView =
-    /*#__PURE__*/
-    function () {
+    var MatYearView = /*#__PURE__*/function () {
       /**
        * @param {?} _changeDetectorRef
        * @param {?} _dateFormats
@@ -51661,7 +51317,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _matCalendarBody: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: [MatCalendarBody, {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -51675,9 +51331,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template D
      */
 
-    var MatCalendarHeader =
-    /*#__PURE__*/
-    function () {
+    var MatCalendarHeader = /*#__PURE__*/function () {
       /**
        * @param {?} _intl
        * @param {?} calendar
@@ -51909,9 +51563,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatCalendar =
-    /*#__PURE__*/
-    function () {
+    var MatCalendar = /*#__PURE__*/function () {
       /**
        * @param {?} _intl
        * @param {?} _dateAdapter
@@ -52343,19 +51995,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       monthView: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: [MatMonthView, {
-          static: false
+          "static": false
         }]
       }],
       yearView: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: [MatYearView, {
-          static: false
+          "static": false
         }]
       }],
       multiYearView: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: [MatMultiYearView, {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -52467,10 +52119,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatDatepickerContent =
-    /*#__PURE__*/
-    function (_MatDatepickerContent) {
+    var MatDatepickerContent = /*#__PURE__*/function (_MatDatepickerContent) {
       _inherits(MatDatepickerContent, _MatDatepickerContent);
+
+      var _super64 = _createSuper(MatDatepickerContent);
 
       /**
        * @param {?} elementRef
@@ -52478,7 +52130,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function MatDatepickerContent(elementRef) {
         _classCallCheck(this, MatDatepickerContent);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatDatepickerContent).call(this, elementRef));
+        return _super64.call(this, elementRef);
       }
       /**
        * @return {?}
@@ -52525,7 +52177,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _calendar: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: [MatCalendar, {
-          static: false
+          "static": false
         }]
       }]
     }; // TODO(mmalerba): We use a component instead of a directive here so the user can use implicit
@@ -52537,9 +52189,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template D
      */
 
-    var MatDatepicker =
-    /*#__PURE__*/
-    function () {
+    var MatDatepicker = /*#__PURE__*/function () {
       /**
        * @param {?} _dialog
        * @param {?} _overlay
@@ -53273,9 +52923,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatDatepickerInput =
-    /*#__PURE__*/
-    function () {
+    var MatDatepickerInput = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} _dateAdapter
@@ -53898,9 +53546,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template D
      */
 
-    var MatDatepickerToggle =
-    /*#__PURE__*/
-    function () {
+    var MatDatepickerToggle = /*#__PURE__*/function () {
       /**
        * @param {?} _intl
        * @param {?} _changeDetectorRef
@@ -54071,13 +53717,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _customIcon: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [MatDatepickerToggleIcon, {
-          static: false
+          "static": false
         }]
       }],
       _button: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['button', {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -54456,10 +54102,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatDialogContainer =
-    /*#__PURE__*/
-    function (_angular_cdk_portal__2) {
+    var MatDialogContainer = /*#__PURE__*/function (_angular_cdk_portal__2) {
       _inherits(MatDialogContainer, _angular_cdk_portal__2);
+
+      var _super65 = _createSuper(MatDialogContainer);
 
       /**
        * @param {?} _elementRef
@@ -54473,7 +54119,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatDialogContainer);
 
-        _this207 = _possibleConstructorReturn(this, _getPrototypeOf(MatDialogContainer).call(this));
+        _this207 = _super65.call(this);
         _this207._elementRef = _elementRef;
         _this207._focusTrapFactory = _focusTrapFactory;
         _this207._changeDetectorRef = _changeDetectorRef;
@@ -54716,7 +54362,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _portalOutlet: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"],
         args: [_angular_cdk_portal__WEBPACK_IMPORTED_MODULE_3__["CdkPortalOutlet"], {
-          static: true
+          "static": true
         }]
       }]
     };
@@ -54735,9 +54381,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T, R
      */
 
-    var MatDialogRef =
-    /*#__PURE__*/
-    function () {
+    var MatDialogRef = /*#__PURE__*/function () {
       /**
        * @param {?} _overlayRef
        * @param {?} _containerInstance
@@ -55189,9 +54833,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Service to open Material Design modal dialogs.
      */
 
-    var MatDialog =
-    /*#__PURE__*/
-    function () {
+    var MatDialog = /*#__PURE__*/function () {
       /**
        * @param {?} _overlay
        * @param {?} _injector
@@ -55685,9 +55327,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Button that will close the current dialog.
      */
 
-    var MatDialogClose =
-    /*#__PURE__*/
-    function () {
+    var MatDialogClose = /*#__PURE__*/function () {
       /**
        * @param {?} dialogRef
        * @param {?} _elementRef
@@ -55792,9 +55432,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Title of a dialog element. Stays fixed to the top of the dialog when scrolling.
      */
 
-    var MatDialogTitle =
-    /*#__PURE__*/
-    function () {
+    var MatDialogTitle = /*#__PURE__*/function () {
       /**
        * @param {?} _dialogRef
        * @param {?} _elementRef
@@ -56033,9 +55671,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatDivider =
-    /*#__PURE__*/
-    function () {
+    var MatDivider = /*#__PURE__*/function () {
       function MatDivider() {
         _classCallCheck(this, MatDivider);
 
@@ -56454,10 +56090,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * multiple children of an element with the MatAccordion directive attached.
      */
 
-    var MatExpansionPanel =
-    /*#__PURE__*/
-    function (_angular_cdk_accordio) {
+    var MatExpansionPanel = /*#__PURE__*/function (_angular_cdk_accordio) {
       _inherits(MatExpansionPanel, _angular_cdk_accordio);
+
+      var _super66 = _createSuper(MatExpansionPanel);
 
       /**
        * @param {?} accordion
@@ -56473,7 +56109,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatExpansionPanel);
 
-        _this214 = _possibleConstructorReturn(this, _getPrototypeOf(MatExpansionPanel).call(this, accordion, _changeDetectorRef, _uniqueSelectionDispatcher));
+        _this214 = _super66.call(this, accordion, _changeDetectorRef, _uniqueSelectionDispatcher);
         _this214._viewContainerRef = _viewContainerRef;
         _this214._animationMode = _animationMode;
         _this214._hideToggle = false;
@@ -56760,13 +56396,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _lazyContent: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [MatExpansionPanelContent, {
-          static: false
+          "static": false
         }]
       }],
       _body: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['body', {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -56780,7 +56416,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       args: [{
         selector: 'mat-action-row',
         host: {
-          class: 'mat-action-row'
+          "class": 'mat-action-row'
         }
       }]
     }];
@@ -56795,9 +56431,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * This component corresponds to the header element of an `<mat-expansion-panel>`.
      */
 
-    var MatExpansionPanelHeader =
-    /*#__PURE__*/
-    function () {
+    var MatExpansionPanelHeader = /*#__PURE__*/function () {
       /**
        * @param {?} panel
        * @param {?} _element
@@ -57103,7 +56737,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       args: [{
         selector: 'mat-panel-description',
         host: {
-          class: 'mat-expansion-panel-header-description'
+          "class": 'mat-expansion-panel-header-description'
         }
       }]
     }];
@@ -57122,7 +56756,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       args: [{
         selector: 'mat-panel-title',
         host: {
-          class: 'mat-expansion-panel-header-title'
+          "class": 'mat-expansion-panel-header-title'
         }
       }]
     }];
@@ -57135,17 +56769,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Directive for a Material Design Accordion.
      */
 
-    var MatAccordion =
-    /*#__PURE__*/
-    function (_angular_cdk_accordio2) {
+    var MatAccordion = /*#__PURE__*/function (_angular_cdk_accordio2) {
       _inherits(MatAccordion, _angular_cdk_accordio2);
+
+      var _super67 = _createSuper(MatAccordion);
 
       function MatAccordion() {
         var _this217;
 
         _classCallCheck(this, MatAccordion);
 
-        _this217 = _possibleConstructorReturn(this, _getPrototypeOf(MatAccordion).apply(this, arguments));
+        _this217 = _super67.apply(this, arguments);
         _this217._hideToggle = false;
         /**
          * Display mode used for all expansion panels in the accordion. Currently two display
@@ -57246,7 +56880,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           useExisting: MatAccordion
         }],
         host: {
-          class: 'mat-accordion'
+          "class": 'mat-accordion'
         }
       }]
     }];
@@ -57750,10 +57384,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Container for form controls that applies Material Design styling and behavior.
      */
 
-    var MatFormField =
-    /*#__PURE__*/
-    function (_MatFormFieldMixinBas) {
+    var MatFormField = /*#__PURE__*/function (_MatFormFieldMixinBas) {
       _inherits(MatFormField, _MatFormFieldMixinBas);
+
+      var _super68 = _createSuper(MatFormField);
 
       /**
        * @param {?} _elementRef
@@ -57770,7 +57404,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatFormField);
 
-        _this218 = _possibleConstructorReturn(this, _getPrototypeOf(MatFormField).call(this, _elementRef));
+        _this218 = _super68.call(this, _elementRef);
         _this218._elementRef = _elementRef;
         _this218._changeDetectorRef = _changeDetectorRef;
         _this218._dir = _dir;
@@ -57814,7 +57448,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _this218._previousDirection = 'ltr';
         _this218._labelOptions = labelOptions ? labelOptions : {};
-        _this218.floatLabel = _this218._labelOptions.float || 'auto';
+        _this218.floatLabel = _this218._labelOptions["float"] || 'auto';
         _this218._animationsEnabled = _animationMode !== 'NoopAnimations'; // Set the default through here so we invoke the setter on the first run.
 
         _this218.appearance = _defaults && _defaults.appearance ? _defaults.appearance : 'legacy';
@@ -58291,28 +57925,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
             var labelWidth = 0;
-            var _iteratorNormalCompletion14 = true;
-            var _didIteratorError14 = false;
-            var _iteratorError14 = undefined;
+
+            var _iterator14 = _createForOfIteratorHelper(labelEl.children),
+                _step14;
 
             try {
-              for (var _iterator14 = labelEl.children[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
+              for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
                 var child = _step14.value;
                 labelWidth += child.offsetWidth;
               }
             } catch (err) {
-              _didIteratorError14 = true;
-              _iteratorError14 = err;
+              _iterator14.e(err);
             } finally {
-              try {
-                if (!_iteratorNormalCompletion14 && _iterator14.return != null) {
-                  _iterator14.return();
-                }
-              } finally {
-                if (_didIteratorError14) {
-                  throw _iteratorError14;
-                }
-              }
+              _iterator14.f();
             }
 
             startWidth = labelStart - containerStart - outlineGapPadding;
@@ -58440,7 +58065,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         ,
         set: function set(value) {
           if (value !== this._floatLabel) {
-            this._floatLabel = value || this._labelOptions.float || 'auto';
+            this._floatLabel = value || this._labelOptions["float"] || 'auto';
 
             this._changeDetectorRef.markForCheck();
           }
@@ -58578,55 +58203,55 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       underlineRef: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['underline', {
-          static: false
+          "static": false
         }]
       }],
       _connectionContainerRef: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['connectionContainer', {
-          static: true
+          "static": true
         }]
       }],
       _inputContainerRef: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['inputContainer', {
-          static: false
+          "static": false
         }]
       }],
       _label: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['label', {
-          static: false
+          "static": false
         }]
       }],
       _controlNonStatic: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [MatFormFieldControl, {
-          static: false
+          "static": false
         }]
       }],
       _controlStatic: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [MatFormFieldControl, {
-          static: true
+          "static": true
         }]
       }],
       _labelChildNonStatic: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [MatLabel, {
-          static: false
+          "static": false
         }]
       }],
       _labelChildStatic: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [MatLabel, {
-          static: true
+          "static": true
         }]
       }],
       _placeholderChild: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [MatPlaceholder, {
-          static: false
+          "static": false
         }]
       }],
       _errorChildren: [{
@@ -58788,9 +58413,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
-    var MatGridTile =
-    /*#__PURE__*/
-    function () {
+    var MatGridTile = /*#__PURE__*/function () {
       /**
        * @param {?} _element
        * @param {?=} _gridList
@@ -58898,9 +58521,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }]
     };
 
-    var MatGridTileText =
-    /*#__PURE__*/
-    function () {
+    var MatGridTileText = /*#__PURE__*/function () {
       /**
        * @param {?} _element
        */
@@ -59024,9 +58645,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@docs-private
      */
 
-    var TileCoordinator =
-    /*#__PURE__*/
-    function () {
+    var TileCoordinator = /*#__PURE__*/function () {
       function TileCoordinator() {
         _classCallCheck(this, TileCoordinator);
 
@@ -59259,9 +58878,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @abstract
      */
 
-    var TileStyler =
-    /*#__PURE__*/
-    function () {
+    var TileStyler = /*#__PURE__*/function () {
       function TileStyler() {
         _classCallCheck(this, TileStyler);
 
@@ -59426,10 +59043,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var FixedTileStyler =
-    /*#__PURE__*/
-    function (_TileStyler) {
+    var FixedTileStyler = /*#__PURE__*/function (_TileStyler) {
       _inherits(FixedTileStyler, _TileStyler);
+
+      var _super69 = _createSuper(FixedTileStyler);
 
       /**
        * @param {?} fixedRowHeight
@@ -59439,7 +59056,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, FixedTileStyler);
 
-        _this223 = _possibleConstructorReturn(this, _getPrototypeOf(FixedTileStyler).call(this));
+        _this223 = _super69.call(this);
         _this223.fixedRowHeight = fixedRowHeight;
         return _this223;
       }
@@ -59519,10 +59136,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var RatioTileStyler =
-    /*#__PURE__*/
-    function (_TileStyler2) {
+    var RatioTileStyler = /*#__PURE__*/function (_TileStyler2) {
       _inherits(RatioTileStyler, _TileStyler2);
+
+      var _super70 = _createSuper(RatioTileStyler);
 
       /**
        * @param {?} value
@@ -59532,7 +59149,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, RatioTileStyler);
 
-        _this224 = _possibleConstructorReturn(this, _getPrototypeOf(RatioTileStyler).call(this));
+        _this224 = _super70.call(this);
 
         _this224._parseRatio(value);
 
@@ -59621,15 +59238,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var FitTileStyler =
-    /*#__PURE__*/
-    function (_TileStyler3) {
+    var FitTileStyler = /*#__PURE__*/function (_TileStyler3) {
       _inherits(FitTileStyler, _TileStyler3);
+
+      var _super71 = _createSuper(FitTileStyler);
 
       function FitTileStyler() {
         _classCallCheck(this, FitTileStyler);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(FitTileStyler).apply(this, arguments));
+        return _super71.apply(this, arguments);
       }
 
       _createClass(FitTileStyler, [{
@@ -59716,9 +59333,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var MAT_FIT_MODE = 'fit';
 
-    var MatGridList =
-    /*#__PURE__*/
-    function () {
+    var MatGridList = /*#__PURE__*/function () {
       /**
        * @param {?} _element
        * @param {?} _dir
@@ -60239,9 +59854,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatIconRegistry =
-    /*#__PURE__*/
-    function () {
+    var MatIconRegistry = /*#__PURE__*/function () {
       /**
        * @param {?} _httpClient
        * @param {?} _sanitizer
@@ -61049,7 +60662,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            return _this230._inProgressUrlFetches.delete(url);
+            return _this230._inProgressUrlFetches["delete"](url);
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["share"])());
 
           this._inProgressUrlFetches.set(url, req);
@@ -61322,10 +60935,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     `<mat-icon fontSet="fa" fontIcon="alarm"></mat-icon>`
      */
 
-    var MatIcon =
-    /*#__PURE__*/
-    function (_MatIconMixinBase2) {
+    var MatIcon = /*#__PURE__*/function (_MatIconMixinBase2) {
       _inherits(MatIcon, _MatIconMixinBase2);
+
+      var _super72 = _createSuper(MatIcon);
 
       /**
        * @param {?} elementRef
@@ -61339,7 +60952,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatIcon);
 
-        _this231 = _possibleConstructorReturn(this, _getPrototypeOf(MatIcon).call(this, elementRef));
+        _this231 = _super72.call(this, elementRef);
         _this231._iconRegistry = _iconRegistry;
         _this231._location = _location;
         _this231._errorHandler = _errorHandler;
@@ -61994,15 +61607,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatTextareaAutosize =
-    /*#__PURE__*/
-    function (_angular_cdk_text_fie) {
+    var MatTextareaAutosize = /*#__PURE__*/function (_angular_cdk_text_fie) {
       _inherits(MatTextareaAutosize, _angular_cdk_text_fie);
+
+      var _super73 = _createSuper(MatTextareaAutosize);
 
       function MatTextareaAutosize() {
         _classCallCheck(this, MatTextareaAutosize);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatTextareaAutosize).apply(this, arguments));
+        return _super73.apply(this, arguments);
       }
 
       _createClass(MatTextareaAutosize, [{
@@ -62178,10 +61791,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatInput =
-    /*#__PURE__*/
-    function (_MatInputMixinBase2) {
+    var MatInput = /*#__PURE__*/function (_MatInputMixinBase2) {
       _inherits(MatInput, _MatInputMixinBase2);
+
+      var _super74 = _createSuper(MatInput);
 
       /**
        * @param {?} _elementRef
@@ -62199,7 +61812,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatInput);
 
-        _this233 = _possibleConstructorReturn(this, _getPrototypeOf(MatInput).call(this, _defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl));
+        _this233 = _super74.call(this, _defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
         _this233._elementRef = _elementRef;
         _this233._platform = _platform;
         _this233.ngControl = ngControl;
@@ -63001,17 +62614,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _MatListItemMixinBase = Object(_angular_material_core__WEBPACK_IMPORTED_MODULE_1__["mixinDisableRipple"])(MatListItemBase);
 
-    var MatNavList =
-    /*#__PURE__*/
-    function (_MatListMixinBase2) {
+    var MatNavList = /*#__PURE__*/function (_MatListMixinBase2) {
       _inherits(MatNavList, _MatListMixinBase2);
+
+      var _super75 = _createSuper(MatNavList);
 
       function MatNavList() {
         var _this235;
 
         _classCallCheck(this, MatNavList);
 
-        _this235 = _possibleConstructorReturn(this, _getPrototypeOf(MatNavList).apply(this, arguments));
+        _this235 = _super75.apply(this, arguments);
         /**
          * Emits when the state of the list changes.
          */
@@ -63060,10 +62673,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }]
     }];
 
-    var MatList =
-    /*#__PURE__*/
-    function (_MatListMixinBase3) {
+    var MatList = /*#__PURE__*/function (_MatListMixinBase3) {
       _inherits(MatList, _MatListMixinBase3);
+
+      var _super76 = _createSuper(MatList);
 
       /**
        * @param {?} _elementRef
@@ -63073,7 +62686,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatList);
 
-        _this236 = _possibleConstructorReturn(this, _getPrototypeOf(MatList).call(this));
+        _this236 = _super76.call(this);
         _this236._elementRef = _elementRef;
         /**
          * Emits when the state of the list changes.
@@ -63212,10 +62825,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * An item within a Material Design list.
      */
 
-    var MatListItem =
-    /*#__PURE__*/
-    function (_MatListItemMixinBase2) {
+    var MatListItem = /*#__PURE__*/function (_MatListItemMixinBase2) {
       _inherits(MatListItem, _MatListItemMixinBase2);
+
+      var _super77 = _createSuper(MatListItem);
 
       /**
        * @param {?} _element
@@ -63228,7 +62841,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatListItem);
 
-        _this237 = _possibleConstructorReturn(this, _getPrototypeOf(MatListItem).call(this));
+        _this237 = _super77.call(this);
         _this237._element = _element;
         _this237._isInteractiveList = false;
         _this237._destroyed = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
@@ -63351,13 +62964,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _avatar: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [MatListAvatarCssMatStyler, {
-          static: false
+          "static": false
         }]
       }],
       _icon: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [MatListIconCssMatStyler, {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -63428,10 +63041,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatListOption =
-    /*#__PURE__*/
-    function (_MatListOptionMixinBa) {
+    var MatListOption = /*#__PURE__*/function (_MatListOptionMixinBa) {
       _inherits(MatListOption, _MatListOptionMixinBa);
+
+      var _super78 = _createSuper(MatListOption);
 
       /**
        * @param {?} _element
@@ -63443,7 +63056,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatListOption);
 
-        _this238 = _possibleConstructorReturn(this, _getPrototypeOf(MatListOption).call(this));
+        _this238 = _super78.call(this);
         _this238._element = _element;
         _this238._changeDetector = _changeDetector;
         _this238.selectionList = selectionList;
@@ -63818,13 +63431,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _avatar: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [MatListAvatarCssMatStyler, {
-          static: false
+          "static": false
         }]
       }],
       _icon: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [MatListIconCssMatStyler, {
-          static: false
+          "static": false
         }]
       }],
       _lines: [{
@@ -63834,7 +63447,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _text: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['text', {
-          static: false
+          "static": false
         }]
       }],
       checkboxPosition: [{
@@ -63857,10 +63470,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Material Design list component where each item is a selectable option. Behaves as a listbox.
      */
 
-    var MatSelectionList =
-    /*#__PURE__*/
-    function (_MatSelectionListMixi) {
+    var MatSelectionList = /*#__PURE__*/function (_MatSelectionListMixi) {
       _inherits(MatSelectionList, _MatSelectionListMixi);
+
+      var _super79 = _createSuper(MatSelectionList);
 
       /**
        * @param {?} _element
@@ -63871,7 +63484,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatSelectionList);
 
-        _this241 = _possibleConstructorReturn(this, _getPrototypeOf(MatSelectionList).call(this));
+        _this241 = _super79.call(this);
         _this241._element = _element;
         /**
          * Emits a change event whenever the selected state of an option changes.
@@ -63974,54 +63587,34 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (event) {
             if (event.added) {
-              var _iteratorNormalCompletion15 = true;
-              var _didIteratorError15 = false;
-              var _iteratorError15 = undefined;
+              var _iterator15 = _createForOfIteratorHelper(event.added),
+                  _step15;
 
               try {
-                for (var _iterator15 = event.added[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
+                for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
                   var item = _step15.value;
                   item.selected = true;
                 }
               } catch (err) {
-                _didIteratorError15 = true;
-                _iteratorError15 = err;
+                _iterator15.e(err);
               } finally {
-                try {
-                  if (!_iteratorNormalCompletion15 && _iterator15.return != null) {
-                    _iterator15.return();
-                  }
-                } finally {
-                  if (_didIteratorError15) {
-                    throw _iteratorError15;
-                  }
-                }
+                _iterator15.f();
               }
             }
 
             if (event.removed) {
-              var _iteratorNormalCompletion16 = true;
-              var _didIteratorError16 = false;
-              var _iteratorError16 = undefined;
+              var _iterator16 = _createForOfIteratorHelper(event.removed),
+                  _step16;
 
               try {
-                for (var _iterator16 = event.removed[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
+                for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
                   var _item2 = _step16.value;
                   _item2.selected = false;
                 }
               } catch (err) {
-                _didIteratorError16 = true;
-                _iteratorError16 = err;
+                _iterator16.e(err);
               } finally {
-                try {
-                  if (!_iteratorNormalCompletion16 && _iterator16.return != null) {
-                    _iterator16.return();
-                  }
-                } finally {
-                  if (_didIteratorError16) {
-                    throw _iteratorError16;
-                  }
-                }
+                _iterator16.f();
               }
             }
           });
@@ -67494,9 +67087,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Menu content that will be rendered lazily once the menu is opened.
      */
 
-    var MatMenuContent =
-    /*#__PURE__*/
-    function () {
+    var MatMenuContent = /*#__PURE__*/function () {
       /**
        * @param {?} _template
        * @param {?} _componentFactoryResolver
@@ -67698,10 +67289,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatMenuItem =
-    /*#__PURE__*/
-    function (_MatMenuItemMixinBase2) {
+    var MatMenuItem = /*#__PURE__*/function (_MatMenuItemMixinBase2) {
       _inherits(MatMenuItem, _MatMenuItemMixinBase2);
+
+      var _super80 = _createSuper(MatMenuItem);
 
       /**
        * @param {?} _elementRef
@@ -67715,7 +67306,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         _classCallCheck(this, MatMenuItem);
 
         // @breaking-change 8.0.0 make `_focusMonitor` and `document` required params.
-        _this243 = _possibleConstructorReturn(this, _getPrototypeOf(MatMenuItem).call(this));
+        _this243 = _super80.call(this);
         _this243._elementRef = _elementRef;
         _this243._focusMonitor = _focusMonitor;
         _this243._parentMenu = _parentMenu;
@@ -67979,9 +67570,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
     // tslint:disable-next-line:class-name
 
-    var _MatMenuBase =
-    /*#__PURE__*/
-    function () {
+    var _MatMenuBase = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} _ngZone
@@ -68579,7 +68168,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       templateRef: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"],
         args: [_angular_core__WEBPACK_IMPORTED_MODULE_3__["TemplateRef"], {
-          static: false
+          "static": false
         }]
       }],
       items: [{
@@ -68589,7 +68178,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       lazyContent: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ContentChild"],
         args: [MatMenuContent, {
-          static: false
+          "static": false
         }]
       }],
       overlapTrigger: [{
@@ -68616,15 +68205,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@docs-private We show the "_MatMenu" class as "MatMenu" in the docs.
      */
 
-    var MatMenu =
-    /*#__PURE__*/
-    function (_MatMenuBase2) {
+    var MatMenu = /*#__PURE__*/function (_MatMenuBase2) {
       _inherits(MatMenu, _MatMenuBase2);
+
+      var _super81 = _createSuper(MatMenu);
 
       function MatMenu() {
         _classCallCheck(this, MatMenu);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatMenu).apply(this, arguments));
+        return _super81.apply(this, arguments);
       }
 
       return MatMenu;
@@ -68645,10 +68234,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     // tslint:disable-next-line:class-name
 
 
-    var _MatMenu =
-    /*#__PURE__*/
-    function (_MatMenu2) {
+    var _MatMenu = /*#__PURE__*/function (_MatMenu2) {
       _inherits(_MatMenu, _MatMenu2);
+
+      var _super82 = _createSuper(_MatMenu);
 
       /**
        * @param {?} elementRef
@@ -68658,7 +68247,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function _MatMenu(elementRef, ngZone, defaultOptions) {
         _classCallCheck(this, _MatMenu);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(_MatMenu).call(this, elementRef, ngZone, defaultOptions));
+        return _super82.call(this, elementRef, ngZone, defaultOptions);
       }
 
       return _MatMenu;
@@ -68757,9 +68346,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * responsible for toggling the display of the provided menu instance.
      */
 
-    var MatMenuTrigger =
-    /*#__PURE__*/
-    function () {
+    var MatMenuTrigger = /*#__PURE__*/function () {
       /**
        * @param {?} _overlay
        * @param {?} _element
@@ -69925,10 +69512,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatPaginator =
-    /*#__PURE__*/
-    function (_MatPaginatorBase2) {
+    var MatPaginator = /*#__PURE__*/function (_MatPaginatorBase2) {
       _inherits(MatPaginator, _MatPaginatorBase2);
+
+      var _super83 = _createSuper(MatPaginator);
 
       /**
        * @param {?} _intl
@@ -69939,7 +69526,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatPaginator);
 
-        _this254 = _possibleConstructorReturn(this, _getPrototypeOf(MatPaginator).call(this));
+        _this254 = _super83.call(this);
         _this254._intl = _intl;
         _this254._changeDetectorRef = _changeDetectorRef;
         _this254._pageIndex = 0;
@@ -70564,10 +70151,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * `<mat-progress-bar>` component.
      */
 
-    var MatProgressBar =
-    /*#__PURE__*/
-    function (_MatProgressBarMixinB) {
+    var MatProgressBar = /*#__PURE__*/function (_MatProgressBarMixinB) {
       _inherits(MatProgressBar, _MatProgressBarMixinB);
+
+      var _super84 = _createSuper(MatProgressBar);
 
       /**
        * @param {?} _elementRef
@@ -70585,7 +70172,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatProgressBar);
 
-        _this255 = _possibleConstructorReturn(this, _getPrototypeOf(MatProgressBar).call(this, _elementRef));
+        _this255 = _super84.call(this, _elementRef);
         _this255._elementRef = _elementRef;
         _this255._ngZone = _ngZone;
         _this255._animationMode = _animationMode;
@@ -70839,7 +70426,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _primaryValueBar: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['primaryValueBar', {
-          static: false
+          "static": false
         }]
       }],
       animationEnd: [{
@@ -71051,10 +70638,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * `<mat-progress-spinner>` component.
      */
 
-    var MatProgressSpinner =
-    /*#__PURE__*/
-    function (_MatProgressSpinnerMi) {
+    var MatProgressSpinner = /*#__PURE__*/function (_MatProgressSpinnerMi) {
       _inherits(MatProgressSpinner, _MatProgressSpinnerMi);
+
+      var _super85 = _createSuper(MatProgressSpinner);
 
       /**
        * @param {?} _elementRef
@@ -71068,7 +70655,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatProgressSpinner);
 
-        _this257 = _possibleConstructorReturn(this, _getPrototypeOf(MatProgressSpinner).call(this, _elementRef));
+        _this257 = _super85.call(this, _elementRef);
         _this257._elementRef = _elementRef;
         _this257._document = _document;
         _this257._diameter = BASE_SIZE;
@@ -71384,10 +70971,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * indeterminate `<mat-progress-spinner>` instance.
      */
 
-    var MatSpinner =
-    /*#__PURE__*/
-    function (_MatProgressSpinner) {
+    var MatSpinner = /*#__PURE__*/function (_MatProgressSpinner) {
       _inherits(MatSpinner, _MatProgressSpinner);
+
+      var _super86 = _createSuper(MatSpinner);
 
       /**
        * @param {?} elementRef
@@ -71401,7 +70988,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatSpinner);
 
-        _this258 = _possibleConstructorReturn(this, _getPrototypeOf(MatSpinner).call(this, elementRef, platform, document, animationMode, defaults));
+        _this258 = _super86.call(this, elementRef, platform, document, animationMode, defaults);
         _this258.mode = 'indeterminate';
         return _this258;
       }
@@ -71698,9 +71285,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatRadioGroup =
-    /*#__PURE__*/
-    function () {
+    var MatRadioGroup = /*#__PURE__*/function () {
       /**
        * @param {?} _changeDetector
        */
@@ -72167,10 +71752,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatRadioButton =
-    /*#__PURE__*/
-    function (_MatRadioButtonMixinB) {
+    var MatRadioButton = /*#__PURE__*/function (_MatRadioButtonMixinB) {
       _inherits(MatRadioButton, _MatRadioButtonMixinB);
+
+      var _super87 = _createSuper(MatRadioButton);
 
       /**
        * @param {?} radioGroup
@@ -72186,7 +71771,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatRadioButton);
 
-        _this261 = _possibleConstructorReturn(this, _getPrototypeOf(MatRadioButton).call(this, elementRef));
+        _this261 = _super87.call(this, elementRef);
         _this261._changeDetector = _changeDetector;
         _this261._focusMonitor = _focusMonitor;
         _this261._radioDispatcher = _radioDispatcher;
@@ -72650,7 +72235,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _inputElement: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"],
         args: ['input', {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -73155,10 +72740,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }]
     }];
 
-    var MatSelect =
-    /*#__PURE__*/
-    function (_MatSelectMixinBase2) {
+    var MatSelect = /*#__PURE__*/function (_MatSelectMixinBase2) {
       _inherits(MatSelect, _MatSelectMixinBase2);
+
+      var _super88 = _createSuper(MatSelect);
 
       /**
        * @param {?} _viewportRuler
@@ -73180,7 +72765,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatSelect);
 
-        _this263 = _possibleConstructorReturn(this, _getPrototypeOf(MatSelect).call(this, elementRef, _defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl));
+        _this263 = _super88.call(this, elementRef, _defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
         _this263._viewportRuler = _viewportRuler;
         _this263._changeDetectorRef = _changeDetectorRef;
         _this263._ngZone = _ngZone;
@@ -75032,19 +74617,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       trigger: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ViewChild"],
         args: ['trigger', {
-          static: false
+          "static": false
         }]
       }],
       panel: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ViewChild"],
         args: ['panel', {
-          static: false
+          "static": false
         }]
       }],
       overlayDir: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ViewChild"],
         args: [_angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_6__["CdkConnectedOverlay"], {
-          static: false
+          "static": false
         }]
       }],
       options: [{
@@ -75063,7 +74648,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       customTrigger: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ContentChild"],
         args: [MatSelectTrigger, {
-          static: false
+          "static": false
         }]
       }],
       placeholder: [{
@@ -75382,10 +74967,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       return false;
     }
 
-    var MatDrawerContent =
-    /*#__PURE__*/
-    function (_angular_cdk_scrollin) {
+    var MatDrawerContent = /*#__PURE__*/function (_angular_cdk_scrollin) {
       _inherits(MatDrawerContent, _angular_cdk_scrollin);
+
+      var _super89 = _createSuper(MatDrawerContent);
 
       /**
        * @param {?} _changeDetectorRef
@@ -75399,7 +74984,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatDrawerContent);
 
-        _this274 = _possibleConstructorReturn(this, _getPrototypeOf(MatDrawerContent).call(this, elementRef, scrollDispatcher, ngZone));
+        _this274 = _super89.call(this, elementRef, scrollDispatcher, ngZone);
         _this274._changeDetectorRef = _changeDetectorRef;
         _this274._container = _container;
         return _this274;
@@ -75471,9 +75056,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatDrawer =
-    /*#__PURE__*/
-    function () {
+    var MatDrawer = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} _focusTrapFactory
@@ -76156,9 +75739,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * and coordinates the backdrop and content styling.
      */
 
-    var MatDrawerContainer =
-    /*#__PURE__*/
-    function () {
+    var MatDrawerContainer = /*#__PURE__*/function () {
       /**
        * @param {?} _dir
        * @param {?} _element
@@ -76813,13 +76394,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _content: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ContentChild"],
         args: [MatDrawerContent, {
-          static: false
+          "static": false
         }]
       }],
       _userContent: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ViewChild"],
         args: [MatDrawerContent, {
-          static: false
+          "static": false
         }]
       }],
       autosize: [{
@@ -76837,10 +76418,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
-    var MatSidenavContent =
-    /*#__PURE__*/
-    function (_MatDrawerContent) {
+    var MatSidenavContent = /*#__PURE__*/function (_MatDrawerContent) {
       _inherits(MatSidenavContent, _MatDrawerContent);
+
+      var _super90 = _createSuper(MatSidenavContent);
 
       /**
        * @param {?} changeDetectorRef
@@ -76852,7 +76433,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function MatSidenavContent(changeDetectorRef, container, elementRef, scrollDispatcher, ngZone) {
         _classCallCheck(this, MatSidenavContent);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatSidenavContent).call(this, changeDetectorRef, container, elementRef, scrollDispatcher, ngZone));
+        return _super90.call(this, changeDetectorRef, container, elementRef, scrollDispatcher, ngZone);
       }
 
       return MatSidenavContent;
@@ -76898,17 +76479,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }];
     };
 
-    var MatSidenav =
-    /*#__PURE__*/
-    function (_MatDrawer) {
+    var MatSidenav = /*#__PURE__*/function (_MatDrawer) {
       _inherits(MatSidenav, _MatDrawer);
+
+      var _super91 = _createSuper(MatSidenav);
 
       function MatSidenav() {
         var _this288;
 
         _classCallCheck(this, MatSidenav);
 
-        _this288 = _possibleConstructorReturn(this, _getPrototypeOf(MatSidenav).apply(this, arguments));
+        _this288 = _super91.apply(this, arguments);
         _this288._fixedInViewport = false;
         _this288._fixedTopGap = 0;
         _this288._fixedBottomGap = 0;
@@ -77013,15 +76594,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }]
     };
 
-    var MatSidenavContainer =
-    /*#__PURE__*/
-    function (_MatDrawerContainer) {
+    var MatSidenavContainer = /*#__PURE__*/function (_MatDrawerContainer) {
       _inherits(MatSidenavContainer, _MatDrawerContainer);
+
+      var _super92 = _createSuper(MatSidenavContainer);
 
       function MatSidenavContainer() {
         _classCallCheck(this, MatSidenavContainer);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatSidenavContainer).apply(this, arguments));
+        return _super92.apply(this, arguments);
       }
 
       return MatSidenavContainer;
@@ -77050,7 +76631,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _content: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ContentChild"],
         args: [MatSidenavContent, {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -77296,10 +76877,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatSlideToggle =
-    /*#__PURE__*/
-    function (_MatSlideToggleMixinB) {
+    var MatSlideToggle = /*#__PURE__*/function (_MatSlideToggleMixinB) {
       _inherits(MatSlideToggle, _MatSlideToggleMixinB);
+
+      var _super93 = _createSuper(MatSlideToggle);
 
       /**
        * @param {?} elementRef
@@ -77316,7 +76897,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatSlideToggle);
 
-        _this289 = _possibleConstructorReturn(this, _getPrototypeOf(MatSlideToggle).call(this, elementRef));
+        _this289 = _super93.call(this, elementRef);
         _this289._focusMonitor = _focusMonitor;
         _this289._changeDetectorRef = _changeDetectorRef;
         _this289._ngZone = _ngZone;
@@ -77808,13 +77389,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _thumbEl: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['thumbContainer', {
-          static: false
+          "static": false
         }]
       }],
       _thumbBarEl: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['toggleBar', {
-          static: false
+          "static": false
         }]
       }],
       name: [{
@@ -77852,7 +77433,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _inputElement: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['input', {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -77883,15 +77464,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Required slide-toggle form controls are valid when checked.
      */
 
-    var MatSlideToggleRequiredValidator =
-    /*#__PURE__*/
-    function (_angular_forms__WEBPA2) {
+    var MatSlideToggleRequiredValidator = /*#__PURE__*/function (_angular_forms__WEBPA2) {
       _inherits(MatSlideToggleRequiredValidator, _angular_forms__WEBPA2);
+
+      var _super94 = _createSuper(MatSlideToggleRequiredValidator);
 
       function MatSlideToggleRequiredValidator() {
         _classCallCheck(this, MatSlideToggleRequiredValidator);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatSlideToggleRequiredValidator).apply(this, arguments));
+        return _super94.apply(this, arguments);
       }
 
       return MatSlideToggleRequiredValidator;
@@ -78148,10 +77729,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatSlider =
-    /*#__PURE__*/
-    function (_MatSliderMixinBase2) {
+    var MatSlider = /*#__PURE__*/function (_MatSliderMixinBase2) {
       _inherits(MatSlider, _MatSliderMixinBase2);
+
+      var _super95 = _createSuper(MatSlider);
 
       /**
        * @param {?} elementRef
@@ -78166,7 +77747,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatSlider);
 
-        _this292 = _possibleConstructorReturn(this, _getPrototypeOf(MatSlider).call(this, elementRef));
+        _this292 = _super95.call(this, elementRef);
         _this292._focusMonitor = _focusMonitor;
         _this292._changeDetectorRef = _changeDetectorRef;
         _this292._dir = _dir;
@@ -79347,7 +78928,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _sliderWrapper: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_4__["ViewChild"],
         args: ['sliderWrapper', {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -79544,9 +79125,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatSnackBarRef =
-    /*#__PURE__*/
-    function () {
+    var MatSnackBarRef = /*#__PURE__*/function () {
       /**
        * @param {?} containerInstance
        * @param {?} _overlayRef
@@ -79790,9 +79369,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var SimpleSnackBar =
-    /*#__PURE__*/
-    function () {
+    var SimpleSnackBar = /*#__PURE__*/function () {
       /**
        * @param {?} snackBarRef
        * @param {?} data
@@ -79891,10 +79468,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@docs-private
      */
 
-    var MatSnackBarContainer =
-    /*#__PURE__*/
-    function (_angular_cdk_portal__3) {
+    var MatSnackBarContainer = /*#__PURE__*/function (_angular_cdk_portal__3) {
       _inherits(MatSnackBarContainer, _angular_cdk_portal__3);
+
+      var _super96 = _createSuper(MatSnackBarContainer);
 
       /**
        * @param {?} _ngZone
@@ -79907,7 +79484,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatSnackBarContainer);
 
-        _this296 = _possibleConstructorReturn(this, _getPrototypeOf(MatSnackBarContainer).call(this));
+        _this296 = _super96.call(this);
         _this296._ngZone = _ngZone;
         _this296._elementRef = _elementRef;
         _this296._changeDetectorRef = _changeDetectorRef;
@@ -80168,7 +79745,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _portalOutlet: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"],
         args: [_angular_cdk_portal__WEBPACK_IMPORTED_MODULE_3__["CdkPortalOutlet"], {
-          static: true
+          "static": true
         }]
       }]
     };
@@ -80217,9 +79794,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatSnackBar =
-    /*#__PURE__*/
-    function () {
+    var MatSnackBar = /*#__PURE__*/function () {
       /**
        * @param {?} _overlay
        * @param {?} _live
@@ -80806,17 +80381,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatSort =
-    /*#__PURE__*/
-    function (_MatSortMixinBase2) {
+    var MatSort = /*#__PURE__*/function (_MatSortMixinBase2) {
       _inherits(MatSort, _MatSortMixinBase2);
+
+      var _super97 = _createSuper(MatSort);
 
       function MatSort() {
         var _this299;
 
         _classCallCheck(this, MatSort);
 
-        _this299 = _possibleConstructorReturn(this, _getPrototypeOf(MatSort).apply(this, arguments));
+        _this299 = _super97.apply(this, arguments);
         /**
          * Collection of all registered sortables that this directive manages.
          */
@@ -80877,7 +80452,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "deregister",
         value: function deregister(sortable) {
-          this.sortables.delete(sortable.id);
+          this.sortables["delete"](sortable.id);
         }
         /**
          * Sets the active sort id and determines the new sort direction.
@@ -81244,10 +80819,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatSortHeader =
-    /*#__PURE__*/
-    function (_MatSortHeaderMixinBa) {
+    var MatSortHeader = /*#__PURE__*/function (_MatSortHeaderMixinBa) {
       _inherits(MatSortHeader, _MatSortHeaderMixinBa);
+
+      var _super98 = _createSuper(MatSortHeader);
 
       /**
        * @param {?} _intl
@@ -81264,7 +80839,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         // `material/table` and `cdk/table` and we can't have the CDK depending on Material,
         // and we want to avoid having the sort header depending on the CDK table because
         // of this single reference.
-        _this300 = _possibleConstructorReturn(this, _getPrototypeOf(MatSortHeader).call(this));
+        _this300 = _super98.call(this);
         _this300._intl = _intl;
         _this300._sort = _sort;
         _this300._columnDef = _columnDef;
@@ -81823,15 +81398,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatStepLabel =
-    /*#__PURE__*/
-    function (_angular_cdk_stepper_) {
+    var MatStepLabel = /*#__PURE__*/function (_angular_cdk_stepper_) {
       _inherits(MatStepLabel, _angular_cdk_stepper_);
+
+      var _super99 = _createSuper(MatStepLabel);
 
       function MatStepLabel() {
         _classCallCheck(this, MatStepLabel);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatStepLabel).apply(this, arguments));
+        return _super99.apply(this, arguments);
       }
 
       return MatStepLabel;
@@ -81907,10 +81482,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
-    var MatStepHeader =
-    /*#__PURE__*/
-    function (_angular_cdk_stepper_2) {
+    var MatStepHeader = /*#__PURE__*/function (_angular_cdk_stepper_2) {
       _inherits(MatStepHeader, _angular_cdk_stepper_2);
+
+      var _super100 = _createSuper(MatStepHeader);
 
       /**
        * @param {?} _intl
@@ -81923,7 +81498,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatStepHeader);
 
-        _this301 = _possibleConstructorReturn(this, _getPrototypeOf(MatStepHeader).call(this, _elementRef));
+        _this301 = _super100.call(this, _elementRef);
         _this301._intl = _intl;
         _this301._focusMonitor = _focusMonitor;
 
@@ -82172,10 +81747,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
-    var MatStep =
-    /*#__PURE__*/
-    function (_angular_cdk_stepper_3) {
+    var MatStep = /*#__PURE__*/function (_angular_cdk_stepper_3) {
       _inherits(MatStep, _angular_cdk_stepper_3);
+
+      var _super101 = _createSuper(MatStep);
 
       /**
        * \@breaking-change 8.0.0 remove the `?` after `stepperOptions`
@@ -82188,7 +81763,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatStep);
 
-        _this302 = _possibleConstructorReturn(this, _getPrototypeOf(MatStep).call(this, stepper, stepperOptions));
+        _this302 = _super101.call(this, stepper, stepperOptions);
         _this302._errorStateMatcher = _errorStateMatcher;
         return _this302;
       }
@@ -82268,22 +81843,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       stepLabel: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [MatStepLabel, {
-          static: false
+          "static": false
         }]
       }]
     };
 
-    var MatStepper =
-    /*#__PURE__*/
-    function (_angular_cdk_stepper_4) {
+    var MatStepper = /*#__PURE__*/function (_angular_cdk_stepper_4) {
       _inherits(MatStepper, _angular_cdk_stepper_4);
+
+      var _super102 = _createSuper(MatStepper);
 
       function MatStepper() {
         var _this303;
 
         _classCallCheck(this, MatStepper);
 
-        _this303 = _possibleConstructorReturn(this, _getPrototypeOf(MatStepper).apply(this, arguments));
+        _this303 = _super102.apply(this, arguments);
         /**
          * Event emitted when the current step is done transitioning in.
          */
@@ -82391,17 +81966,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }]
     };
 
-    var MatHorizontalStepper =
-    /*#__PURE__*/
-    function (_MatStepper) {
+    var MatHorizontalStepper = /*#__PURE__*/function (_MatStepper) {
       _inherits(MatHorizontalStepper, _MatStepper);
+
+      var _super103 = _createSuper(MatHorizontalStepper);
 
       function MatHorizontalStepper() {
         var _this305;
 
         _classCallCheck(this, MatHorizontalStepper);
 
-        _this305 = _possibleConstructorReturn(this, _getPrototypeOf(MatHorizontalStepper).apply(this, arguments));
+        _this305 = _super103.apply(this, arguments);
         /**
          * Whether the label should display in bottom or end position.
          */
@@ -82446,10 +82021,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }]
     };
 
-    var MatVerticalStepper =
-    /*#__PURE__*/
-    function (_MatStepper2) {
+    var MatVerticalStepper = /*#__PURE__*/function (_MatStepper2) {
       _inherits(MatVerticalStepper, _MatStepper2);
+
+      var _super104 = _createSuper(MatVerticalStepper);
 
       /**
        * @param {?} dir
@@ -82463,7 +82038,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatVerticalStepper);
 
-        _this306 = _possibleConstructorReturn(this, _getPrototypeOf(MatVerticalStepper).call(this, dir, changeDetectorRef, elementRef, _document));
+        _this306 = _super104.call(this, dir, changeDetectorRef, elementRef, _document);
         _this306._orientation = 'vertical';
         return _this306;
       }
@@ -82526,15 +82101,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatStepperNext =
-    /*#__PURE__*/
-    function (_angular_cdk_stepper_5) {
+    var MatStepperNext = /*#__PURE__*/function (_angular_cdk_stepper_5) {
       _inherits(MatStepperNext, _angular_cdk_stepper_5);
+
+      var _super105 = _createSuper(MatStepperNext);
 
       function MatStepperNext() {
         _classCallCheck(this, MatStepperNext);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatStepperNext).apply(this, arguments));
+        return _super105.apply(this, arguments);
       }
 
       return MatStepperNext;
@@ -82554,15 +82129,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Button that moves to the previous step in a stepper workflow.
      */
 
-    var MatStepperPrevious =
-    /*#__PURE__*/
-    function (_angular_cdk_stepper_6) {
+    var MatStepperPrevious = /*#__PURE__*/function (_angular_cdk_stepper_6) {
       _inherits(MatStepperPrevious, _angular_cdk_stepper_6);
+
+      var _super106 = _createSuper(MatStepperPrevious);
 
       function MatStepperPrevious() {
         _classCallCheck(this, MatStepperPrevious);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatStepperPrevious).apply(this, arguments));
+        return _super106.apply(this, arguments);
       }
 
       return MatStepperPrevious;
@@ -82786,17 +82361,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatTable =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W) {
+    var MatTable = /*#__PURE__*/function (_angular_cdk_table__W) {
       _inherits(MatTable, _angular_cdk_table__W);
+
+      var _super107 = _createSuper(MatTable);
 
       function MatTable() {
         var _this307;
 
         _classCallCheck(this, MatTable);
 
-        _this307 = _possibleConstructorReturn(this, _getPrototypeOf(MatTable).apply(this, arguments));
+        _this307 = _super107.apply(this, arguments);
         /**
          * Overrides the sticky CSS class set by the `CdkTable`.
          */
@@ -82838,15 +82413,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Captures the template of a column's data row cell as well as cell-specific properties.
      */
 
-    var MatCellDef =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W2) {
+    var MatCellDef = /*#__PURE__*/function (_angular_cdk_table__W2) {
       _inherits(MatCellDef, _angular_cdk_table__W2);
+
+      var _super108 = _createSuper(MatCellDef);
 
       function MatCellDef() {
         _classCallCheck(this, MatCellDef);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatCellDef).apply(this, arguments));
+        return _super108.apply(this, arguments);
       }
 
       return MatCellDef;
@@ -82867,15 +82442,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Captures the template of a column's header cell and as well as cell-specific properties.
      */
 
-    var MatHeaderCellDef =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W3) {
+    var MatHeaderCellDef = /*#__PURE__*/function (_angular_cdk_table__W3) {
       _inherits(MatHeaderCellDef, _angular_cdk_table__W3);
+
+      var _super109 = _createSuper(MatHeaderCellDef);
 
       function MatHeaderCellDef() {
         _classCallCheck(this, MatHeaderCellDef);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatHeaderCellDef).apply(this, arguments));
+        return _super109.apply(this, arguments);
       }
 
       return MatHeaderCellDef;
@@ -82896,15 +82471,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Captures the template of a column's footer cell and as well as cell-specific properties.
      */
 
-    var MatFooterCellDef =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W4) {
+    var MatFooterCellDef = /*#__PURE__*/function (_angular_cdk_table__W4) {
       _inherits(MatFooterCellDef, _angular_cdk_table__W4);
+
+      var _super110 = _createSuper(MatFooterCellDef);
 
       function MatFooterCellDef() {
         _classCallCheck(this, MatFooterCellDef);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatFooterCellDef).apply(this, arguments));
+        return _super110.apply(this, arguments);
       }
 
       return MatFooterCellDef;
@@ -82925,15 +82500,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Defines a set of cells available for a table column.
      */
 
-    var MatColumnDef =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W5) {
+    var MatColumnDef = /*#__PURE__*/function (_angular_cdk_table__W5) {
       _inherits(MatColumnDef, _angular_cdk_table__W5);
+
+      var _super111 = _createSuper(MatColumnDef);
 
       function MatColumnDef() {
         _classCallCheck(this, MatColumnDef);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatColumnDef).apply(this, arguments));
+        return _super111.apply(this, arguments);
       }
 
       return MatColumnDef;
@@ -82968,10 +82543,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Header cell template container that adds the right classes and role.
      */
 
-    var MatHeaderCell =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W6) {
+    var MatHeaderCell = /*#__PURE__*/function (_angular_cdk_table__W6) {
       _inherits(MatHeaderCell, _angular_cdk_table__W6);
+
+      var _super112 = _createSuper(MatHeaderCell);
 
       /**
        * @param {?} columnDef
@@ -82982,7 +82557,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatHeaderCell);
 
-        _this308 = _possibleConstructorReturn(this, _getPrototypeOf(MatHeaderCell).call(this, columnDef, elementRef));
+        _this308 = _super112.call(this, columnDef, elementRef);
         elementRef.nativeElement.classList.add("mat-column-".concat(columnDef.cssClassFriendlyName));
         return _this308;
       }
@@ -83014,10 +82589,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatFooterCell =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W7) {
+    var MatFooterCell = /*#__PURE__*/function (_angular_cdk_table__W7) {
       _inherits(MatFooterCell, _angular_cdk_table__W7);
+
+      var _super113 = _createSuper(MatFooterCell);
 
       /**
        * @param {?} columnDef
@@ -83028,7 +82603,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatFooterCell);
 
-        _this309 = _possibleConstructorReturn(this, _getPrototypeOf(MatFooterCell).call(this, columnDef, elementRef));
+        _this309 = _super113.call(this, columnDef, elementRef);
         elementRef.nativeElement.classList.add("mat-column-".concat(columnDef.cssClassFriendlyName));
         return _this309;
       }
@@ -83060,10 +82635,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatCell =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W8) {
+    var MatCell = /*#__PURE__*/function (_angular_cdk_table__W8) {
       _inherits(MatCell, _angular_cdk_table__W8);
+
+      var _super114 = _createSuper(MatCell);
 
       /**
        * @param {?} columnDef
@@ -83074,7 +82649,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatCell);
 
-        _this310 = _possibleConstructorReturn(this, _getPrototypeOf(MatCell).call(this, columnDef, elementRef));
+        _this310 = _super114.call(this, columnDef, elementRef);
         elementRef.nativeElement.classList.add("mat-column-".concat(columnDef.cssClassFriendlyName));
         return _this310;
       }
@@ -83112,15 +82687,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatHeaderRowDef =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W9) {
+    var MatHeaderRowDef = /*#__PURE__*/function (_angular_cdk_table__W9) {
       _inherits(MatHeaderRowDef, _angular_cdk_table__W9);
+
+      var _super115 = _createSuper(MatHeaderRowDef);
 
       function MatHeaderRowDef() {
         _classCallCheck(this, MatHeaderRowDef);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatHeaderRowDef).apply(this, arguments));
+        return _super115.apply(this, arguments);
       }
 
       return MatHeaderRowDef;
@@ -83142,15 +82717,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Captures the footer row's template and other footer properties such as the columns to display.
      */
 
-    var MatFooterRowDef =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W10) {
+    var MatFooterRowDef = /*#__PURE__*/function (_angular_cdk_table__W10) {
       _inherits(MatFooterRowDef, _angular_cdk_table__W10);
+
+      var _super116 = _createSuper(MatFooterRowDef);
 
       function MatFooterRowDef() {
         _classCallCheck(this, MatFooterRowDef);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatFooterRowDef).apply(this, arguments));
+        return _super116.apply(this, arguments);
       }
 
       return MatFooterRowDef;
@@ -83174,15 +82749,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T
      */
 
-    var MatRowDef =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W11) {
+    var MatRowDef = /*#__PURE__*/function (_angular_cdk_table__W11) {
       _inherits(MatRowDef, _angular_cdk_table__W11);
+
+      var _super117 = _createSuper(MatRowDef);
 
       function MatRowDef() {
         _classCallCheck(this, MatRowDef);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatRowDef).apply(this, arguments));
+        return _super117.apply(this, arguments);
       }
 
       return MatRowDef;
@@ -83203,15 +82778,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Footer template container that contains the cell outlet. Adds the right class and role.
      */
 
-    var MatHeaderRow =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W12) {
+    var MatHeaderRow = /*#__PURE__*/function (_angular_cdk_table__W12) {
       _inherits(MatHeaderRow, _angular_cdk_table__W12);
+
+      var _super118 = _createSuper(MatHeaderRow);
 
       function MatHeaderRow() {
         _classCallCheck(this, MatHeaderRow);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatHeaderRow).apply(this, arguments));
+        return _super118.apply(this, arguments);
       }
 
       return MatHeaderRow;
@@ -83241,15 +82816,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Footer template container that contains the cell outlet. Adds the right class and role.
      */
 
-    var MatFooterRow =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W13) {
+    var MatFooterRow = /*#__PURE__*/function (_angular_cdk_table__W13) {
       _inherits(MatFooterRow, _angular_cdk_table__W13);
+
+      var _super119 = _createSuper(MatFooterRow);
 
       function MatFooterRow() {
         _classCallCheck(this, MatFooterRow);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatFooterRow).apply(this, arguments));
+        return _super119.apply(this, arguments);
       }
 
       return MatFooterRow;
@@ -83279,15 +82854,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Data row template container that contains the cell outlet. Adds the right class and role.
      */
 
-    var MatRow =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W14) {
+    var MatRow = /*#__PURE__*/function (_angular_cdk_table__W14) {
       _inherits(MatRow, _angular_cdk_table__W14);
+
+      var _super120 = _createSuper(MatRow);
 
       function MatRow() {
         _classCallCheck(this, MatRow);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatRow).apply(this, arguments));
+        return _super120.apply(this, arguments);
       }
 
       return MatRow;
@@ -83329,15 +82904,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T
      */
 
-    var MatTextColumn =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W15) {
+    var MatTextColumn = /*#__PURE__*/function (_angular_cdk_table__W15) {
       _inherits(MatTextColumn, _angular_cdk_table__W15);
+
+      var _super121 = _createSuper(MatTextColumn);
 
       function MatTextColumn() {
         _classCallCheck(this, MatTextColumn);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatTextColumn).apply(this, arguments));
+        return _super121.apply(this, arguments);
       }
 
       return MatTextColumn;
@@ -83410,10 +82985,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T
      */
 
-    var MatTableDataSource =
-    /*#__PURE__*/
-    function (_angular_cdk_table__W16) {
+    var MatTableDataSource = /*#__PURE__*/function (_angular_cdk_table__W16) {
       _inherits(MatTableDataSource, _angular_cdk_table__W16);
+
+      var _super122 = _createSuper(MatTableDataSource);
 
       /**
        * @param {?=} initialData
@@ -83425,7 +83000,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatTableDataSource);
 
-        _this311 = _possibleConstructorReturn(this, _getPrototypeOf(MatTableDataSource).call(this));
+        _this311 = _super122.call(this);
         /**
          * Stream emitting render data to the table (depends on ordered data changes).
          */
@@ -84211,9 +83786,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatInkBar =
-    /*#__PURE__*/
-    function () {
+    var MatInkBar = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} _ngZone
@@ -84381,15 +83954,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatTabLabel =
-    /*#__PURE__*/
-    function (_angular_cdk_portal__4) {
+    var MatTabLabel = /*#__PURE__*/function (_angular_cdk_portal__4) {
       _inherits(MatTabLabel, _angular_cdk_portal__4);
+
+      var _super123 = _createSuper(MatTabLabel);
 
       function MatTabLabel() {
         _classCallCheck(this, MatTabLabel);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatTabLabel).apply(this, arguments));
+        return _super123.apply(this, arguments);
       }
 
       return MatTabLabel;
@@ -84419,10 +83992,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _MatTabMixinBase = Object(_angular_material_core__WEBPACK_IMPORTED_MODULE_3__["mixinDisabled"])(MatTabBase);
 
-    var MatTab =
-    /*#__PURE__*/
-    function (_MatTabMixinBase2) {
+    var MatTab = /*#__PURE__*/function (_MatTabMixinBase2) {
       _inherits(MatTab, _MatTabMixinBase2);
+
+      var _super124 = _createSuper(MatTab);
 
       /**
        * @param {?} _viewContainerRef
@@ -84432,7 +84005,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatTab);
 
-        _this316 = _possibleConstructorReturn(this, _getPrototypeOf(MatTab).call(this));
+        _this316 = _super124.call(this);
         _this316._viewContainerRef = _viewContainerRef;
         /**
          * Plain text label for the tab, used when there is no template label.
@@ -84537,20 +84110,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       templateLabel: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [MatTabLabel, {
-          static: false
+          "static": false
         }]
       }],
       _explicitContent: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChild"],
         args: [MatTabContent, {
           read: _angular_core__WEBPACK_IMPORTED_MODULE_0__["TemplateRef"],
-          static: true
+          "static": true
         }]
       }],
       _implicitContent: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["TemplateRef"], {
-          static: true
+          "static": true
         }]
       }],
       textLabel: [{
@@ -84610,10 +84183,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@docs-private
      */
 
-    var MatTabBodyPortal =
-    /*#__PURE__*/
-    function (_angular_cdk_portal__5) {
+    var MatTabBodyPortal = /*#__PURE__*/function (_angular_cdk_portal__5) {
       _inherits(MatTabBodyPortal, _angular_cdk_portal__5);
+
+      var _super125 = _createSuper(MatTabBodyPortal);
 
       /**
        * @param {?} componentFactoryResolver
@@ -84625,7 +84198,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatTabBodyPortal);
 
-        _this317 = _possibleConstructorReturn(this, _getPrototypeOf(MatTabBodyPortal).call(this, componentFactoryResolver, viewContainerRef));
+        _this317 = _super125.call(this, componentFactoryResolver, viewContainerRef);
         _this317._host = _host;
         /**
          * Subscription to events for when the tab body begins centering.
@@ -84724,9 +84297,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     // tslint:disable-next-line:class-name
 
 
-    var _MatTabBodyBase =
-    /*#__PURE__*/
-    function () {
+    var _MatTabBodyBase = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} _dir
@@ -84990,10 +84561,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@docs-private
      */
 
-    var MatTabBody =
-    /*#__PURE__*/
-    function (_MatTabBodyBase2) {
+    var MatTabBody = /*#__PURE__*/function (_MatTabBodyBase2) {
       _inherits(MatTabBody, _MatTabBodyBase2);
+
+      var _super126 = _createSuper(MatTabBody);
 
       /**
        * @param {?} elementRef
@@ -85003,7 +84574,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function MatTabBody(elementRef, dir, changeDetectorRef) {
         _classCallCheck(this, MatTabBody);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatTabBody).call(this, elementRef, dir, changeDetectorRef));
+        return _super126.call(this, elementRef, dir, changeDetectorRef);
       }
 
       return MatTabBody;
@@ -85042,7 +84613,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _portalHost: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: [_angular_cdk_portal__WEBPACK_IMPORTED_MODULE_2__["PortalHostDirective"], {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -85097,10 +84668,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     // tslint:disable-next-line:class-name
 
 
-    var _MatTabGroupBase =
-    /*#__PURE__*/
-    function (_MatTabGroupMixinBase2) {
+    var _MatTabGroupBase = /*#__PURE__*/function (_MatTabGroupMixinBase2) {
       _inherits(_MatTabGroupBase, _MatTabGroupMixinBase2);
+
+      var _super127 = _createSuper(_MatTabGroupBase);
 
       /**
        * @param {?} elementRef
@@ -85113,7 +84684,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, _MatTabGroupBase);
 
-        _this320 = _possibleConstructorReturn(this, _getPrototypeOf(_MatTabGroupBase).call(this, elementRef));
+        _this320 = _super127.call(this, elementRef);
         _this320._changeDetectorRef = _changeDetectorRef;
         _this320._animationMode = _animationMode;
         /**
@@ -85629,10 +85200,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * See: https://material.io/design/components/tabs.html
      */
 
-    var MatTabGroup =
-    /*#__PURE__*/
-    function (_MatTabGroupBase2) {
+    var MatTabGroup = /*#__PURE__*/function (_MatTabGroupBase2) {
       _inherits(MatTabGroup, _MatTabGroupBase2);
+
+      var _super128 = _createSuper(MatTabGroup);
 
       /**
        * @param {?} elementRef
@@ -85643,7 +85214,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function MatTabGroup(elementRef, changeDetectorRef, defaultConfig, animationMode) {
         _classCallCheck(this, MatTabGroup);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatTabGroup).call(this, elementRef, changeDetectorRef, defaultConfig, animationMode));
+        return _super128.call(this, elementRef, changeDetectorRef, defaultConfig, animationMode);
       }
 
       return MatTabGroup;
@@ -85700,13 +85271,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _tabBodyWrapper: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['tabBodyWrapper', {
-          static: false
+          "static": false
         }]
       }],
       _tabHeader: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['tabHeader', {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -85733,10 +85304,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatTabLabelWrapper =
-    /*#__PURE__*/
-    function (_MatTabLabelWrapperMi) {
+    var MatTabLabelWrapper = /*#__PURE__*/function (_MatTabLabelWrapperMi) {
       _inherits(MatTabLabelWrapper, _MatTabLabelWrapperMi);
+
+      var _super129 = _createSuper(MatTabLabelWrapper);
 
       /**
        * @param {?} elementRef
@@ -85746,7 +85317,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatTabLabelWrapper);
 
-        _this324 = _possibleConstructorReturn(this, _getPrototypeOf(MatTabLabelWrapper).call(this));
+        _this324 = _super129.call(this);
         _this324.elementRef = elementRef;
         return _this324;
       }
@@ -85845,9 +85416,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @abstract
      */
 
-    var MatPaginatedTabHeader =
-    /*#__PURE__*/
-    function () {
+    var MatPaginatedTabHeader = /*#__PURE__*/function () {
       /**
        * @param {?} _elementRef
        * @param {?} _changeDetectorRef
@@ -86618,10 +86187,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     // tslint:disable-next-line:class-name
 
 
-    var _MatTabHeaderBase =
-    /*#__PURE__*/
-    function (_MatPaginatedTabHeade) {
+    var _MatTabHeaderBase = /*#__PURE__*/function (_MatPaginatedTabHeade) {
       _inherits(_MatTabHeaderBase, _MatPaginatedTabHeade);
+
+      var _super130 = _createSuper(_MatTabHeaderBase);
 
       /**
        * @param {?} elementRef
@@ -86638,7 +86207,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, _MatTabHeaderBase);
 
-        _this330 = _possibleConstructorReturn(this, _getPrototypeOf(_MatTabHeaderBase).call(this, elementRef, changeDetectorRef, viewportRuler, dir, ngZone, platform, animationMode));
+        _this330 = _super130.call(this, elementRef, changeDetectorRef, viewportRuler, dir, ngZone, platform, animationMode);
         _this330._disableRipple = false;
         return _this330;
       }
@@ -86726,10 +86295,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@docs-private
      */
 
-    var MatTabHeader =
-    /*#__PURE__*/
-    function (_MatTabHeaderBase2) {
+    var MatTabHeader = /*#__PURE__*/function (_MatTabHeaderBase2) {
       _inherits(MatTabHeader, _MatTabHeaderBase2);
+
+      var _super131 = _createSuper(MatTabHeader);
 
       /**
        * @param {?} elementRef
@@ -86744,7 +86313,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       animationMode) {
         _classCallCheck(this, MatTabHeader);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatTabHeader).call(this, elementRef, changeDetectorRef, viewportRuler, dir, ngZone, platform, animationMode));
+        return _super131.call(this, elementRef, changeDetectorRef, viewportRuler, dir, ngZone, platform, animationMode);
       }
 
       return MatTabHeader;
@@ -86804,31 +86373,31 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _inkBar: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: [MatInkBar, {
-          static: true
+          "static": true
         }]
       }],
       _tabListContainer: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['tabListContainer', {
-          static: true
+          "static": true
         }]
       }],
       _tabList: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['tabList', {
-          static: true
+          "static": true
         }]
       }],
       _nextPaginator: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['nextPaginator', {
-          static: false
+          "static": false
         }]
       }],
       _previousPaginator: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['previousPaginator', {
-          static: false
+          "static": false
         }]
       }]
     };
@@ -86844,10 +86413,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
     // tslint:disable-next-line:class-name
 
-    var _MatTabNavBase =
-    /*#__PURE__*/
-    function (_MatPaginatedTabHeade2) {
+    var _MatTabNavBase = /*#__PURE__*/function (_MatPaginatedTabHeade2) {
       _inherits(_MatTabNavBase, _MatPaginatedTabHeade2);
+
+      var _super132 = _createSuper(_MatTabNavBase);
 
       /**
        * @param {?} elementRef
@@ -86867,7 +86436,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, _MatTabNavBase);
 
-        _this331 = _possibleConstructorReturn(this, _getPrototypeOf(_MatTabNavBase).call(this, elementRef, changeDetectorRef, viewportRuler, dir, ngZone, platform, animationMode));
+        _this331 = _super132.call(this, elementRef, changeDetectorRef, viewportRuler, dir, ngZone, platform, animationMode);
         _this331._disableRipple = false;
         /**
          * Theme color of the nav bar.
@@ -87044,10 +86613,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Provides anchored navigation with animated ink bar.
      */
 
-    var MatTabNav =
-    /*#__PURE__*/
-    function (_MatTabNavBase2) {
+    var MatTabNav = /*#__PURE__*/function (_MatTabNavBase2) {
       _inherits(MatTabNav, _MatTabNavBase2);
+
+      var _super133 = _createSuper(MatTabNav);
 
       /**
        * @param {?} elementRef
@@ -87065,7 +86634,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       platform, animationMode) {
         _classCallCheck(this, MatTabNav);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatTabNav).call(this, elementRef, dir, ngZone, changeDetectorRef, viewportRuler, platform, animationMode));
+        return _super133.call(this, elementRef, dir, ngZone, changeDetectorRef, viewportRuler, platform, animationMode);
       }
 
       return MatTabNav;
@@ -87139,31 +86708,31 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _inkBar: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: [MatInkBar, {
-          static: true
+          "static": true
         }]
       }],
       _tabListContainer: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['tabListContainer', {
-          static: true
+          "static": true
         }]
       }],
       _tabList: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['tabList', {
-          static: true
+          "static": true
         }]
       }],
       _nextPaginator: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['nextPaginator', {
-          static: false
+          "static": false
         }]
       }],
       _previousPaginator: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
         args: ['previousPaginator', {
-          static: false
+          "static": false
         }]
       }]
     }; // Boilerplate for applying mixins to MatTabLink.
@@ -87181,10 +86750,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     // tslint:disable-next-line:class-name
 
 
-    var _MatTabLinkBase =
-    /*#__PURE__*/
-    function (_MatTabLinkMixinBase2) {
+    var _MatTabLinkBase = /*#__PURE__*/function (_MatTabLinkMixinBase2) {
       _inherits(_MatTabLinkBase, _MatTabLinkMixinBase2);
+
+      var _super134 = _createSuper(_MatTabLinkBase);
 
       /**
        * @param {?} _tabNavBar
@@ -87199,7 +86768,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, _MatTabLinkBase);
 
-        _this333 = _possibleConstructorReturn(this, _getPrototypeOf(_MatTabLinkBase).call(this));
+        _this333 = _super134.call(this);
         _this333._tabNavBar = _tabNavBar;
         _this333.elementRef = elementRef;
         _this333._focusMonitor = _focusMonitor;
@@ -87329,10 +86898,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * Link inside of a `mat-tab-nav-bar`.
      */
 
-    var MatTabLink =
-    /*#__PURE__*/
-    function (_MatTabLinkBase2) {
+    var MatTabLink = /*#__PURE__*/function (_MatTabLinkBase2) {
       _inherits(MatTabLink, _MatTabLinkBase2);
+
+      var _super135 = _createSuper(MatTabLink);
 
       /**
        * @param {?} tabNavBar
@@ -87349,7 +86918,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatTabLink);
 
-        _this334 = _possibleConstructorReturn(this, _getPrototypeOf(MatTabLink).call(this, tabNavBar, elementRef, globalRippleOptions, tabIndex, focusMonitor, animationMode));
+        _this334 = _super135.call(this, tabNavBar, elementRef, globalRippleOptions, tabIndex, focusMonitor, animationMode);
         _this334._tabLinkRipple = new _angular_material_core__WEBPACK_IMPORTED_MODULE_3__["RippleRenderer"](_assertThisInitialized(_this334), ngZone, elementRef, platform);
 
         _this334._tabLinkRipple.setupTriggerEvents(elementRef.nativeElement);
@@ -87586,10 +87155,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }]
     }];
 
-    var MatToolbar =
-    /*#__PURE__*/
-    function (_MatToolbarMixinBase2) {
+    var MatToolbar = /*#__PURE__*/function (_MatToolbarMixinBase2) {
       _inherits(MatToolbar, _MatToolbarMixinBase2);
+
+      var _super136 = _createSuper(MatToolbar);
 
       /**
        * @param {?} elementRef
@@ -87601,7 +87170,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatToolbar);
 
-        _this335 = _possibleConstructorReturn(this, _getPrototypeOf(MatToolbar).call(this, elementRef));
+        _this335 = _super136.call(this, elementRef);
         _this335._platform = _platform; // TODO: make the document a required param when doing breaking changes.
 
         _this335._document = document;
@@ -88080,9 +87649,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatTooltip =
-    /*#__PURE__*/
-    function () {
+    var MatTooltip = /*#__PURE__*/function () {
       /**
        * @param {?} _overlay
        * @param {?} _elementRef
@@ -88883,9 +88450,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * \@docs-private
      */
 
-    var TooltipComponent =
-    /*#__PURE__*/
-    function () {
+    var TooltipComponent = /*#__PURE__*/function () {
       /**
        * @param {?} _changeDetectorRef
        * @param {?} _breakpointObserver
@@ -89281,10 +88846,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatTreeNode =
-    /*#__PURE__*/
-    function (_MatTreeNodeMixinBase2) {
+    var MatTreeNode = /*#__PURE__*/function (_MatTreeNodeMixinBase2) {
       _inherits(MatTreeNode, _MatTreeNodeMixinBase2);
+
+      var _super137 = _createSuper(MatTreeNode);
 
       /**
        * @param {?} _elementRef
@@ -89296,7 +88861,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatTreeNode);
 
-        _this346 = _possibleConstructorReturn(this, _getPrototypeOf(MatTreeNode).call(this, _elementRef, _tree));
+        _this346 = _super137.call(this, _elementRef, _tree);
         _this346._elementRef = _elementRef;
         _this346._tree = _tree;
         _this346.role = 'treeitem';
@@ -89351,15 +88916,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T
      */
 
-    var MatTreeNodeDef =
-    /*#__PURE__*/
-    function (_angular_cdk_tree__WE) {
+    var MatTreeNodeDef = /*#__PURE__*/function (_angular_cdk_tree__WE) {
       _inherits(MatTreeNodeDef, _angular_cdk_tree__WE);
+
+      var _super138 = _createSuper(MatTreeNodeDef);
 
       function MatTreeNodeDef() {
         _classCallCheck(this, MatTreeNodeDef);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatTreeNodeDef).apply(this, arguments));
+        return _super138.apply(this, arguments);
       }
 
       return MatTreeNodeDef;
@@ -89387,10 +88952,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T
      */
 
-    var MatNestedTreeNode =
-    /*#__PURE__*/
-    function (_angular_cdk_tree__WE2) {
+    var MatNestedTreeNode = /*#__PURE__*/function (_angular_cdk_tree__WE2) {
       _inherits(MatNestedTreeNode, _angular_cdk_tree__WE2);
+
+      var _super139 = _createSuper(MatNestedTreeNode);
 
       /**
        * @param {?} _elementRef
@@ -89403,7 +88968,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatNestedTreeNode);
 
-        _this347 = _possibleConstructorReturn(this, _getPrototypeOf(MatNestedTreeNode).call(this, _elementRef, _tree, _differs));
+        _this347 = _super139.call(this, _elementRef, _tree, _differs);
         _this347._elementRef = _elementRef;
         _this347._tree = _tree;
         _this347._differs = _differs;
@@ -89537,15 +89102,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T
      */
 
-    var MatTreeNodePadding =
-    /*#__PURE__*/
-    function (_angular_cdk_tree__WE3) {
+    var MatTreeNodePadding = /*#__PURE__*/function (_angular_cdk_tree__WE3) {
       _inherits(MatTreeNodePadding, _angular_cdk_tree__WE3);
+
+      var _super140 = _createSuper(MatTreeNodePadding);
 
       function MatTreeNodePadding() {
         _classCallCheck(this, MatTreeNodePadding);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatTreeNodePadding).apply(this, arguments));
+        return _super140.apply(this, arguments);
       }
 
       return MatTreeNodePadding;
@@ -89629,15 +89194,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatTree =
-    /*#__PURE__*/
-    function (_angular_cdk_tree__WE4) {
+    var MatTree = /*#__PURE__*/function (_angular_cdk_tree__WE4) {
       _inherits(MatTree, _angular_cdk_tree__WE4);
+
+      var _super141 = _createSuper(MatTree);
 
       function MatTree() {
         _classCallCheck(this, MatTree);
 
-        return _possibleConstructorReturn(this, _getPrototypeOf(MatTree).apply(this, arguments));
+        return _super141.apply(this, arguments);
       }
 
       return MatTree;
@@ -89668,7 +89233,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _nodeOutlet: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"],
         args: [MatTreeNodeOutlet, {
-          static: true
+          "static": true
         }]
       }]
     };
@@ -89682,17 +89247,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T
      */
 
-    var MatTreeNodeToggle =
-    /*#__PURE__*/
-    function (_angular_cdk_tree__WE5) {
+    var MatTreeNodeToggle = /*#__PURE__*/function (_angular_cdk_tree__WE5) {
       _inherits(MatTreeNodeToggle, _angular_cdk_tree__WE5);
+
+      var _super142 = _createSuper(MatTreeNodeToggle);
 
       function MatTreeNodeToggle() {
         var _this348;
 
         _classCallCheck(this, MatTreeNodeToggle);
 
-        _this348 = _possibleConstructorReturn(this, _getPrototypeOf(MatTreeNodeToggle).apply(this, arguments));
+        _this348 = _super142.apply(this, arguments);
         _this348.recursive = false;
         return _this348;
       }
@@ -89778,9 +89343,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @template T, F
      */
 
-    var MatTreeFlattener =
-    /*#__PURE__*/
-    function () {
+    var MatTreeFlattener = /*#__PURE__*/function () {
       /**
        * @param {?} transformFunction
        * @param {?} getLevel
@@ -89943,10 +89506,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatTreeFlatDataSource =
-    /*#__PURE__*/
-    function (_angular_cdk_collecti) {
+    var MatTreeFlatDataSource = /*#__PURE__*/function (_angular_cdk_collecti) {
       _inherits(MatTreeFlatDataSource, _angular_cdk_collecti);
+
+      var _super143 = _createSuper(MatTreeFlatDataSource);
 
       /**
        * @param {?} _treeControl
@@ -89960,7 +89523,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _classCallCheck(this, MatTreeFlatDataSource);
 
-        _this353 = _possibleConstructorReturn(this, _getPrototypeOf(MatTreeFlatDataSource).call(this));
+        _this353 = _super143.call(this);
         _this353._treeControl = _treeControl;
         _this353._treeFlattener = _treeFlattener;
         _this353._flattenedData = new rxjs__WEBPACK_IMPORTED_MODULE_6__["BehaviorSubject"]([]);
@@ -90038,17 +89601,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
 
-    var MatTreeNestedDataSource =
-    /*#__PURE__*/
-    function (_angular_cdk_collecti2) {
+    var MatTreeNestedDataSource = /*#__PURE__*/function (_angular_cdk_collecti2) {
       _inherits(MatTreeNestedDataSource, _angular_cdk_collecti2);
+
+      var _super144 = _createSuper(MatTreeNestedDataSource);
 
       function MatTreeNestedDataSource() {
         var _this355;
 
         _classCallCheck(this, MatTreeNestedDataSource);
 
-        _this355 = _possibleConstructorReturn(this, _getPrototypeOf(MatTreeNestedDataSource).apply(this, arguments));
+        _this355 = _super144.apply(this, arguments);
         _this355._data = new rxjs__WEBPACK_IMPORTED_MODULE_6__["BehaviorSubject"]([]);
         return _this355;
       }
@@ -90117,6 +89680,4898 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   },
 
   /***/
+  "./node_modules/after/index.js":
+  /*!*************************************!*\
+    !*** ./node_modules/after/index.js ***!
+    \*************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesAfterIndexJs(module, exports) {
+    module.exports = after;
+
+    function after(count, callback, err_cb) {
+      var bail = false;
+      err_cb = err_cb || noop;
+      proxy.count = count;
+      return count === 0 ? callback() : proxy;
+
+      function proxy(err, result) {
+        if (proxy.count <= 0) {
+          throw new Error('after called too many times');
+        }
+
+        --proxy.count; // after first error, rest are passed to err_cb
+
+        if (err) {
+          bail = true;
+          callback(err); // future error callbacks will go to error handler
+
+          callback = err_cb;
+        } else if (proxy.count === 0 && !bail) {
+          callback(null, result);
+        }
+      }
+    }
+
+    function noop() {}
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/arraybuffer.slice/index.js":
+  /*!*************************************************!*\
+    !*** ./node_modules/arraybuffer.slice/index.js ***!
+    \*************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesArraybufferSliceIndexJs(module, exports) {
+    /**
+     * An abstraction for slicing an arraybuffer even when
+     * ArrayBuffer.prototype.slice is not supported
+     *
+     * @api public
+     */
+    module.exports = function (arraybuffer, start, end) {
+      var bytes = arraybuffer.byteLength;
+      start = start || 0;
+      end = end || bytes;
+
+      if (arraybuffer.slice) {
+        return arraybuffer.slice(start, end);
+      }
+
+      if (start < 0) {
+        start += bytes;
+      }
+
+      if (end < 0) {
+        end += bytes;
+      }
+
+      if (end > bytes) {
+        end = bytes;
+      }
+
+      if (start >= bytes || start >= end || bytes === 0) {
+        return new ArrayBuffer(0);
+      }
+
+      var abv = new Uint8Array(arraybuffer);
+      var result = new Uint8Array(end - start);
+
+      for (var i = start, ii = 0; i < end; i++, ii++) {
+        result[ii] = abv[i];
+      }
+
+      return result.buffer;
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/backo2/index.js":
+  /*!**************************************!*\
+    !*** ./node_modules/backo2/index.js ***!
+    \**************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesBacko2IndexJs(module, exports) {
+    /**
+     * Expose `Backoff`.
+     */
+    module.exports = Backoff;
+    /**
+     * Initialize backoff timer with `opts`.
+     *
+     * - `min` initial timeout in milliseconds [100]
+     * - `max` max timeout [10000]
+     * - `jitter` [0]
+     * - `factor` [2]
+     *
+     * @param {Object} opts
+     * @api public
+     */
+
+    function Backoff(opts) {
+      opts = opts || {};
+      this.ms = opts.min || 100;
+      this.max = opts.max || 10000;
+      this.factor = opts.factor || 2;
+      this.jitter = opts.jitter > 0 && opts.jitter <= 1 ? opts.jitter : 0;
+      this.attempts = 0;
+    }
+    /**
+     * Return the backoff duration.
+     *
+     * @return {Number}
+     * @api public
+     */
+
+
+    Backoff.prototype.duration = function () {
+      var ms = this.ms * Math.pow(this.factor, this.attempts++);
+
+      if (this.jitter) {
+        var rand = Math.random();
+        var deviation = Math.floor(rand * this.jitter * ms);
+        ms = (Math.floor(rand * 10) & 1) == 0 ? ms - deviation : ms + deviation;
+      }
+
+      return Math.min(ms, this.max) | 0;
+    };
+    /**
+     * Reset the number of attempts.
+     *
+     * @api public
+     */
+
+
+    Backoff.prototype.reset = function () {
+      this.attempts = 0;
+    };
+    /**
+     * Set the minimum duration
+     *
+     * @api public
+     */
+
+
+    Backoff.prototype.setMin = function (min) {
+      this.ms = min;
+    };
+    /**
+     * Set the maximum duration
+     *
+     * @api public
+     */
+
+
+    Backoff.prototype.setMax = function (max) {
+      this.max = max;
+    };
+    /**
+     * Set the jitter
+     *
+     * @api public
+     */
+
+
+    Backoff.prototype.setJitter = function (jitter) {
+      this.jitter = jitter;
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/base64-arraybuffer/lib/base64-arraybuffer.js":
+  /*!*******************************************************************!*\
+    !*** ./node_modules/base64-arraybuffer/lib/base64-arraybuffer.js ***!
+    \*******************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesBase64ArraybufferLibBase64ArraybufferJs(module, exports) {
+    /*
+     * base64-arraybuffer
+     * https://github.com/niklasvh/base64-arraybuffer
+     *
+     * Copyright (c) 2012 Niklas von Hertzen
+     * Licensed under the MIT license.
+     */
+    (function () {
+      "use strict";
+
+      var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"; // Use a lookup table to find the index.
+
+      var lookup = new Uint8Array(256);
+
+      for (var i = 0; i < chars.length; i++) {
+        lookup[chars.charCodeAt(i)] = i;
+      }
+
+      exports.encode = function (arraybuffer) {
+        var bytes = new Uint8Array(arraybuffer),
+            i,
+            len = bytes.length,
+            base64 = "";
+
+        for (i = 0; i < len; i += 3) {
+          base64 += chars[bytes[i] >> 2];
+          base64 += chars[(bytes[i] & 3) << 4 | bytes[i + 1] >> 4];
+          base64 += chars[(bytes[i + 1] & 15) << 2 | bytes[i + 2] >> 6];
+          base64 += chars[bytes[i + 2] & 63];
+        }
+
+        if (len % 3 === 2) {
+          base64 = base64.substring(0, base64.length - 1) + "=";
+        } else if (len % 3 === 1) {
+          base64 = base64.substring(0, base64.length - 2) + "==";
+        }
+
+        return base64;
+      };
+
+      exports.decode = function (base64) {
+        var bufferLength = base64.length * 0.75,
+            len = base64.length,
+            i,
+            p = 0,
+            encoded1,
+            encoded2,
+            encoded3,
+            encoded4;
+
+        if (base64[base64.length - 1] === "=") {
+          bufferLength--;
+
+          if (base64[base64.length - 2] === "=") {
+            bufferLength--;
+          }
+        }
+
+        var arraybuffer = new ArrayBuffer(bufferLength),
+            bytes = new Uint8Array(arraybuffer);
+
+        for (i = 0; i < len; i += 4) {
+          encoded1 = lookup[base64.charCodeAt(i)];
+          encoded2 = lookup[base64.charCodeAt(i + 1)];
+          encoded3 = lookup[base64.charCodeAt(i + 2)];
+          encoded4 = lookup[base64.charCodeAt(i + 3)];
+          bytes[p++] = encoded1 << 2 | encoded2 >> 4;
+          bytes[p++] = (encoded2 & 15) << 4 | encoded3 >> 2;
+          bytes[p++] = (encoded3 & 3) << 6 | encoded4 & 63;
+        }
+
+        return arraybuffer;
+      };
+    })();
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/blob/index.js":
+  /*!************************************!*\
+    !*** ./node_modules/blob/index.js ***!
+    \************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesBlobIndexJs(module, exports) {
+    /**
+     * Create a blob builder even when vendor prefixes exist
+     */
+    var BlobBuilder = typeof BlobBuilder !== 'undefined' ? BlobBuilder : typeof WebKitBlobBuilder !== 'undefined' ? WebKitBlobBuilder : typeof MSBlobBuilder !== 'undefined' ? MSBlobBuilder : typeof MozBlobBuilder !== 'undefined' ? MozBlobBuilder : false;
+    /**
+     * Check if Blob constructor is supported
+     */
+
+    var blobSupported = function () {
+      try {
+        var a = new Blob(['hi']);
+        return a.size === 2;
+      } catch (e) {
+        return false;
+      }
+    }();
+    /**
+     * Check if Blob constructor supports ArrayBufferViews
+     * Fails in Safari 6, so we need to map to ArrayBuffers there.
+     */
+
+
+    var blobSupportsArrayBufferView = blobSupported && function () {
+      try {
+        var b = new Blob([new Uint8Array([1, 2])]);
+        return b.size === 2;
+      } catch (e) {
+        return false;
+      }
+    }();
+    /**
+     * Check if BlobBuilder is supported
+     */
+
+
+    var blobBuilderSupported = BlobBuilder && BlobBuilder.prototype.append && BlobBuilder.prototype.getBlob;
+    /**
+     * Helper function that maps ArrayBufferViews to ArrayBuffers
+     * Used by BlobBuilder constructor and old browsers that didn't
+     * support it in the Blob constructor.
+     */
+
+    function mapArrayBufferViews(ary) {
+      return ary.map(function (chunk) {
+        if (chunk.buffer instanceof ArrayBuffer) {
+          var buf = chunk.buffer; // if this is a subarray, make a copy so we only
+          // include the subarray region from the underlying buffer
+
+          if (chunk.byteLength !== buf.byteLength) {
+            var copy = new Uint8Array(chunk.byteLength);
+            copy.set(new Uint8Array(buf, chunk.byteOffset, chunk.byteLength));
+            buf = copy.buffer;
+          }
+
+          return buf;
+        }
+
+        return chunk;
+      });
+    }
+
+    function BlobBuilderConstructor(ary, options) {
+      options = options || {};
+      var bb = new BlobBuilder();
+      mapArrayBufferViews(ary).forEach(function (part) {
+        bb.append(part);
+      });
+      return options.type ? bb.getBlob(options.type) : bb.getBlob();
+    }
+
+    ;
+
+    function BlobConstructor(ary, options) {
+      return new Blob(mapArrayBufferViews(ary), options || {});
+    }
+
+    ;
+
+    if (typeof Blob !== 'undefined') {
+      BlobBuilderConstructor.prototype = Blob.prototype;
+      BlobConstructor.prototype = Blob.prototype;
+    }
+
+    module.exports = function () {
+      if (blobSupported) {
+        return blobSupportsArrayBufferView ? Blob : BlobConstructor;
+      } else if (blobBuilderSupported) {
+        return BlobBuilderConstructor;
+      } else {
+        return undefined;
+      }
+    }();
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/component-bind/index.js":
+  /*!**********************************************!*\
+    !*** ./node_modules/component-bind/index.js ***!
+    \**********************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesComponentBindIndexJs(module, exports) {
+    /**
+     * Slice reference.
+     */
+    var slice = [].slice;
+    /**
+     * Bind `obj` to `fn`.
+     *
+     * @param {Object} obj
+     * @param {Function|String} fn or string
+     * @return {Function}
+     * @api public
+     */
+
+    module.exports = function (obj, fn) {
+      if ('string' == typeof fn) fn = obj[fn];
+      if ('function' != typeof fn) throw new Error('bind() requires a function');
+      var args = slice.call(arguments, 2);
+      return function () {
+        return fn.apply(obj, args.concat(slice.call(arguments)));
+      };
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/component-emitter/index.js":
+  /*!*************************************************!*\
+    !*** ./node_modules/component-emitter/index.js ***!
+    \*************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesComponentEmitterIndexJs(module, exports, __webpack_require__) {
+    /**
+     * Expose `Emitter`.
+     */
+    if (true) {
+      module.exports = Emitter;
+    }
+    /**
+     * Initialize a new `Emitter`.
+     *
+     * @api public
+     */
+
+
+    function Emitter(obj) {
+      if (obj) return mixin(obj);
+    }
+
+    ;
+    /**
+     * Mixin the emitter properties.
+     *
+     * @param {Object} obj
+     * @return {Object}
+     * @api private
+     */
+
+    function mixin(obj) {
+      for (var key in Emitter.prototype) {
+        obj[key] = Emitter.prototype[key];
+      }
+
+      return obj;
+    }
+    /**
+     * Listen on the given `event` with `fn`.
+     *
+     * @param {String} event
+     * @param {Function} fn
+     * @return {Emitter}
+     * @api public
+     */
+
+
+    Emitter.prototype.on = Emitter.prototype.addEventListener = function (event, fn) {
+      this._callbacks = this._callbacks || {};
+      (this._callbacks['$' + event] = this._callbacks['$' + event] || []).push(fn);
+      return this;
+    };
+    /**
+     * Adds an `event` listener that will be invoked a single
+     * time then automatically removed.
+     *
+     * @param {String} event
+     * @param {Function} fn
+     * @return {Emitter}
+     * @api public
+     */
+
+
+    Emitter.prototype.once = function (event, fn) {
+      function on() {
+        this.off(event, on);
+        fn.apply(this, arguments);
+      }
+
+      on.fn = fn;
+      this.on(event, on);
+      return this;
+    };
+    /**
+     * Remove the given callback for `event` or all
+     * registered callbacks.
+     *
+     * @param {String} event
+     * @param {Function} fn
+     * @return {Emitter}
+     * @api public
+     */
+
+
+    Emitter.prototype.off = Emitter.prototype.removeListener = Emitter.prototype.removeAllListeners = Emitter.prototype.removeEventListener = function (event, fn) {
+      this._callbacks = this._callbacks || {}; // all
+
+      if (0 == arguments.length) {
+        this._callbacks = {};
+        return this;
+      } // specific event
+
+
+      var callbacks = this._callbacks['$' + event];
+      if (!callbacks) return this; // remove all handlers
+
+      if (1 == arguments.length) {
+        delete this._callbacks['$' + event];
+        return this;
+      } // remove specific handler
+
+
+      var cb;
+
+      for (var i = 0; i < callbacks.length; i++) {
+        cb = callbacks[i];
+
+        if (cb === fn || cb.fn === fn) {
+          callbacks.splice(i, 1);
+          break;
+        }
+      }
+
+      return this;
+    };
+    /**
+     * Emit `event` with the given args.
+     *
+     * @param {String} event
+     * @param {Mixed} ...
+     * @return {Emitter}
+     */
+
+
+    Emitter.prototype.emit = function (event) {
+      this._callbacks = this._callbacks || {};
+      var args = [].slice.call(arguments, 1),
+          callbacks = this._callbacks['$' + event];
+
+      if (callbacks) {
+        callbacks = callbacks.slice(0);
+
+        for (var i = 0, len = callbacks.length; i < len; ++i) {
+          callbacks[i].apply(this, args);
+        }
+      }
+
+      return this;
+    };
+    /**
+     * Return array of callbacks for `event`.
+     *
+     * @param {String} event
+     * @return {Array}
+     * @api public
+     */
+
+
+    Emitter.prototype.listeners = function (event) {
+      this._callbacks = this._callbacks || {};
+      return this._callbacks['$' + event] || [];
+    };
+    /**
+     * Check if this emitter has `event` handlers.
+     *
+     * @param {String} event
+     * @return {Boolean}
+     * @api public
+     */
+
+
+    Emitter.prototype.hasListeners = function (event) {
+      return !!this.listeners(event).length;
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/component-inherit/index.js":
+  /*!*************************************************!*\
+    !*** ./node_modules/component-inherit/index.js ***!
+    \*************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesComponentInheritIndexJs(module, exports) {
+    module.exports = function (a, b) {
+      var fn = function fn() {};
+
+      fn.prototype = b.prototype;
+      a.prototype = new fn();
+      a.prototype.constructor = a;
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/engine.io-client/lib/globalThis.browser.js":
+  /*!*****************************************************************!*\
+    !*** ./node_modules/engine.io-client/lib/globalThis.browser.js ***!
+    \*****************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoClientLibGlobalThisBrowserJs(module, exports) {
+    module.exports = function () {
+      if (typeof self !== 'undefined') {
+        return self;
+      } else if (typeof window !== 'undefined') {
+        return window;
+      } else {
+        return Function('return this')(); // eslint-disable-line no-new-func
+      }
+    }();
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/engine.io-client/lib/index.js":
+  /*!****************************************************!*\
+    !*** ./node_modules/engine.io-client/lib/index.js ***!
+    \****************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoClientLibIndexJs(module, exports, __webpack_require__) {
+    module.exports = __webpack_require__(
+    /*! ./socket */
+    "./node_modules/engine.io-client/lib/socket.js");
+    /**
+     * Exports parser
+     *
+     * @api public
+     *
+     */
+
+    module.exports.parser = __webpack_require__(
+    /*! engine.io-parser */
+    "./node_modules/engine.io-parser/lib/browser.js");
+    /***/
+  },
+
+  /***/
+  "./node_modules/engine.io-client/lib/socket.js":
+  /*!*****************************************************!*\
+    !*** ./node_modules/engine.io-client/lib/socket.js ***!
+    \*****************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoClientLibSocketJs(module, exports, __webpack_require__) {
+    /**
+     * Module dependencies.
+     */
+    var transports = __webpack_require__(
+    /*! ./transports/index */
+    "./node_modules/engine.io-client/lib/transports/index.js");
+
+    var Emitter = __webpack_require__(
+    /*! component-emitter */
+    "./node_modules/component-emitter/index.js");
+
+    var debug = __webpack_require__(
+    /*! debug */
+    "./node_modules/engine.io-client/node_modules/debug/src/browser.js")('engine.io-client:socket');
+
+    var index = __webpack_require__(
+    /*! indexof */
+    "./node_modules/indexof/index.js");
+
+    var parser = __webpack_require__(
+    /*! engine.io-parser */
+    "./node_modules/engine.io-parser/lib/browser.js");
+
+    var parseuri = __webpack_require__(
+    /*! parseuri */
+    "./node_modules/parseuri/index.js");
+
+    var parseqs = __webpack_require__(
+    /*! parseqs */
+    "./node_modules/parseqs/index.js");
+    /**
+     * Module exports.
+     */
+
+
+    module.exports = Socket;
+    /**
+     * Socket constructor.
+     *
+     * @param {String|Object} uri or options
+     * @param {Object} options
+     * @api public
+     */
+
+    function Socket(uri, opts) {
+      if (!(this instanceof Socket)) return new Socket(uri, opts);
+      opts = opts || {};
+
+      if (uri && 'object' === typeof uri) {
+        opts = uri;
+        uri = null;
+      }
+
+      if (uri) {
+        uri = parseuri(uri);
+        opts.hostname = uri.host;
+        opts.secure = uri.protocol === 'https' || uri.protocol === 'wss';
+        opts.port = uri.port;
+        if (uri.query) opts.query = uri.query;
+      } else if (opts.host) {
+        opts.hostname = parseuri(opts.host).host;
+      }
+
+      this.secure = null != opts.secure ? opts.secure : typeof location !== 'undefined' && 'https:' === location.protocol;
+
+      if (opts.hostname && !opts.port) {
+        // if no port is specified manually, use the protocol default
+        opts.port = this.secure ? '443' : '80';
+      }
+
+      this.agent = opts.agent || false;
+      this.hostname = opts.hostname || (typeof location !== 'undefined' ? location.hostname : 'localhost');
+      this.port = opts.port || (typeof location !== 'undefined' && location.port ? location.port : this.secure ? 443 : 80);
+      this.query = opts.query || {};
+      if ('string' === typeof this.query) this.query = parseqs.decode(this.query);
+      this.upgrade = false !== opts.upgrade;
+      this.path = (opts.path || '/engine.io').replace(/\/$/, '') + '/';
+      this.forceJSONP = !!opts.forceJSONP;
+      this.jsonp = false !== opts.jsonp;
+      this.forceBase64 = !!opts.forceBase64;
+      this.enablesXDR = !!opts.enablesXDR;
+      this.withCredentials = false !== opts.withCredentials;
+      this.timestampParam = opts.timestampParam || 't';
+      this.timestampRequests = opts.timestampRequests;
+      this.transports = opts.transports || ['polling', 'websocket'];
+      this.transportOptions = opts.transportOptions || {};
+      this.readyState = '';
+      this.writeBuffer = [];
+      this.prevBufferLen = 0;
+      this.policyPort = opts.policyPort || 843;
+      this.rememberUpgrade = opts.rememberUpgrade || false;
+      this.binaryType = null;
+      this.onlyBinaryUpgrades = opts.onlyBinaryUpgrades;
+      this.perMessageDeflate = false !== opts.perMessageDeflate ? opts.perMessageDeflate || {} : false;
+      if (true === this.perMessageDeflate) this.perMessageDeflate = {};
+
+      if (this.perMessageDeflate && null == this.perMessageDeflate.threshold) {
+        this.perMessageDeflate.threshold = 1024;
+      } // SSL options for Node.js client
+
+
+      this.pfx = opts.pfx || null;
+      this.key = opts.key || null;
+      this.passphrase = opts.passphrase || null;
+      this.cert = opts.cert || null;
+      this.ca = opts.ca || null;
+      this.ciphers = opts.ciphers || null;
+      this.rejectUnauthorized = opts.rejectUnauthorized === undefined ? true : opts.rejectUnauthorized;
+      this.forceNode = !!opts.forceNode; // detect ReactNative environment
+
+      this.isReactNative = typeof navigator !== 'undefined' && typeof navigator.product === 'string' && navigator.product.toLowerCase() === 'reactnative'; // other options for Node.js or ReactNative client
+
+      if (typeof self === 'undefined' || this.isReactNative) {
+        if (opts.extraHeaders && Object.keys(opts.extraHeaders).length > 0) {
+          this.extraHeaders = opts.extraHeaders;
+        }
+
+        if (opts.localAddress) {
+          this.localAddress = opts.localAddress;
+        }
+      } // set on handshake
+
+
+      this.id = null;
+      this.upgrades = null;
+      this.pingInterval = null;
+      this.pingTimeout = null; // set on heartbeat
+
+      this.pingIntervalTimer = null;
+      this.pingTimeoutTimer = null;
+      this.open();
+    }
+
+    Socket.priorWebsocketSuccess = false;
+    /**
+     * Mix in `Emitter`.
+     */
+
+    Emitter(Socket.prototype);
+    /**
+     * Protocol version.
+     *
+     * @api public
+     */
+
+    Socket.protocol = parser.protocol; // this is an int
+
+    /**
+     * Expose deps for legacy compatibility
+     * and standalone browser access.
+     */
+
+    Socket.Socket = Socket;
+    Socket.Transport = __webpack_require__(
+    /*! ./transport */
+    "./node_modules/engine.io-client/lib/transport.js");
+    Socket.transports = __webpack_require__(
+    /*! ./transports/index */
+    "./node_modules/engine.io-client/lib/transports/index.js");
+    Socket.parser = __webpack_require__(
+    /*! engine.io-parser */
+    "./node_modules/engine.io-parser/lib/browser.js");
+    /**
+     * Creates transport of the given type.
+     *
+     * @param {String} transport name
+     * @return {Transport}
+     * @api private
+     */
+
+    Socket.prototype.createTransport = function (name) {
+      debug('creating transport "%s"', name);
+      var query = clone(this.query); // append engine.io protocol identifier
+
+      query.EIO = parser.protocol; // transport name
+
+      query.transport = name; // per-transport options
+
+      var options = this.transportOptions[name] || {}; // session id if we already have one
+
+      if (this.id) query.sid = this.id;
+      var transport = new transports[name]({
+        query: query,
+        socket: this,
+        agent: options.agent || this.agent,
+        hostname: options.hostname || this.hostname,
+        port: options.port || this.port,
+        secure: options.secure || this.secure,
+        path: options.path || this.path,
+        forceJSONP: options.forceJSONP || this.forceJSONP,
+        jsonp: options.jsonp || this.jsonp,
+        forceBase64: options.forceBase64 || this.forceBase64,
+        enablesXDR: options.enablesXDR || this.enablesXDR,
+        withCredentials: options.withCredentials || this.withCredentials,
+        timestampRequests: options.timestampRequests || this.timestampRequests,
+        timestampParam: options.timestampParam || this.timestampParam,
+        policyPort: options.policyPort || this.policyPort,
+        pfx: options.pfx || this.pfx,
+        key: options.key || this.key,
+        passphrase: options.passphrase || this.passphrase,
+        cert: options.cert || this.cert,
+        ca: options.ca || this.ca,
+        ciphers: options.ciphers || this.ciphers,
+        rejectUnauthorized: options.rejectUnauthorized || this.rejectUnauthorized,
+        perMessageDeflate: options.perMessageDeflate || this.perMessageDeflate,
+        extraHeaders: options.extraHeaders || this.extraHeaders,
+        forceNode: options.forceNode || this.forceNode,
+        localAddress: options.localAddress || this.localAddress,
+        requestTimeout: options.requestTimeout || this.requestTimeout,
+        protocols: options.protocols || void 0,
+        isReactNative: this.isReactNative
+      });
+      return transport;
+    };
+
+    function clone(obj) {
+      var o = {};
+
+      for (var i in obj) {
+        if (obj.hasOwnProperty(i)) {
+          o[i] = obj[i];
+        }
+      }
+
+      return o;
+    }
+    /**
+     * Initializes transport to use and starts probe.
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.open = function () {
+      var transport;
+
+      if (this.rememberUpgrade && Socket.priorWebsocketSuccess && this.transports.indexOf('websocket') !== -1) {
+        transport = 'websocket';
+      } else if (0 === this.transports.length) {
+        // Emit error on next tick so it can be listened to
+        var self = this;
+        setTimeout(function () {
+          self.emit('error', 'No transports available');
+        }, 0);
+        return;
+      } else {
+        transport = this.transports[0];
+      }
+
+      this.readyState = 'opening'; // Retry with the next transport if the transport is disabled (jsonp: false)
+
+      try {
+        transport = this.createTransport(transport);
+      } catch (e) {
+        this.transports.shift();
+        this.open();
+        return;
+      }
+
+      transport.open();
+      this.setTransport(transport);
+    };
+    /**
+     * Sets the current transport. Disables the existing one (if any).
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.setTransport = function (transport) {
+      debug('setting transport %s', transport.name);
+      var self = this;
+
+      if (this.transport) {
+        debug('clearing existing transport %s', this.transport.name);
+        this.transport.removeAllListeners();
+      } // set up transport
+
+
+      this.transport = transport; // set up transport listeners
+
+      transport.on('drain', function () {
+        self.onDrain();
+      }).on('packet', function (packet) {
+        self.onPacket(packet);
+      }).on('error', function (e) {
+        self.onError(e);
+      }).on('close', function () {
+        self.onClose('transport close');
+      });
+    };
+    /**
+     * Probes a transport.
+     *
+     * @param {String} transport name
+     * @api private
+     */
+
+
+    Socket.prototype.probe = function (name) {
+      debug('probing transport "%s"', name);
+      var transport = this.createTransport(name, {
+        probe: 1
+      });
+      var failed = false;
+      var self = this;
+      Socket.priorWebsocketSuccess = false;
+
+      function onTransportOpen() {
+        if (self.onlyBinaryUpgrades) {
+          var upgradeLosesBinary = !this.supportsBinary && self.transport.supportsBinary;
+          failed = failed || upgradeLosesBinary;
+        }
+
+        if (failed) return;
+        debug('probe transport "%s" opened', name);
+        transport.send([{
+          type: 'ping',
+          data: 'probe'
+        }]);
+        transport.once('packet', function (msg) {
+          if (failed) return;
+
+          if ('pong' === msg.type && 'probe' === msg.data) {
+            debug('probe transport "%s" pong', name);
+            self.upgrading = true;
+            self.emit('upgrading', transport);
+            if (!transport) return;
+            Socket.priorWebsocketSuccess = 'websocket' === transport.name;
+            debug('pausing current transport "%s"', self.transport.name);
+            self.transport.pause(function () {
+              if (failed) return;
+              if ('closed' === self.readyState) return;
+              debug('changing transport and sending upgrade packet');
+              cleanup();
+              self.setTransport(transport);
+              transport.send([{
+                type: 'upgrade'
+              }]);
+              self.emit('upgrade', transport);
+              transport = null;
+              self.upgrading = false;
+              self.flush();
+            });
+          } else {
+            debug('probe transport "%s" failed', name);
+            var err = new Error('probe error');
+            err.transport = transport.name;
+            self.emit('upgradeError', err);
+          }
+        });
+      }
+
+      function freezeTransport() {
+        if (failed) return; // Any callback called by transport should be ignored since now
+
+        failed = true;
+        cleanup();
+        transport.close();
+        transport = null;
+      } // Handle any error that happens while probing
+
+
+      function onerror(err) {
+        var error = new Error('probe error: ' + err);
+        error.transport = transport.name;
+        freezeTransport();
+        debug('probe transport "%s" failed because of error: %s', name, err);
+        self.emit('upgradeError', error);
+      }
+
+      function onTransportClose() {
+        onerror('transport closed');
+      } // When the socket is closed while we're probing
+
+
+      function onclose() {
+        onerror('socket closed');
+      } // When the socket is upgraded while we're probing
+
+
+      function onupgrade(to) {
+        if (transport && to.name !== transport.name) {
+          debug('"%s" works - aborting "%s"', to.name, transport.name);
+          freezeTransport();
+        }
+      } // Remove all listeners on the transport and on self
+
+
+      function cleanup() {
+        transport.removeListener('open', onTransportOpen);
+        transport.removeListener('error', onerror);
+        transport.removeListener('close', onTransportClose);
+        self.removeListener('close', onclose);
+        self.removeListener('upgrading', onupgrade);
+      }
+
+      transport.once('open', onTransportOpen);
+      transport.once('error', onerror);
+      transport.once('close', onTransportClose);
+      this.once('close', onclose);
+      this.once('upgrading', onupgrade);
+      transport.open();
+    };
+    /**
+     * Called when connection is deemed open.
+     *
+     * @api public
+     */
+
+
+    Socket.prototype.onOpen = function () {
+      debug('socket open');
+      this.readyState = 'open';
+      Socket.priorWebsocketSuccess = 'websocket' === this.transport.name;
+      this.emit('open');
+      this.flush(); // we check for `readyState` in case an `open`
+      // listener already closed the socket
+
+      if ('open' === this.readyState && this.upgrade && this.transport.pause) {
+        debug('starting upgrade probes');
+
+        for (var i = 0, l = this.upgrades.length; i < l; i++) {
+          this.probe(this.upgrades[i]);
+        }
+      }
+    };
+    /**
+     * Handles a packet.
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.onPacket = function (packet) {
+      if ('opening' === this.readyState || 'open' === this.readyState || 'closing' === this.readyState) {
+        debug('socket receive: type "%s", data "%s"', packet.type, packet.data);
+        this.emit('packet', packet); // Socket is live - any packet counts
+
+        this.emit('heartbeat');
+
+        switch (packet.type) {
+          case 'open':
+            this.onHandshake(JSON.parse(packet.data));
+            break;
+
+          case 'pong':
+            this.setPing();
+            this.emit('pong');
+            break;
+
+          case 'error':
+            var err = new Error('server error');
+            err.code = packet.data;
+            this.onError(err);
+            break;
+
+          case 'message':
+            this.emit('data', packet.data);
+            this.emit('message', packet.data);
+            break;
+        }
+      } else {
+        debug('packet received with socket readyState "%s"', this.readyState);
+      }
+    };
+    /**
+     * Called upon handshake completion.
+     *
+     * @param {Object} handshake obj
+     * @api private
+     */
+
+
+    Socket.prototype.onHandshake = function (data) {
+      this.emit('handshake', data);
+      this.id = data.sid;
+      this.transport.query.sid = data.sid;
+      this.upgrades = this.filterUpgrades(data.upgrades);
+      this.pingInterval = data.pingInterval;
+      this.pingTimeout = data.pingTimeout;
+      this.onOpen(); // In case open handler closes socket
+
+      if ('closed' === this.readyState) return;
+      this.setPing(); // Prolong liveness of socket on heartbeat
+
+      this.removeListener('heartbeat', this.onHeartbeat);
+      this.on('heartbeat', this.onHeartbeat);
+    };
+    /**
+     * Resets ping timeout.
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.onHeartbeat = function (timeout) {
+      clearTimeout(this.pingTimeoutTimer);
+      var self = this;
+      self.pingTimeoutTimer = setTimeout(function () {
+        if ('closed' === self.readyState) return;
+        self.onClose('ping timeout');
+      }, timeout || self.pingInterval + self.pingTimeout);
+    };
+    /**
+     * Pings server every `this.pingInterval` and expects response
+     * within `this.pingTimeout` or closes connection.
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.setPing = function () {
+      var self = this;
+      clearTimeout(self.pingIntervalTimer);
+      self.pingIntervalTimer = setTimeout(function () {
+        debug('writing ping packet - expecting pong within %sms', self.pingTimeout);
+        self.ping();
+        self.onHeartbeat(self.pingTimeout);
+      }, self.pingInterval);
+    };
+    /**
+    * Sends a ping packet.
+    *
+    * @api private
+    */
+
+
+    Socket.prototype.ping = function () {
+      var self = this;
+      this.sendPacket('ping', function () {
+        self.emit('ping');
+      });
+    };
+    /**
+     * Called on `drain` event
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.onDrain = function () {
+      this.writeBuffer.splice(0, this.prevBufferLen); // setting prevBufferLen = 0 is very important
+      // for example, when upgrading, upgrade packet is sent over,
+      // and a nonzero prevBufferLen could cause problems on `drain`
+
+      this.prevBufferLen = 0;
+
+      if (0 === this.writeBuffer.length) {
+        this.emit('drain');
+      } else {
+        this.flush();
+      }
+    };
+    /**
+     * Flush write buffers.
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.flush = function () {
+      if ('closed' !== this.readyState && this.transport.writable && !this.upgrading && this.writeBuffer.length) {
+        debug('flushing %d packets in socket', this.writeBuffer.length);
+        this.transport.send(this.writeBuffer); // keep track of current length of writeBuffer
+        // splice writeBuffer and callbackBuffer on `drain`
+
+        this.prevBufferLen = this.writeBuffer.length;
+        this.emit('flush');
+      }
+    };
+    /**
+     * Sends a message.
+     *
+     * @param {String} message.
+     * @param {Function} callback function.
+     * @param {Object} options.
+     * @return {Socket} for chaining.
+     * @api public
+     */
+
+
+    Socket.prototype.write = Socket.prototype.send = function (msg, options, fn) {
+      this.sendPacket('message', msg, options, fn);
+      return this;
+    };
+    /**
+     * Sends a packet.
+     *
+     * @param {String} packet type.
+     * @param {String} data.
+     * @param {Object} options.
+     * @param {Function} callback function.
+     * @api private
+     */
+
+
+    Socket.prototype.sendPacket = function (type, data, options, fn) {
+      if ('function' === typeof data) {
+        fn = data;
+        data = undefined;
+      }
+
+      if ('function' === typeof options) {
+        fn = options;
+        options = null;
+      }
+
+      if ('closing' === this.readyState || 'closed' === this.readyState) {
+        return;
+      }
+
+      options = options || {};
+      options.compress = false !== options.compress;
+      var packet = {
+        type: type,
+        data: data,
+        options: options
+      };
+      this.emit('packetCreate', packet);
+      this.writeBuffer.push(packet);
+      if (fn) this.once('flush', fn);
+      this.flush();
+    };
+    /**
+     * Closes the connection.
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.close = function () {
+      if ('opening' === this.readyState || 'open' === this.readyState) {
+        this.readyState = 'closing';
+        var self = this;
+
+        if (this.writeBuffer.length) {
+          this.once('drain', function () {
+            if (this.upgrading) {
+              waitForUpgrade();
+            } else {
+              close();
+            }
+          });
+        } else if (this.upgrading) {
+          waitForUpgrade();
+        } else {
+          close();
+        }
+      }
+
+      function close() {
+        self.onClose('forced close');
+        debug('socket closing - telling transport to close');
+        self.transport.close();
+      }
+
+      function cleanupAndClose() {
+        self.removeListener('upgrade', cleanupAndClose);
+        self.removeListener('upgradeError', cleanupAndClose);
+        close();
+      }
+
+      function waitForUpgrade() {
+        // wait for upgrade to finish since we can't send packets while pausing a transport
+        self.once('upgrade', cleanupAndClose);
+        self.once('upgradeError', cleanupAndClose);
+      }
+
+      return this;
+    };
+    /**
+     * Called upon transport error
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.onError = function (err) {
+      debug('socket error %j', err);
+      Socket.priorWebsocketSuccess = false;
+      this.emit('error', err);
+      this.onClose('transport error', err);
+    };
+    /**
+     * Called upon transport close.
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.onClose = function (reason, desc) {
+      if ('opening' === this.readyState || 'open' === this.readyState || 'closing' === this.readyState) {
+        debug('socket close with reason: "%s"', reason);
+        var self = this; // clear timers
+
+        clearTimeout(this.pingIntervalTimer);
+        clearTimeout(this.pingTimeoutTimer); // stop event from firing again for transport
+
+        this.transport.removeAllListeners('close'); // ensure transport won't stay open
+
+        this.transport.close(); // ignore further transport communication
+
+        this.transport.removeAllListeners(); // set ready state
+
+        this.readyState = 'closed'; // clear session id
+
+        this.id = null; // emit close event
+
+        this.emit('close', reason, desc); // clean buffers after, so users can still
+        // grab the buffers on `close` event
+
+        self.writeBuffer = [];
+        self.prevBufferLen = 0;
+      }
+    };
+    /**
+     * Filters upgrades, returning only those matching client transports.
+     *
+     * @param {Array} server upgrades
+     * @api private
+     *
+     */
+
+
+    Socket.prototype.filterUpgrades = function (upgrades) {
+      var filteredUpgrades = [];
+
+      for (var i = 0, j = upgrades.length; i < j; i++) {
+        if (~index(this.transports, upgrades[i])) filteredUpgrades.push(upgrades[i]);
+      }
+
+      return filteredUpgrades;
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/engine.io-client/lib/transport.js":
+  /*!********************************************************!*\
+    !*** ./node_modules/engine.io-client/lib/transport.js ***!
+    \********************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoClientLibTransportJs(module, exports, __webpack_require__) {
+    /**
+     * Module dependencies.
+     */
+    var parser = __webpack_require__(
+    /*! engine.io-parser */
+    "./node_modules/engine.io-parser/lib/browser.js");
+
+    var Emitter = __webpack_require__(
+    /*! component-emitter */
+    "./node_modules/component-emitter/index.js");
+    /**
+     * Module exports.
+     */
+
+
+    module.exports = Transport;
+    /**
+     * Transport abstract constructor.
+     *
+     * @param {Object} options.
+     * @api private
+     */
+
+    function Transport(opts) {
+      this.path = opts.path;
+      this.hostname = opts.hostname;
+      this.port = opts.port;
+      this.secure = opts.secure;
+      this.query = opts.query;
+      this.timestampParam = opts.timestampParam;
+      this.timestampRequests = opts.timestampRequests;
+      this.readyState = '';
+      this.agent = opts.agent || false;
+      this.socket = opts.socket;
+      this.enablesXDR = opts.enablesXDR;
+      this.withCredentials = opts.withCredentials; // SSL options for Node.js client
+
+      this.pfx = opts.pfx;
+      this.key = opts.key;
+      this.passphrase = opts.passphrase;
+      this.cert = opts.cert;
+      this.ca = opts.ca;
+      this.ciphers = opts.ciphers;
+      this.rejectUnauthorized = opts.rejectUnauthorized;
+      this.forceNode = opts.forceNode; // results of ReactNative environment detection
+
+      this.isReactNative = opts.isReactNative; // other options for Node.js client
+
+      this.extraHeaders = opts.extraHeaders;
+      this.localAddress = opts.localAddress;
+    }
+    /**
+     * Mix in `Emitter`.
+     */
+
+
+    Emitter(Transport.prototype);
+    /**
+     * Emits an error.
+     *
+     * @param {String} str
+     * @return {Transport} for chaining
+     * @api public
+     */
+
+    Transport.prototype.onError = function (msg, desc) {
+      var err = new Error(msg);
+      err.type = 'TransportError';
+      err.description = desc;
+      this.emit('error', err);
+      return this;
+    };
+    /**
+     * Opens the transport.
+     *
+     * @api public
+     */
+
+
+    Transport.prototype.open = function () {
+      if ('closed' === this.readyState || '' === this.readyState) {
+        this.readyState = 'opening';
+        this.doOpen();
+      }
+
+      return this;
+    };
+    /**
+     * Closes the transport.
+     *
+     * @api private
+     */
+
+
+    Transport.prototype.close = function () {
+      if ('opening' === this.readyState || 'open' === this.readyState) {
+        this.doClose();
+        this.onClose();
+      }
+
+      return this;
+    };
+    /**
+     * Sends multiple packets.
+     *
+     * @param {Array} packets
+     * @api private
+     */
+
+
+    Transport.prototype.send = function (packets) {
+      if ('open' === this.readyState) {
+        this.write(packets);
+      } else {
+        throw new Error('Transport not open');
+      }
+    };
+    /**
+     * Called upon open
+     *
+     * @api private
+     */
+
+
+    Transport.prototype.onOpen = function () {
+      this.readyState = 'open';
+      this.writable = true;
+      this.emit('open');
+    };
+    /**
+     * Called with data.
+     *
+     * @param {String} data
+     * @api private
+     */
+
+
+    Transport.prototype.onData = function (data) {
+      var packet = parser.decodePacket(data, this.socket.binaryType);
+      this.onPacket(packet);
+    };
+    /**
+     * Called with a decoded packet.
+     */
+
+
+    Transport.prototype.onPacket = function (packet) {
+      this.emit('packet', packet);
+    };
+    /**
+     * Called upon close.
+     *
+     * @api private
+     */
+
+
+    Transport.prototype.onClose = function () {
+      this.readyState = 'closed';
+      this.emit('close');
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/engine.io-client/lib/transports/index.js":
+  /*!***************************************************************!*\
+    !*** ./node_modules/engine.io-client/lib/transports/index.js ***!
+    \***************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoClientLibTransportsIndexJs(module, exports, __webpack_require__) {
+    /**
+     * Module dependencies
+     */
+    var XMLHttpRequest = __webpack_require__(
+    /*! xmlhttprequest-ssl */
+    "./node_modules/engine.io-client/lib/xmlhttprequest.js");
+
+    var XHR = __webpack_require__(
+    /*! ./polling-xhr */
+    "./node_modules/engine.io-client/lib/transports/polling-xhr.js");
+
+    var JSONP = __webpack_require__(
+    /*! ./polling-jsonp */
+    "./node_modules/engine.io-client/lib/transports/polling-jsonp.js");
+
+    var websocket = __webpack_require__(
+    /*! ./websocket */
+    "./node_modules/engine.io-client/lib/transports/websocket.js");
+    /**
+     * Export transports.
+     */
+
+
+    exports.polling = polling;
+    exports.websocket = websocket;
+    /**
+     * Polling transport polymorphic constructor.
+     * Decides on xhr vs jsonp based on feature detection.
+     *
+     * @api private
+     */
+
+    function polling(opts) {
+      var xhr;
+      var xd = false;
+      var xs = false;
+      var jsonp = false !== opts.jsonp;
+
+      if (typeof location !== 'undefined') {
+        var isSSL = 'https:' === location.protocol;
+        var port = location.port; // some user agents have empty `location.port`
+
+        if (!port) {
+          port = isSSL ? 443 : 80;
+        }
+
+        xd = opts.hostname !== location.hostname || port !== opts.port;
+        xs = opts.secure !== isSSL;
+      }
+
+      opts.xdomain = xd;
+      opts.xscheme = xs;
+      xhr = new XMLHttpRequest(opts);
+
+      if ('open' in xhr && !opts.forceJSONP) {
+        return new XHR(opts);
+      } else {
+        if (!jsonp) throw new Error('JSONP disabled');
+        return new JSONP(opts);
+      }
+    }
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/engine.io-client/lib/transports/polling-jsonp.js":
+  /*!***********************************************************************!*\
+    !*** ./node_modules/engine.io-client/lib/transports/polling-jsonp.js ***!
+    \***********************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoClientLibTransportsPollingJsonpJs(module, exports, __webpack_require__) {
+    /**
+     * Module requirements.
+     */
+    var Polling = __webpack_require__(
+    /*! ./polling */
+    "./node_modules/engine.io-client/lib/transports/polling.js");
+
+    var inherit = __webpack_require__(
+    /*! component-inherit */
+    "./node_modules/component-inherit/index.js");
+
+    var globalThis = __webpack_require__(
+    /*! ../globalThis */
+    "./node_modules/engine.io-client/lib/globalThis.browser.js");
+    /**
+     * Module exports.
+     */
+
+
+    module.exports = JSONPPolling;
+    /**
+     * Cached regular expressions.
+     */
+
+    var rNewline = /\n/g;
+    var rEscapedNewline = /\\n/g;
+    /**
+     * Global JSONP callbacks.
+     */
+
+    var callbacks;
+    /**
+     * Noop.
+     */
+
+    function empty() {}
+    /**
+     * JSONP Polling constructor.
+     *
+     * @param {Object} opts.
+     * @api public
+     */
+
+
+    function JSONPPolling(opts) {
+      Polling.call(this, opts);
+      this.query = this.query || {}; // define global callbacks array if not present
+      // we do this here (lazily) to avoid unneeded global pollution
+
+      if (!callbacks) {
+        // we need to consider multiple engines in the same page
+        callbacks = globalThis.___eio = globalThis.___eio || [];
+      } // callback identifier
+
+
+      this.index = callbacks.length; // add callback to jsonp global
+
+      var self = this;
+      callbacks.push(function (msg) {
+        self.onData(msg);
+      }); // append to query string
+
+      this.query.j = this.index; // prevent spurious errors from being emitted when the window is unloaded
+
+      if (typeof addEventListener === 'function') {
+        addEventListener('beforeunload', function () {
+          if (self.script) self.script.onerror = empty;
+        }, false);
+      }
+    }
+    /**
+     * Inherits from Polling.
+     */
+
+
+    inherit(JSONPPolling, Polling);
+    /*
+     * JSONP only supports binary as base64 encoded strings
+     */
+
+    JSONPPolling.prototype.supportsBinary = false;
+    /**
+     * Closes the socket.
+     *
+     * @api private
+     */
+
+    JSONPPolling.prototype.doClose = function () {
+      if (this.script) {
+        this.script.parentNode.removeChild(this.script);
+        this.script = null;
+      }
+
+      if (this.form) {
+        this.form.parentNode.removeChild(this.form);
+        this.form = null;
+        this.iframe = null;
+      }
+
+      Polling.prototype.doClose.call(this);
+    };
+    /**
+     * Starts a poll cycle.
+     *
+     * @api private
+     */
+
+
+    JSONPPolling.prototype.doPoll = function () {
+      var self = this;
+      var script = document.createElement('script');
+
+      if (this.script) {
+        this.script.parentNode.removeChild(this.script);
+        this.script = null;
+      }
+
+      script.async = true;
+      script.src = this.uri();
+
+      script.onerror = function (e) {
+        self.onError('jsonp poll error', e);
+      };
+
+      var insertAt = document.getElementsByTagName('script')[0];
+
+      if (insertAt) {
+        insertAt.parentNode.insertBefore(script, insertAt);
+      } else {
+        (document.head || document.body).appendChild(script);
+      }
+
+      this.script = script;
+      var isUAgecko = 'undefined' !== typeof navigator && /gecko/i.test(navigator.userAgent);
+
+      if (isUAgecko) {
+        setTimeout(function () {
+          var iframe = document.createElement('iframe');
+          document.body.appendChild(iframe);
+          document.body.removeChild(iframe);
+        }, 100);
+      }
+    };
+    /**
+     * Writes with a hidden iframe.
+     *
+     * @param {String} data to send
+     * @param {Function} called upon flush.
+     * @api private
+     */
+
+
+    JSONPPolling.prototype.doWrite = function (data, fn) {
+      var self = this;
+
+      if (!this.form) {
+        var form = document.createElement('form');
+        var area = document.createElement('textarea');
+        var id = this.iframeId = 'eio_iframe_' + this.index;
+        var iframe;
+        form.className = 'socketio';
+        form.style.position = 'absolute';
+        form.style.top = '-1000px';
+        form.style.left = '-1000px';
+        form.target = id;
+        form.method = 'POST';
+        form.setAttribute('accept-charset', 'utf-8');
+        area.name = 'd';
+        form.appendChild(area);
+        document.body.appendChild(form);
+        this.form = form;
+        this.area = area;
+      }
+
+      this.form.action = this.uri();
+
+      function complete() {
+        initIframe();
+        fn();
+      }
+
+      function initIframe() {
+        if (self.iframe) {
+          try {
+            self.form.removeChild(self.iframe);
+          } catch (e) {
+            self.onError('jsonp polling iframe removal error', e);
+          }
+        }
+
+        try {
+          // ie6 dynamic iframes with target="" support (thanks Chris Lambacher)
+          var html = '<iframe src="javascript:0" name="' + self.iframeId + '">';
+          iframe = document.createElement(html);
+        } catch (e) {
+          iframe = document.createElement('iframe');
+          iframe.name = self.iframeId;
+          iframe.src = 'javascript:0';
+        }
+
+        iframe.id = self.iframeId;
+        self.form.appendChild(iframe);
+        self.iframe = iframe;
+      }
+
+      initIframe(); // escape \n to prevent it from being converted into \r\n by some UAs
+      // double escaping is required for escaped new lines because unescaping of new lines can be done safely on server-side
+
+      data = data.replace(rEscapedNewline, '\\\n');
+      this.area.value = data.replace(rNewline, '\\n');
+
+      try {
+        this.form.submit();
+      } catch (e) {}
+
+      if (this.iframe.attachEvent) {
+        this.iframe.onreadystatechange = function () {
+          if (self.iframe.readyState === 'complete') {
+            complete();
+          }
+        };
+      } else {
+        this.iframe.onload = complete;
+      }
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/engine.io-client/lib/transports/polling-xhr.js":
+  /*!*********************************************************************!*\
+    !*** ./node_modules/engine.io-client/lib/transports/polling-xhr.js ***!
+    \*********************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoClientLibTransportsPollingXhrJs(module, exports, __webpack_require__) {
+    /* global attachEvent */
+
+    /**
+     * Module requirements.
+     */
+    var XMLHttpRequest = __webpack_require__(
+    /*! xmlhttprequest-ssl */
+    "./node_modules/engine.io-client/lib/xmlhttprequest.js");
+
+    var Polling = __webpack_require__(
+    /*! ./polling */
+    "./node_modules/engine.io-client/lib/transports/polling.js");
+
+    var Emitter = __webpack_require__(
+    /*! component-emitter */
+    "./node_modules/component-emitter/index.js");
+
+    var inherit = __webpack_require__(
+    /*! component-inherit */
+    "./node_modules/component-inherit/index.js");
+
+    var debug = __webpack_require__(
+    /*! debug */
+    "./node_modules/engine.io-client/node_modules/debug/src/browser.js")('engine.io-client:polling-xhr');
+
+    var globalThis = __webpack_require__(
+    /*! ../globalThis */
+    "./node_modules/engine.io-client/lib/globalThis.browser.js");
+    /**
+     * Module exports.
+     */
+
+
+    module.exports = XHR;
+    module.exports.Request = Request;
+    /**
+     * Empty function
+     */
+
+    function empty() {}
+    /**
+     * XHR Polling constructor.
+     *
+     * @param {Object} opts
+     * @api public
+     */
+
+
+    function XHR(opts) {
+      Polling.call(this, opts);
+      this.requestTimeout = opts.requestTimeout;
+      this.extraHeaders = opts.extraHeaders;
+
+      if (typeof location !== 'undefined') {
+        var isSSL = 'https:' === location.protocol;
+        var port = location.port; // some user agents have empty `location.port`
+
+        if (!port) {
+          port = isSSL ? 443 : 80;
+        }
+
+        this.xd = typeof location !== 'undefined' && opts.hostname !== location.hostname || port !== opts.port;
+        this.xs = opts.secure !== isSSL;
+      }
+    }
+    /**
+     * Inherits from Polling.
+     */
+
+
+    inherit(XHR, Polling);
+    /**
+     * XHR supports binary
+     */
+
+    XHR.prototype.supportsBinary = true;
+    /**
+     * Creates a request.
+     *
+     * @param {String} method
+     * @api private
+     */
+
+    XHR.prototype.request = function (opts) {
+      opts = opts || {};
+      opts.uri = this.uri();
+      opts.xd = this.xd;
+      opts.xs = this.xs;
+      opts.agent = this.agent || false;
+      opts.supportsBinary = this.supportsBinary;
+      opts.enablesXDR = this.enablesXDR;
+      opts.withCredentials = this.withCredentials; // SSL options for Node.js client
+
+      opts.pfx = this.pfx;
+      opts.key = this.key;
+      opts.passphrase = this.passphrase;
+      opts.cert = this.cert;
+      opts.ca = this.ca;
+      opts.ciphers = this.ciphers;
+      opts.rejectUnauthorized = this.rejectUnauthorized;
+      opts.requestTimeout = this.requestTimeout; // other options for Node.js client
+
+      opts.extraHeaders = this.extraHeaders;
+      return new Request(opts);
+    };
+    /**
+     * Sends data.
+     *
+     * @param {String} data to send.
+     * @param {Function} called upon flush.
+     * @api private
+     */
+
+
+    XHR.prototype.doWrite = function (data, fn) {
+      var isBinary = typeof data !== 'string' && data !== undefined;
+      var req = this.request({
+        method: 'POST',
+        data: data,
+        isBinary: isBinary
+      });
+      var self = this;
+      req.on('success', fn);
+      req.on('error', function (err) {
+        self.onError('xhr post error', err);
+      });
+      this.sendXhr = req;
+    };
+    /**
+     * Starts a poll cycle.
+     *
+     * @api private
+     */
+
+
+    XHR.prototype.doPoll = function () {
+      debug('xhr poll');
+      var req = this.request();
+      var self = this;
+      req.on('data', function (data) {
+        self.onData(data);
+      });
+      req.on('error', function (err) {
+        self.onError('xhr poll error', err);
+      });
+      this.pollXhr = req;
+    };
+    /**
+     * Request constructor
+     *
+     * @param {Object} options
+     * @api public
+     */
+
+
+    function Request(opts) {
+      this.method = opts.method || 'GET';
+      this.uri = opts.uri;
+      this.xd = !!opts.xd;
+      this.xs = !!opts.xs;
+      this.async = false !== opts.async;
+      this.data = undefined !== opts.data ? opts.data : null;
+      this.agent = opts.agent;
+      this.isBinary = opts.isBinary;
+      this.supportsBinary = opts.supportsBinary;
+      this.enablesXDR = opts.enablesXDR;
+      this.withCredentials = opts.withCredentials;
+      this.requestTimeout = opts.requestTimeout; // SSL options for Node.js client
+
+      this.pfx = opts.pfx;
+      this.key = opts.key;
+      this.passphrase = opts.passphrase;
+      this.cert = opts.cert;
+      this.ca = opts.ca;
+      this.ciphers = opts.ciphers;
+      this.rejectUnauthorized = opts.rejectUnauthorized; // other options for Node.js client
+
+      this.extraHeaders = opts.extraHeaders;
+      this.create();
+    }
+    /**
+     * Mix in `Emitter`.
+     */
+
+
+    Emitter(Request.prototype);
+    /**
+     * Creates the XHR object and sends the request.
+     *
+     * @api private
+     */
+
+    Request.prototype.create = function () {
+      var opts = {
+        agent: this.agent,
+        xdomain: this.xd,
+        xscheme: this.xs,
+        enablesXDR: this.enablesXDR
+      }; // SSL options for Node.js client
+
+      opts.pfx = this.pfx;
+      opts.key = this.key;
+      opts.passphrase = this.passphrase;
+      opts.cert = this.cert;
+      opts.ca = this.ca;
+      opts.ciphers = this.ciphers;
+      opts.rejectUnauthorized = this.rejectUnauthorized;
+      var xhr = this.xhr = new XMLHttpRequest(opts);
+      var self = this;
+
+      try {
+        debug('xhr open %s: %s', this.method, this.uri);
+        xhr.open(this.method, this.uri, this.async);
+
+        try {
+          if (this.extraHeaders) {
+            xhr.setDisableHeaderCheck && xhr.setDisableHeaderCheck(true);
+
+            for (var i in this.extraHeaders) {
+              if (this.extraHeaders.hasOwnProperty(i)) {
+                xhr.setRequestHeader(i, this.extraHeaders[i]);
+              }
+            }
+          }
+        } catch (e) {}
+
+        if ('POST' === this.method) {
+          try {
+            if (this.isBinary) {
+              xhr.setRequestHeader('Content-type', 'application/octet-stream');
+            } else {
+              xhr.setRequestHeader('Content-type', 'text/plain;charset=UTF-8');
+            }
+          } catch (e) {}
+        }
+
+        try {
+          xhr.setRequestHeader('Accept', '*/*');
+        } catch (e) {} // ie6 check
+
+
+        if ('withCredentials' in xhr) {
+          xhr.withCredentials = this.withCredentials;
+        }
+
+        if (this.requestTimeout) {
+          xhr.timeout = this.requestTimeout;
+        }
+
+        if (this.hasXDR()) {
+          xhr.onload = function () {
+            self.onLoad();
+          };
+
+          xhr.onerror = function () {
+            self.onError(xhr.responseText);
+          };
+        } else {
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 2) {
+              try {
+                var contentType = xhr.getResponseHeader('Content-Type');
+
+                if (self.supportsBinary && contentType === 'application/octet-stream' || contentType === 'application/octet-stream; charset=UTF-8') {
+                  xhr.responseType = 'arraybuffer';
+                }
+              } catch (e) {}
+            }
+
+            if (4 !== xhr.readyState) return;
+
+            if (200 === xhr.status || 1223 === xhr.status) {
+              self.onLoad();
+            } else {
+              // make sure the `error` event handler that's user-set
+              // does not throw in the same tick and gets caught here
+              setTimeout(function () {
+                self.onError(typeof xhr.status === 'number' ? xhr.status : 0);
+              }, 0);
+            }
+          };
+        }
+
+        debug('xhr data %s', this.data);
+        xhr.send(this.data);
+      } catch (e) {
+        // Need to defer since .create() is called directly fhrom the constructor
+        // and thus the 'error' event can only be only bound *after* this exception
+        // occurs.  Therefore, also, we cannot throw here at all.
+        setTimeout(function () {
+          self.onError(e);
+        }, 0);
+        return;
+      }
+
+      if (typeof document !== 'undefined') {
+        this.index = Request.requestsCount++;
+        Request.requests[this.index] = this;
+      }
+    };
+    /**
+     * Called upon successful response.
+     *
+     * @api private
+     */
+
+
+    Request.prototype.onSuccess = function () {
+      this.emit('success');
+      this.cleanup();
+    };
+    /**
+     * Called if we have data.
+     *
+     * @api private
+     */
+
+
+    Request.prototype.onData = function (data) {
+      this.emit('data', data);
+      this.onSuccess();
+    };
+    /**
+     * Called upon error.
+     *
+     * @api private
+     */
+
+
+    Request.prototype.onError = function (err) {
+      this.emit('error', err);
+      this.cleanup(true);
+    };
+    /**
+     * Cleans up house.
+     *
+     * @api private
+     */
+
+
+    Request.prototype.cleanup = function (fromError) {
+      if ('undefined' === typeof this.xhr || null === this.xhr) {
+        return;
+      } // xmlhttprequest
+
+
+      if (this.hasXDR()) {
+        this.xhr.onload = this.xhr.onerror = empty;
+      } else {
+        this.xhr.onreadystatechange = empty;
+      }
+
+      if (fromError) {
+        try {
+          this.xhr.abort();
+        } catch (e) {}
+      }
+
+      if (typeof document !== 'undefined') {
+        delete Request.requests[this.index];
+      }
+
+      this.xhr = null;
+    };
+    /**
+     * Called upon load.
+     *
+     * @api private
+     */
+
+
+    Request.prototype.onLoad = function () {
+      var data;
+
+      try {
+        var contentType;
+
+        try {
+          contentType = this.xhr.getResponseHeader('Content-Type');
+        } catch (e) {}
+
+        if (contentType === 'application/octet-stream' || contentType === 'application/octet-stream; charset=UTF-8') {
+          data = this.xhr.response || this.xhr.responseText;
+        } else {
+          data = this.xhr.responseText;
+        }
+      } catch (e) {
+        this.onError(e);
+      }
+
+      if (null != data) {
+        this.onData(data);
+      }
+    };
+    /**
+     * Check if it has XDomainRequest.
+     *
+     * @api private
+     */
+
+
+    Request.prototype.hasXDR = function () {
+      return typeof XDomainRequest !== 'undefined' && !this.xs && this.enablesXDR;
+    };
+    /**
+     * Aborts the request.
+     *
+     * @api public
+     */
+
+
+    Request.prototype.abort = function () {
+      this.cleanup();
+    };
+    /**
+     * Aborts pending requests when unloading the window. This is needed to prevent
+     * memory leaks (e.g. when using IE) and to ensure that no spurious error is
+     * emitted.
+     */
+
+
+    Request.requestsCount = 0;
+    Request.requests = {};
+
+    if (typeof document !== 'undefined') {
+      if (typeof attachEvent === 'function') {
+        attachEvent('onunload', unloadHandler);
+      } else if (typeof addEventListener === 'function') {
+        var terminationEvent = 'onpagehide' in globalThis ? 'pagehide' : 'unload';
+        addEventListener(terminationEvent, unloadHandler, false);
+      }
+    }
+
+    function unloadHandler() {
+      for (var i in Request.requests) {
+        if (Request.requests.hasOwnProperty(i)) {
+          Request.requests[i].abort();
+        }
+      }
+    }
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/engine.io-client/lib/transports/polling.js":
+  /*!*****************************************************************!*\
+    !*** ./node_modules/engine.io-client/lib/transports/polling.js ***!
+    \*****************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoClientLibTransportsPollingJs(module, exports, __webpack_require__) {
+    /**
+     * Module dependencies.
+     */
+    var Transport = __webpack_require__(
+    /*! ../transport */
+    "./node_modules/engine.io-client/lib/transport.js");
+
+    var parseqs = __webpack_require__(
+    /*! parseqs */
+    "./node_modules/parseqs/index.js");
+
+    var parser = __webpack_require__(
+    /*! engine.io-parser */
+    "./node_modules/engine.io-parser/lib/browser.js");
+
+    var inherit = __webpack_require__(
+    /*! component-inherit */
+    "./node_modules/component-inherit/index.js");
+
+    var yeast = __webpack_require__(
+    /*! yeast */
+    "./node_modules/yeast/index.js");
+
+    var debug = __webpack_require__(
+    /*! debug */
+    "./node_modules/engine.io-client/node_modules/debug/src/browser.js")('engine.io-client:polling');
+    /**
+     * Module exports.
+     */
+
+
+    module.exports = Polling;
+    /**
+     * Is XHR2 supported?
+     */
+
+    var hasXHR2 = function () {
+      var XMLHttpRequest = __webpack_require__(
+      /*! xmlhttprequest-ssl */
+      "./node_modules/engine.io-client/lib/xmlhttprequest.js");
+
+      var xhr = new XMLHttpRequest({
+        xdomain: false
+      });
+      return null != xhr.responseType;
+    }();
+    /**
+     * Polling interface.
+     *
+     * @param {Object} opts
+     * @api private
+     */
+
+
+    function Polling(opts) {
+      var forceBase64 = opts && opts.forceBase64;
+
+      if (!hasXHR2 || forceBase64) {
+        this.supportsBinary = false;
+      }
+
+      Transport.call(this, opts);
+    }
+    /**
+     * Inherits from Transport.
+     */
+
+
+    inherit(Polling, Transport);
+    /**
+     * Transport name.
+     */
+
+    Polling.prototype.name = 'polling';
+    /**
+     * Opens the socket (triggers polling). We write a PING message to determine
+     * when the transport is open.
+     *
+     * @api private
+     */
+
+    Polling.prototype.doOpen = function () {
+      this.poll();
+    };
+    /**
+     * Pauses polling.
+     *
+     * @param {Function} callback upon buffers are flushed and transport is paused
+     * @api private
+     */
+
+
+    Polling.prototype.pause = function (onPause) {
+      var self = this;
+      this.readyState = 'pausing';
+
+      function pause() {
+        debug('paused');
+        self.readyState = 'paused';
+        onPause();
+      }
+
+      if (this.polling || !this.writable) {
+        var total = 0;
+
+        if (this.polling) {
+          debug('we are currently polling - waiting to pause');
+          total++;
+          this.once('pollComplete', function () {
+            debug('pre-pause polling complete');
+            --total || pause();
+          });
+        }
+
+        if (!this.writable) {
+          debug('we are currently writing - waiting to pause');
+          total++;
+          this.once('drain', function () {
+            debug('pre-pause writing complete');
+            --total || pause();
+          });
+        }
+      } else {
+        pause();
+      }
+    };
+    /**
+     * Starts polling cycle.
+     *
+     * @api public
+     */
+
+
+    Polling.prototype.poll = function () {
+      debug('polling');
+      this.polling = true;
+      this.doPoll();
+      this.emit('poll');
+    };
+    /**
+     * Overloads onData to detect payloads.
+     *
+     * @api private
+     */
+
+
+    Polling.prototype.onData = function (data) {
+      var self = this;
+      debug('polling got data %s', data);
+
+      var callback = function callback(packet, index, total) {
+        // if its the first message we consider the transport open
+        if ('opening' === self.readyState) {
+          self.onOpen();
+        } // if its a close packet, we close the ongoing requests
+
+
+        if ('close' === packet.type) {
+          self.onClose();
+          return false;
+        } // otherwise bypass onData and handle the message
+
+
+        self.onPacket(packet);
+      }; // decode payload
+
+
+      parser.decodePayload(data, this.socket.binaryType, callback); // if an event did not trigger closing
+
+      if ('closed' !== this.readyState) {
+        // if we got data we're not polling
+        this.polling = false;
+        this.emit('pollComplete');
+
+        if ('open' === this.readyState) {
+          this.poll();
+        } else {
+          debug('ignoring poll - transport state "%s"', this.readyState);
+        }
+      }
+    };
+    /**
+     * For polling, send a close packet.
+     *
+     * @api private
+     */
+
+
+    Polling.prototype.doClose = function () {
+      var self = this;
+
+      function close() {
+        debug('writing close packet');
+        self.write([{
+          type: 'close'
+        }]);
+      }
+
+      if ('open' === this.readyState) {
+        debug('transport open - closing');
+        close();
+      } else {
+        // in case we're trying to close while
+        // handshaking is in progress (GH-164)
+        debug('transport not open - deferring close');
+        this.once('open', close);
+      }
+    };
+    /**
+     * Writes a packets payload.
+     *
+     * @param {Array} data packets
+     * @param {Function} drain callback
+     * @api private
+     */
+
+
+    Polling.prototype.write = function (packets) {
+      var self = this;
+      this.writable = false;
+
+      var callbackfn = function callbackfn() {
+        self.writable = true;
+        self.emit('drain');
+      };
+
+      parser.encodePayload(packets, this.supportsBinary, function (data) {
+        self.doWrite(data, callbackfn);
+      });
+    };
+    /**
+     * Generates uri for connection.
+     *
+     * @api private
+     */
+
+
+    Polling.prototype.uri = function () {
+      var query = this.query || {};
+      var schema = this.secure ? 'https' : 'http';
+      var port = ''; // cache busting is forced
+
+      if (false !== this.timestampRequests) {
+        query[this.timestampParam] = yeast();
+      }
+
+      if (!this.supportsBinary && !query.sid) {
+        query.b64 = 1;
+      }
+
+      query = parseqs.encode(query); // avoid port if default for schema
+
+      if (this.port && ('https' === schema && Number(this.port) !== 443 || 'http' === schema && Number(this.port) !== 80)) {
+        port = ':' + this.port;
+      } // prepend ? to query
+
+
+      if (query.length) {
+        query = '?' + query;
+      }
+
+      var ipv6 = this.hostname.indexOf(':') !== -1;
+      return schema + '://' + (ipv6 ? '[' + this.hostname + ']' : this.hostname) + port + this.path + query;
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/engine.io-client/lib/transports/websocket.js":
+  /*!*******************************************************************!*\
+    !*** ./node_modules/engine.io-client/lib/transports/websocket.js ***!
+    \*******************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoClientLibTransportsWebsocketJs(module, exports, __webpack_require__) {
+    /**
+     * Module dependencies.
+     */
+    var Transport = __webpack_require__(
+    /*! ../transport */
+    "./node_modules/engine.io-client/lib/transport.js");
+
+    var parser = __webpack_require__(
+    /*! engine.io-parser */
+    "./node_modules/engine.io-parser/lib/browser.js");
+
+    var parseqs = __webpack_require__(
+    /*! parseqs */
+    "./node_modules/parseqs/index.js");
+
+    var inherit = __webpack_require__(
+    /*! component-inherit */
+    "./node_modules/component-inherit/index.js");
+
+    var yeast = __webpack_require__(
+    /*! yeast */
+    "./node_modules/yeast/index.js");
+
+    var debug = __webpack_require__(
+    /*! debug */
+    "./node_modules/engine.io-client/node_modules/debug/src/browser.js")('engine.io-client:websocket');
+
+    var BrowserWebSocket, NodeWebSocket;
+
+    if (typeof WebSocket !== 'undefined') {
+      BrowserWebSocket = WebSocket;
+    } else if (typeof self !== 'undefined') {
+      BrowserWebSocket = self.WebSocket || self.MozWebSocket;
+    }
+
+    if (typeof window === 'undefined') {
+      try {
+        NodeWebSocket = __webpack_require__(
+        /*! ws */
+        4);
+      } catch (e) {}
+    }
+    /**
+     * Get either the `WebSocket` or `MozWebSocket` globals
+     * in the browser or try to resolve WebSocket-compatible
+     * interface exposed by `ws` for Node-like environment.
+     */
+
+
+    var WebSocketImpl = BrowserWebSocket || NodeWebSocket;
+    /**
+     * Module exports.
+     */
+
+    module.exports = WS;
+    /**
+     * WebSocket transport constructor.
+     *
+     * @api {Object} connection options
+     * @api public
+     */
+
+    function WS(opts) {
+      var forceBase64 = opts && opts.forceBase64;
+
+      if (forceBase64) {
+        this.supportsBinary = false;
+      }
+
+      this.perMessageDeflate = opts.perMessageDeflate;
+      this.usingBrowserWebSocket = BrowserWebSocket && !opts.forceNode;
+      this.protocols = opts.protocols;
+
+      if (!this.usingBrowserWebSocket) {
+        WebSocketImpl = NodeWebSocket;
+      }
+
+      Transport.call(this, opts);
+    }
+    /**
+     * Inherits from Transport.
+     */
+
+
+    inherit(WS, Transport);
+    /**
+     * Transport name.
+     *
+     * @api public
+     */
+
+    WS.prototype.name = 'websocket';
+    /*
+     * WebSockets support binary
+     */
+
+    WS.prototype.supportsBinary = true;
+    /**
+     * Opens socket.
+     *
+     * @api private
+     */
+
+    WS.prototype.doOpen = function () {
+      if (!this.check()) {
+        // let probe timeout
+        return;
+      }
+
+      var uri = this.uri();
+      var protocols = this.protocols;
+      var opts = {
+        agent: this.agent,
+        perMessageDeflate: this.perMessageDeflate
+      }; // SSL options for Node.js client
+
+      opts.pfx = this.pfx;
+      opts.key = this.key;
+      opts.passphrase = this.passphrase;
+      opts.cert = this.cert;
+      opts.ca = this.ca;
+      opts.ciphers = this.ciphers;
+      opts.rejectUnauthorized = this.rejectUnauthorized;
+
+      if (this.extraHeaders) {
+        opts.headers = this.extraHeaders;
+      }
+
+      if (this.localAddress) {
+        opts.localAddress = this.localAddress;
+      }
+
+      try {
+        this.ws = this.usingBrowserWebSocket && !this.isReactNative ? protocols ? new WebSocketImpl(uri, protocols) : new WebSocketImpl(uri) : new WebSocketImpl(uri, protocols, opts);
+      } catch (err) {
+        return this.emit('error', err);
+      }
+
+      if (this.ws.binaryType === undefined) {
+        this.supportsBinary = false;
+      }
+
+      if (this.ws.supports && this.ws.supports.binary) {
+        this.supportsBinary = true;
+        this.ws.binaryType = 'nodebuffer';
+      } else {
+        this.ws.binaryType = 'arraybuffer';
+      }
+
+      this.addEventListeners();
+    };
+    /**
+     * Adds event listeners to the socket
+     *
+     * @api private
+     */
+
+
+    WS.prototype.addEventListeners = function () {
+      var self = this;
+
+      this.ws.onopen = function () {
+        self.onOpen();
+      };
+
+      this.ws.onclose = function () {
+        self.onClose();
+      };
+
+      this.ws.onmessage = function (ev) {
+        self.onData(ev.data);
+      };
+
+      this.ws.onerror = function (e) {
+        self.onError('websocket error', e);
+      };
+    };
+    /**
+     * Writes data to socket.
+     *
+     * @param {Array} array of packets.
+     * @api private
+     */
+
+
+    WS.prototype.write = function (packets) {
+      var self = this;
+      this.writable = false; // encodePacket efficient as it uses WS framing
+      // no need for encodePayload
+
+      var total = packets.length;
+
+      for (var i = 0, l = total; i < l; i++) {
+        (function (packet) {
+          parser.encodePacket(packet, self.supportsBinary, function (data) {
+            if (!self.usingBrowserWebSocket) {
+              // always create a new object (GH-437)
+              var opts = {};
+
+              if (packet.options) {
+                opts.compress = packet.options.compress;
+              }
+
+              if (self.perMessageDeflate) {
+                var len = 'string' === typeof data ? Buffer.byteLength(data) : data.length;
+
+                if (len < self.perMessageDeflate.threshold) {
+                  opts.compress = false;
+                }
+              }
+            } // Sometimes the websocket has already been closed but the browser didn't
+            // have a chance of informing us about it yet, in that case send will
+            // throw an error
+
+
+            try {
+              if (self.usingBrowserWebSocket) {
+                // TypeError is thrown when passing the second argument on Safari
+                self.ws.send(data);
+              } else {
+                self.ws.send(data, opts);
+              }
+            } catch (e) {
+              debug('websocket closed before onclose event');
+            }
+
+            --total || done();
+          });
+        })(packets[i]);
+      }
+
+      function done() {
+        self.emit('flush'); // fake drain
+        // defer to next tick to allow Socket to clear writeBuffer
+
+        setTimeout(function () {
+          self.writable = true;
+          self.emit('drain');
+        }, 0);
+      }
+    };
+    /**
+     * Called upon close
+     *
+     * @api private
+     */
+
+
+    WS.prototype.onClose = function () {
+      Transport.prototype.onClose.call(this);
+    };
+    /**
+     * Closes socket.
+     *
+     * @api private
+     */
+
+
+    WS.prototype.doClose = function () {
+      if (typeof this.ws !== 'undefined') {
+        this.ws.close();
+      }
+    };
+    /**
+     * Generates uri for connection.
+     *
+     * @api private
+     */
+
+
+    WS.prototype.uri = function () {
+      var query = this.query || {};
+      var schema = this.secure ? 'wss' : 'ws';
+      var port = ''; // avoid port if default for schema
+
+      if (this.port && ('wss' === schema && Number(this.port) !== 443 || 'ws' === schema && Number(this.port) !== 80)) {
+        port = ':' + this.port;
+      } // append timestamp to URI
+
+
+      if (this.timestampRequests) {
+        query[this.timestampParam] = yeast();
+      } // communicate binary support capabilities
+
+
+      if (!this.supportsBinary) {
+        query.b64 = 1;
+      }
+
+      query = parseqs.encode(query); // prepend ? to query
+
+      if (query.length) {
+        query = '?' + query;
+      }
+
+      var ipv6 = this.hostname.indexOf(':') !== -1;
+      return schema + '://' + (ipv6 ? '[' + this.hostname + ']' : this.hostname) + port + this.path + query;
+    };
+    /**
+     * Feature detection for WebSocket.
+     *
+     * @return {Boolean} whether this transport is available.
+     * @api public
+     */
+
+
+    WS.prototype.check = function () {
+      return !!WebSocketImpl && !('__initialize' in WebSocketImpl && this.name === WS.prototype.name);
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/engine.io-client/lib/xmlhttprequest.js":
+  /*!*************************************************************!*\
+    !*** ./node_modules/engine.io-client/lib/xmlhttprequest.js ***!
+    \*************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoClientLibXmlhttprequestJs(module, exports, __webpack_require__) {
+    // browser shim for xmlhttprequest module
+    var hasCORS = __webpack_require__(
+    /*! has-cors */
+    "./node_modules/has-cors/index.js");
+
+    var globalThis = __webpack_require__(
+    /*! ./globalThis */
+    "./node_modules/engine.io-client/lib/globalThis.browser.js");
+
+    module.exports = function (opts) {
+      var xdomain = opts.xdomain; // scheme must be same when usign XDomainRequest
+      // http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx
+
+      var xscheme = opts.xscheme; // XDomainRequest has a flow of not sending cookie, therefore it should be disabled as a default.
+      // https://github.com/Automattic/engine.io-client/pull/217
+
+      var enablesXDR = opts.enablesXDR; // XMLHttpRequest can be disabled on IE
+
+      try {
+        if ('undefined' !== typeof XMLHttpRequest && (!xdomain || hasCORS)) {
+          return new XMLHttpRequest();
+        }
+      } catch (e) {} // Use XDomainRequest for IE8 if enablesXDR is true
+      // because loading bar keeps flashing when using jsonp-polling
+      // https://github.com/yujiosaka/socke.io-ie8-loading-example
+
+
+      try {
+        if ('undefined' !== typeof XDomainRequest && !xscheme && enablesXDR) {
+          return new XDomainRequest();
+        }
+      } catch (e) {}
+
+      if (!xdomain) {
+        try {
+          return new globalThis[['Active'].concat('Object').join('X')]('Microsoft.XMLHTTP');
+        } catch (e) {}
+      }
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/engine.io-client/node_modules/debug/src/browser.js":
+  /*!*************************************************************************!*\
+    !*** ./node_modules/engine.io-client/node_modules/debug/src/browser.js ***!
+    \*************************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoClientNode_modulesDebugSrcBrowserJs(module, exports, __webpack_require__) {
+    /* eslint-env browser */
+
+    /**
+     * This is the web browser implementation of `debug()`.
+     */
+    exports.log = log;
+    exports.formatArgs = formatArgs;
+    exports.save = save;
+    exports.load = load;
+    exports.useColors = useColors;
+    exports.storage = localstorage();
+    /**
+     * Colors.
+     */
+
+    exports.colors = ['#0000CC', '#0000FF', '#0033CC', '#0033FF', '#0066CC', '#0066FF', '#0099CC', '#0099FF', '#00CC00', '#00CC33', '#00CC66', '#00CC99', '#00CCCC', '#00CCFF', '#3300CC', '#3300FF', '#3333CC', '#3333FF', '#3366CC', '#3366FF', '#3399CC', '#3399FF', '#33CC00', '#33CC33', '#33CC66', '#33CC99', '#33CCCC', '#33CCFF', '#6600CC', '#6600FF', '#6633CC', '#6633FF', '#66CC00', '#66CC33', '#9900CC', '#9900FF', '#9933CC', '#9933FF', '#99CC00', '#99CC33', '#CC0000', '#CC0033', '#CC0066', '#CC0099', '#CC00CC', '#CC00FF', '#CC3300', '#CC3333', '#CC3366', '#CC3399', '#CC33CC', '#CC33FF', '#CC6600', '#CC6633', '#CC9900', '#CC9933', '#CCCC00', '#CCCC33', '#FF0000', '#FF0033', '#FF0066', '#FF0099', '#FF00CC', '#FF00FF', '#FF3300', '#FF3333', '#FF3366', '#FF3399', '#FF33CC', '#FF33FF', '#FF6600', '#FF6633', '#FF9900', '#FF9933', '#FFCC00', '#FFCC33'];
+    /**
+     * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+     * and the Firebug extension (any Firefox version) are known
+     * to support "%c" CSS customizations.
+     *
+     * TODO: add a `localStorage` variable to explicitly enable/disable colors
+     */
+    // eslint-disable-next-line complexity
+
+    function useColors() {
+      // NB: In an Electron preload script, document will be defined but not fully
+      // initialized. Since we know we're in Chrome, we'll just detect this case
+      // explicitly
+      if (typeof window !== 'undefined' && window.process && (window.process.type === 'renderer' || window.process.__nwjs)) {
+        return true;
+      } // Internet Explorer and Edge do not support colors.
+
+
+      if (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
+        return false;
+      } // Is webkit? http://stackoverflow.com/a/16459606/376773
+      // document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
+
+
+      return typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance || // Is firebug? http://stackoverflow.com/a/398120/376773
+      typeof window !== 'undefined' && window.console && (window.console.firebug || window.console.exception && window.console.table) || // Is firefox >= v31?
+      // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+      typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31 || // Double check webkit in userAgent just in case we are in a worker
+      typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
+    }
+    /**
+     * Colorize log arguments if enabled.
+     *
+     * @api public
+     */
+
+
+    function formatArgs(args) {
+      args[0] = (this.useColors ? '%c' : '') + this.namespace + (this.useColors ? ' %c' : ' ') + args[0] + (this.useColors ? '%c ' : ' ') + '+' + module.exports.humanize(this.diff);
+
+      if (!this.useColors) {
+        return;
+      }
+
+      var c = 'color: ' + this.color;
+      args.splice(1, 0, c, 'color: inherit'); // The final "%c" is somewhat tricky, because there could be other
+      // arguments passed either before or after the %c, so we need to
+      // figure out the correct index to insert the CSS into
+
+      var index = 0;
+      var lastC = 0;
+      args[0].replace(/%[a-zA-Z%]/g, function (match) {
+        if (match === '%%') {
+          return;
+        }
+
+        index++;
+
+        if (match === '%c') {
+          // We only are interested in the *last* %c
+          // (the user may have provided their own)
+          lastC = index;
+        }
+      });
+      args.splice(lastC, 0, c);
+    }
+    /**
+     * Invokes `console.log()` when available.
+     * No-op when `console.log` is not a "function".
+     *
+     * @api public
+     */
+
+
+    function log() {
+      var _console;
+
+      // This hackery is required for IE8/9, where
+      // the `console.log` function doesn't have 'apply'
+      return typeof console === 'object' && console.log && (_console = console).log.apply(_console, arguments);
+    }
+    /**
+     * Save `namespaces`.
+     *
+     * @param {String} namespaces
+     * @api private
+     */
+
+
+    function save(namespaces) {
+      try {
+        if (namespaces) {
+          exports.storage.setItem('debug', namespaces);
+        } else {
+          exports.storage.removeItem('debug');
+        }
+      } catch (error) {// Swallow
+        // XXX (@Qix-) should we be logging these?
+      }
+    }
+    /**
+     * Load `namespaces`.
+     *
+     * @return {String} returns the previously persisted debug modes
+     * @api private
+     */
+
+
+    function load() {
+      var r;
+
+      try {
+        r = exports.storage.getItem('debug');
+      } catch (error) {} // Swallow
+      // XXX (@Qix-) should we be logging these?
+      // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
+
+
+      if (!r && typeof process !== 'undefined' && 'env' in process) {
+        r = process.env.DEBUG;
+      }
+
+      return r;
+    }
+    /**
+     * Localstorage attempts to return the localstorage.
+     *
+     * This is necessary because safari throws
+     * when a user disables cookies/localstorage
+     * and you attempt to access it.
+     *
+     * @return {LocalStorage}
+     * @api private
+     */
+
+
+    function localstorage() {
+      try {
+        // TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
+        // The Browser also has localStorage in the global context.
+        return localStorage;
+      } catch (error) {// Swallow
+        // XXX (@Qix-) should we be logging these?
+      }
+    }
+
+    module.exports = __webpack_require__(
+    /*! ./common */
+    "./node_modules/engine.io-client/node_modules/debug/src/common.js")(exports);
+    var formatters = module.exports.formatters;
+    /**
+     * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+     */
+
+    formatters.j = function (v) {
+      try {
+        return JSON.stringify(v);
+      } catch (error) {
+        return '[UnexpectedJSONParseError]: ' + error.message;
+      }
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/engine.io-client/node_modules/debug/src/common.js":
+  /*!************************************************************************!*\
+    !*** ./node_modules/engine.io-client/node_modules/debug/src/common.js ***!
+    \************************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoClientNode_modulesDebugSrcCommonJs(module, exports, __webpack_require__) {
+    /**
+     * This is the common logic for both the Node.js and web browser
+     * implementations of `debug()`.
+     */
+    function setup(env) {
+      createDebug.debug = createDebug;
+      createDebug["default"] = createDebug;
+      createDebug.coerce = coerce;
+      createDebug.disable = disable;
+      createDebug.enable = enable;
+      createDebug.enabled = enabled;
+      createDebug.humanize = __webpack_require__(
+      /*! ms */
+      "./node_modules/engine.io-client/node_modules/ms/index.js");
+      Object.keys(env).forEach(function (key) {
+        createDebug[key] = env[key];
+      });
+      /**
+      * Active `debug` instances.
+      */
+
+      createDebug.instances = [];
+      /**
+      * The currently active debug mode names, and names to skip.
+      */
+
+      createDebug.names = [];
+      createDebug.skips = [];
+      /**
+      * Map of special "%n" handling functions, for the debug "format" argument.
+      *
+      * Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
+      */
+
+      createDebug.formatters = {};
+      /**
+      * Selects a color for a debug namespace
+      * @param {String} namespace The namespace string for the for the debug instance to be colored
+      * @return {Number|String} An ANSI color code for the given namespace
+      * @api private
+      */
+
+      function selectColor(namespace) {
+        var hash = 0;
+
+        for (var i = 0; i < namespace.length; i++) {
+          hash = (hash << 5) - hash + namespace.charCodeAt(i);
+          hash |= 0; // Convert to 32bit integer
+        }
+
+        return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
+      }
+
+      createDebug.selectColor = selectColor;
+      /**
+      * Create a debugger with the given `namespace`.
+      *
+      * @param {String} namespace
+      * @return {Function}
+      * @api public
+      */
+
+      function createDebug(namespace) {
+        var prevTime;
+
+        function debug() {
+          for (var _len15 = arguments.length, args = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+            args[_key15] = arguments[_key15];
+          }
+
+          // Disabled?
+          if (!debug.enabled) {
+            return;
+          }
+
+          var self = debug; // Set `diff` timestamp
+
+          var curr = Number(new Date());
+          var ms = curr - (prevTime || curr);
+          self.diff = ms;
+          self.prev = prevTime;
+          self.curr = curr;
+          prevTime = curr;
+          args[0] = createDebug.coerce(args[0]);
+
+          if (typeof args[0] !== 'string') {
+            // Anything else let's inspect with %O
+            args.unshift('%O');
+          } // Apply any `formatters` transformations
+
+
+          var index = 0;
+          args[0] = args[0].replace(/%([a-zA-Z%])/g, function (match, format) {
+            // If we encounter an escaped % then don't increase the array index
+            if (match === '%%') {
+              return match;
+            }
+
+            index++;
+            var formatter = createDebug.formatters[format];
+
+            if (typeof formatter === 'function') {
+              var val = args[index];
+              match = formatter.call(self, val); // Now we need to remove `args[index]` since it's inlined in the `format`
+
+              args.splice(index, 1);
+              index--;
+            }
+
+            return match;
+          }); // Apply env-specific formatting (colors, etc.)
+
+          createDebug.formatArgs.call(self, args);
+          var logFn = self.log || createDebug.log;
+          logFn.apply(self, args);
+        }
+
+        debug.namespace = namespace;
+        debug.enabled = createDebug.enabled(namespace);
+        debug.useColors = createDebug.useColors();
+        debug.color = selectColor(namespace);
+        debug.destroy = destroy;
+        debug.extend = extend; // Debug.formatArgs = formatArgs;
+        // debug.rawLog = rawLog;
+        // env-specific initialization logic for debug instances
+
+        if (typeof createDebug.init === 'function') {
+          createDebug.init(debug);
+        }
+
+        createDebug.instances.push(debug);
+        return debug;
+      }
+
+      function destroy() {
+        var index = createDebug.instances.indexOf(this);
+
+        if (index !== -1) {
+          createDebug.instances.splice(index, 1);
+          return true;
+        }
+
+        return false;
+      }
+
+      function extend(namespace, delimiter) {
+        var newDebug = createDebug(this.namespace + (typeof delimiter === 'undefined' ? ':' : delimiter) + namespace);
+        newDebug.log = this.log;
+        return newDebug;
+      }
+      /**
+      * Enables a debug mode by namespaces. This can include modes
+      * separated by a colon and wildcards.
+      *
+      * @param {String} namespaces
+      * @api public
+      */
+
+
+      function enable(namespaces) {
+        createDebug.save(namespaces);
+        createDebug.names = [];
+        createDebug.skips = [];
+        var i;
+        var split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
+        var len = split.length;
+
+        for (i = 0; i < len; i++) {
+          if (!split[i]) {
+            // ignore empty strings
+            continue;
+          }
+
+          namespaces = split[i].replace(/\*/g, '.*?');
+
+          if (namespaces[0] === '-') {
+            createDebug.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+          } else {
+            createDebug.names.push(new RegExp('^' + namespaces + '$'));
+          }
+        }
+
+        for (i = 0; i < createDebug.instances.length; i++) {
+          var instance = createDebug.instances[i];
+          instance.enabled = createDebug.enabled(instance.namespace);
+        }
+      }
+      /**
+      * Disable debug output.
+      *
+      * @return {String} namespaces
+      * @api public
+      */
+
+
+      function disable() {
+        var namespaces = [].concat(_toConsumableArray(createDebug.names.map(toNamespace)), _toConsumableArray(createDebug.skips.map(toNamespace).map(function (namespace) {
+          return '-' + namespace;
+        }))).join(',');
+        createDebug.enable('');
+        return namespaces;
+      }
+      /**
+      * Returns true if the given mode name is enabled, false otherwise.
+      *
+      * @param {String} name
+      * @return {Boolean}
+      * @api public
+      */
+
+
+      function enabled(name) {
+        if (name[name.length - 1] === '*') {
+          return true;
+        }
+
+        var i;
+        var len;
+
+        for (i = 0, len = createDebug.skips.length; i < len; i++) {
+          if (createDebug.skips[i].test(name)) {
+            return false;
+          }
+        }
+
+        for (i = 0, len = createDebug.names.length; i < len; i++) {
+          if (createDebug.names[i].test(name)) {
+            return true;
+          }
+        }
+
+        return false;
+      }
+      /**
+      * Convert regexp to namespace
+      *
+      * @param {RegExp} regxep
+      * @return {String} namespace
+      * @api private
+      */
+
+
+      function toNamespace(regexp) {
+        return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, '*');
+      }
+      /**
+      * Coerce `val`.
+      *
+      * @param {Mixed} val
+      * @return {Mixed}
+      * @api private
+      */
+
+
+      function coerce(val) {
+        if (val instanceof Error) {
+          return val.stack || val.message;
+        }
+
+        return val;
+      }
+
+      createDebug.enable(createDebug.load());
+      return createDebug;
+    }
+
+    module.exports = setup;
+    /***/
+  },
+
+  /***/
+  "./node_modules/engine.io-client/node_modules/ms/index.js":
+  /*!****************************************************************!*\
+    !*** ./node_modules/engine.io-client/node_modules/ms/index.js ***!
+    \****************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoClientNode_modulesMsIndexJs(module, exports) {
+    /**
+     * Helpers.
+     */
+    var s = 1000;
+    var m = s * 60;
+    var h = m * 60;
+    var d = h * 24;
+    var w = d * 7;
+    var y = d * 365.25;
+    /**
+     * Parse or format the given `val`.
+     *
+     * Options:
+     *
+     *  - `long` verbose formatting [false]
+     *
+     * @param {String|Number} val
+     * @param {Object} [options]
+     * @throws {Error} throw an error if val is not a non-empty string or a number
+     * @return {String|Number}
+     * @api public
+     */
+
+    module.exports = function (val, options) {
+      options = options || {};
+      var type = typeof val;
+
+      if (type === 'string' && val.length > 0) {
+        return parse(val);
+      } else if (type === 'number' && isFinite(val)) {
+        return options["long"] ? fmtLong(val) : fmtShort(val);
+      }
+
+      throw new Error('val is not a non-empty string or a valid number. val=' + JSON.stringify(val));
+    };
+    /**
+     * Parse the given `str` and return milliseconds.
+     *
+     * @param {String} str
+     * @return {Number}
+     * @api private
+     */
+
+
+    function parse(str) {
+      str = String(str);
+
+      if (str.length > 100) {
+        return;
+      }
+
+      var match = /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(str);
+
+      if (!match) {
+        return;
+      }
+
+      var n = parseFloat(match[1]);
+      var type = (match[2] || 'ms').toLowerCase();
+
+      switch (type) {
+        case 'years':
+        case 'year':
+        case 'yrs':
+        case 'yr':
+        case 'y':
+          return n * y;
+
+        case 'weeks':
+        case 'week':
+        case 'w':
+          return n * w;
+
+        case 'days':
+        case 'day':
+        case 'd':
+          return n * d;
+
+        case 'hours':
+        case 'hour':
+        case 'hrs':
+        case 'hr':
+        case 'h':
+          return n * h;
+
+        case 'minutes':
+        case 'minute':
+        case 'mins':
+        case 'min':
+        case 'm':
+          return n * m;
+
+        case 'seconds':
+        case 'second':
+        case 'secs':
+        case 'sec':
+        case 's':
+          return n * s;
+
+        case 'milliseconds':
+        case 'millisecond':
+        case 'msecs':
+        case 'msec':
+        case 'ms':
+          return n;
+
+        default:
+          return undefined;
+      }
+    }
+    /**
+     * Short format for `ms`.
+     *
+     * @param {Number} ms
+     * @return {String}
+     * @api private
+     */
+
+
+    function fmtShort(ms) {
+      var msAbs = Math.abs(ms);
+
+      if (msAbs >= d) {
+        return Math.round(ms / d) + 'd';
+      }
+
+      if (msAbs >= h) {
+        return Math.round(ms / h) + 'h';
+      }
+
+      if (msAbs >= m) {
+        return Math.round(ms / m) + 'm';
+      }
+
+      if (msAbs >= s) {
+        return Math.round(ms / s) + 's';
+      }
+
+      return ms + 'ms';
+    }
+    /**
+     * Long format for `ms`.
+     *
+     * @param {Number} ms
+     * @return {String}
+     * @api private
+     */
+
+
+    function fmtLong(ms) {
+      var msAbs = Math.abs(ms);
+
+      if (msAbs >= d) {
+        return plural(ms, msAbs, d, 'day');
+      }
+
+      if (msAbs >= h) {
+        return plural(ms, msAbs, h, 'hour');
+      }
+
+      if (msAbs >= m) {
+        return plural(ms, msAbs, m, 'minute');
+      }
+
+      if (msAbs >= s) {
+        return plural(ms, msAbs, s, 'second');
+      }
+
+      return ms + ' ms';
+    }
+    /**
+     * Pluralization helper.
+     */
+
+
+    function plural(ms, msAbs, n, name) {
+      var isPlural = msAbs >= n * 1.5;
+      return Math.round(ms / n) + ' ' + name + (isPlural ? 's' : '');
+    }
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/engine.io-parser/lib/browser.js":
+  /*!******************************************************!*\
+    !*** ./node_modules/engine.io-parser/lib/browser.js ***!
+    \******************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoParserLibBrowserJs(module, exports, __webpack_require__) {
+    /**
+     * Module dependencies.
+     */
+    var keys = __webpack_require__(
+    /*! ./keys */
+    "./node_modules/engine.io-parser/lib/keys.js");
+
+    var hasBinary = __webpack_require__(
+    /*! has-binary2 */
+    "./node_modules/has-binary2/index.js");
+
+    var sliceBuffer = __webpack_require__(
+    /*! arraybuffer.slice */
+    "./node_modules/arraybuffer.slice/index.js");
+
+    var after = __webpack_require__(
+    /*! after */
+    "./node_modules/after/index.js");
+
+    var utf8 = __webpack_require__(
+    /*! ./utf8 */
+    "./node_modules/engine.io-parser/lib/utf8.js");
+
+    var base64encoder;
+
+    if (typeof ArrayBuffer !== 'undefined') {
+      base64encoder = __webpack_require__(
+      /*! base64-arraybuffer */
+      "./node_modules/base64-arraybuffer/lib/base64-arraybuffer.js");
+    }
+    /**
+     * Check if we are running an android browser. That requires us to use
+     * ArrayBuffer with polling transports...
+     *
+     * http://ghinda.net/jpeg-blob-ajax-android/
+     */
+
+
+    var isAndroid = typeof navigator !== 'undefined' && /Android/i.test(navigator.userAgent);
+    /**
+     * Check if we are running in PhantomJS.
+     * Uploading a Blob with PhantomJS does not work correctly, as reported here:
+     * https://github.com/ariya/phantomjs/issues/11395
+     * @type boolean
+     */
+
+    var isPhantomJS = typeof navigator !== 'undefined' && /PhantomJS/i.test(navigator.userAgent);
+    /**
+     * When true, avoids using Blobs to encode payloads.
+     * @type boolean
+     */
+
+    var dontSendBlobs = isAndroid || isPhantomJS;
+    /**
+     * Current protocol version.
+     */
+
+    exports.protocol = 3;
+    /**
+     * Packet types.
+     */
+
+    var packets = exports.packets = {
+      open: 0 // non-ws
+      ,
+      close: 1 // non-ws
+      ,
+      ping: 2,
+      pong: 3,
+      message: 4,
+      upgrade: 5,
+      noop: 6
+    };
+    var packetslist = keys(packets);
+    /**
+     * Premade error packet.
+     */
+
+    var err = {
+      type: 'error',
+      data: 'parser error'
+    };
+    /**
+     * Create a blob api even for blob builder when vendor prefixes exist
+     */
+
+    var Blob = __webpack_require__(
+    /*! blob */
+    "./node_modules/blob/index.js");
+    /**
+     * Encodes a packet.
+     *
+     *     <packet type id> [ <data> ]
+     *
+     * Example:
+     *
+     *     5hello world
+     *     3
+     *     4
+     *
+     * Binary is encoded in an identical principle
+     *
+     * @api private
+     */
+
+
+    exports.encodePacket = function (packet, supportsBinary, utf8encode, callback) {
+      if (typeof supportsBinary === 'function') {
+        callback = supportsBinary;
+        supportsBinary = false;
+      }
+
+      if (typeof utf8encode === 'function') {
+        callback = utf8encode;
+        utf8encode = null;
+      }
+
+      var data = packet.data === undefined ? undefined : packet.data.buffer || packet.data;
+
+      if (typeof ArrayBuffer !== 'undefined' && data instanceof ArrayBuffer) {
+        return encodeArrayBuffer(packet, supportsBinary, callback);
+      } else if (typeof Blob !== 'undefined' && data instanceof Blob) {
+        return encodeBlob(packet, supportsBinary, callback);
+      } // might be an object with { base64: true, data: dataAsBase64String }
+
+
+      if (data && data.base64) {
+        return encodeBase64Object(packet, callback);
+      } // Sending data as a utf-8 string
+
+
+      var encoded = packets[packet.type]; // data fragment is optional
+
+      if (undefined !== packet.data) {
+        encoded += utf8encode ? utf8.encode(String(packet.data), {
+          strict: false
+        }) : String(packet.data);
+      }
+
+      return callback('' + encoded);
+    };
+
+    function encodeBase64Object(packet, callback) {
+      // packet data is an object { base64: true, data: dataAsBase64String }
+      var message = 'b' + exports.packets[packet.type] + packet.data.data;
+      return callback(message);
+    }
+    /**
+     * Encode packet helpers for binary types
+     */
+
+
+    function encodeArrayBuffer(packet, supportsBinary, callback) {
+      if (!supportsBinary) {
+        return exports.encodeBase64Packet(packet, callback);
+      }
+
+      var data = packet.data;
+      var contentArray = new Uint8Array(data);
+      var resultBuffer = new Uint8Array(1 + data.byteLength);
+      resultBuffer[0] = packets[packet.type];
+
+      for (var i = 0; i < contentArray.length; i++) {
+        resultBuffer[i + 1] = contentArray[i];
+      }
+
+      return callback(resultBuffer.buffer);
+    }
+
+    function encodeBlobAsArrayBuffer(packet, supportsBinary, callback) {
+      if (!supportsBinary) {
+        return exports.encodeBase64Packet(packet, callback);
+      }
+
+      var fr = new FileReader();
+
+      fr.onload = function () {
+        exports.encodePacket({
+          type: packet.type,
+          data: fr.result
+        }, supportsBinary, true, callback);
+      };
+
+      return fr.readAsArrayBuffer(packet.data);
+    }
+
+    function encodeBlob(packet, supportsBinary, callback) {
+      if (!supportsBinary) {
+        return exports.encodeBase64Packet(packet, callback);
+      }
+
+      if (dontSendBlobs) {
+        return encodeBlobAsArrayBuffer(packet, supportsBinary, callback);
+      }
+
+      var length = new Uint8Array(1);
+      length[0] = packets[packet.type];
+      var blob = new Blob([length.buffer, packet.data]);
+      return callback(blob);
+    }
+    /**
+     * Encodes a packet with binary data in a base64 string
+     *
+     * @param {Object} packet, has `type` and `data`
+     * @return {String} base64 encoded message
+     */
+
+
+    exports.encodeBase64Packet = function (packet, callback) {
+      var message = 'b' + exports.packets[packet.type];
+
+      if (typeof Blob !== 'undefined' && packet.data instanceof Blob) {
+        var fr = new FileReader();
+
+        fr.onload = function () {
+          var b64 = fr.result.split(',')[1];
+          callback(message + b64);
+        };
+
+        return fr.readAsDataURL(packet.data);
+      }
+
+      var b64data;
+
+      try {
+        b64data = String.fromCharCode.apply(null, new Uint8Array(packet.data));
+      } catch (e) {
+        // iPhone Safari doesn't let you apply with typed arrays
+        var typed = new Uint8Array(packet.data);
+        var basic = new Array(typed.length);
+
+        for (var i = 0; i < typed.length; i++) {
+          basic[i] = typed[i];
+        }
+
+        b64data = String.fromCharCode.apply(null, basic);
+      }
+
+      message += btoa(b64data);
+      return callback(message);
+    };
+    /**
+     * Decodes a packet. Changes format to Blob if requested.
+     *
+     * @return {Object} with `type` and `data` (if any)
+     * @api private
+     */
+
+
+    exports.decodePacket = function (data, binaryType, utf8decode) {
+      if (data === undefined) {
+        return err;
+      } // String data
+
+
+      if (typeof data === 'string') {
+        if (data.charAt(0) === 'b') {
+          return exports.decodeBase64Packet(data.substr(1), binaryType);
+        }
+
+        if (utf8decode) {
+          data = tryDecode(data);
+
+          if (data === false) {
+            return err;
+          }
+        }
+
+        var type = data.charAt(0);
+
+        if (Number(type) != type || !packetslist[type]) {
+          return err;
+        }
+
+        if (data.length > 1) {
+          return {
+            type: packetslist[type],
+            data: data.substring(1)
+          };
+        } else {
+          return {
+            type: packetslist[type]
+          };
+        }
+      }
+
+      var asArray = new Uint8Array(data);
+      var type = asArray[0];
+      var rest = sliceBuffer(data, 1);
+
+      if (Blob && binaryType === 'blob') {
+        rest = new Blob([rest]);
+      }
+
+      return {
+        type: packetslist[type],
+        data: rest
+      };
+    };
+
+    function tryDecode(data) {
+      try {
+        data = utf8.decode(data, {
+          strict: false
+        });
+      } catch (e) {
+        return false;
+      }
+
+      return data;
+    }
+    /**
+     * Decodes a packet encoded in a base64 string
+     *
+     * @param {String} base64 encoded message
+     * @return {Object} with `type` and `data` (if any)
+     */
+
+
+    exports.decodeBase64Packet = function (msg, binaryType) {
+      var type = packetslist[msg.charAt(0)];
+
+      if (!base64encoder) {
+        return {
+          type: type,
+          data: {
+            base64: true,
+            data: msg.substr(1)
+          }
+        };
+      }
+
+      var data = base64encoder.decode(msg.substr(1));
+
+      if (binaryType === 'blob' && Blob) {
+        data = new Blob([data]);
+      }
+
+      return {
+        type: type,
+        data: data
+      };
+    };
+    /**
+     * Encodes multiple messages (payload).
+     *
+     *     <length>:data
+     *
+     * Example:
+     *
+     *     11:hello world2:hi
+     *
+     * If any contents are binary, they will be encoded as base64 strings. Base64
+     * encoded strings are marked with a b before the length specifier
+     *
+     * @param {Array} packets
+     * @api private
+     */
+
+
+    exports.encodePayload = function (packets, supportsBinary, callback) {
+      if (typeof supportsBinary === 'function') {
+        callback = supportsBinary;
+        supportsBinary = null;
+      }
+
+      var isBinary = hasBinary(packets);
+
+      if (supportsBinary && isBinary) {
+        if (Blob && !dontSendBlobs) {
+          return exports.encodePayloadAsBlob(packets, callback);
+        }
+
+        return exports.encodePayloadAsArrayBuffer(packets, callback);
+      }
+
+      if (!packets.length) {
+        return callback('0:');
+      }
+
+      function setLengthHeader(message) {
+        return message.length + ':' + message;
+      }
+
+      function encodeOne(packet, doneCallback) {
+        exports.encodePacket(packet, !isBinary ? false : supportsBinary, false, function (message) {
+          doneCallback(null, setLengthHeader(message));
+        });
+      }
+
+      map(packets, encodeOne, function (err, results) {
+        return callback(results.join(''));
+      });
+    };
+    /**
+     * Async array map using after
+     */
+
+
+    function map(ary, each, done) {
+      var result = new Array(ary.length);
+      var next = after(ary.length, done);
+
+      var eachWithIndex = function eachWithIndex(i, el, cb) {
+        each(el, function (error, msg) {
+          result[i] = msg;
+          cb(error, result);
+        });
+      };
+
+      for (var i = 0; i < ary.length; i++) {
+        eachWithIndex(i, ary[i], next);
+      }
+    }
+    /*
+     * Decodes data when a payload is maybe expected. Possible binary contents are
+     * decoded from their base64 representation
+     *
+     * @param {String} data, callback method
+     * @api public
+     */
+
+
+    exports.decodePayload = function (data, binaryType, callback) {
+      if (typeof data !== 'string') {
+        return exports.decodePayloadAsBinary(data, binaryType, callback);
+      }
+
+      if (typeof binaryType === 'function') {
+        callback = binaryType;
+        binaryType = null;
+      }
+
+      var packet;
+
+      if (data === '') {
+        // parser error - ignoring payload
+        return callback(err, 0, 1);
+      }
+
+      var length = '',
+          n,
+          msg;
+
+      for (var i = 0, l = data.length; i < l; i++) {
+        var chr = data.charAt(i);
+
+        if (chr !== ':') {
+          length += chr;
+          continue;
+        }
+
+        if (length === '' || length != (n = Number(length))) {
+          // parser error - ignoring payload
+          return callback(err, 0, 1);
+        }
+
+        msg = data.substr(i + 1, n);
+
+        if (length != msg.length) {
+          // parser error - ignoring payload
+          return callback(err, 0, 1);
+        }
+
+        if (msg.length) {
+          packet = exports.decodePacket(msg, binaryType, false);
+
+          if (err.type === packet.type && err.data === packet.data) {
+            // parser error in individual packet - ignoring payload
+            return callback(err, 0, 1);
+          }
+
+          var ret = callback(packet, i + n, l);
+          if (false === ret) return;
+        } // advance cursor
+
+
+        i += n;
+        length = '';
+      }
+
+      if (length !== '') {
+        // parser error - ignoring payload
+        return callback(err, 0, 1);
+      }
+    };
+    /**
+     * Encodes multiple messages (payload) as binary.
+     *
+     * <1 = binary, 0 = string><number from 0-9><number from 0-9>[...]<number
+     * 255><data>
+     *
+     * Example:
+     * 1 3 255 1 2 3, if the binary contents are interpreted as 8 bit integers
+     *
+     * @param {Array} packets
+     * @return {ArrayBuffer} encoded payload
+     * @api private
+     */
+
+
+    exports.encodePayloadAsArrayBuffer = function (packets, callback) {
+      if (!packets.length) {
+        return callback(new ArrayBuffer(0));
+      }
+
+      function encodeOne(packet, doneCallback) {
+        exports.encodePacket(packet, true, true, function (data) {
+          return doneCallback(null, data);
+        });
+      }
+
+      map(packets, encodeOne, function (err, encodedPackets) {
+        var totalLength = encodedPackets.reduce(function (acc, p) {
+          var len;
+
+          if (typeof p === 'string') {
+            len = p.length;
+          } else {
+            len = p.byteLength;
+          }
+
+          return acc + len.toString().length + len + 2; // string/binary identifier + separator = 2
+        }, 0);
+        var resultArray = new Uint8Array(totalLength);
+        var bufferIndex = 0;
+        encodedPackets.forEach(function (p) {
+          var isString = typeof p === 'string';
+          var ab = p;
+
+          if (isString) {
+            var view = new Uint8Array(p.length);
+
+            for (var i = 0; i < p.length; i++) {
+              view[i] = p.charCodeAt(i);
+            }
+
+            ab = view.buffer;
+          }
+
+          if (isString) {
+            // not true binary
+            resultArray[bufferIndex++] = 0;
+          } else {
+            // true binary
+            resultArray[bufferIndex++] = 1;
+          }
+
+          var lenStr = ab.byteLength.toString();
+
+          for (var i = 0; i < lenStr.length; i++) {
+            resultArray[bufferIndex++] = parseInt(lenStr[i]);
+          }
+
+          resultArray[bufferIndex++] = 255;
+          var view = new Uint8Array(ab);
+
+          for (var i = 0; i < view.length; i++) {
+            resultArray[bufferIndex++] = view[i];
+          }
+        });
+        return callback(resultArray.buffer);
+      });
+    };
+    /**
+     * Encode as Blob
+     */
+
+
+    exports.encodePayloadAsBlob = function (packets, callback) {
+      function encodeOne(packet, doneCallback) {
+        exports.encodePacket(packet, true, true, function (encoded) {
+          var binaryIdentifier = new Uint8Array(1);
+          binaryIdentifier[0] = 1;
+
+          if (typeof encoded === 'string') {
+            var view = new Uint8Array(encoded.length);
+
+            for (var i = 0; i < encoded.length; i++) {
+              view[i] = encoded.charCodeAt(i);
+            }
+
+            encoded = view.buffer;
+            binaryIdentifier[0] = 0;
+          }
+
+          var len = encoded instanceof ArrayBuffer ? encoded.byteLength : encoded.size;
+          var lenStr = len.toString();
+          var lengthAry = new Uint8Array(lenStr.length + 1);
+
+          for (var i = 0; i < lenStr.length; i++) {
+            lengthAry[i] = parseInt(lenStr[i]);
+          }
+
+          lengthAry[lenStr.length] = 255;
+
+          if (Blob) {
+            var blob = new Blob([binaryIdentifier.buffer, lengthAry.buffer, encoded]);
+            doneCallback(null, blob);
+          }
+        });
+      }
+
+      map(packets, encodeOne, function (err, results) {
+        return callback(new Blob(results));
+      });
+    };
+    /*
+     * Decodes data when a payload is maybe expected. Strings are decoded by
+     * interpreting each byte as a key code for entries marked to start with 0. See
+     * description of encodePayloadAsBinary
+     *
+     * @param {ArrayBuffer} data, callback method
+     * @api public
+     */
+
+
+    exports.decodePayloadAsBinary = function (data, binaryType, callback) {
+      if (typeof binaryType === 'function') {
+        callback = binaryType;
+        binaryType = null;
+      }
+
+      var bufferTail = data;
+      var buffers = [];
+
+      while (bufferTail.byteLength > 0) {
+        var tailArray = new Uint8Array(bufferTail);
+        var isString = tailArray[0] === 0;
+        var msgLength = '';
+
+        for (var i = 1;; i++) {
+          if (tailArray[i] === 255) break; // 310 = char length of Number.MAX_VALUE
+
+          if (msgLength.length > 310) {
+            return callback(err, 0, 1);
+          }
+
+          msgLength += tailArray[i];
+        }
+
+        bufferTail = sliceBuffer(bufferTail, 2 + msgLength.length);
+        msgLength = parseInt(msgLength);
+        var msg = sliceBuffer(bufferTail, 0, msgLength);
+
+        if (isString) {
+          try {
+            msg = String.fromCharCode.apply(null, new Uint8Array(msg));
+          } catch (e) {
+            // iPhone Safari doesn't let you apply to typed arrays
+            var typed = new Uint8Array(msg);
+            msg = '';
+
+            for (var i = 0; i < typed.length; i++) {
+              msg += String.fromCharCode(typed[i]);
+            }
+          }
+        }
+
+        buffers.push(msg);
+        bufferTail = sliceBuffer(bufferTail, msgLength);
+      }
+
+      var total = buffers.length;
+      buffers.forEach(function (buffer, i) {
+        callback(exports.decodePacket(buffer, binaryType, true), i, total);
+      });
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/engine.io-parser/lib/keys.js":
+  /*!***************************************************!*\
+    !*** ./node_modules/engine.io-parser/lib/keys.js ***!
+    \***************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoParserLibKeysJs(module, exports) {
+    /**
+     * Gets the keys for an object.
+     *
+     * @return {Array} keys
+     * @api private
+     */
+    module.exports = Object.keys || function keys(obj) {
+      var arr = [];
+      var has = Object.prototype.hasOwnProperty;
+
+      for (var i in obj) {
+        if (has.call(obj, i)) {
+          arr.push(i);
+        }
+      }
+
+      return arr;
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/engine.io-parser/lib/utf8.js":
+  /*!***************************************************!*\
+    !*** ./node_modules/engine.io-parser/lib/utf8.js ***!
+    \***************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesEngineIoParserLibUtf8Js(module, exports) {
+    /*! https://mths.be/utf8js v2.1.2 by @mathias */
+    var stringFromCharCode = String.fromCharCode; // Taken from https://mths.be/punycode
+
+    function ucs2decode(string) {
+      var output = [];
+      var counter = 0;
+      var length = string.length;
+      var value;
+      var extra;
+
+      while (counter < length) {
+        value = string.charCodeAt(counter++);
+
+        if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
+          // high surrogate, and there is a next character
+          extra = string.charCodeAt(counter++);
+
+          if ((extra & 0xFC00) == 0xDC00) {
+            // low surrogate
+            output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
+          } else {
+            // unmatched surrogate; only append this code unit, in case the next
+            // code unit is the high surrogate of a surrogate pair
+            output.push(value);
+            counter--;
+          }
+        } else {
+          output.push(value);
+        }
+      }
+
+      return output;
+    } // Taken from https://mths.be/punycode
+
+
+    function ucs2encode(array) {
+      var length = array.length;
+      var index = -1;
+      var value;
+      var output = '';
+
+      while (++index < length) {
+        value = array[index];
+
+        if (value > 0xFFFF) {
+          value -= 0x10000;
+          output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
+          value = 0xDC00 | value & 0x3FF;
+        }
+
+        output += stringFromCharCode(value);
+      }
+
+      return output;
+    }
+
+    function checkScalarValue(codePoint, strict) {
+      if (codePoint >= 0xD800 && codePoint <= 0xDFFF) {
+        if (strict) {
+          throw Error('Lone surrogate U+' + codePoint.toString(16).toUpperCase() + ' is not a scalar value');
+        }
+
+        return false;
+      }
+
+      return true;
+    }
+    /*--------------------------------------------------------------------------*/
+
+
+    function createByte(codePoint, shift) {
+      return stringFromCharCode(codePoint >> shift & 0x3F | 0x80);
+    }
+
+    function encodeCodePoint(codePoint, strict) {
+      if ((codePoint & 0xFFFFFF80) == 0) {
+        // 1-byte sequence
+        return stringFromCharCode(codePoint);
+      }
+
+      var symbol = '';
+
+      if ((codePoint & 0xFFFFF800) == 0) {
+        // 2-byte sequence
+        symbol = stringFromCharCode(codePoint >> 6 & 0x1F | 0xC0);
+      } else if ((codePoint & 0xFFFF0000) == 0) {
+        // 3-byte sequence
+        if (!checkScalarValue(codePoint, strict)) {
+          codePoint = 0xFFFD;
+        }
+
+        symbol = stringFromCharCode(codePoint >> 12 & 0x0F | 0xE0);
+        symbol += createByte(codePoint, 6);
+      } else if ((codePoint & 0xFFE00000) == 0) {
+        // 4-byte sequence
+        symbol = stringFromCharCode(codePoint >> 18 & 0x07 | 0xF0);
+        symbol += createByte(codePoint, 12);
+        symbol += createByte(codePoint, 6);
+      }
+
+      symbol += stringFromCharCode(codePoint & 0x3F | 0x80);
+      return symbol;
+    }
+
+    function utf8encode(string, opts) {
+      opts = opts || {};
+      var strict = false !== opts.strict;
+      var codePoints = ucs2decode(string);
+      var length = codePoints.length;
+      var index = -1;
+      var codePoint;
+      var byteString = '';
+
+      while (++index < length) {
+        codePoint = codePoints[index];
+        byteString += encodeCodePoint(codePoint, strict);
+      }
+
+      return byteString;
+    }
+    /*--------------------------------------------------------------------------*/
+
+
+    function readContinuationByte() {
+      if (byteIndex >= byteCount) {
+        throw Error('Invalid byte index');
+      }
+
+      var continuationByte = byteArray[byteIndex] & 0xFF;
+      byteIndex++;
+
+      if ((continuationByte & 0xC0) == 0x80) {
+        return continuationByte & 0x3F;
+      } // If we end up here, it’s not a continuation byte
+
+
+      throw Error('Invalid continuation byte');
+    }
+
+    function decodeSymbol(strict) {
+      var byte1;
+      var byte2;
+      var byte3;
+      var byte4;
+      var codePoint;
+
+      if (byteIndex > byteCount) {
+        throw Error('Invalid byte index');
+      }
+
+      if (byteIndex == byteCount) {
+        return false;
+      } // Read first byte
+
+
+      byte1 = byteArray[byteIndex] & 0xFF;
+      byteIndex++; // 1-byte sequence (no continuation bytes)
+
+      if ((byte1 & 0x80) == 0) {
+        return byte1;
+      } // 2-byte sequence
+
+
+      if ((byte1 & 0xE0) == 0xC0) {
+        byte2 = readContinuationByte();
+        codePoint = (byte1 & 0x1F) << 6 | byte2;
+
+        if (codePoint >= 0x80) {
+          return codePoint;
+        } else {
+          throw Error('Invalid continuation byte');
+        }
+      } // 3-byte sequence (may include unpaired surrogates)
+
+
+      if ((byte1 & 0xF0) == 0xE0) {
+        byte2 = readContinuationByte();
+        byte3 = readContinuationByte();
+        codePoint = (byte1 & 0x0F) << 12 | byte2 << 6 | byte3;
+
+        if (codePoint >= 0x0800) {
+          return checkScalarValue(codePoint, strict) ? codePoint : 0xFFFD;
+        } else {
+          throw Error('Invalid continuation byte');
+        }
+      } // 4-byte sequence
+
+
+      if ((byte1 & 0xF8) == 0xF0) {
+        byte2 = readContinuationByte();
+        byte3 = readContinuationByte();
+        byte4 = readContinuationByte();
+        codePoint = (byte1 & 0x07) << 0x12 | byte2 << 0x0C | byte3 << 0x06 | byte4;
+
+        if (codePoint >= 0x010000 && codePoint <= 0x10FFFF) {
+          return codePoint;
+        }
+      }
+
+      throw Error('Invalid UTF-8 detected');
+    }
+
+    var byteArray;
+    var byteCount;
+    var byteIndex;
+
+    function utf8decode(byteString, opts) {
+      opts = opts || {};
+      var strict = false !== opts.strict;
+      byteArray = ucs2decode(byteString);
+      byteCount = byteArray.length;
+      byteIndex = 0;
+      var codePoints = [];
+      var tmp;
+
+      while ((tmp = decodeSymbol(strict)) !== false) {
+        codePoints.push(tmp);
+      }
+
+      return ucs2encode(codePoints);
+    }
+
+    module.exports = {
+      version: '2.1.2',
+      encode: utf8encode,
+      decode: utf8decode
+    };
+    /***/
+  },
+
+  /***/
+  "./node_modules/has-binary2/index.js":
+  /*!*******************************************!*\
+    !*** ./node_modules/has-binary2/index.js ***!
+    \*******************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesHasBinary2IndexJs(module, exports, __webpack_require__) {
+    /* global Blob File */
+
+    /*
+     * Module requirements.
+     */
+    var isArray = __webpack_require__(
+    /*! isarray */
+    "./node_modules/has-binary2/node_modules/isarray/index.js");
+
+    var toString = Object.prototype.toString;
+    var withNativeBlob = typeof Blob === 'function' || typeof Blob !== 'undefined' && toString.call(Blob) === '[object BlobConstructor]';
+    var withNativeFile = typeof File === 'function' || typeof File !== 'undefined' && toString.call(File) === '[object FileConstructor]';
+    /**
+     * Module exports.
+     */
+
+    module.exports = hasBinary;
+    /**
+     * Checks for binary data.
+     *
+     * Supports Buffer, ArrayBuffer, Blob and File.
+     *
+     * @param {Object} anything
+     * @api public
+     */
+
+    function hasBinary(obj) {
+      if (!obj || typeof obj !== 'object') {
+        return false;
+      }
+
+      if (isArray(obj)) {
+        for (var i = 0, l = obj.length; i < l; i++) {
+          if (hasBinary(obj[i])) {
+            return true;
+          }
+        }
+
+        return false;
+      }
+
+      if (typeof Buffer === 'function' && Buffer.isBuffer && Buffer.isBuffer(obj) || typeof ArrayBuffer === 'function' && obj instanceof ArrayBuffer || withNativeBlob && obj instanceof Blob || withNativeFile && obj instanceof File) {
+        return true;
+      } // see: https://github.com/Automattic/has-binary/pull/4
+
+
+      if (obj.toJSON && typeof obj.toJSON === 'function' && arguments.length === 1) {
+        return hasBinary(obj.toJSON(), true);
+      }
+
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key) && hasBinary(obj[key])) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/has-binary2/node_modules/isarray/index.js":
+  /*!****************************************************************!*\
+    !*** ./node_modules/has-binary2/node_modules/isarray/index.js ***!
+    \****************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesHasBinary2Node_modulesIsarrayIndexJs(module, exports) {
+    var toString = {}.toString;
+
+    module.exports = Array.isArray || function (arr) {
+      return toString.call(arr) == '[object Array]';
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/has-cors/index.js":
+  /*!****************************************!*\
+    !*** ./node_modules/has-cors/index.js ***!
+    \****************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesHasCorsIndexJs(module, exports) {
+    /**
+     * Module exports.
+     *
+     * Logic borrowed from Modernizr:
+     *
+     *   - https://github.com/Modernizr/Modernizr/blob/master/feature-detects/cors.js
+     */
+    try {
+      module.exports = typeof XMLHttpRequest !== 'undefined' && 'withCredentials' in new XMLHttpRequest();
+    } catch (err) {
+      // if XMLHttp support is disabled in IE then it will throw
+      // when trying to create
+      module.exports = false;
+    }
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/indexof/index.js":
+  /*!***************************************!*\
+    !*** ./node_modules/indexof/index.js ***!
+    \***************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesIndexofIndexJs(module, exports) {
+    var indexOf = [].indexOf;
+
+    module.exports = function (arr, obj) {
+      if (indexOf) return arr.indexOf(obj);
+
+      for (var i = 0; i < arr.length; ++i) {
+        if (arr[i] === obj) return i;
+      }
+
+      return -1;
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/parseqs/index.js":
+  /*!***************************************!*\
+    !*** ./node_modules/parseqs/index.js ***!
+    \***************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesParseqsIndexJs(module, exports) {
+    /**
+     * Compiles a querystring
+     * Returns string representation of the object
+     *
+     * @param {Object}
+     * @api private
+     */
+    exports.encode = function (obj) {
+      var str = '';
+
+      for (var i in obj) {
+        if (obj.hasOwnProperty(i)) {
+          if (str.length) str += '&';
+          str += encodeURIComponent(i) + '=' + encodeURIComponent(obj[i]);
+        }
+      }
+
+      return str;
+    };
+    /**
+     * Parses a simple querystring into an object
+     *
+     * @param {String} qs
+     * @api private
+     */
+
+
+    exports.decode = function (qs) {
+      var qry = {};
+      var pairs = qs.split('&');
+
+      for (var i = 0, l = pairs.length; i < l; i++) {
+        var pair = pairs[i].split('=');
+        qry[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+      }
+
+      return qry;
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/parseuri/index.js":
+  /*!****************************************!*\
+    !*** ./node_modules/parseuri/index.js ***!
+    \****************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesParseuriIndexJs(module, exports) {
+    /**
+     * Parses an URI
+     *
+     * @author Steven Levithan <stevenlevithan.com> (MIT license)
+     * @api private
+     */
+    var re = /^(?:(?![^:@]+:[^:@\/]*@)(http|https|ws|wss):\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?((?:[a-f0-9]{0,4}:){2,7}[a-f0-9]{0,4}|[^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/;
+    var parts = ['source', 'protocol', 'authority', 'userInfo', 'user', 'password', 'host', 'port', 'relative', 'path', 'directory', 'file', 'query', 'anchor'];
+
+    module.exports = function parseuri(str) {
+      var src = str,
+          b = str.indexOf('['),
+          e = str.indexOf(']');
+
+      if (b != -1 && e != -1) {
+        str = str.substring(0, b) + str.substring(b, e).replace(/:/g, ';') + str.substring(e, str.length);
+      }
+
+      var m = re.exec(str || ''),
+          uri = {},
+          i = 14;
+
+      while (i--) {
+        uri[parts[i]] = m[i] || '';
+      }
+
+      if (b != -1 && e != -1) {
+        uri.source = src;
+        uri.host = uri.host.substring(1, uri.host.length - 1).replace(/;/g, ':');
+        uri.authority = uri.authority.replace('[', '').replace(']', '').replace(/;/g, ':');
+        uri.ipv6uri = true;
+      }
+
+      return uri;
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/components/chat-page/chat-page.component.html":
+  /*!*****************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/chat-page/chat-page.component.html ***!
+    \*****************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppComponentsChatPageChatPageComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<div class=\"structure\">\n    <div class=\"header\">\n      <img *ngIf=\"chatData['image'] == undefined\" class=\"profile\" src=\"../../../assets/default-image.jpeg\"/>\n      <img *ngIf=\"chatData['image'] != undefined\" class=\"profile\" src=\"{{ chatData['image'] }}\"/>\n      <div> {{ chatData['name'] }} </div>\n    </div>\n\n    <div  class=\"msg-cont\">\n      <ng-container *ngFor=\"let data of chatList; index as index\">\n        <mat-card *ngIf=\"chatData.userId == data['msg_from']\" class=\"msg-from\"> {{ data['msg']}} </mat-card>\n        <mat-card *ngIf=\"chatData.userId == data['msg_to']\" class=\"msg-to\"> {{ data['msg'] }}</mat-card>\n      </ng-container>\n    </div>\n    \n    <div class=\"footer\" [formGroup]=\"msgForm\">\n      <input formControlName=\"msg\" matInput placeholder=\"Type a message\" class=\"text-box\" type=\"text\" />\n      <img (click)=\"send()\" class=\"send-button\" src=\"../../../assets/send.jpeg\" />\n    </div>\n\n</div>";
+    /***/
+  },
+
+  /***/
   "./node_modules/raw-loader/dist/cjs.js!./src/app/components/initial-page/initial-page.component.html":
   /*!***********************************************************************************************************!*\
     !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/initial-page/initial-page.component.html ***!
@@ -90132,7 +94587,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"structure\">\n  <div class=\"text\">\n    DEMO\n  </div>\n</div>";
+    __webpack_exports__["default"] = "<div class=\"structure\">\n  <div class=\"text1\">\n    DEMO\n  </div>\n  <div class=\"text2\">\n    created by SUMAN\n  </div>\n</div>";
     /***/
   },
 
@@ -90152,7 +94607,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"structure\">\n  <div class=\"header\">\n  </div>\n\n  <div class=\"body\">\n\n    <div class=\"status\">\n    </div>\n\n    <div class=\"msg-body\">\n      <ng-container *ngFor=\"let val of msgData; index as ind\">\n        <div class=\"msg-cont\">\n          <div class=\"profile-img\">\n            <img src=\"\" alt=\"none\">\n          </div>\n          <div class=\"profile-name\">\n            {{ val.name }}\n          </div>\n        </div>\n        <mat-divider></mat-divider>\n      </ng-container>\n    </div>\n\n  </div>\n\n</div>";
+    __webpack_exports__["default"] = "<div *ngIf=\"apiState\" class=\"api-progress\">\n  <img class=\"api-progress-img\" src=\"../../../assets/giphy.gif\"/>\n</div>\n\n<div class=\"structure\">\n  <div class=\"header\">\n    \n    <label for=\"image-input\">  \n      <img *ngIf=\"!isShowProfile\" class=\"img-upld\" src=\"../../../assets/upload-image.png\">\n    </label>\n    <input id=\"image-input\" type=\"file\" (change)=\"onUpload($event)\" accept=\"image/*\" style=\"display: none;\"/>\n     \n    <img *ngIf=\"!isShowProfile && userProfileImage == undefined\" class=\"profile\" (click)=\"showProfile()\" src=\"../../../assets/default-image.jpeg\"/>\n    <img *ngIf=\"!isShowProfile && userProfileImage != undefined\" class=\"profile\" (click)=\"showProfile()\" src=\"{{ userProfileImage }}\"/>\n  </div>\n\n  <!--user profile child comp-->\n  <app-profile-info *ngIf='isShowProfile' class=\"body\" [userProfileImage]='userProfileImage'  [profileData]='userInfo'></app-profile-info>\n\n  <div *ngIf='!isShowProfile' class=\"body\">\n\n    <div class=\"nav-header\">\n      <div (click)=\"activeNav(activeStatus.HOME)\" [ngClass]=\" activeHeader.home ? 'nav-header-item-active' : 'nav-header-item-inactive'\">\n        HOME\n      </div>\n      <div (click)=\"activeNav(activeStatus.CHAT)\" [ngClass]=\" activeHeader.chat ? 'nav-header-item-active' : 'nav-header-item-inactive'\">\n        CHAT\n      </div>\n      <div (click)=\"activeNav(activeStatus.PEOPLE)\" [ngClass]=\" activeHeader.people ? 'nav-header-item-active' : 'nav-header-item-inactive'\">\n        PEOPLE\n      </div>\n    </div>\n\n<!-- home body  -->\n    <div *ngIf=\"activeHeader.home\" class=\"home-body\">\n      <div *ngFor=\"let data of timeLine;index as index\">\n        <div class=\"home-cont\">\n          <div class=\"body-nm\"> {{ data['name'] }} </div>\n          <img class=\"body-img\" src=\"{{ data['image'] }}\">\n        </div>\n      </div>\n    </div>\n\n<!-- chat body -->\n    <div *ngIf=\"activeHeader.chat\" class=\"chat-body\">\n      <div *ngFor=\"let data of chatHistory;index as index\" (click)=\"selectChatHistory(index)\">\n        <div class=\"people-rec\">\n          <img *ngIf=\"data['image'] == undefined\" class=\"people-img\" src=\"../../../assets/default-image.jpeg\">\n          <img *ngIf=\"data['image'] != undefined\" class=\"people-img\" src=\"{{ data['image'] }}\"/>\n          <div class=\"people-name\"> {{ data[\"name\"] }} </div>\n        </div>\n      </div>\n    </div>\n<!-- people info -->\n    <div *ngIf=\"activeHeader.people\" class=\"people-body\">\n      <div *ngFor=\"let data of peopleInfo;index as index\" (click)=\"selectPeople(index)\">\n        <div class=\"people-rec\">\n          <img *ngIf=\"data['image'] == undefined\" class=\"people-img\" src=\"../../../assets/default-image.jpeg\">\n          <img *ngIf=\"data['image'] != undefined\" class=\"people-img\" src=\"{{ data['image'] }}\"/>\n          <div class=\"people-name\"> {{ data[\"name\"] }} </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n\n</div>\n\n\n";
     /***/
   },
 
@@ -90172,7 +94627,3357 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div *ngIf=\"apiState\" class=\"api-progress\">\n  <img class=\"api-progress-img\" src=\"../../../assets/giphy.gif\"/>\n</div>\n\n<div *ngIf=\"signupStatus\" class=\"popup-signup\">\n  <mat-card class=\"popup-content\">\n    succesfully sign up\n  </mat-card>\n</div>\n\n<div class=\"structure\">\n  <div class=\" header\">\n  </div>\n  <div class=\"body\">\n    <mat-card class=\"login-box\">\n      <div class=\"tab\">\n        <div [ngClass]=\"toggle ? 'tab-cont-active' : 'tab-cont-not-active'\"  (click)=\"logInForm($event)\">Log In</div>\n        <div [ngClass]=\"!toggle ? 'tab-cont-active' : 'tab-cont-not-active'\" style=\"margin-left: 1px;\"  (click)=\"signupForm($event)\">Sign Up</div>\n      </div>\n      <div *ngIf=\"toggle;else signup\" >  \n        <form [formGroup]=\"loginFormGroup\" (ngSubmit)=\"logIn()\" class=\"login-form\">\n\n          <mat-form-field class=\"text-form-field-li\"  appearance=\"outline\">\n            <mat-label>User Id</mat-label>\n            <input formControlName=\"userId\" matInput>\n          </mat-form-field>\n\n          <mat-form-field class=\"text-form-field-li\"  appearance=\"outline\">\n            <mat-label>Password</mat-label>\n            <input type=\"password\" formControlName=\"password\"  matInput>\n          </mat-form-field>\n          <input [ngClass]=\"loginFormGroup.valid ? 'submit-button' : 'submit-button-disable'\" \n                 [disabled]=\"!loginFormGroup.valid\" type=\"submit\"  value=\"Log In\">\n        </form>\n      </div>\n    </mat-card>\n  </div>\n  \n  <ng-template #signup>\n    <form [formGroup]=\"signupFormFroup\" (ngSubmit)=\"signUp()\" class=\"login-form\">\n\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>Name</mat-label>\n        <input formControlName=\"name\" matInput>\n      </mat-form-field>\n\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>User Id</mat-label>\n        <input formControlName=\"userId\" matInput>\n      </mat-form-field>\n\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>Password</mat-label>\n        <input type=\"password\" formControlName=\"password\" matInput>\n      </mat-form-field>\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>Contact</mat-label>\n        <input formControlName=\"phoneNo\" type=\"number\" matInput>\n      </mat-form-field>                  \n      <input [ngClass]=\"signupFormFroup.valid ? 'submit-button' : 'submit-button-disable'\" [disabled]=\"!signupFormFroup.valid\" type=\"submit\"  value=\"Sign Up\">\n    </form>\n  </ng-template>\n</div>\n\n\n\n\n<!-- temp html\n\n  <input  class=\"text-form-field-su\" \n                  type=\"text\"     \n                  formControlName=\"name\"\n                  placeholder=\"name\"\n                  required>  \n      <input  class=\"text-form-field-su\" \n                  type=\"text\"     \n                  formControlName=\"userId\"\n                  placeholder=\"User Name\"\n                  required>  \n      <input  class=\"text-form-field-su\" \n                  type=\"password\"     \n                  formControlName=\"password\"\n                  placeholder=\"password\"\n                  required>  \n      <input  class=\"text-form-field-su\" \n                  type=\"number\"     \n                  formControlName=\"phoneNo\"\n                  placeholder=\"contact\"\n                  required>  \n\n      <input  class=\"text-form-field-li\" \n                  type=\"text\"     \n                  formControlName=\"userId\"\n                  placeholder=\"User Name\"\n                  required>\n          <input  class=\"text-form-field-li\" \n                  type=\"password\"\n                  placeholder=\"Password\"\n                  formControlName=\"password\"\n                  required> \n\n-->";
+    __webpack_exports__["default"] = "<div *ngIf=\"apiState\" class=\"api-progress\">\n  <img class=\"api-progress-img\" src=\"../../../assets/giphy.gif\"/>\n</div>\n\n<div *ngIf=\"signupStatus\" class=\"popup-signup\">\n  <mat-card class=\"popup-content\">\n    succesfully sign up\n  </mat-card>\n</div>\n\n<div *ngIf=\"invLogIn\" class=\"inv-login\">\n  <mat-card class=\"popup-content\">\n    Invalid Login\n  </mat-card>\n</div>\n\n<div *ngIf=\"invSignup\" class=\"inv-login\">\n    <mat-card class=\"popup-content\">\n      Username already exist\n    </mat-card>\n  </div>\n\n<div class=\"structure\">\n\n  <div *ngIf=\"toggle === STATE.HOME\" class=\"login-box\">\n    <img class=\"cont-img\" src=\"../../../assets/connect-logo2.jpg\" />\n    <div class=\"tab\">\n      <div class=\"tab-items\"  (click)=\"logInForm($event)\">Log In</div>\n      <div class=\"tab-items\" style=\"margin-left: 1px;\"  (click)=\"signupForm($event)\">Sign Up</div>\n    </div>\n  </div>\n\n  <div *ngIf=\"toggle === STATE.LOGIN\" class=\"login-box\">\n    <div class=\"text\">\n      Log In\n    </div>\n    <form [formGroup]=\"loginFormGroup\" (ngSubmit)=\"logIn()\" class=\"login-form\">\n      <mat-form-field class=\"text-form-field-li\"  appearance=\"outline\">\n        <mat-label>User Name</mat-label>\n        <input formControlName=\"userId\" matInput>\n      </mat-form-field>\n      <mat-form-field class=\"text-form-field-li\"  appearance=\"outline\">\n        <mat-label>Password</mat-label>\n        <input type=\"password\" formControlName=\"password\"  matInput>\n      </mat-form-field>\n      <input [ngClass]=\"loginFormGroup.valid ? 'submit-button' : 'submit-button-disable'\" \n             [disabled]=\"!loginFormGroup.valid\" type=\"submit\"  value=\"Log In\">\n    </form>\n  </div>\n\n    \n  <div *ngIf=\"toggle === STATE.SIGNUP\" class=\"login-box\">\n    <div class=\"text\">\n      Sign Up\n    </div>\n    <form [formGroup]=\"signupFormFroup\" (ngSubmit)=\"signUp()\" class=\"login-form\">\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>Name</mat-label>\n        <input formControlName=\"name\" matInput>\n      </mat-form-field>\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>User Name</mat-label>\n        <input formControlName=\"userId\" matInput>\n      </mat-form-field>\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>Password</mat-label>\n        <input type=\"password\" formControlName=\"password\" matInput>\n      </mat-form-field>\n      <mat-form-field class=\"text-form-field-su\"  appearance=\"outline\">\n        <mat-label>Contact</mat-label>\n        <input formControlName=\"phoneNo\" type=\"number\" matInput>\n      </mat-form-field>  \n      <input [ngClass]=\"signupFormFroup.valid ? 'submit-button' : 'submit-button-disable'\" [disabled]=\"!signupFormFroup.valid\" type=\"submit\"  value=\"Sign Up\">\n    </form>\n  </div>\n</div>\n\n\n\n\n\n<!-- temp html\n\n  <input  class=\"text-form-field-su\" \n                  type=\"text\"     \n                  formControlName=\"name\"\n                  placeholder=\"name\"\n                  required>  \n      <input  class=\"text-form-field-su\" \n                  type=\"text\"     \n                  formControlName=\"userId\"\n                  placeholder=\"User Name\"\n                  required>  \n      <input  class=\"text-form-field-su\" \n                  type=\"password\"     \n                  formControlName=\"password\"\n                  placeholder=\"password\"\n                  required>  \n      <input  class=\"text-form-field-su\" \n                  type=\"number\"     \n                  formControlName=\"phoneNo\"\n                  placeholder=\"contact\"\n                  required>  \n\n      <input  class=\"text-form-field-li\" \n                  type=\"text\"     \n                  formControlName=\"userId\"\n                  placeholder=\"User Name\"\n                  required>\n          <input  class=\"text-form-field-li\" \n                  type=\"password\"\n                  placeholder=\"Password\"\n                  formControlName=\"password\"\n                  required> \n\n-->";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/components/profile-info/profile-info.component.html":
+  /*!***********************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/profile-info/profile-info.component.html ***!
+    \***********************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppComponentsProfileInfoProfileInfoComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "\n<div class=\"container\">\n  <div class=\"profile-img-body\">\n\n    <div class=\"upld-profile-img\">\n      <label for=\"image-profile\">  \n        <img class=\"upld-profile-img\" src=\"../../../assets/upload-image.png\">\n      </label>\n      <input id=\"image-profile\" type=\"file\" (change)=\"onUpload($event)\" accept=\"image/*\"/>\n    </div>\n\n    <img *ngIf=\"userProfileImage != undefined\" class=\"profile-img\" src=\"{{ userProfileImage }}\">\n    <img *ngIf=\"userProfileImage == undefined\" class=\"profile-img\" src=\"../../../assets/default-image.jpeg\">\n\n  </div>\n\n  <div *ngIf=\"profileInfo.name != undefined\" class=\"profile-name\">\n    {{ profileInfo.name }}\n  </div>\n  <div class=\"log-out\">\n    <mat-card (click)=\"logout()\" class=\"log-out-button\">\n      Log out\n    </mat-card>\n  </div>\n</div>";
+    /***/
+  },
+
+  /***/
+  "./node_modules/socket.io-client/lib/index.js":
+  /*!****************************************************!*\
+    !*** ./node_modules/socket.io-client/lib/index.js ***!
+    \****************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientLibIndexJs(module, exports, __webpack_require__) {
+    /**
+     * Module dependencies.
+     */
+    var url = __webpack_require__(
+    /*! ./url */
+    "./node_modules/socket.io-client/lib/url.js");
+
+    var parser = __webpack_require__(
+    /*! socket.io-parser */
+    "./node_modules/socket.io-client/node_modules/socket.io-parser/index.js");
+
+    var Manager = __webpack_require__(
+    /*! ./manager */
+    "./node_modules/socket.io-client/lib/manager.js");
+
+    var debug = __webpack_require__(
+    /*! debug */
+    "./node_modules/socket.io-client/node_modules/debug/src/browser.js")('socket.io-client');
+    /**
+     * Module exports.
+     */
+
+
+    module.exports = exports = lookup;
+    /**
+     * Managers cache.
+     */
+
+    var cache = exports.managers = {};
+    /**
+     * Looks up an existing `Manager` for multiplexing.
+     * If the user summons:
+     *
+     *   `io('http://localhost/a');`
+     *   `io('http://localhost/b');`
+     *
+     * We reuse the existing instance based on same scheme/port/host,
+     * and we initialize sockets for each namespace.
+     *
+     * @api public
+     */
+
+    function lookup(uri, opts) {
+      if (typeof uri === 'object') {
+        opts = uri;
+        uri = undefined;
+      }
+
+      opts = opts || {};
+      var parsed = url(uri);
+      var source = parsed.source;
+      var id = parsed.id;
+      var path = parsed.path;
+      var sameNamespace = cache[id] && path in cache[id].nsps;
+      var newConnection = opts.forceNew || opts['force new connection'] || false === opts.multiplex || sameNamespace;
+      var io;
+
+      if (newConnection) {
+        debug('ignoring socket cache for %s', source);
+        io = Manager(source, opts);
+      } else {
+        if (!cache[id]) {
+          debug('new io instance for %s', source);
+          cache[id] = Manager(source, opts);
+        }
+
+        io = cache[id];
+      }
+
+      if (parsed.query && !opts.query) {
+        opts.query = parsed.query;
+      }
+
+      return io.socket(parsed.path, opts);
+    }
+    /**
+     * Protocol version.
+     *
+     * @api public
+     */
+
+
+    exports.protocol = parser.protocol;
+    /**
+     * `connect`.
+     *
+     * @param {String} uri
+     * @api public
+     */
+
+    exports.connect = lookup;
+    /**
+     * Expose constructors for standalone build.
+     *
+     * @api public
+     */
+
+    exports.Manager = __webpack_require__(
+    /*! ./manager */
+    "./node_modules/socket.io-client/lib/manager.js");
+    exports.Socket = __webpack_require__(
+    /*! ./socket */
+    "./node_modules/socket.io-client/lib/socket.js");
+    /***/
+  },
+
+  /***/
+  "./node_modules/socket.io-client/lib/manager.js":
+  /*!******************************************************!*\
+    !*** ./node_modules/socket.io-client/lib/manager.js ***!
+    \******************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientLibManagerJs(module, exports, __webpack_require__) {
+    /**
+     * Module dependencies.
+     */
+    var eio = __webpack_require__(
+    /*! engine.io-client */
+    "./node_modules/engine.io-client/lib/index.js");
+
+    var Socket = __webpack_require__(
+    /*! ./socket */
+    "./node_modules/socket.io-client/lib/socket.js");
+
+    var Emitter = __webpack_require__(
+    /*! component-emitter */
+    "./node_modules/component-emitter/index.js");
+
+    var parser = __webpack_require__(
+    /*! socket.io-parser */
+    "./node_modules/socket.io-client/node_modules/socket.io-parser/index.js");
+
+    var on = __webpack_require__(
+    /*! ./on */
+    "./node_modules/socket.io-client/lib/on.js");
+
+    var bind = __webpack_require__(
+    /*! component-bind */
+    "./node_modules/component-bind/index.js");
+
+    var debug = __webpack_require__(
+    /*! debug */
+    "./node_modules/socket.io-client/node_modules/debug/src/browser.js")('socket.io-client:manager');
+
+    var indexOf = __webpack_require__(
+    /*! indexof */
+    "./node_modules/indexof/index.js");
+
+    var Backoff = __webpack_require__(
+    /*! backo2 */
+    "./node_modules/backo2/index.js");
+    /**
+     * IE6+ hasOwnProperty
+     */
+
+
+    var has = Object.prototype.hasOwnProperty;
+    /**
+     * Module exports
+     */
+
+    module.exports = Manager;
+    /**
+     * `Manager` constructor.
+     *
+     * @param {String} engine instance or engine uri/opts
+     * @param {Object} options
+     * @api public
+     */
+
+    function Manager(uri, opts) {
+      if (!(this instanceof Manager)) return new Manager(uri, opts);
+
+      if (uri && 'object' === typeof uri) {
+        opts = uri;
+        uri = undefined;
+      }
+
+      opts = opts || {};
+      opts.path = opts.path || '/socket.io';
+      this.nsps = {};
+      this.subs = [];
+      this.opts = opts;
+      this.reconnection(opts.reconnection !== false);
+      this.reconnectionAttempts(opts.reconnectionAttempts || Infinity);
+      this.reconnectionDelay(opts.reconnectionDelay || 1000);
+      this.reconnectionDelayMax(opts.reconnectionDelayMax || 5000);
+      this.randomizationFactor(opts.randomizationFactor || 0.5);
+      this.backoff = new Backoff({
+        min: this.reconnectionDelay(),
+        max: this.reconnectionDelayMax(),
+        jitter: this.randomizationFactor()
+      });
+      this.timeout(null == opts.timeout ? 20000 : opts.timeout);
+      this.readyState = 'closed';
+      this.uri = uri;
+      this.connecting = [];
+      this.lastPing = null;
+      this.encoding = false;
+      this.packetBuffer = [];
+
+      var _parser = opts.parser || parser;
+
+      this.encoder = new _parser.Encoder();
+      this.decoder = new _parser.Decoder();
+      this.autoConnect = opts.autoConnect !== false;
+      if (this.autoConnect) this.open();
+    }
+    /**
+     * Propagate given event to sockets and emit on `this`
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.emitAll = function () {
+      this.emit.apply(this, arguments);
+
+      for (var nsp in this.nsps) {
+        if (has.call(this.nsps, nsp)) {
+          this.nsps[nsp].emit.apply(this.nsps[nsp], arguments);
+        }
+      }
+    };
+    /**
+     * Update `socket.id` of all sockets
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.updateSocketIds = function () {
+      for (var nsp in this.nsps) {
+        if (has.call(this.nsps, nsp)) {
+          this.nsps[nsp].id = this.generateId(nsp);
+        }
+      }
+    };
+    /**
+     * generate `socket.id` for the given `nsp`
+     *
+     * @param {String} nsp
+     * @return {String}
+     * @api private
+     */
+
+
+    Manager.prototype.generateId = function (nsp) {
+      return (nsp === '/' ? '' : nsp + '#') + this.engine.id;
+    };
+    /**
+     * Mix in `Emitter`.
+     */
+
+
+    Emitter(Manager.prototype);
+    /**
+     * Sets the `reconnection` config.
+     *
+     * @param {Boolean} true/false if it should automatically reconnect
+     * @return {Manager} self or value
+     * @api public
+     */
+
+    Manager.prototype.reconnection = function (v) {
+      if (!arguments.length) return this._reconnection;
+      this._reconnection = !!v;
+      return this;
+    };
+    /**
+     * Sets the reconnection attempts config.
+     *
+     * @param {Number} max reconnection attempts before giving up
+     * @return {Manager} self or value
+     * @api public
+     */
+
+
+    Manager.prototype.reconnectionAttempts = function (v) {
+      if (!arguments.length) return this._reconnectionAttempts;
+      this._reconnectionAttempts = v;
+      return this;
+    };
+    /**
+     * Sets the delay between reconnections.
+     *
+     * @param {Number} delay
+     * @return {Manager} self or value
+     * @api public
+     */
+
+
+    Manager.prototype.reconnectionDelay = function (v) {
+      if (!arguments.length) return this._reconnectionDelay;
+      this._reconnectionDelay = v;
+      this.backoff && this.backoff.setMin(v);
+      return this;
+    };
+
+    Manager.prototype.randomizationFactor = function (v) {
+      if (!arguments.length) return this._randomizationFactor;
+      this._randomizationFactor = v;
+      this.backoff && this.backoff.setJitter(v);
+      return this;
+    };
+    /**
+     * Sets the maximum delay between reconnections.
+     *
+     * @param {Number} delay
+     * @return {Manager} self or value
+     * @api public
+     */
+
+
+    Manager.prototype.reconnectionDelayMax = function (v) {
+      if (!arguments.length) return this._reconnectionDelayMax;
+      this._reconnectionDelayMax = v;
+      this.backoff && this.backoff.setMax(v);
+      return this;
+    };
+    /**
+     * Sets the connection timeout. `false` to disable
+     *
+     * @return {Manager} self or value
+     * @api public
+     */
+
+
+    Manager.prototype.timeout = function (v) {
+      if (!arguments.length) return this._timeout;
+      this._timeout = v;
+      return this;
+    };
+    /**
+     * Starts trying to reconnect if reconnection is enabled and we have not
+     * started reconnecting yet
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.maybeReconnectOnOpen = function () {
+      // Only try to reconnect if it's the first time we're connecting
+      if (!this.reconnecting && this._reconnection && this.backoff.attempts === 0) {
+        // keeps reconnection from firing twice for the same reconnection loop
+        this.reconnect();
+      }
+    };
+    /**
+     * Sets the current transport `socket`.
+     *
+     * @param {Function} optional, callback
+     * @return {Manager} self
+     * @api public
+     */
+
+
+    Manager.prototype.open = Manager.prototype.connect = function (fn, opts) {
+      debug('readyState %s', this.readyState);
+      if (~this.readyState.indexOf('open')) return this;
+      debug('opening %s', this.uri);
+      this.engine = eio(this.uri, this.opts);
+      var socket = this.engine;
+      var self = this;
+      this.readyState = 'opening';
+      this.skipReconnect = false; // emit `open`
+
+      var openSub = on(socket, 'open', function () {
+        self.onopen();
+        fn && fn();
+      }); // emit `connect_error`
+
+      var errorSub = on(socket, 'error', function (data) {
+        debug('connect_error');
+        self.cleanup();
+        self.readyState = 'closed';
+        self.emitAll('connect_error', data);
+
+        if (fn) {
+          var err = new Error('Connection error');
+          err.data = data;
+          fn(err);
+        } else {
+          // Only do this if there is no fn to handle the error
+          self.maybeReconnectOnOpen();
+        }
+      }); // emit `connect_timeout`
+
+      if (false !== this._timeout) {
+        var timeout = this._timeout;
+        debug('connect attempt will timeout after %d', timeout); // set timer
+
+        var timer = setTimeout(function () {
+          debug('connect attempt timed out after %d', timeout);
+          openSub.destroy();
+          socket.close();
+          socket.emit('error', 'timeout');
+          self.emitAll('connect_timeout', timeout);
+        }, timeout);
+        this.subs.push({
+          destroy: function destroy() {
+            clearTimeout(timer);
+          }
+        });
+      }
+
+      this.subs.push(openSub);
+      this.subs.push(errorSub);
+      return this;
+    };
+    /**
+     * Called upon transport open.
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.onopen = function () {
+      debug('open'); // clear old subs
+
+      this.cleanup(); // mark as open
+
+      this.readyState = 'open';
+      this.emit('open'); // add new subs
+
+      var socket = this.engine;
+      this.subs.push(on(socket, 'data', bind(this, 'ondata')));
+      this.subs.push(on(socket, 'ping', bind(this, 'onping')));
+      this.subs.push(on(socket, 'pong', bind(this, 'onpong')));
+      this.subs.push(on(socket, 'error', bind(this, 'onerror')));
+      this.subs.push(on(socket, 'close', bind(this, 'onclose')));
+      this.subs.push(on(this.decoder, 'decoded', bind(this, 'ondecoded')));
+    };
+    /**
+     * Called upon a ping.
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.onping = function () {
+      this.lastPing = new Date();
+      this.emitAll('ping');
+    };
+    /**
+     * Called upon a packet.
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.onpong = function () {
+      this.emitAll('pong', new Date() - this.lastPing);
+    };
+    /**
+     * Called with data.
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.ondata = function (data) {
+      this.decoder.add(data);
+    };
+    /**
+     * Called when parser fully decodes a packet.
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.ondecoded = function (packet) {
+      this.emit('packet', packet);
+    };
+    /**
+     * Called upon socket error.
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.onerror = function (err) {
+      debug('error', err);
+      this.emitAll('error', err);
+    };
+    /**
+     * Creates a new socket for the given `nsp`.
+     *
+     * @return {Socket}
+     * @api public
+     */
+
+
+    Manager.prototype.socket = function (nsp, opts) {
+      var socket = this.nsps[nsp];
+
+      if (!socket) {
+        socket = new Socket(this, nsp, opts);
+        this.nsps[nsp] = socket;
+        var self = this;
+        socket.on('connecting', onConnecting);
+        socket.on('connect', function () {
+          socket.id = self.generateId(nsp);
+        });
+
+        if (this.autoConnect) {
+          // manually call here since connecting event is fired before listening
+          onConnecting();
+        }
+      }
+
+      function onConnecting() {
+        if (!~indexOf(self.connecting, socket)) {
+          self.connecting.push(socket);
+        }
+      }
+
+      return socket;
+    };
+    /**
+     * Called upon a socket close.
+     *
+     * @param {Socket} socket
+     */
+
+
+    Manager.prototype.destroy = function (socket) {
+      var index = indexOf(this.connecting, socket);
+      if (~index) this.connecting.splice(index, 1);
+      if (this.connecting.length) return;
+      this.close();
+    };
+    /**
+     * Writes a packet.
+     *
+     * @param {Object} packet
+     * @api private
+     */
+
+
+    Manager.prototype.packet = function (packet) {
+      debug('writing packet %j', packet);
+      var self = this;
+      if (packet.query && packet.type === 0) packet.nsp += '?' + packet.query;
+
+      if (!self.encoding) {
+        // encode, then write to engine with result
+        self.encoding = true;
+        this.encoder.encode(packet, function (encodedPackets) {
+          for (var i = 0; i < encodedPackets.length; i++) {
+            self.engine.write(encodedPackets[i], packet.options);
+          }
+
+          self.encoding = false;
+          self.processPacketQueue();
+        });
+      } else {
+        // add packet to the queue
+        self.packetBuffer.push(packet);
+      }
+    };
+    /**
+     * If packet buffer is non-empty, begins encoding the
+     * next packet in line.
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.processPacketQueue = function () {
+      if (this.packetBuffer.length > 0 && !this.encoding) {
+        var pack = this.packetBuffer.shift();
+        this.packet(pack);
+      }
+    };
+    /**
+     * Clean up transport subscriptions and packet buffer.
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.cleanup = function () {
+      debug('cleanup');
+      var subsLength = this.subs.length;
+
+      for (var i = 0; i < subsLength; i++) {
+        var sub = this.subs.shift();
+        sub.destroy();
+      }
+
+      this.packetBuffer = [];
+      this.encoding = false;
+      this.lastPing = null;
+      this.decoder.destroy();
+    };
+    /**
+     * Close the current socket.
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.close = Manager.prototype.disconnect = function () {
+      debug('disconnect');
+      this.skipReconnect = true;
+      this.reconnecting = false;
+
+      if ('opening' === this.readyState) {
+        // `onclose` will not fire because
+        // an open event never happened
+        this.cleanup();
+      }
+
+      this.backoff.reset();
+      this.readyState = 'closed';
+      if (this.engine) this.engine.close();
+    };
+    /**
+     * Called upon engine close.
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.onclose = function (reason) {
+      debug('onclose');
+      this.cleanup();
+      this.backoff.reset();
+      this.readyState = 'closed';
+      this.emit('close', reason);
+
+      if (this._reconnection && !this.skipReconnect) {
+        this.reconnect();
+      }
+    };
+    /**
+     * Attempt a reconnection.
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.reconnect = function () {
+      if (this.reconnecting || this.skipReconnect) return this;
+      var self = this;
+
+      if (this.backoff.attempts >= this._reconnectionAttempts) {
+        debug('reconnect failed');
+        this.backoff.reset();
+        this.emitAll('reconnect_failed');
+        this.reconnecting = false;
+      } else {
+        var delay = this.backoff.duration();
+        debug('will wait %dms before reconnect attempt', delay);
+        this.reconnecting = true;
+        var timer = setTimeout(function () {
+          if (self.skipReconnect) return;
+          debug('attempting reconnect');
+          self.emitAll('reconnect_attempt', self.backoff.attempts);
+          self.emitAll('reconnecting', self.backoff.attempts); // check again for the case socket closed in above events
+
+          if (self.skipReconnect) return;
+          self.open(function (err) {
+            if (err) {
+              debug('reconnect attempt error');
+              self.reconnecting = false;
+              self.reconnect();
+              self.emitAll('reconnect_error', err.data);
+            } else {
+              debug('reconnect success');
+              self.onreconnect();
+            }
+          });
+        }, delay);
+        this.subs.push({
+          destroy: function destroy() {
+            clearTimeout(timer);
+          }
+        });
+      }
+    };
+    /**
+     * Called upon successful reconnect.
+     *
+     * @api private
+     */
+
+
+    Manager.prototype.onreconnect = function () {
+      var attempt = this.backoff.attempts;
+      this.reconnecting = false;
+      this.backoff.reset();
+      this.updateSocketIds();
+      this.emitAll('reconnect', attempt);
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/socket.io-client/lib/on.js":
+  /*!*************************************************!*\
+    !*** ./node_modules/socket.io-client/lib/on.js ***!
+    \*************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientLibOnJs(module, exports) {
+    /**
+     * Module exports.
+     */
+    module.exports = on;
+    /**
+     * Helper for subscriptions.
+     *
+     * @param {Object|EventEmitter} obj with `Emitter` mixin or `EventEmitter`
+     * @param {String} event name
+     * @param {Function} callback
+     * @api public
+     */
+
+    function on(obj, ev, fn) {
+      obj.on(ev, fn);
+      return {
+        destroy: function destroy() {
+          obj.removeListener(ev, fn);
+        }
+      };
+    }
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/socket.io-client/lib/socket.js":
+  /*!*****************************************************!*\
+    !*** ./node_modules/socket.io-client/lib/socket.js ***!
+    \*****************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientLibSocketJs(module, exports, __webpack_require__) {
+    /**
+     * Module dependencies.
+     */
+    var parser = __webpack_require__(
+    /*! socket.io-parser */
+    "./node_modules/socket.io-client/node_modules/socket.io-parser/index.js");
+
+    var Emitter = __webpack_require__(
+    /*! component-emitter */
+    "./node_modules/component-emitter/index.js");
+
+    var toArray = __webpack_require__(
+    /*! to-array */
+    "./node_modules/to-array/index.js");
+
+    var on = __webpack_require__(
+    /*! ./on */
+    "./node_modules/socket.io-client/lib/on.js");
+
+    var bind = __webpack_require__(
+    /*! component-bind */
+    "./node_modules/component-bind/index.js");
+
+    var debug = __webpack_require__(
+    /*! debug */
+    "./node_modules/socket.io-client/node_modules/debug/src/browser.js")('socket.io-client:socket');
+
+    var parseqs = __webpack_require__(
+    /*! parseqs */
+    "./node_modules/parseqs/index.js");
+
+    var hasBin = __webpack_require__(
+    /*! has-binary2 */
+    "./node_modules/has-binary2/index.js");
+    /**
+     * Module exports.
+     */
+
+
+    module.exports = exports = Socket;
+    /**
+     * Internal events (blacklisted).
+     * These events can't be emitted by the user.
+     *
+     * @api private
+     */
+
+    var events = {
+      connect: 1,
+      connect_error: 1,
+      connect_timeout: 1,
+      connecting: 1,
+      disconnect: 1,
+      error: 1,
+      reconnect: 1,
+      reconnect_attempt: 1,
+      reconnect_failed: 1,
+      reconnect_error: 1,
+      reconnecting: 1,
+      ping: 1,
+      pong: 1
+    };
+    /**
+     * Shortcut to `Emitter#emit`.
+     */
+
+    var emit = Emitter.prototype.emit;
+    /**
+     * `Socket` constructor.
+     *
+     * @api public
+     */
+
+    function Socket(io, nsp, opts) {
+      this.io = io;
+      this.nsp = nsp;
+      this.json = this; // compat
+
+      this.ids = 0;
+      this.acks = {};
+      this.receiveBuffer = [];
+      this.sendBuffer = [];
+      this.connected = false;
+      this.disconnected = true;
+      this.flags = {};
+
+      if (opts && opts.query) {
+        this.query = opts.query;
+      }
+
+      if (this.io.autoConnect) this.open();
+    }
+    /**
+     * Mix in `Emitter`.
+     */
+
+
+    Emitter(Socket.prototype);
+    /**
+     * Subscribe to open, close and packet events
+     *
+     * @api private
+     */
+
+    Socket.prototype.subEvents = function () {
+      if (this.subs) return;
+      var io = this.io;
+      this.subs = [on(io, 'open', bind(this, 'onopen')), on(io, 'packet', bind(this, 'onpacket')), on(io, 'close', bind(this, 'onclose'))];
+    };
+    /**
+     * "Opens" the socket.
+     *
+     * @api public
+     */
+
+
+    Socket.prototype.open = Socket.prototype.connect = function () {
+      if (this.connected) return this;
+      this.subEvents();
+      this.io.open(); // ensure open
+
+      if ('open' === this.io.readyState) this.onopen();
+      this.emit('connecting');
+      return this;
+    };
+    /**
+     * Sends a `message` event.
+     *
+     * @return {Socket} self
+     * @api public
+     */
+
+
+    Socket.prototype.send = function () {
+      var args = toArray(arguments);
+      args.unshift('message');
+      this.emit.apply(this, args);
+      return this;
+    };
+    /**
+     * Override `emit`.
+     * If the event is in `events`, it's emitted normally.
+     *
+     * @param {String} event name
+     * @return {Socket} self
+     * @api public
+     */
+
+
+    Socket.prototype.emit = function (ev) {
+      if (events.hasOwnProperty(ev)) {
+        emit.apply(this, arguments);
+        return this;
+      }
+
+      var args = toArray(arguments);
+      var packet = {
+        type: (this.flags.binary !== undefined ? this.flags.binary : hasBin(args)) ? parser.BINARY_EVENT : parser.EVENT,
+        data: args
+      };
+      packet.options = {};
+      packet.options.compress = !this.flags || false !== this.flags.compress; // event ack callback
+
+      if ('function' === typeof args[args.length - 1]) {
+        debug('emitting packet with ack id %d', this.ids);
+        this.acks[this.ids] = args.pop();
+        packet.id = this.ids++;
+      }
+
+      if (this.connected) {
+        this.packet(packet);
+      } else {
+        this.sendBuffer.push(packet);
+      }
+
+      this.flags = {};
+      return this;
+    };
+    /**
+     * Sends a packet.
+     *
+     * @param {Object} packet
+     * @api private
+     */
+
+
+    Socket.prototype.packet = function (packet) {
+      packet.nsp = this.nsp;
+      this.io.packet(packet);
+    };
+    /**
+     * Called upon engine `open`.
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.onopen = function () {
+      debug('transport is open - connecting'); // write connect packet if necessary
+
+      if ('/' !== this.nsp) {
+        if (this.query) {
+          var query = typeof this.query === 'object' ? parseqs.encode(this.query) : this.query;
+          debug('sending connect packet with query %s', query);
+          this.packet({
+            type: parser.CONNECT,
+            query: query
+          });
+        } else {
+          this.packet({
+            type: parser.CONNECT
+          });
+        }
+      }
+    };
+    /**
+     * Called upon engine `close`.
+     *
+     * @param {String} reason
+     * @api private
+     */
+
+
+    Socket.prototype.onclose = function (reason) {
+      debug('close (%s)', reason);
+      this.connected = false;
+      this.disconnected = true;
+      delete this.id;
+      this.emit('disconnect', reason);
+    };
+    /**
+     * Called with socket packet.
+     *
+     * @param {Object} packet
+     * @api private
+     */
+
+
+    Socket.prototype.onpacket = function (packet) {
+      var sameNamespace = packet.nsp === this.nsp;
+      var rootNamespaceError = packet.type === parser.ERROR && packet.nsp === '/';
+      if (!sameNamespace && !rootNamespaceError) return;
+
+      switch (packet.type) {
+        case parser.CONNECT:
+          this.onconnect();
+          break;
+
+        case parser.EVENT:
+          this.onevent(packet);
+          break;
+
+        case parser.BINARY_EVENT:
+          this.onevent(packet);
+          break;
+
+        case parser.ACK:
+          this.onack(packet);
+          break;
+
+        case parser.BINARY_ACK:
+          this.onack(packet);
+          break;
+
+        case parser.DISCONNECT:
+          this.ondisconnect();
+          break;
+
+        case parser.ERROR:
+          this.emit('error', packet.data);
+          break;
+      }
+    };
+    /**
+     * Called upon a server event.
+     *
+     * @param {Object} packet
+     * @api private
+     */
+
+
+    Socket.prototype.onevent = function (packet) {
+      var args = packet.data || [];
+      debug('emitting event %j', args);
+
+      if (null != packet.id) {
+        debug('attaching ack callback to event');
+        args.push(this.ack(packet.id));
+      }
+
+      if (this.connected) {
+        emit.apply(this, args);
+      } else {
+        this.receiveBuffer.push(args);
+      }
+    };
+    /**
+     * Produces an ack callback to emit with an event.
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.ack = function (id) {
+      var self = this;
+      var sent = false;
+      return function () {
+        // prevent double callbacks
+        if (sent) return;
+        sent = true;
+        var args = toArray(arguments);
+        debug('sending ack %j', args);
+        self.packet({
+          type: hasBin(args) ? parser.BINARY_ACK : parser.ACK,
+          id: id,
+          data: args
+        });
+      };
+    };
+    /**
+     * Called upon a server acknowlegement.
+     *
+     * @param {Object} packet
+     * @api private
+     */
+
+
+    Socket.prototype.onack = function (packet) {
+      var ack = this.acks[packet.id];
+
+      if ('function' === typeof ack) {
+        debug('calling ack %s with %j', packet.id, packet.data);
+        ack.apply(this, packet.data);
+        delete this.acks[packet.id];
+      } else {
+        debug('bad ack %s', packet.id);
+      }
+    };
+    /**
+     * Called upon server connect.
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.onconnect = function () {
+      this.connected = true;
+      this.disconnected = false;
+      this.emit('connect');
+      this.emitBuffered();
+    };
+    /**
+     * Emit buffered events (received and emitted).
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.emitBuffered = function () {
+      var i;
+
+      for (i = 0; i < this.receiveBuffer.length; i++) {
+        emit.apply(this, this.receiveBuffer[i]);
+      }
+
+      this.receiveBuffer = [];
+
+      for (i = 0; i < this.sendBuffer.length; i++) {
+        this.packet(this.sendBuffer[i]);
+      }
+
+      this.sendBuffer = [];
+    };
+    /**
+     * Called upon server disconnect.
+     *
+     * @api private
+     */
+
+
+    Socket.prototype.ondisconnect = function () {
+      debug('server disconnect (%s)', this.nsp);
+      this.destroy();
+      this.onclose('io server disconnect');
+    };
+    /**
+     * Called upon forced client/server side disconnections,
+     * this method ensures the manager stops tracking us and
+     * that reconnections don't get triggered for this.
+     *
+     * @api private.
+     */
+
+
+    Socket.prototype.destroy = function () {
+      if (this.subs) {
+        // clean subscriptions to avoid reconnections
+        for (var i = 0; i < this.subs.length; i++) {
+          this.subs[i].destroy();
+        }
+
+        this.subs = null;
+      }
+
+      this.io.destroy(this);
+    };
+    /**
+     * Disconnects the socket manually.
+     *
+     * @return {Socket} self
+     * @api public
+     */
+
+
+    Socket.prototype.close = Socket.prototype.disconnect = function () {
+      if (this.connected) {
+        debug('performing disconnect (%s)', this.nsp);
+        this.packet({
+          type: parser.DISCONNECT
+        });
+      } // remove socket from pool
+
+
+      this.destroy();
+
+      if (this.connected) {
+        // fire events
+        this.onclose('io client disconnect');
+      }
+
+      return this;
+    };
+    /**
+     * Sets the compress flag.
+     *
+     * @param {Boolean} if `true`, compresses the sending data
+     * @return {Socket} self
+     * @api public
+     */
+
+
+    Socket.prototype.compress = function (compress) {
+      this.flags.compress = compress;
+      return this;
+    };
+    /**
+     * Sets the binary flag
+     *
+     * @param {Boolean} whether the emitted data contains binary
+     * @return {Socket} self
+     * @api public
+     */
+
+
+    Socket.prototype.binary = function (binary) {
+      this.flags.binary = binary;
+      return this;
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/socket.io-client/lib/url.js":
+  /*!**************************************************!*\
+    !*** ./node_modules/socket.io-client/lib/url.js ***!
+    \**************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientLibUrlJs(module, exports, __webpack_require__) {
+    /**
+     * Module dependencies.
+     */
+    var parseuri = __webpack_require__(
+    /*! parseuri */
+    "./node_modules/parseuri/index.js");
+
+    var debug = __webpack_require__(
+    /*! debug */
+    "./node_modules/socket.io-client/node_modules/debug/src/browser.js")('socket.io-client:url');
+    /**
+     * Module exports.
+     */
+
+
+    module.exports = url;
+    /**
+     * URL parser.
+     *
+     * @param {String} url
+     * @param {Object} An object meant to mimic window.location.
+     *                 Defaults to window.location.
+     * @api public
+     */
+
+    function url(uri, loc) {
+      var obj = uri; // default to window.location
+
+      loc = loc || typeof location !== 'undefined' && location;
+      if (null == uri) uri = loc.protocol + '//' + loc.host; // relative path support
+
+      if ('string' === typeof uri) {
+        if ('/' === uri.charAt(0)) {
+          if ('/' === uri.charAt(1)) {
+            uri = loc.protocol + uri;
+          } else {
+            uri = loc.host + uri;
+          }
+        }
+
+        if (!/^(https?|wss?):\/\//.test(uri)) {
+          debug('protocol-less url %s', uri);
+
+          if ('undefined' !== typeof loc) {
+            uri = loc.protocol + '//' + uri;
+          } else {
+            uri = 'https://' + uri;
+          }
+        } // parse
+
+
+        debug('parse %s', uri);
+        obj = parseuri(uri);
+      } // make sure we treat `localhost:80` and `localhost` equally
+
+
+      if (!obj.port) {
+        if (/^(http|ws)$/.test(obj.protocol)) {
+          obj.port = '80';
+        } else if (/^(http|ws)s$/.test(obj.protocol)) {
+          obj.port = '443';
+        }
+      }
+
+      obj.path = obj.path || '/';
+      var ipv6 = obj.host.indexOf(':') !== -1;
+      var host = ipv6 ? '[' + obj.host + ']' : obj.host; // define unique id
+
+      obj.id = obj.protocol + '://' + host + ':' + obj.port; // define href
+
+      obj.href = obj.protocol + '://' + host + (loc && loc.port === obj.port ? '' : ':' + obj.port);
+      return obj;
+    }
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/socket.io-client/node_modules/debug/src/browser.js":
+  /*!*************************************************************************!*\
+    !*** ./node_modules/socket.io-client/node_modules/debug/src/browser.js ***!
+    \*************************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientNode_modulesDebugSrcBrowserJs(module, exports, __webpack_require__) {
+    /* eslint-env browser */
+
+    /**
+     * This is the web browser implementation of `debug()`.
+     */
+    exports.log = log;
+    exports.formatArgs = formatArgs;
+    exports.save = save;
+    exports.load = load;
+    exports.useColors = useColors;
+    exports.storage = localstorage();
+    /**
+     * Colors.
+     */
+
+    exports.colors = ['#0000CC', '#0000FF', '#0033CC', '#0033FF', '#0066CC', '#0066FF', '#0099CC', '#0099FF', '#00CC00', '#00CC33', '#00CC66', '#00CC99', '#00CCCC', '#00CCFF', '#3300CC', '#3300FF', '#3333CC', '#3333FF', '#3366CC', '#3366FF', '#3399CC', '#3399FF', '#33CC00', '#33CC33', '#33CC66', '#33CC99', '#33CCCC', '#33CCFF', '#6600CC', '#6600FF', '#6633CC', '#6633FF', '#66CC00', '#66CC33', '#9900CC', '#9900FF', '#9933CC', '#9933FF', '#99CC00', '#99CC33', '#CC0000', '#CC0033', '#CC0066', '#CC0099', '#CC00CC', '#CC00FF', '#CC3300', '#CC3333', '#CC3366', '#CC3399', '#CC33CC', '#CC33FF', '#CC6600', '#CC6633', '#CC9900', '#CC9933', '#CCCC00', '#CCCC33', '#FF0000', '#FF0033', '#FF0066', '#FF0099', '#FF00CC', '#FF00FF', '#FF3300', '#FF3333', '#FF3366', '#FF3399', '#FF33CC', '#FF33FF', '#FF6600', '#FF6633', '#FF9900', '#FF9933', '#FFCC00', '#FFCC33'];
+    /**
+     * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+     * and the Firebug extension (any Firefox version) are known
+     * to support "%c" CSS customizations.
+     *
+     * TODO: add a `localStorage` variable to explicitly enable/disable colors
+     */
+    // eslint-disable-next-line complexity
+
+    function useColors() {
+      // NB: In an Electron preload script, document will be defined but not fully
+      // initialized. Since we know we're in Chrome, we'll just detect this case
+      // explicitly
+      if (typeof window !== 'undefined' && window.process && (window.process.type === 'renderer' || window.process.__nwjs)) {
+        return true;
+      } // Internet Explorer and Edge do not support colors.
+
+
+      if (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
+        return false;
+      } // Is webkit? http://stackoverflow.com/a/16459606/376773
+      // document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
+
+
+      return typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance || // Is firebug? http://stackoverflow.com/a/398120/376773
+      typeof window !== 'undefined' && window.console && (window.console.firebug || window.console.exception && window.console.table) || // Is firefox >= v31?
+      // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+      typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31 || // Double check webkit in userAgent just in case we are in a worker
+      typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
+    }
+    /**
+     * Colorize log arguments if enabled.
+     *
+     * @api public
+     */
+
+
+    function formatArgs(args) {
+      args[0] = (this.useColors ? '%c' : '') + this.namespace + (this.useColors ? ' %c' : ' ') + args[0] + (this.useColors ? '%c ' : ' ') + '+' + module.exports.humanize(this.diff);
+
+      if (!this.useColors) {
+        return;
+      }
+
+      var c = 'color: ' + this.color;
+      args.splice(1, 0, c, 'color: inherit'); // The final "%c" is somewhat tricky, because there could be other
+      // arguments passed either before or after the %c, so we need to
+      // figure out the correct index to insert the CSS into
+
+      var index = 0;
+      var lastC = 0;
+      args[0].replace(/%[a-zA-Z%]/g, function (match) {
+        if (match === '%%') {
+          return;
+        }
+
+        index++;
+
+        if (match === '%c') {
+          // We only are interested in the *last* %c
+          // (the user may have provided their own)
+          lastC = index;
+        }
+      });
+      args.splice(lastC, 0, c);
+    }
+    /**
+     * Invokes `console.log()` when available.
+     * No-op when `console.log` is not a "function".
+     *
+     * @api public
+     */
+
+
+    function log() {
+      var _console2;
+
+      // This hackery is required for IE8/9, where
+      // the `console.log` function doesn't have 'apply'
+      return typeof console === 'object' && console.log && (_console2 = console).log.apply(_console2, arguments);
+    }
+    /**
+     * Save `namespaces`.
+     *
+     * @param {String} namespaces
+     * @api private
+     */
+
+
+    function save(namespaces) {
+      try {
+        if (namespaces) {
+          exports.storage.setItem('debug', namespaces);
+        } else {
+          exports.storage.removeItem('debug');
+        }
+      } catch (error) {// Swallow
+        // XXX (@Qix-) should we be logging these?
+      }
+    }
+    /**
+     * Load `namespaces`.
+     *
+     * @return {String} returns the previously persisted debug modes
+     * @api private
+     */
+
+
+    function load() {
+      var r;
+
+      try {
+        r = exports.storage.getItem('debug');
+      } catch (error) {} // Swallow
+      // XXX (@Qix-) should we be logging these?
+      // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
+
+
+      if (!r && typeof process !== 'undefined' && 'env' in process) {
+        r = process.env.DEBUG;
+      }
+
+      return r;
+    }
+    /**
+     * Localstorage attempts to return the localstorage.
+     *
+     * This is necessary because safari throws
+     * when a user disables cookies/localstorage
+     * and you attempt to access it.
+     *
+     * @return {LocalStorage}
+     * @api private
+     */
+
+
+    function localstorage() {
+      try {
+        // TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
+        // The Browser also has localStorage in the global context.
+        return localStorage;
+      } catch (error) {// Swallow
+        // XXX (@Qix-) should we be logging these?
+      }
+    }
+
+    module.exports = __webpack_require__(
+    /*! ./common */
+    "./node_modules/socket.io-client/node_modules/debug/src/common.js")(exports);
+    var formatters = module.exports.formatters;
+    /**
+     * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+     */
+
+    formatters.j = function (v) {
+      try {
+        return JSON.stringify(v);
+      } catch (error) {
+        return '[UnexpectedJSONParseError]: ' + error.message;
+      }
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/socket.io-client/node_modules/debug/src/common.js":
+  /*!************************************************************************!*\
+    !*** ./node_modules/socket.io-client/node_modules/debug/src/common.js ***!
+    \************************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientNode_modulesDebugSrcCommonJs(module, exports, __webpack_require__) {
+    /**
+     * This is the common logic for both the Node.js and web browser
+     * implementations of `debug()`.
+     */
+    function setup(env) {
+      createDebug.debug = createDebug;
+      createDebug["default"] = createDebug;
+      createDebug.coerce = coerce;
+      createDebug.disable = disable;
+      createDebug.enable = enable;
+      createDebug.enabled = enabled;
+      createDebug.humanize = __webpack_require__(
+      /*! ms */
+      "./node_modules/socket.io-client/node_modules/ms/index.js");
+      Object.keys(env).forEach(function (key) {
+        createDebug[key] = env[key];
+      });
+      /**
+      * Active `debug` instances.
+      */
+
+      createDebug.instances = [];
+      /**
+      * The currently active debug mode names, and names to skip.
+      */
+
+      createDebug.names = [];
+      createDebug.skips = [];
+      /**
+      * Map of special "%n" handling functions, for the debug "format" argument.
+      *
+      * Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
+      */
+
+      createDebug.formatters = {};
+      /**
+      * Selects a color for a debug namespace
+      * @param {String} namespace The namespace string for the for the debug instance to be colored
+      * @return {Number|String} An ANSI color code for the given namespace
+      * @api private
+      */
+
+      function selectColor(namespace) {
+        var hash = 0;
+
+        for (var i = 0; i < namespace.length; i++) {
+          hash = (hash << 5) - hash + namespace.charCodeAt(i);
+          hash |= 0; // Convert to 32bit integer
+        }
+
+        return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
+      }
+
+      createDebug.selectColor = selectColor;
+      /**
+      * Create a debugger with the given `namespace`.
+      *
+      * @param {String} namespace
+      * @return {Function}
+      * @api public
+      */
+
+      function createDebug(namespace) {
+        var prevTime;
+
+        function debug() {
+          for (var _len16 = arguments.length, args = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+            args[_key16] = arguments[_key16];
+          }
+
+          // Disabled?
+          if (!debug.enabled) {
+            return;
+          }
+
+          var self = debug; // Set `diff` timestamp
+
+          var curr = Number(new Date());
+          var ms = curr - (prevTime || curr);
+          self.diff = ms;
+          self.prev = prevTime;
+          self.curr = curr;
+          prevTime = curr;
+          args[0] = createDebug.coerce(args[0]);
+
+          if (typeof args[0] !== 'string') {
+            // Anything else let's inspect with %O
+            args.unshift('%O');
+          } // Apply any `formatters` transformations
+
+
+          var index = 0;
+          args[0] = args[0].replace(/%([a-zA-Z%])/g, function (match, format) {
+            // If we encounter an escaped % then don't increase the array index
+            if (match === '%%') {
+              return match;
+            }
+
+            index++;
+            var formatter = createDebug.formatters[format];
+
+            if (typeof formatter === 'function') {
+              var val = args[index];
+              match = formatter.call(self, val); // Now we need to remove `args[index]` since it's inlined in the `format`
+
+              args.splice(index, 1);
+              index--;
+            }
+
+            return match;
+          }); // Apply env-specific formatting (colors, etc.)
+
+          createDebug.formatArgs.call(self, args);
+          var logFn = self.log || createDebug.log;
+          logFn.apply(self, args);
+        }
+
+        debug.namespace = namespace;
+        debug.enabled = createDebug.enabled(namespace);
+        debug.useColors = createDebug.useColors();
+        debug.color = selectColor(namespace);
+        debug.destroy = destroy;
+        debug.extend = extend; // Debug.formatArgs = formatArgs;
+        // debug.rawLog = rawLog;
+        // env-specific initialization logic for debug instances
+
+        if (typeof createDebug.init === 'function') {
+          createDebug.init(debug);
+        }
+
+        createDebug.instances.push(debug);
+        return debug;
+      }
+
+      function destroy() {
+        var index = createDebug.instances.indexOf(this);
+
+        if (index !== -1) {
+          createDebug.instances.splice(index, 1);
+          return true;
+        }
+
+        return false;
+      }
+
+      function extend(namespace, delimiter) {
+        var newDebug = createDebug(this.namespace + (typeof delimiter === 'undefined' ? ':' : delimiter) + namespace);
+        newDebug.log = this.log;
+        return newDebug;
+      }
+      /**
+      * Enables a debug mode by namespaces. This can include modes
+      * separated by a colon and wildcards.
+      *
+      * @param {String} namespaces
+      * @api public
+      */
+
+
+      function enable(namespaces) {
+        createDebug.save(namespaces);
+        createDebug.names = [];
+        createDebug.skips = [];
+        var i;
+        var split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
+        var len = split.length;
+
+        for (i = 0; i < len; i++) {
+          if (!split[i]) {
+            // ignore empty strings
+            continue;
+          }
+
+          namespaces = split[i].replace(/\*/g, '.*?');
+
+          if (namespaces[0] === '-') {
+            createDebug.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+          } else {
+            createDebug.names.push(new RegExp('^' + namespaces + '$'));
+          }
+        }
+
+        for (i = 0; i < createDebug.instances.length; i++) {
+          var instance = createDebug.instances[i];
+          instance.enabled = createDebug.enabled(instance.namespace);
+        }
+      }
+      /**
+      * Disable debug output.
+      *
+      * @return {String} namespaces
+      * @api public
+      */
+
+
+      function disable() {
+        var namespaces = [].concat(_toConsumableArray(createDebug.names.map(toNamespace)), _toConsumableArray(createDebug.skips.map(toNamespace).map(function (namespace) {
+          return '-' + namespace;
+        }))).join(',');
+        createDebug.enable('');
+        return namespaces;
+      }
+      /**
+      * Returns true if the given mode name is enabled, false otherwise.
+      *
+      * @param {String} name
+      * @return {Boolean}
+      * @api public
+      */
+
+
+      function enabled(name) {
+        if (name[name.length - 1] === '*') {
+          return true;
+        }
+
+        var i;
+        var len;
+
+        for (i = 0, len = createDebug.skips.length; i < len; i++) {
+          if (createDebug.skips[i].test(name)) {
+            return false;
+          }
+        }
+
+        for (i = 0, len = createDebug.names.length; i < len; i++) {
+          if (createDebug.names[i].test(name)) {
+            return true;
+          }
+        }
+
+        return false;
+      }
+      /**
+      * Convert regexp to namespace
+      *
+      * @param {RegExp} regxep
+      * @return {String} namespace
+      * @api private
+      */
+
+
+      function toNamespace(regexp) {
+        return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, '*');
+      }
+      /**
+      * Coerce `val`.
+      *
+      * @param {Mixed} val
+      * @return {Mixed}
+      * @api private
+      */
+
+
+      function coerce(val) {
+        if (val instanceof Error) {
+          return val.stack || val.message;
+        }
+
+        return val;
+      }
+
+      createDebug.enable(createDebug.load());
+      return createDebug;
+    }
+
+    module.exports = setup;
+    /***/
+  },
+
+  /***/
+  "./node_modules/socket.io-client/node_modules/isarray/index.js":
+  /*!*********************************************************************!*\
+    !*** ./node_modules/socket.io-client/node_modules/isarray/index.js ***!
+    \*********************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientNode_modulesIsarrayIndexJs(module, exports) {
+    var toString = {}.toString;
+
+    module.exports = Array.isArray || function (arr) {
+      return toString.call(arr) == '[object Array]';
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/socket.io-client/node_modules/ms/index.js":
+  /*!****************************************************************!*\
+    !*** ./node_modules/socket.io-client/node_modules/ms/index.js ***!
+    \****************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientNode_modulesMsIndexJs(module, exports) {
+    /**
+     * Helpers.
+     */
+    var s = 1000;
+    var m = s * 60;
+    var h = m * 60;
+    var d = h * 24;
+    var w = d * 7;
+    var y = d * 365.25;
+    /**
+     * Parse or format the given `val`.
+     *
+     * Options:
+     *
+     *  - `long` verbose formatting [false]
+     *
+     * @param {String|Number} val
+     * @param {Object} [options]
+     * @throws {Error} throw an error if val is not a non-empty string or a number
+     * @return {String|Number}
+     * @api public
+     */
+
+    module.exports = function (val, options) {
+      options = options || {};
+      var type = typeof val;
+
+      if (type === 'string' && val.length > 0) {
+        return parse(val);
+      } else if (type === 'number' && isFinite(val)) {
+        return options["long"] ? fmtLong(val) : fmtShort(val);
+      }
+
+      throw new Error('val is not a non-empty string or a valid number. val=' + JSON.stringify(val));
+    };
+    /**
+     * Parse the given `str` and return milliseconds.
+     *
+     * @param {String} str
+     * @return {Number}
+     * @api private
+     */
+
+
+    function parse(str) {
+      str = String(str);
+
+      if (str.length > 100) {
+        return;
+      }
+
+      var match = /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(str);
+
+      if (!match) {
+        return;
+      }
+
+      var n = parseFloat(match[1]);
+      var type = (match[2] || 'ms').toLowerCase();
+
+      switch (type) {
+        case 'years':
+        case 'year':
+        case 'yrs':
+        case 'yr':
+        case 'y':
+          return n * y;
+
+        case 'weeks':
+        case 'week':
+        case 'w':
+          return n * w;
+
+        case 'days':
+        case 'day':
+        case 'd':
+          return n * d;
+
+        case 'hours':
+        case 'hour':
+        case 'hrs':
+        case 'hr':
+        case 'h':
+          return n * h;
+
+        case 'minutes':
+        case 'minute':
+        case 'mins':
+        case 'min':
+        case 'm':
+          return n * m;
+
+        case 'seconds':
+        case 'second':
+        case 'secs':
+        case 'sec':
+        case 's':
+          return n * s;
+
+        case 'milliseconds':
+        case 'millisecond':
+        case 'msecs':
+        case 'msec':
+        case 'ms':
+          return n;
+
+        default:
+          return undefined;
+      }
+    }
+    /**
+     * Short format for `ms`.
+     *
+     * @param {Number} ms
+     * @return {String}
+     * @api private
+     */
+
+
+    function fmtShort(ms) {
+      var msAbs = Math.abs(ms);
+
+      if (msAbs >= d) {
+        return Math.round(ms / d) + 'd';
+      }
+
+      if (msAbs >= h) {
+        return Math.round(ms / h) + 'h';
+      }
+
+      if (msAbs >= m) {
+        return Math.round(ms / m) + 'm';
+      }
+
+      if (msAbs >= s) {
+        return Math.round(ms / s) + 's';
+      }
+
+      return ms + 'ms';
+    }
+    /**
+     * Long format for `ms`.
+     *
+     * @param {Number} ms
+     * @return {String}
+     * @api private
+     */
+
+
+    function fmtLong(ms) {
+      var msAbs = Math.abs(ms);
+
+      if (msAbs >= d) {
+        return plural(ms, msAbs, d, 'day');
+      }
+
+      if (msAbs >= h) {
+        return plural(ms, msAbs, h, 'hour');
+      }
+
+      if (msAbs >= m) {
+        return plural(ms, msAbs, m, 'minute');
+      }
+
+      if (msAbs >= s) {
+        return plural(ms, msAbs, s, 'second');
+      }
+
+      return ms + ' ms';
+    }
+    /**
+     * Pluralization helper.
+     */
+
+
+    function plural(ms, msAbs, n, name) {
+      var isPlural = msAbs >= n * 1.5;
+      return Math.round(ms / n) + ' ' + name + (isPlural ? 's' : '');
+    }
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/socket.io-client/node_modules/socket.io-parser/binary.js":
+  /*!*******************************************************************************!*\
+    !*** ./node_modules/socket.io-client/node_modules/socket.io-parser/binary.js ***!
+    \*******************************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientNode_modulesSocketIoParserBinaryJs(module, exports, __webpack_require__) {
+    /*global Blob,File*/
+
+    /**
+     * Module requirements
+     */
+    var isArray = __webpack_require__(
+    /*! isarray */
+    "./node_modules/socket.io-client/node_modules/isarray/index.js");
+
+    var isBuf = __webpack_require__(
+    /*! ./is-buffer */
+    "./node_modules/socket.io-client/node_modules/socket.io-parser/is-buffer.js");
+
+    var toString = Object.prototype.toString;
+    var withNativeBlob = typeof Blob === 'function' || typeof Blob !== 'undefined' && toString.call(Blob) === '[object BlobConstructor]';
+    var withNativeFile = typeof File === 'function' || typeof File !== 'undefined' && toString.call(File) === '[object FileConstructor]';
+    /**
+     * Replaces every Buffer | ArrayBuffer in packet with a numbered placeholder.
+     * Anything with blobs or files should be fed through removeBlobs before coming
+     * here.
+     *
+     * @param {Object} packet - socket.io event packet
+     * @return {Object} with deconstructed packet and list of buffers
+     * @api public
+     */
+
+    exports.deconstructPacket = function (packet) {
+      var buffers = [];
+      var packetData = packet.data;
+      var pack = packet;
+      pack.data = _deconstructPacket(packetData, buffers);
+      pack.attachments = buffers.length; // number of binary 'attachments'
+
+      return {
+        packet: pack,
+        buffers: buffers
+      };
+    };
+
+    function _deconstructPacket(data, buffers) {
+      if (!data) return data;
+
+      if (isBuf(data)) {
+        var placeholder = {
+          _placeholder: true,
+          num: buffers.length
+        };
+        buffers.push(data);
+        return placeholder;
+      } else if (isArray(data)) {
+        var newData = new Array(data.length);
+
+        for (var i = 0; i < data.length; i++) {
+          newData[i] = _deconstructPacket(data[i], buffers);
+        }
+
+        return newData;
+      } else if (typeof data === 'object' && !(data instanceof Date)) {
+        var newData = {};
+
+        for (var key in data) {
+          newData[key] = _deconstructPacket(data[key], buffers);
+        }
+
+        return newData;
+      }
+
+      return data;
+    }
+    /**
+     * Reconstructs a binary packet from its placeholder packet and buffers
+     *
+     * @param {Object} packet - event packet with placeholders
+     * @param {Array} buffers - binary buffers to put in placeholder positions
+     * @return {Object} reconstructed packet
+     * @api public
+     */
+
+
+    exports.reconstructPacket = function (packet, buffers) {
+      packet.data = _reconstructPacket(packet.data, buffers);
+      packet.attachments = undefined; // no longer useful
+
+      return packet;
+    };
+
+    function _reconstructPacket(data, buffers) {
+      if (!data) return data;
+
+      if (data && data._placeholder) {
+        return buffers[data.num]; // appropriate buffer (should be natural order anyway)
+      } else if (isArray(data)) {
+        for (var i = 0; i < data.length; i++) {
+          data[i] = _reconstructPacket(data[i], buffers);
+        }
+      } else if (typeof data === 'object') {
+        for (var key in data) {
+          data[key] = _reconstructPacket(data[key], buffers);
+        }
+      }
+
+      return data;
+    }
+    /**
+     * Asynchronously removes Blobs or Files from data via
+     * FileReader's readAsArrayBuffer method. Used before encoding
+     * data as msgpack. Calls callback with the blobless data.
+     *
+     * @param {Object} data
+     * @param {Function} callback
+     * @api private
+     */
+
+
+    exports.removeBlobs = function (data, callback) {
+      function _removeBlobs(obj, curKey, containingObject) {
+        if (!obj) return obj; // convert any blob
+
+        if (withNativeBlob && obj instanceof Blob || withNativeFile && obj instanceof File) {
+          pendingBlobs++; // async filereader
+
+          var fileReader = new FileReader();
+
+          fileReader.onload = function () {
+            // this.result == arraybuffer
+            if (containingObject) {
+              containingObject[curKey] = this.result;
+            } else {
+              bloblessData = this.result;
+            } // if nothing pending its callback time
+
+
+            if (! --pendingBlobs) {
+              callback(bloblessData);
+            }
+          };
+
+          fileReader.readAsArrayBuffer(obj); // blob -> arraybuffer
+        } else if (isArray(obj)) {
+          // handle array
+          for (var i = 0; i < obj.length; i++) {
+            _removeBlobs(obj[i], i, obj);
+          }
+        } else if (typeof obj === 'object' && !isBuf(obj)) {
+          // and object
+          for (var key in obj) {
+            _removeBlobs(obj[key], key, obj);
+          }
+        }
+      }
+
+      var pendingBlobs = 0;
+      var bloblessData = data;
+
+      _removeBlobs(bloblessData);
+
+      if (!pendingBlobs) {
+        callback(bloblessData);
+      }
+    };
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/socket.io-client/node_modules/socket.io-parser/index.js":
+  /*!******************************************************************************!*\
+    !*** ./node_modules/socket.io-client/node_modules/socket.io-parser/index.js ***!
+    \******************************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientNode_modulesSocketIoParserIndexJs(module, exports, __webpack_require__) {
+    /**
+     * Module dependencies.
+     */
+    var debug = __webpack_require__(
+    /*! debug */
+    "./node_modules/socket.io-client/node_modules/socket.io-parser/node_modules/debug/src/browser.js")('socket.io-parser');
+
+    var Emitter = __webpack_require__(
+    /*! component-emitter */
+    "./node_modules/component-emitter/index.js");
+
+    var binary = __webpack_require__(
+    /*! ./binary */
+    "./node_modules/socket.io-client/node_modules/socket.io-parser/binary.js");
+
+    var isArray = __webpack_require__(
+    /*! isarray */
+    "./node_modules/socket.io-client/node_modules/isarray/index.js");
+
+    var isBuf = __webpack_require__(
+    /*! ./is-buffer */
+    "./node_modules/socket.io-client/node_modules/socket.io-parser/is-buffer.js");
+    /**
+     * Protocol version.
+     *
+     * @api public
+     */
+
+
+    exports.protocol = 4;
+    /**
+     * Packet types.
+     *
+     * @api public
+     */
+
+    exports.types = ['CONNECT', 'DISCONNECT', 'EVENT', 'ACK', 'ERROR', 'BINARY_EVENT', 'BINARY_ACK'];
+    /**
+     * Packet type `connect`.
+     *
+     * @api public
+     */
+
+    exports.CONNECT = 0;
+    /**
+     * Packet type `disconnect`.
+     *
+     * @api public
+     */
+
+    exports.DISCONNECT = 1;
+    /**
+     * Packet type `event`.
+     *
+     * @api public
+     */
+
+    exports.EVENT = 2;
+    /**
+     * Packet type `ack`.
+     *
+     * @api public
+     */
+
+    exports.ACK = 3;
+    /**
+     * Packet type `error`.
+     *
+     * @api public
+     */
+
+    exports.ERROR = 4;
+    /**
+     * Packet type 'binary event'
+     *
+     * @api public
+     */
+
+    exports.BINARY_EVENT = 5;
+    /**
+     * Packet type `binary ack`. For acks with binary arguments.
+     *
+     * @api public
+     */
+
+    exports.BINARY_ACK = 6;
+    /**
+     * Encoder constructor.
+     *
+     * @api public
+     */
+
+    exports.Encoder = Encoder;
+    /**
+     * Decoder constructor.
+     *
+     * @api public
+     */
+
+    exports.Decoder = Decoder;
+    /**
+     * A socket.io Encoder instance
+     *
+     * @api public
+     */
+
+    function Encoder() {}
+
+    var ERROR_PACKET = exports.ERROR + '"encode error"';
+    /**
+     * Encode a packet as a single string if non-binary, or as a
+     * buffer sequence, depending on packet type.
+     *
+     * @param {Object} obj - packet object
+     * @param {Function} callback - function to handle encodings (likely engine.write)
+     * @return Calls callback with Array of encodings
+     * @api public
+     */
+
+    Encoder.prototype.encode = function (obj, callback) {
+      debug('encoding packet %j', obj);
+
+      if (exports.BINARY_EVENT === obj.type || exports.BINARY_ACK === obj.type) {
+        encodeAsBinary(obj, callback);
+      } else {
+        var encoding = encodeAsString(obj);
+        callback([encoding]);
+      }
+    };
+    /**
+     * Encode packet as string.
+     *
+     * @param {Object} packet
+     * @return {String} encoded
+     * @api private
+     */
+
+
+    function encodeAsString(obj) {
+      // first is type
+      var str = '' + obj.type; // attachments if we have them
+
+      if (exports.BINARY_EVENT === obj.type || exports.BINARY_ACK === obj.type) {
+        str += obj.attachments + '-';
+      } // if we have a namespace other than `/`
+      // we append it followed by a comma `,`
+
+
+      if (obj.nsp && '/' !== obj.nsp) {
+        str += obj.nsp + ',';
+      } // immediately followed by the id
+
+
+      if (null != obj.id) {
+        str += obj.id;
+      } // json data
+
+
+      if (null != obj.data) {
+        var payload = tryStringify(obj.data);
+
+        if (payload !== false) {
+          str += payload;
+        } else {
+          return ERROR_PACKET;
+        }
+      }
+
+      debug('encoded %j as %s', obj, str);
+      return str;
+    }
+
+    function tryStringify(str) {
+      try {
+        return JSON.stringify(str);
+      } catch (e) {
+        return false;
+      }
+    }
+    /**
+     * Encode packet as 'buffer sequence' by removing blobs, and
+     * deconstructing packet into object with placeholders and
+     * a list of buffers.
+     *
+     * @param {Object} packet
+     * @return {Buffer} encoded
+     * @api private
+     */
+
+
+    function encodeAsBinary(obj, callback) {
+      function writeEncoding(bloblessData) {
+        var deconstruction = binary.deconstructPacket(bloblessData);
+        var pack = encodeAsString(deconstruction.packet);
+        var buffers = deconstruction.buffers;
+        buffers.unshift(pack); // add packet info to beginning of data list
+
+        callback(buffers); // write all the buffers
+      }
+
+      binary.removeBlobs(obj, writeEncoding);
+    }
+    /**
+     * A socket.io Decoder instance
+     *
+     * @return {Object} decoder
+     * @api public
+     */
+
+
+    function Decoder() {
+      this.reconstructor = null;
+    }
+    /**
+     * Mix in `Emitter` with Decoder.
+     */
+
+
+    Emitter(Decoder.prototype);
+    /**
+     * Decodes an encoded packet string into packet JSON.
+     *
+     * @param {String} obj - encoded packet
+     * @return {Object} packet
+     * @api public
+     */
+
+    Decoder.prototype.add = function (obj) {
+      var packet;
+
+      if (typeof obj === 'string') {
+        packet = decodeString(obj);
+
+        if (exports.BINARY_EVENT === packet.type || exports.BINARY_ACK === packet.type) {
+          // binary packet's json
+          this.reconstructor = new BinaryReconstructor(packet); // no attachments, labeled binary but no binary data to follow
+
+          if (this.reconstructor.reconPack.attachments === 0) {
+            this.emit('decoded', packet);
+          }
+        } else {
+          // non-binary full packet
+          this.emit('decoded', packet);
+        }
+      } else if (isBuf(obj) || obj.base64) {
+        // raw binary data
+        if (!this.reconstructor) {
+          throw new Error('got binary data when not reconstructing a packet');
+        } else {
+          packet = this.reconstructor.takeBinaryData(obj);
+
+          if (packet) {
+            // received final buffer
+            this.reconstructor = null;
+            this.emit('decoded', packet);
+          }
+        }
+      } else {
+        throw new Error('Unknown type: ' + obj);
+      }
+    };
+    /**
+     * Decode a packet String (JSON data)
+     *
+     * @param {String} str
+     * @return {Object} packet
+     * @api private
+     */
+
+
+    function decodeString(str) {
+      var i = 0; // look up type
+
+      var p = {
+        type: Number(str.charAt(0))
+      };
+
+      if (null == exports.types[p.type]) {
+        return error('unknown packet type ' + p.type);
+      } // look up attachments if type binary
+
+
+      if (exports.BINARY_EVENT === p.type || exports.BINARY_ACK === p.type) {
+        var buf = '';
+
+        while (str.charAt(++i) !== '-') {
+          buf += str.charAt(i);
+          if (i == str.length) break;
+        }
+
+        if (buf != Number(buf) || str.charAt(i) !== '-') {
+          throw new Error('Illegal attachments');
+        }
+
+        p.attachments = Number(buf);
+      } // look up namespace (if any)
+
+
+      if ('/' === str.charAt(i + 1)) {
+        p.nsp = '';
+
+        while (++i) {
+          var c = str.charAt(i);
+          if (',' === c) break;
+          p.nsp += c;
+          if (i === str.length) break;
+        }
+      } else {
+        p.nsp = '/';
+      } // look up id
+
+
+      var next = str.charAt(i + 1);
+
+      if ('' !== next && Number(next) == next) {
+        p.id = '';
+
+        while (++i) {
+          var c = str.charAt(i);
+
+          if (null == c || Number(c) != c) {
+            --i;
+            break;
+          }
+
+          p.id += str.charAt(i);
+          if (i === str.length) break;
+        }
+
+        p.id = Number(p.id);
+      } // look up json data
+
+
+      if (str.charAt(++i)) {
+        var payload = tryParse(str.substr(i));
+        var isPayloadValid = payload !== false && (p.type === exports.ERROR || isArray(payload));
+
+        if (isPayloadValid) {
+          p.data = payload;
+        } else {
+          return error('invalid payload');
+        }
+      }
+
+      debug('decoded %s as %j', str, p);
+      return p;
+    }
+
+    function tryParse(str) {
+      try {
+        return JSON.parse(str);
+      } catch (e) {
+        return false;
+      }
+    }
+    /**
+     * Deallocates a parser's resources
+     *
+     * @api public
+     */
+
+
+    Decoder.prototype.destroy = function () {
+      if (this.reconstructor) {
+        this.reconstructor.finishedReconstruction();
+      }
+    };
+    /**
+     * A manager of a binary event's 'buffer sequence'. Should
+     * be constructed whenever a packet of type BINARY_EVENT is
+     * decoded.
+     *
+     * @param {Object} packet
+     * @return {BinaryReconstructor} initialized reconstructor
+     * @api private
+     */
+
+
+    function BinaryReconstructor(packet) {
+      this.reconPack = packet;
+      this.buffers = [];
+    }
+    /**
+     * Method to be called when binary data received from connection
+     * after a BINARY_EVENT packet.
+     *
+     * @param {Buffer | ArrayBuffer} binData - the raw binary data received
+     * @return {null | Object} returns null if more binary data is expected or
+     *   a reconstructed packet object if all buffers have been received.
+     * @api private
+     */
+
+
+    BinaryReconstructor.prototype.takeBinaryData = function (binData) {
+      this.buffers.push(binData);
+
+      if (this.buffers.length === this.reconPack.attachments) {
+        // done with buffer list
+        var packet = binary.reconstructPacket(this.reconPack, this.buffers);
+        this.finishedReconstruction();
+        return packet;
+      }
+
+      return null;
+    };
+    /**
+     * Cleans up binary packet reconstruction variables.
+     *
+     * @api private
+     */
+
+
+    BinaryReconstructor.prototype.finishedReconstruction = function () {
+      this.reconPack = null;
+      this.buffers = [];
+    };
+
+    function error(msg) {
+      return {
+        type: exports.ERROR,
+        data: 'parser error: ' + msg
+      };
+    }
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/socket.io-client/node_modules/socket.io-parser/is-buffer.js":
+  /*!**********************************************************************************!*\
+    !*** ./node_modules/socket.io-client/node_modules/socket.io-parser/is-buffer.js ***!
+    \**********************************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientNode_modulesSocketIoParserIsBufferJs(module, exports) {
+    module.exports = isBuf;
+    var withNativeBuffer = typeof Buffer === 'function' && typeof Buffer.isBuffer === 'function';
+    var withNativeArrayBuffer = typeof ArrayBuffer === 'function';
+
+    var isView = function isView(obj) {
+      return typeof ArrayBuffer.isView === 'function' ? ArrayBuffer.isView(obj) : obj.buffer instanceof ArrayBuffer;
+    };
+    /**
+     * Returns true if obj is a buffer or an arraybuffer.
+     *
+     * @api private
+     */
+
+
+    function isBuf(obj) {
+      return withNativeBuffer && Buffer.isBuffer(obj) || withNativeArrayBuffer && (obj instanceof ArrayBuffer || isView(obj));
+    }
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/socket.io-client/node_modules/socket.io-parser/node_modules/debug/src/browser.js":
+  /*!*******************************************************************************************************!*\
+    !*** ./node_modules/socket.io-client/node_modules/socket.io-parser/node_modules/debug/src/browser.js ***!
+    \*******************************************************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientNode_modulesSocketIoParserNode_modulesDebugSrcBrowserJs(module, exports, __webpack_require__) {
+    /**
+     * This is the web browser implementation of `debug()`.
+     *
+     * Expose `debug()` as the module.
+     */
+    exports = module.exports = __webpack_require__(
+    /*! ./debug */
+    "./node_modules/socket.io-client/node_modules/socket.io-parser/node_modules/debug/src/debug.js");
+    exports.log = log;
+    exports.formatArgs = formatArgs;
+    exports.save = save;
+    exports.load = load;
+    exports.useColors = useColors;
+    exports.storage = 'undefined' != typeof chrome && 'undefined' != typeof chrome.storage ? chrome.storage.local : localstorage();
+    /**
+     * Colors.
+     */
+
+    exports.colors = ['#0000CC', '#0000FF', '#0033CC', '#0033FF', '#0066CC', '#0066FF', '#0099CC', '#0099FF', '#00CC00', '#00CC33', '#00CC66', '#00CC99', '#00CCCC', '#00CCFF', '#3300CC', '#3300FF', '#3333CC', '#3333FF', '#3366CC', '#3366FF', '#3399CC', '#3399FF', '#33CC00', '#33CC33', '#33CC66', '#33CC99', '#33CCCC', '#33CCFF', '#6600CC', '#6600FF', '#6633CC', '#6633FF', '#66CC00', '#66CC33', '#9900CC', '#9900FF', '#9933CC', '#9933FF', '#99CC00', '#99CC33', '#CC0000', '#CC0033', '#CC0066', '#CC0099', '#CC00CC', '#CC00FF', '#CC3300', '#CC3333', '#CC3366', '#CC3399', '#CC33CC', '#CC33FF', '#CC6600', '#CC6633', '#CC9900', '#CC9933', '#CCCC00', '#CCCC33', '#FF0000', '#FF0033', '#FF0066', '#FF0099', '#FF00CC', '#FF00FF', '#FF3300', '#FF3333', '#FF3366', '#FF3399', '#FF33CC', '#FF33FF', '#FF6600', '#FF6633', '#FF9900', '#FF9933', '#FFCC00', '#FFCC33'];
+    /**
+     * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+     * and the Firebug extension (any Firefox version) are known
+     * to support "%c" CSS customizations.
+     *
+     * TODO: add a `localStorage` variable to explicitly enable/disable colors
+     */
+
+    function useColors() {
+      // NB: In an Electron preload script, document will be defined but not fully
+      // initialized. Since we know we're in Chrome, we'll just detect this case
+      // explicitly
+      if (typeof window !== 'undefined' && window.process && window.process.type === 'renderer') {
+        return true;
+      } // Internet Explorer and Edge do not support colors.
+
+
+      if (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
+        return false;
+      } // is webkit? http://stackoverflow.com/a/16459606/376773
+      // document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
+
+
+      return typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance || // is firebug? http://stackoverflow.com/a/398120/376773
+      typeof window !== 'undefined' && window.console && (window.console.firebug || window.console.exception && window.console.table) || // is firefox >= v31?
+      // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+      typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31 || // double check webkit in userAgent just in case we are in a worker
+      typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
+    }
+    /**
+     * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+     */
+
+
+    exports.formatters.j = function (v) {
+      try {
+        return JSON.stringify(v);
+      } catch (err) {
+        return '[UnexpectedJSONParseError]: ' + err.message;
+      }
+    };
+    /**
+     * Colorize log arguments if enabled.
+     *
+     * @api public
+     */
+
+
+    function formatArgs(args) {
+      var useColors = this.useColors;
+      args[0] = (useColors ? '%c' : '') + this.namespace + (useColors ? ' %c' : ' ') + args[0] + (useColors ? '%c ' : ' ') + '+' + exports.humanize(this.diff);
+      if (!useColors) return;
+      var c = 'color: ' + this.color;
+      args.splice(1, 0, c, 'color: inherit'); // the final "%c" is somewhat tricky, because there could be other
+      // arguments passed either before or after the %c, so we need to
+      // figure out the correct index to insert the CSS into
+
+      var index = 0;
+      var lastC = 0;
+      args[0].replace(/%[a-zA-Z%]/g, function (match) {
+        if ('%%' === match) return;
+        index++;
+
+        if ('%c' === match) {
+          // we only are interested in the *last* %c
+          // (the user may have provided their own)
+          lastC = index;
+        }
+      });
+      args.splice(lastC, 0, c);
+    }
+    /**
+     * Invokes `console.log()` when available.
+     * No-op when `console.log` is not a "function".
+     *
+     * @api public
+     */
+
+
+    function log() {
+      // this hackery is required for IE8/9, where
+      // the `console.log` function doesn't have 'apply'
+      return 'object' === typeof console && console.log && Function.prototype.apply.call(console.log, console, arguments);
+    }
+    /**
+     * Save `namespaces`.
+     *
+     * @param {String} namespaces
+     * @api private
+     */
+
+
+    function save(namespaces) {
+      try {
+        if (null == namespaces) {
+          exports.storage.removeItem('debug');
+        } else {
+          exports.storage.debug = namespaces;
+        }
+      } catch (e) {}
+    }
+    /**
+     * Load `namespaces`.
+     *
+     * @return {String} returns the previously persisted debug modes
+     * @api private
+     */
+
+
+    function load() {
+      var r;
+
+      try {
+        r = exports.storage.debug;
+      } catch (e) {} // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
+
+
+      if (!r && typeof process !== 'undefined' && 'env' in process) {
+        r = process.env.DEBUG;
+      }
+
+      return r;
+    }
+    /**
+     * Enable namespaces listed in `localStorage.debug` initially.
+     */
+
+
+    exports.enable(load());
+    /**
+     * Localstorage attempts to return the localstorage.
+     *
+     * This is necessary because safari throws
+     * when a user disables cookies/localstorage
+     * and you attempt to access it.
+     *
+     * @return {LocalStorage}
+     * @api private
+     */
+
+    function localstorage() {
+      try {
+        return window.localStorage;
+      } catch (e) {}
+    }
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/socket.io-client/node_modules/socket.io-parser/node_modules/debug/src/debug.js":
+  /*!*****************************************************************************************************!*\
+    !*** ./node_modules/socket.io-client/node_modules/socket.io-parser/node_modules/debug/src/debug.js ***!
+    \*****************************************************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientNode_modulesSocketIoParserNode_modulesDebugSrcDebugJs(module, exports, __webpack_require__) {
+    /**
+     * This is the common logic for both the Node.js and web browser
+     * implementations of `debug()`.
+     *
+     * Expose `debug()` as the module.
+     */
+    exports = module.exports = createDebug.debug = createDebug['default'] = createDebug;
+    exports.coerce = coerce;
+    exports.disable = disable;
+    exports.enable = enable;
+    exports.enabled = enabled;
+    exports.humanize = __webpack_require__(
+    /*! ms */
+    "./node_modules/socket.io-client/node_modules/socket.io-parser/node_modules/ms/index.js");
+    /**
+     * Active `debug` instances.
+     */
+
+    exports.instances = [];
+    /**
+     * The currently active debug mode names, and names to skip.
+     */
+
+    exports.names = [];
+    exports.skips = [];
+    /**
+     * Map of special "%n" handling functions, for the debug "format" argument.
+     *
+     * Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
+     */
+
+    exports.formatters = {};
+    /**
+     * Select a color.
+     * @param {String} namespace
+     * @return {Number}
+     * @api private
+     */
+
+    function selectColor(namespace) {
+      var hash = 0,
+          i;
+
+      for (i in namespace) {
+        hash = (hash << 5) - hash + namespace.charCodeAt(i);
+        hash |= 0; // Convert to 32bit integer
+      }
+
+      return exports.colors[Math.abs(hash) % exports.colors.length];
+    }
+    /**
+     * Create a debugger with the given `namespace`.
+     *
+     * @param {String} namespace
+     * @return {Function}
+     * @api public
+     */
+
+
+    function createDebug(namespace) {
+      var prevTime;
+
+      function debug() {
+        // disabled?
+        if (!debug.enabled) return;
+        var self = debug; // set `diff` timestamp
+
+        var curr = +new Date();
+        var ms = curr - (prevTime || curr);
+        self.diff = ms;
+        self.prev = prevTime;
+        self.curr = curr;
+        prevTime = curr; // turn the `arguments` into a proper Array
+
+        var args = new Array(arguments.length);
+
+        for (var i = 0; i < args.length; i++) {
+          args[i] = arguments[i];
+        }
+
+        args[0] = exports.coerce(args[0]);
+
+        if ('string' !== typeof args[0]) {
+          // anything else let's inspect with %O
+          args.unshift('%O');
+        } // apply any `formatters` transformations
+
+
+        var index = 0;
+        args[0] = args[0].replace(/%([a-zA-Z%])/g, function (match, format) {
+          // if we encounter an escaped % then don't increase the array index
+          if (match === '%%') return match;
+          index++;
+          var formatter = exports.formatters[format];
+
+          if ('function' === typeof formatter) {
+            var val = args[index];
+            match = formatter.call(self, val); // now we need to remove `args[index]` since it's inlined in the `format`
+
+            args.splice(index, 1);
+            index--;
+          }
+
+          return match;
+        }); // apply env-specific formatting (colors, etc.)
+
+        exports.formatArgs.call(self, args);
+        var logFn = debug.log || exports.log || console.log.bind(console);
+        logFn.apply(self, args);
+      }
+
+      debug.namespace = namespace;
+      debug.enabled = exports.enabled(namespace);
+      debug.useColors = exports.useColors();
+      debug.color = selectColor(namespace);
+      debug.destroy = destroy; // env-specific initialization logic for debug instances
+
+      if ('function' === typeof exports.init) {
+        exports.init(debug);
+      }
+
+      exports.instances.push(debug);
+      return debug;
+    }
+
+    function destroy() {
+      var index = exports.instances.indexOf(this);
+
+      if (index !== -1) {
+        exports.instances.splice(index, 1);
+        return true;
+      } else {
+        return false;
+      }
+    }
+    /**
+     * Enables a debug mode by namespaces. This can include modes
+     * separated by a colon and wildcards.
+     *
+     * @param {String} namespaces
+     * @api public
+     */
+
+
+    function enable(namespaces) {
+      exports.save(namespaces);
+      exports.names = [];
+      exports.skips = [];
+      var i;
+      var split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
+      var len = split.length;
+
+      for (i = 0; i < len; i++) {
+        if (!split[i]) continue; // ignore empty strings
+
+        namespaces = split[i].replace(/\*/g, '.*?');
+
+        if (namespaces[0] === '-') {
+          exports.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+        } else {
+          exports.names.push(new RegExp('^' + namespaces + '$'));
+        }
+      }
+
+      for (i = 0; i < exports.instances.length; i++) {
+        var instance = exports.instances[i];
+        instance.enabled = exports.enabled(instance.namespace);
+      }
+    }
+    /**
+     * Disable debug output.
+     *
+     * @api public
+     */
+
+
+    function disable() {
+      exports.enable('');
+    }
+    /**
+     * Returns true if the given mode name is enabled, false otherwise.
+     *
+     * @param {String} name
+     * @return {Boolean}
+     * @api public
+     */
+
+
+    function enabled(name) {
+      if (name[name.length - 1] === '*') {
+        return true;
+      }
+
+      var i, len;
+
+      for (i = 0, len = exports.skips.length; i < len; i++) {
+        if (exports.skips[i].test(name)) {
+          return false;
+        }
+      }
+
+      for (i = 0, len = exports.names.length; i < len; i++) {
+        if (exports.names[i].test(name)) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+    /**
+     * Coerce `val`.
+     *
+     * @param {Mixed} val
+     * @return {Mixed}
+     * @api private
+     */
+
+
+    function coerce(val) {
+      if (val instanceof Error) return val.stack || val.message;
+      return val;
+    }
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/socket.io-client/node_modules/socket.io-parser/node_modules/ms/index.js":
+  /*!**********************************************************************************************!*\
+    !*** ./node_modules/socket.io-client/node_modules/socket.io-parser/node_modules/ms/index.js ***!
+    \**********************************************************************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesSocketIoClientNode_modulesSocketIoParserNode_modulesMsIndexJs(module, exports) {
+    /**
+     * Helpers.
+     */
+    var s = 1000;
+    var m = s * 60;
+    var h = m * 60;
+    var d = h * 24;
+    var y = d * 365.25;
+    /**
+     * Parse or format the given `val`.
+     *
+     * Options:
+     *
+     *  - `long` verbose formatting [false]
+     *
+     * @param {String|Number} val
+     * @param {Object} [options]
+     * @throws {Error} throw an error if val is not a non-empty string or a number
+     * @return {String|Number}
+     * @api public
+     */
+
+    module.exports = function (val, options) {
+      options = options || {};
+      var type = typeof val;
+
+      if (type === 'string' && val.length > 0) {
+        return parse(val);
+      } else if (type === 'number' && isNaN(val) === false) {
+        return options["long"] ? fmtLong(val) : fmtShort(val);
+      }
+
+      throw new Error('val is not a non-empty string or a valid number. val=' + JSON.stringify(val));
+    };
+    /**
+     * Parse the given `str` and return milliseconds.
+     *
+     * @param {String} str
+     * @return {Number}
+     * @api private
+     */
+
+
+    function parse(str) {
+      str = String(str);
+
+      if (str.length > 100) {
+        return;
+      }
+
+      var match = /^((?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|years?|yrs?|y)?$/i.exec(str);
+
+      if (!match) {
+        return;
+      }
+
+      var n = parseFloat(match[1]);
+      var type = (match[2] || 'ms').toLowerCase();
+
+      switch (type) {
+        case 'years':
+        case 'year':
+        case 'yrs':
+        case 'yr':
+        case 'y':
+          return n * y;
+
+        case 'days':
+        case 'day':
+        case 'd':
+          return n * d;
+
+        case 'hours':
+        case 'hour':
+        case 'hrs':
+        case 'hr':
+        case 'h':
+          return n * h;
+
+        case 'minutes':
+        case 'minute':
+        case 'mins':
+        case 'min':
+        case 'm':
+          return n * m;
+
+        case 'seconds':
+        case 'second':
+        case 'secs':
+        case 'sec':
+        case 's':
+          return n * s;
+
+        case 'milliseconds':
+        case 'millisecond':
+        case 'msecs':
+        case 'msec':
+        case 'ms':
+          return n;
+
+        default:
+          return undefined;
+      }
+    }
+    /**
+     * Short format for `ms`.
+     *
+     * @param {Number} ms
+     * @return {String}
+     * @api private
+     */
+
+
+    function fmtShort(ms) {
+      if (ms >= d) {
+        return Math.round(ms / d) + 'd';
+      }
+
+      if (ms >= h) {
+        return Math.round(ms / h) + 'h';
+      }
+
+      if (ms >= m) {
+        return Math.round(ms / m) + 'm';
+      }
+
+      if (ms >= s) {
+        return Math.round(ms / s) + 's';
+      }
+
+      return ms + 'ms';
+    }
+    /**
+     * Long format for `ms`.
+     *
+     * @param {Number} ms
+     * @return {String}
+     * @api private
+     */
+
+
+    function fmtLong(ms) {
+      return plural(ms, d, 'day') || plural(ms, h, 'hour') || plural(ms, m, 'minute') || plural(ms, s, 'second') || ms + ' ms';
+    }
+    /**
+     * Pluralization helper.
+     */
+
+
+    function plural(ms, n, name) {
+      if (ms < n) {
+        return;
+      }
+
+      if (ms < n * 1.5) {
+        return Math.floor(ms / n) + ' ' + name;
+      }
+
+      return Math.ceil(ms / n) + ' ' + name + 's';
+    }
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/to-array/index.js":
+  /*!****************************************!*\
+    !*** ./node_modules/to-array/index.js ***!
+    \****************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesToArrayIndexJs(module, exports) {
+    module.exports = toArray;
+
+    function toArray(list, index) {
+      var array = [];
+      index = index || 0;
+
+      for (var i = index || 0; i < list.length; i++) {
+        array[i - index] = list[i];
+      }
+
+      return array;
+    }
+    /***/
+
+  },
+
+  /***/
+  "./node_modules/yeast/index.js":
+  /*!*************************************!*\
+    !*** ./node_modules/yeast/index.js ***!
+    \*************************************/
+
+  /*! no static exports found */
+
+  /***/
+  function node_modulesYeastIndexJs(module, exports, __webpack_require__) {
+    "use strict";
+
+    var alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'.split(''),
+        length = 64,
+        map = {},
+        seed = 0,
+        i = 0,
+        prev;
+    /**
+     * Return a string representing the specified number.
+     *
+     * @param {Number} num The number to convert.
+     * @returns {String} The string representation of the number.
+     * @api public
+     */
+
+    function encode(num) {
+      var encoded = '';
+
+      do {
+        encoded = alphabet[num % length] + encoded;
+        num = Math.floor(num / length);
+      } while (num > 0);
+
+      return encoded;
+    }
+    /**
+     * Return the integer value specified by the given string.
+     *
+     * @param {String} str The string to convert.
+     * @returns {Number} The integer value represented by the string.
+     * @api public
+     */
+
+
+    function decode(str) {
+      var decoded = 0;
+
+      for (i = 0; i < str.length; i++) {
+        decoded = decoded * length + map[str.charAt(i)];
+      }
+
+      return decoded;
+    }
+    /**
+     * Yeast: A tiny growing id generator.
+     *
+     * @returns {String} A unique id.
+     * @api public
+     */
+
+
+    function yeast() {
+      var now = encode(+new Date());
+      if (now !== prev) return seed = 0, prev = now;
+      return now + '.' + encode(seed++);
+    } //
+    // Map each character to its index.
+    //
+
+
+    for (; i < length; i++) {
+      map[alphabet[i]] = i;
+    } //
+    // Expose the `yeast`, `encode` and `decode` functions.
+    //
+
+
+    yeast.encode = encode;
+    yeast.decode = decode;
+    module.exports = yeast;
     /***/
   },
 
@@ -90213,19 +98018,51 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/common/http */
     "./node_modules/@angular/common/fesm2015/http.js");
+    /* harmony import */
 
-    var AppServiceService =
-    /*#__PURE__*/
-    function () {
-      // private baseUrl = 'https://chatapp212.herokuapp.com/';
+
+    var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! rxjs */
+    "./node_modules/rxjs/_esm2015/index.js");
+    /* harmony import */
+
+
+    var socket_io_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! socket.io-client */
+    "./node_modules/socket.io-client/lib/index.js");
+    /* harmony import */
+
+
+    var socket_io_client__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_4__);
+
+    var AppServiceService = /*#__PURE__*/function () {
       function AppServiceService(httpClient) {
         _classCallCheck(this, AppServiceService);
 
         this.httpClient = httpClient;
         this.baseUrl = 'http://localhost:5000/';
-      }
+        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_4__["connect"](this.baseUrl);
+      } //socket
+
 
       _createClass(AppServiceService, [{
+        key: "listen",
+        value: function listen(eventName) {
+          var _this357 = this;
+
+          return new rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"](function (subscriber) {
+            _this357.socket.on(eventName, function (data) {
+              subscriber.next(data);
+            });
+          });
+        }
+      }, {
+        key: "emit",
+        value: function emit(eventName, data) {
+          this.socket.emit(eventName, data);
+        } //https
+
+      }, {
         key: "logIn",
         value: function logIn(logInValues) {
           return this.httpClient.post("".concat(this.baseUrl, "login"), logInValues);
@@ -90239,6 +98076,46 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "getUserInfo",
         value: function getUserInfo(userinfo) {
           return this.httpClient.post("".concat(this.baseUrl, "getuserinfo"), userinfo);
+        }
+      }, {
+        key: "saveUserProfileImage",
+        value: function saveUserProfileImage(userImage) {
+          return this.httpClient.post("".concat(this.baseUrl, "profileImage"), userImage);
+        }
+      }, {
+        key: "getUserProfileImage",
+        value: function getUserProfileImage(userinfo) {
+          return this.httpClient.post("".concat(this.baseUrl, "getProfileImage"), userinfo);
+        }
+      }, {
+        key: "getPeopleInfo",
+        value: function getPeopleInfo(userId) {
+          return this.httpClient.post("".concat(this.baseUrl, "getpeoplelist"), userId);
+        }
+      }, {
+        key: "getChatList",
+        value: function getChatList(userInfo) {
+          return this.httpClient.post("".concat(this.baseUrl, "getchatlist"), userInfo);
+        }
+      }, {
+        key: "sendMsg",
+        value: function sendMsg(userInfo) {
+          return this.httpClient.post("".concat(this.baseUrl, "sendmsg"), userInfo);
+        }
+      }, {
+        key: "setTimeLineImage",
+        value: function setTimeLineImage(userImage) {
+          return this.httpClient.post("".concat(this.baseUrl, "settimelineimage"), userImage);
+        }
+      }, {
+        key: "getTimeLineImage",
+        value: function getTimeLineImage(userId) {
+          return this.httpClient.post("".concat(this.baseUrl, "gettimelineimage"), userId);
+        }
+      }, {
+        key: "getChatHistory",
+        value: function getChatHistory(userId) {
+          return this.httpClient.post("".concat(this.baseUrl, "getchathistory"), userId);
         }
       }]);
 
@@ -90254,6 +98131,165 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     AppServiceService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
       providedIn: 'root'
     })], AppServiceService);
+    /***/
+  },
+
+  /***/
+  "./src/app/components/chat-page/chat-page.component.css":
+  /*!**************************************************************!*\
+    !*** ./src/app/components/chat-page/chat-page.component.css ***!
+    \**************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppComponentsChatPageChatPageComponentCss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = ".structure {\n  height: 100vh;\n  width: 100vw;\n  display: flex;\n  flex-direction: column; \n  overflow: unset;\n}\n\n.header {\n  width: 100vw;\n  position: -webkit-sticky;\n  position: sticky;\n  z-index: 40000;\n  top: 0;\n  background-color: #ffffff;\n  display: flex;\n  align-items: center;\n  border-bottom: 1px solid rgba(0,0,0,.12);\n}\n\n.profile {\n  height: 10vw;\n  width: 10vw;\n  padding: 12px 12px;\n  border-radius: 10vh;\n  margin-left: 15px;\n}\n\n.footer {\n  position: fixed;\n  z-index: 10000;\n  bottom: 0px;\n  width: 100vw;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  align-items: center;\n  padding: 8px 0;\n  background-color: white\n}\n\n.text-box {\n  font-size: 16px;\n  font-family: Arial, Helvetica, sans-serif;\n  width: 75vw;\n  height: 10vw;\n  font-weight: 400;\n  padding: 2px 10px;\n  border-radius: 16px;\n  background-color: whitesmoke;\n  border-color: black;\n}\n\n.send-button {\n  height: 10vw;\n  width : 14vw;\n  border-radius: 20vw;\n  display: flex;\n  align-items: center;\n  justify-content: space-evenly;\n}\n\n.msg-cont {\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 20vw;\n}\n\n.msg-from {\n  margin-top: 12px;\n  max-width: 70vw;\n  margin-left: 2vw;\n  padding: 6px 8px;\n  background-color: cadetblue;\n  border-radius: 20px;\n  flex-wrap: wrap;\n  word-wrap: break-word;\n}\n\n.msg-to {\n  margin-top: 12px;\n  max-width: 70vw;\n  margin-left: 23vw;\n  padding: 6px 8px;\n  background-color: coral;\n  border-radius: 20px;\n  flex-wrap: wrap;\n  word-wrap: break-word;\n}\n\nmat-card {\n  padding: 0;\n  margin: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9jaGF0LXBhZ2UvY2hhdC1wYWdlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFhO0VBQ2IsWUFBWTtFQUNaLGFBQWE7RUFDYixzQkFBc0I7RUFDdEIsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLFlBQVk7RUFDWix3QkFBZ0I7RUFBaEIsZ0JBQWdCO0VBQ2hCLGNBQWM7RUFDZCxNQUFNO0VBQ04seUJBQXlCO0VBQ3pCLGFBQWE7RUFDYixtQkFBbUI7RUFDbkIsd0NBQXdDO0FBQzFDOztBQUVBO0VBQ0UsWUFBWTtFQUNaLFdBQVc7RUFDWCxrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGVBQWU7RUFDZixjQUFjO0VBQ2QsV0FBVztFQUNYLFlBQVk7RUFDWixhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLDZCQUE2QjtFQUM3QixtQkFBbUI7RUFDbkIsY0FBYztFQUNkO0FBQ0Y7O0FBRUE7RUFDRSxlQUFlO0VBQ2YseUNBQXlDO0VBQ3pDLFdBQVc7RUFDWCxZQUFZO0VBQ1osZ0JBQWdCO0VBQ2hCLGlCQUFpQjtFQUNqQixtQkFBbUI7RUFDbkIsNEJBQTRCO0VBQzVCLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1osbUJBQW1CO0VBQ25CLGFBQWE7RUFDYixtQkFBbUI7RUFDbkIsNkJBQTZCO0FBQy9COztBQUVBO0VBQ0UsYUFBYTtFQUNiLHNCQUFzQjtFQUN0QixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsZUFBZTtFQUNmLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsMkJBQTJCO0VBQzNCLG1CQUFtQjtFQUNuQixlQUFlO0VBQ2YscUJBQXFCO0FBQ3ZCOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLGVBQWU7RUFDZixpQkFBaUI7RUFDakIsZ0JBQWdCO0VBQ2hCLHVCQUF1QjtFQUN2QixtQkFBbUI7RUFDbkIsZUFBZTtFQUNmLHFCQUFxQjtBQUN2Qjs7QUFFQTtFQUNFLFVBQVU7RUFDVixTQUFTO0FBQ1giLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2NoYXQtcGFnZS9jaGF0LXBhZ2UuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zdHJ1Y3R1cmUge1xuICBoZWlnaHQ6IDEwMHZoO1xuICB3aWR0aDogMTAwdnc7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47IFxuICBvdmVyZmxvdzogdW5zZXQ7XG59XG5cbi5oZWFkZXIge1xuICB3aWR0aDogMTAwdnc7XG4gIHBvc2l0aW9uOiBzdGlja3k7XG4gIHotaW5kZXg6IDQwMDAwO1xuICB0b3A6IDA7XG4gIGJhY2tncm91bmQtY29sb3I6ICNmZmZmZmY7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCByZ2JhKDAsMCwwLC4xMik7XG59XG5cbi5wcm9maWxlIHtcbiAgaGVpZ2h0OiAxMHZ3O1xuICB3aWR0aDogMTB2dztcbiAgcGFkZGluZzogMTJweCAxMnB4O1xuICBib3JkZXItcmFkaXVzOiAxMHZoO1xuICBtYXJnaW4tbGVmdDogMTVweDtcbn1cblxuLmZvb3RlciB7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgei1pbmRleDogMTAwMDA7XG4gIGJvdHRvbTogMHB4O1xuICB3aWR0aDogMTAwdnc7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYXJvdW5kO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBwYWRkaW5nOiA4cHggMDtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGVcbn1cblxuLnRleHQtYm94IHtcbiAgZm9udC1zaXplOiAxNnB4O1xuICBmb250LWZhbWlseTogQXJpYWwsIEhlbHZldGljYSwgc2Fucy1zZXJpZjtcbiAgd2lkdGg6IDc1dnc7XG4gIGhlaWdodDogMTB2dztcbiAgZm9udC13ZWlnaHQ6IDQwMDtcbiAgcGFkZGluZzogMnB4IDEwcHg7XG4gIGJvcmRlci1yYWRpdXM6IDE2cHg7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlc21va2U7XG4gIGJvcmRlci1jb2xvcjogYmxhY2s7XG59XG5cbi5zZW5kLWJ1dHRvbiB7XG4gIGhlaWdodDogMTB2dztcbiAgd2lkdGggOiAxNHZ3O1xuICBib3JkZXItcmFkaXVzOiAyMHZ3O1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbn1cblxuLm1zZy1jb250IHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgbWFyZ2luLWJvdHRvbTogMjB2dztcbn1cblxuLm1zZy1mcm9tIHtcbiAgbWFyZ2luLXRvcDogMTJweDtcbiAgbWF4LXdpZHRoOiA3MHZ3O1xuICBtYXJnaW4tbGVmdDogMnZ3O1xuICBwYWRkaW5nOiA2cHggOHB4O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBjYWRldGJsdWU7XG4gIGJvcmRlci1yYWRpdXM6IDIwcHg7XG4gIGZsZXgtd3JhcDogd3JhcDtcbiAgd29yZC13cmFwOiBicmVhay13b3JkO1xufVxuXG4ubXNnLXRvIHtcbiAgbWFyZ2luLXRvcDogMTJweDtcbiAgbWF4LXdpZHRoOiA3MHZ3O1xuICBtYXJnaW4tbGVmdDogMjN2dztcbiAgcGFkZGluZzogNnB4IDhweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogY29yYWw7XG4gIGJvcmRlci1yYWRpdXM6IDIwcHg7XG4gIGZsZXgtd3JhcDogd3JhcDtcbiAgd29yZC13cmFwOiBicmVhay13b3JkO1xufVxuXG5tYXQtY2FyZCB7XG4gIHBhZGRpbmc6IDA7XG4gIG1hcmdpbjogMDtcbn0iXX0= */";
+    /***/
+  },
+
+  /***/
+  "./src/app/components/chat-page/chat-page.component.ts":
+  /*!*************************************************************!*\
+    !*** ./src/app/components/chat-page/chat-page.component.ts ***!
+    \*************************************************************/
+
+  /*! exports provided: ChatPageComponent */
+
+  /***/
+  function srcAppComponentsChatPageChatPageComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ChatPageComponent", function () {
+      return ChatPageComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var src_app_app_service_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/app/app-service.service */
+    "./src/app/app-service.service.ts");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/fesm2015/forms.js");
+
+    var ChatPageComponent = /*#__PURE__*/function () {
+      function ChatPageComponent(chatDetails, formuilder) {
+        _classCallCheck(this, ChatPageComponent);
+
+        this.chatDetails = chatDetails;
+        this.formuilder = formuilder;
+        this.chatList = [];
+        this.currNavFlag = true;
+        this.msgForm = this.formuilder.group({
+          msg: [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]
+        });
+      }
+
+      _createClass(ChatPageComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          this.chatData = JSON.parse(localStorage.getItem('chatinfo'));
+          this.getChatList();
+        }
+      }, {
+        key: "ngOnDestroy",
+        value: function ngOnDestroy() {
+          this.chatDetails.emit('leave', true);
+        } ////////////////////////////////////////////////////////////////////////////////
+        //                                  PRIVATE 
+        ////////////////////////////////////////////////////////////////////////////////
+
+      }, {
+        key: "getChatList",
+        value: function getChatList() {
+          var _this358 = this;
+
+          var data = {
+            'userId': localStorage.getItem('userInfo'),
+            'frndId': this.chatData.userId
+          };
+          this.chatDetails.emit('mesg', data);
+          this.chatDetails.listen('mesg').subscribe(function (data) {
+            _this358.chatList = data;
+          });
+          window.scrollBy({
+            top: window.innerHeight,
+            behavior: 'smooth'
+          });
+        }
+      }, {
+        key: "sendMsg",
+        value: function sendMsg(msg) {
+          var _this359 = this;
+
+          this.chatDetails.sendMsg({
+            sndrId: localStorage.getItem('userInfo'),
+            recvId: this.chatData.userId,
+            msg: msg
+          }).subscribe(function (res) {
+            if (res.status) {
+              _this359.msgForm.setValue({
+                msg: null
+              });
+            }
+          });
+        } ////////////////////////////////////////////////////////////////////////////////
+        //                                  PRIVATE 
+        ////////////////////////////////////////////////////////////////////////////////
+
+      }, {
+        key: "send",
+        value: function send() {
+          if (this.msgForm.get('msg').value) this.sendMsg(this.msgForm.get('msg').value);
+        }
+      }]);
+
+      return ChatPageComponent;
+    }();
+
+    ChatPageComponent.ctorParameters = function () {
+      return [{
+        type: src_app_app_service_service__WEBPACK_IMPORTED_MODULE_2__["AppServiceService"]
+      }, {
+        type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]
+      }];
+    };
+
+    ChatPageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-chat-page',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./chat-page.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/chat-page/chat-page.component.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./chat-page.component.css */
+      "./src/app/components/chat-page/chat-page.component.css"))["default"]]
+    })], ChatPageComponent);
     /***/
   },
 
@@ -90312,6 +98348,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _initial_page_initial_page_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ./initial-page/initial-page.component */
     "./src/app/components/initial-page/initial-page.component.ts");
+    /* harmony import */
+
+
+    var _profile_info_profile_info_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! ./profile-info/profile-info.component */
+    "./src/app/components/profile-info/profile-info.component.ts");
+    /* harmony import */
+
+
+    var _chat_page_chat_page_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ./chat-page/chat-page.component */
+    "./src/app/components/chat-page/chat-page.component.ts");
 
     var routes = [{
       path: '',
@@ -90322,6 +98370,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }, {
       path: 'LandingPage',
       component: _landing_page_landing_page_component__WEBPACK_IMPORTED_MODULE_4__["LandingPageComponent"]
+    }, {
+      path: 'ProfileInfo',
+      component: _profile_info_profile_info_component__WEBPACK_IMPORTED_MODULE_6__["ProfileInfoComponent"]
+    }, {
+      path: 'ChatPage',
+      component: _chat_page_chat_page_component__WEBPACK_IMPORTED_MODULE_7__["ChatPageComponent"]
     }];
 
     var AppComponentRouting = function AppComponentRouting() {
@@ -90408,13 +98462,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _initial_page_initial_page_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! ./initial-page/initial-page.component */
     "./src/app/components/initial-page/initial-page.component.ts");
+    /* harmony import */
+
+
+    var _profile_info_profile_info_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! ./profile-info/profile-info.component */
+    "./src/app/components/profile-info/profile-info.component.ts");
+    /* harmony import */
+
+
+    var _chat_page_chat_page_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    /*! ./chat-page/chat-page.component */
+    "./src/app/components/chat-page/chat-page.component.ts");
 
     var ComponentsModule = function ComponentsModule() {
       _classCallCheck(this, ComponentsModule);
     };
 
     ComponentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      declarations: [_login_signup_login_signup_component__WEBPACK_IMPORTED_MODULE_3__["LoginSignupComponent"], _landing_page_landing_page_component__WEBPACK_IMPORTED_MODULE_7__["LandingPageComponent"], _initial_page_initial_page_component__WEBPACK_IMPORTED_MODULE_8__["InitialPageComponent"]],
+      declarations: [_login_signup_login_signup_component__WEBPACK_IMPORTED_MODULE_3__["LoginSignupComponent"], _landing_page_landing_page_component__WEBPACK_IMPORTED_MODULE_7__["LandingPageComponent"], _initial_page_initial_page_component__WEBPACK_IMPORTED_MODULE_8__["InitialPageComponent"], _profile_info_profile_info_component__WEBPACK_IMPORTED_MODULE_9__["ProfileInfoComponent"], _chat_page_chat_page_component__WEBPACK_IMPORTED_MODULE_10__["ChatPageComponent"]],
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatCardModule"], _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatInputModule"], _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDividerModule"], _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatFormFieldModule"], _components_routing__WEBPACK_IMPORTED_MODULE_4__["AppComponentRouting"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["ReactiveFormsModule"]]
     })], ComponentsModule);
     /***/
@@ -90436,7 +98502,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".structure {\n  height: 100%;\n  width: 100%;\n  background-image: -webkit-gradient(linear, left top, right top, from(#000046), to(#1CB5E0));\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.text {\n  font-weight: bolder;\n  font-style: italic;\n  color: aliceblue;\n  font-size: 2rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9pbml0aWFsLXBhZ2UvaW5pdGlhbC1wYWdlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxZQUFZO0VBQ1osV0FBVztFQUNYLDJGQUE2RDtFQUE3RCw2REFBNkQ7RUFDN0Qsb0JBQWE7RUFBYixhQUFhO0VBQ2IsOEJBQTZCO1VBQTdCLDZCQUE2QjtFQUM3Qix5QkFBbUI7VUFBbkIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsbUJBQW1CO0VBQ25CLGtCQUFrQjtFQUNsQixnQkFBZ0I7RUFDaEIsZUFBZTtBQUNqQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvaW5pdGlhbC1wYWdlL2luaXRpYWwtcGFnZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnN0cnVjdHVyZSB7XG4gIGhlaWdodDogMTAwJTtcbiAgd2lkdGg6IDEwMCU7XG4gIGJhY2tncm91bmQtaW1hZ2U6IGxpbmVhci1ncmFkaWVudCh0byByaWdodCwgIzAwMDA0NiwgIzFDQjVFMCk7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4udGV4dCB7XG4gIGZvbnQtd2VpZ2h0OiBib2xkZXI7XG4gIGZvbnQtc3R5bGU6IGl0YWxpYztcbiAgY29sb3I6IGFsaWNlYmx1ZTtcbiAgZm9udC1zaXplOiAycmVtO1xufSJdfQ== */";
+    __webpack_exports__["default"] = ".structure {\n  height: 100%;\n  width: 100%;\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n  display: flex;\n  justify-content: space-evenly;\n  align-items: center;\n}\n\n.text1 {\n  font-weight: bolder;\n  font-style: italic;\n  color: aliceblue;\n  font-size: 2rem;\n}\n\n.text2 {\n  position: absolute;\n  margin-top: 65vw;\n  font-weight: bolder;\n  font-style: italic;\n  color: aliceblue;\n  font-size: 1rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9pbml0aWFsLXBhZ2UvaW5pdGlhbC1wYWdlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxZQUFZO0VBQ1osV0FBVztFQUNYLDZEQUE2RDtFQUM3RCxhQUFhO0VBQ2IsNkJBQTZCO0VBQzdCLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLG1CQUFtQjtFQUNuQixrQkFBa0I7RUFDbEIsZ0JBQWdCO0VBQ2hCLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsZ0JBQWdCO0VBQ2hCLG1CQUFtQjtFQUNuQixrQkFBa0I7RUFDbEIsZ0JBQWdCO0VBQ2hCLGVBQWU7QUFDakIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2luaXRpYWwtcGFnZS9pbml0aWFsLXBhZ2UuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zdHJ1Y3R1cmUge1xuICBoZWlnaHQ6IDEwMCU7XG4gIHdpZHRoOiAxMDAlO1xuICBiYWNrZ3JvdW5kLWltYWdlOiBsaW5lYXItZ3JhZGllbnQodG8gcmlnaHQsICMwMDAwNDYsICMxQ0I1RTApO1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLnRleHQxIHtcbiAgZm9udC13ZWlnaHQ6IGJvbGRlcjtcbiAgZm9udC1zdHlsZTogaXRhbGljO1xuICBjb2xvcjogYWxpY2VibHVlO1xuICBmb250LXNpemU6IDJyZW07XG59XG5cbi50ZXh0MiB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgbWFyZ2luLXRvcDogNjV2dztcbiAgZm9udC13ZWlnaHQ6IGJvbGRlcjtcbiAgZm9udC1zdHlsZTogaXRhbGljO1xuICBjb2xvcjogYWxpY2VibHVlO1xuICBmb250LXNpemU6IDFyZW07XG59Il19 */";
     /***/
   },
 
@@ -90478,9 +98544,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
 
-    var InitialPageComponent =
-    /*#__PURE__*/
-    function () {
+    var InitialPageComponent = /*#__PURE__*/function () {
       function InitialPageComponent(router) {
         _classCallCheck(this, InitialPageComponent);
 
@@ -90490,16 +98554,51 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(InitialPageComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          this.networkStatus();
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    if (!(screen.width < 800 && screen.height < 1000)) {
+                      _context.next = 7;
+                      break;
+                    }
+
+                    _context.next = 3;
+                    return this.networkStatus();
+
+                  case 3:
+                    _context.next = 5;
+                    return this.clearLocalStorage();
+
+                  case 5:
+                    _context.next = 8;
+                    break;
+
+                  case 7:
+                    alert('Not for WebView');
+
+                  case 8:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this);
+          }));
         }
       }, {
         key: "networkStatus",
         value: function networkStatus() {
-          var _this357 = this;
+          var _this360 = this;
 
           setTimeout(function () {
-            _this357.router.navigate(['./LoginSignupPage']);
-          }, 1000);
+            _this360.router.navigate(['./LoginSignupPage']);
+          }, 4000);
+        }
+      }, {
+        key: "clearLocalStorage",
+        value: function clearLocalStorage() {
+          localStorage.removeItem('userInfo');
         }
       }]);
 
@@ -90516,10 +98615,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       selector: 'app-initial-page',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./initial-page.component.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/initial-page/initial-page.component.html")).default,
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/initial-page/initial-page.component.html"))["default"],
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./initial-page.component.css */
-      "./src/app/components/initial-page/initial-page.component.css")).default]
+      "./src/app/components/initial-page/initial-page.component.css"))["default"]]
     })], InitialPageComponent);
     /***/
   },
@@ -90540,7 +98639,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".structure {\n  background-color: white;\n  height: 100vh;\n  width: 100vw;\n  \n}\n\n.header {\n  height: 10vh;\n  width: 100vw;\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0vh;\n  background-image: -webkit-gradient(linear, left top, right top, from(#000046), to(#1CB5E0));\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n}\n\n.body {\n  height: 90vh;\n  width: 100vw;\n}\n\n.status {\n  height: 10vh;\n  width: 100vw;\n  position: -webkit-sticky;\n  position: sticky;\n  top: 10vh;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n          flex-direction: row;\n  background-color: black;\n}\n\n.msg-body {\n  width: 100%;\n}\n\n.msg-cont {\n  width: 100vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.profile-img {\n  height: 10vh;\n  width: 20vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.profile-name {\n  height: 10vh;\n  width: 80vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9sYW5kaW5nLXBhZ2UvbGFuZGluZy1wYWdlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx1QkFBdUI7RUFDdkIsYUFBYTtFQUNiLFlBQVk7O0FBRWQ7O0FBRUE7RUFDRSxZQUFZO0VBQ1osWUFBWTtFQUNaLHdCQUFnQjtFQUFoQixnQkFBZ0I7RUFDaEIsUUFBUTtFQUNSLDJGQUE2RDtFQUE3RCw2REFBNkQ7QUFDL0Q7O0FBRUE7RUFDRSxZQUFZO0VBQ1osWUFBWTtBQUNkOztBQUVBO0VBQ0UsWUFBWTtFQUNaLFlBQVk7RUFDWix3QkFBZ0I7RUFBaEIsZ0JBQWdCO0VBQ2hCLFNBQVM7RUFDVCxvQkFBYTtFQUFiLGFBQWE7RUFDYiw4QkFBbUI7RUFBbkIsNkJBQW1CO1VBQW5CLG1CQUFtQjtFQUNuQix1QkFBdUI7QUFDekI7O0FBRUE7RUFDRSxXQUFXO0FBQ2I7O0FBRUE7RUFDRSxZQUFZO0VBQ1osb0JBQWE7RUFBYixhQUFhO0VBQ2IseUJBQW1CO1VBQW5CLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixXQUFXO0VBQ1gsb0JBQWE7RUFBYixhQUFhO0VBQ2IsOEJBQTZCO1VBQTdCLDZCQUE2QjtFQUM3Qix5QkFBbUI7VUFBbkIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLFdBQVc7RUFDWCxvQkFBYTtFQUFiLGFBQWE7RUFDYix5QkFBbUI7VUFBbkIsbUJBQW1CO0FBQ3JCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9sYW5kaW5nLXBhZ2UvbGFuZGluZy1wYWdlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc3RydWN0dXJlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gIGhlaWdodDogMTAwdmg7XG4gIHdpZHRoOiAxMDB2dztcbiAgXG59XG5cbi5oZWFkZXIge1xuICBoZWlnaHQ6IDEwdmg7XG4gIHdpZHRoOiAxMDB2dztcbiAgcG9zaXRpb246IHN0aWNreTtcbiAgdG9wOiAwdmg7XG4gIGJhY2tncm91bmQtaW1hZ2U6IGxpbmVhci1ncmFkaWVudCh0byByaWdodCwgIzAwMDA0NiwgIzFDQjVFMCk7XG59XG5cbi5ib2R5IHtcbiAgaGVpZ2h0OiA5MHZoO1xuICB3aWR0aDogMTAwdnc7XG59XG5cbi5zdGF0dXMge1xuICBoZWlnaHQ6IDEwdmg7XG4gIHdpZHRoOiAxMDB2dztcbiAgcG9zaXRpb246IHN0aWNreTtcbiAgdG9wOiAxMHZoO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcbn1cblxuLm1zZy1ib2R5IHtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi5tc2ctY29udCB7XG4gIHdpZHRoOiAxMDB2dztcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLnByb2ZpbGUtaW1nIHtcbiAgaGVpZ2h0OiAxMHZoO1xuICB3aWR0aDogMjB2dztcbiAgZGlzcGxheTogZmxleDtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG59XG5cbi5wcm9maWxlLW5hbWUge1xuICBoZWlnaHQ6IDEwdmg7XG4gIHdpZHRoOiA4MHZ3O1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4iXX0= */";
+    __webpack_exports__["default"] = ".structure {\n  background-color:#ffffff;\n  height: 100vh;\n  width: 100vw;\n}\n\n.header {\n  width: 100vw;\n  background-color: #ffffff;\n  display: flex;\n  align-items: center;\n}\n\n.img-upld {\n  position: absolute;\n  height: 10vw;\n  width: 10vw;\n  top: 0;\n  padding: 10px 10px;\n  border-radius: 10vh;\n}\n\n.profile {\n  height: 10vw;\n  width: 10vw;\n  padding: 10px 10px;\n  border-radius: 10vh;\n  margin-left: calc(85vw - 10px);\n}\n\n.api-progress, .inv-login {\n  z-index: 3000;\n  position: absolute;\n  top: 0;\n  background-color: black;\n  opacity: 0.6;\n  height: 100vh;\n  width: 100vw;\n  display: flex;\n  justify-content: space-evenly;\n  align-items: center;\n}\n\n.body {\n  width: 100vw;\n}\n\n.nav-header {\n  width: 100vw;\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  display: flex;\n  flex-direction: row;\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n}\n\n.nav-header-item-active {\n  height: 100%;\n  width: calc(100% / 3);\n  display: flex;\n  align-items: center;\n  justify-content: space-evenly;\n  color: white;\n  font-family: Arial, Helvetica, sans-serif;\n  border: none;\n  padding: 2vh 0;\n}\n\n.nav-header-item-inactive {\n  box-sizing: border-box;\n  height: 100%;\n  width: calc(100% / 3);\n  display: flex;\n  align-items: center;\n  justify-content: space-evenly;\n  background-color: whitesmoke;\n  font-family: Arial, Helvetica, sans-serif;\n  border: none;\n  padding: 2vh 0;\n}\n\n.img-size {\n  width: 50%;\n  height: 50%;\n}\n\n.msg-body {\n  width: 100%;\n}\n\n.msg-cont {\n  width: 100vw;\n  display: flex;\n  align-items: center;\n}\n\n.profile-img {\n  height: 10vh;\n  width: 20vw;\n  display: flex;\n  justify-content: space-evenly;\n  align-items: center;\n}\n\n.profile-name {\n  height: 10vh;\n  width: 80vw;\n  display: flex;\n  align-items: center;\n}\n\n.api-progress-img {\n  height: 40vh;\n}\n\n/* chat */\n\n.chat-body {\n  height: 100%;\n  width: 100%;\n  border: none;\n  display: flex;\n  flex-direction: column;\n}\n\n/* home cont */\n\n.home-cont {\n  width: 100vw;\n  margin-top: 36px;\n}\n\n.body-nm {\n  width: 80vw;\n  margin-left: 12px;\n  font-size: 16px;\n  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n  font-weight: bolder;\n}\n\n.body-img {\n  margin-top: 8px;\n  width: 100%;\n}\n\n/* people */\n\n.people-body {\n  height: 100%;\n  width: 100%;\n  border: none;\n  display: flex;\n  flex-direction: column;\n}\n\n.people-rec {\n  display: flex;\n  flex-direction: row;\n  width: 100%;\n  align-items: center;\n}\n\n.people-img {\n  height: 8vh;\n  width: 8vh;\n  border-radius: 24vh;\n  padding: 16px 16px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9sYW5kaW5nLXBhZ2UvbGFuZGluZy1wYWdlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx3QkFBd0I7RUFDeEIsYUFBYTtFQUNiLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFlBQVk7RUFDWix5QkFBeUI7RUFDekIsYUFBYTtFQUNiLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLGtCQUFrQjtFQUNsQixZQUFZO0VBQ1osV0FBVztFQUNYLE1BQU07RUFDTixrQkFBa0I7RUFDbEIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLFdBQVc7RUFDWCxrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLDhCQUE4QjtBQUNoQzs7QUFFQTtFQUNFLGFBQWE7RUFDYixrQkFBa0I7RUFDbEIsTUFBTTtFQUNOLHVCQUF1QjtFQUN2QixZQUFZO0VBQ1osYUFBYTtFQUNiLFlBQVk7RUFDWixhQUFhO0VBQ2IsNkJBQTZCO0VBQzdCLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFlBQVk7RUFDWix3QkFBZ0I7RUFBaEIsZ0JBQWdCO0VBQ2hCLE1BQU07RUFDTixhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLDZEQUE2RDtBQUMvRDs7QUFFQTtFQUNFLFlBQVk7RUFDWixxQkFBcUI7RUFDckIsYUFBYTtFQUNiLG1CQUFtQjtFQUNuQiw2QkFBNkI7RUFDN0IsWUFBWTtFQUNaLHlDQUF5QztFQUN6QyxZQUFZO0VBQ1osY0FBYztBQUNoQjs7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QixZQUFZO0VBQ1oscUJBQXFCO0VBQ3JCLGFBQWE7RUFDYixtQkFBbUI7RUFDbkIsNkJBQTZCO0VBQzdCLDRCQUE0QjtFQUM1Qix5Q0FBeUM7RUFDekMsWUFBWTtFQUNaLGNBQWM7QUFDaEI7O0FBRUE7RUFDRSxVQUFVO0VBQ1YsV0FBVztBQUNiOztBQUVBO0VBQ0UsV0FBVztBQUNiOztBQUVBO0VBQ0UsWUFBWTtFQUNaLGFBQWE7RUFDYixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSxZQUFZO0VBQ1osV0FBVztFQUNYLGFBQWE7RUFDYiw2QkFBNkI7RUFDN0IsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLFdBQVc7RUFDWCxhQUFhO0VBQ2IsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsWUFBWTtBQUNkOztBQUVBLFNBQVM7O0FBQ1Q7RUFDRSxZQUFZO0VBQ1osV0FBVztFQUNYLFlBQVk7RUFDWixhQUFhO0VBQ2Isc0JBQXNCO0FBQ3hCOztBQUVBLGNBQWM7O0FBQ2Q7RUFDRSxZQUFZO0VBQ1osZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0UsV0FBVztFQUNYLGlCQUFpQjtFQUNqQixlQUFlO0VBQ2YsNERBQTREO0VBQzVELG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLGVBQWU7RUFDZixXQUFXO0FBQ2I7O0FBRUEsV0FBVzs7QUFDWDtFQUNFLFlBQVk7RUFDWixXQUFXO0VBQ1gsWUFBWTtFQUNaLGFBQWE7RUFDYixzQkFBc0I7QUFDeEI7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLFdBQVc7RUFDWCxtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsVUFBVTtFQUNWLG1CQUFtQjtFQUNuQixrQkFBa0I7QUFDcEIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2xhbmRpbmctcGFnZS9sYW5kaW5nLXBhZ2UuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zdHJ1Y3R1cmUge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiNmZmZmZmY7XG4gIGhlaWdodDogMTAwdmg7XG4gIHdpZHRoOiAxMDB2dztcbn1cblxuLmhlYWRlciB7XG4gIHdpZHRoOiAxMDB2dztcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZmZmZjtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLmltZy11cGxkIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBoZWlnaHQ6IDEwdnc7XG4gIHdpZHRoOiAxMHZ3O1xuICB0b3A6IDA7XG4gIHBhZGRpbmc6IDEwcHggMTBweDtcbiAgYm9yZGVyLXJhZGl1czogMTB2aDtcbn1cblxuLnByb2ZpbGUge1xuICBoZWlnaHQ6IDEwdnc7XG4gIHdpZHRoOiAxMHZ3O1xuICBwYWRkaW5nOiAxMHB4IDEwcHg7XG4gIGJvcmRlci1yYWRpdXM6IDEwdmg7XG4gIG1hcmdpbi1sZWZ0OiBjYWxjKDg1dncgLSAxMHB4KTtcbn1cblxuLmFwaS1wcm9ncmVzcywgLmludi1sb2dpbiB7XG4gIHotaW5kZXg6IDMwMDA7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcbiAgb3BhY2l0eTogMC42O1xuICBoZWlnaHQ6IDEwMHZoO1xuICB3aWR0aDogMTAwdnc7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4uYm9keSB7XG4gIHdpZHRoOiAxMDB2dztcbn1cblxuLm5hdi1oZWFkZXIge1xuICB3aWR0aDogMTAwdnc7XG4gIHBvc2l0aW9uOiBzdGlja3k7XG4gIHRvcDogMDtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgYmFja2dyb3VuZC1pbWFnZTogbGluZWFyLWdyYWRpZW50KHRvIHJpZ2h0LCAjMDAwMDQ2LCAjMUNCNUUwKTtcbn1cblxuLm5hdi1oZWFkZXItaXRlbS1hY3RpdmUge1xuICBoZWlnaHQ6IDEwMCU7XG4gIHdpZHRoOiBjYWxjKDEwMCUgLyAzKTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgZm9udC1mYW1pbHk6IEFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWY7XG4gIGJvcmRlcjogbm9uZTtcbiAgcGFkZGluZzogMnZoIDA7XG59XG5cbi5uYXYtaGVhZGVyLWl0ZW0taW5hY3RpdmUge1xuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICBoZWlnaHQ6IDEwMCU7XG4gIHdpZHRoOiBjYWxjKDEwMCUgLyAzKTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlc21va2U7XG4gIGZvbnQtZmFtaWx5OiBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmO1xuICBib3JkZXI6IG5vbmU7XG4gIHBhZGRpbmc6IDJ2aCAwO1xufVxuXG4uaW1nLXNpemUge1xuICB3aWR0aDogNTAlO1xuICBoZWlnaHQ6IDUwJTtcbn1cblxuLm1zZy1ib2R5IHtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi5tc2ctY29udCB7XG4gIHdpZHRoOiAxMDB2dztcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLnByb2ZpbGUtaW1nIHtcbiAgaGVpZ2h0OiAxMHZoO1xuICB3aWR0aDogMjB2dztcbiAgZGlzcGxheTogZmxleDtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG59XG5cbi5wcm9maWxlLW5hbWUge1xuICBoZWlnaHQ6IDEwdmg7XG4gIHdpZHRoOiA4MHZ3O1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4uYXBpLXByb2dyZXNzLWltZyB7XG4gIGhlaWdodDogNDB2aDtcbn1cblxuLyogY2hhdCAqL1xuLmNoYXQtYm9keSB7XG4gIGhlaWdodDogMTAwJTtcbiAgd2lkdGg6IDEwMCU7XG4gIGJvcmRlcjogbm9uZTtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbn1cblxuLyogaG9tZSBjb250ICovXG4uaG9tZS1jb250IHtcbiAgd2lkdGg6IDEwMHZ3O1xuICBtYXJnaW4tdG9wOiAzNnB4O1xufVxuXG4uYm9keS1ubSB7XG4gIHdpZHRoOiA4MHZ3O1xuICBtYXJnaW4tbGVmdDogMTJweDtcbiAgZm9udC1zaXplOiAxNnB4O1xuICBmb250LWZhbWlseTogJ1NlZ29lIFVJJywgVGFob21hLCBHZW5ldmEsIFZlcmRhbmEsIHNhbnMtc2VyaWY7XG4gIGZvbnQtd2VpZ2h0OiBib2xkZXI7XG59XG5cbi5ib2R5LWltZyB7XG4gIG1hcmdpbi10b3A6IDhweDtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi8qIHBlb3BsZSAqL1xuLnBlb3BsZS1ib2R5IHtcbiAgaGVpZ2h0OiAxMDAlO1xuICB3aWR0aDogMTAwJTtcbiAgYm9yZGVyOiBub25lO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xufVxuXG4ucGVvcGxlLXJlYyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIHdpZHRoOiAxMDAlO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4ucGVvcGxlLWltZyB7XG4gIGhlaWdodDogOHZoO1xuICB3aWR0aDogOHZoO1xuICBib3JkZXItcmFkaXVzOiAyNHZoO1xuICBwYWRkaW5nOiAxNnB4IDE2cHg7XG59XG4iXX0= */";
     /***/
   },
 
@@ -90550,13 +98649,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     !*** ./src/app/components/landing-page/landing-page.component.ts ***!
     \*******************************************************************/
 
-  /*! exports provided: LandingPageComponent */
+  /*! exports provided: ActiveStatus, LandingPageComponent */
 
   /***/
   function srcAppComponentsLandingPageLandingPageComponentTs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ActiveStatus", function () {
+      return ActiveStatus;
+    });
     /* harmony export (binding) */
 
 
@@ -90581,42 +98686,245 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var src_app_app_service_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! src/app/app-service.service */
     "./src/app/app-service.service.ts");
+    /* harmony import */
 
-    var LandingPageComponent =
-    /*#__PURE__*/
-    function () {
-      function LandingPageComponent(dataService) {
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var src_utility_utility_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/utility/utility-image */
+    "./src/utility/utility-image.ts");
+
+    var ActiveStatus;
+
+    (function (ActiveStatus) {
+      ActiveStatus[ActiveStatus["HOME"] = 0] = "HOME";
+      ActiveStatus[ActiveStatus["CHAT"] = 1] = "CHAT";
+      ActiveStatus[ActiveStatus["PEOPLE"] = 2] = "PEOPLE";
+    })(ActiveStatus || (ActiveStatus = {}));
+
+    var LandingPageComponent = /*#__PURE__*/function () {
+      function LandingPageComponent(dataService, router) {
         _classCallCheck(this, LandingPageComponent);
 
         this.dataService = dataService;
+        this.router = router;
+        this.activeStatus = ActiveStatus;
         this.apiState = false;
         this.msgData = [];
+        this.isShowProfile = false;
+        this.peopleInfo = [];
+        this.timeLine = [];
+        this.chatHistory = [];
       }
 
       _createClass(LandingPageComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
+          localStorage.removeItem('chatinfo');
+
+          if (localStorage.getItem('userInfo') == undefined) {
+            this.router.navigate(['/LoginSignupPage']);
+          }
+
+          this.activeHeader = {
+            home: true,
+            chat: false,
+            people: false
+          };
+          this.getUserProfileImage();
           this.getUserDetailes();
+          this.getPeopleInfo();
+          this.getTimeLineImage();
+          this.getChatHistory();
         } ////////////////////////////////////////////////////////////////////////////////
-        //                                  API
+        //                                  PRIVATE 
         ////////////////////////////////////////////////////////////////////////////////
 
       }, {
         key: "getUserDetailes",
         value: function getUserDetailes() {
-          var _this358 = this;
+          var _this361 = this;
 
           this.apiState = true;
           this.dataService.getUserInfo({
-            cookie: document.cookie
+            userInfo: localStorage.getItem('userInfo')
           }).subscribe(function (res) {
-            _this358.apiState = false;
-            _this358.userInfo = res.userInfo;
-            _this358.msgData = res.msgInfo;
+            _this361.userInfo = res.userInfo;
+            _this361.apiState = false;
           }, function (error) {
-            _this358.apiState = false;
-            console.log(error);
+            _this361.apiState = false;
           });
+        }
+      }, {
+        key: "getUserProfileImage",
+        value: function getUserProfileImage() {
+          var _this362 = this;
+
+          this.apiState = true;
+          this.dataService.getUserProfileImage({
+            userId: localStorage.getItem('userInfo')
+          }).subscribe(function (res) {
+            if (res.status && res.image) {
+              _this362.userProfileImage = res.image.image;
+            }
+
+            _this362.apiState = false;
+          }, function (error) {
+            _this362.apiState = false;
+          });
+        }
+      }, {
+        key: "getPeopleInfo",
+        value: function getPeopleInfo() {
+          var _this363 = this;
+
+          this.apiState = true;
+          this.dataService.getPeopleInfo({
+            userId: localStorage.getItem('userInfo')
+          }).subscribe(function (res) {
+            if (res.status) {
+              _this363.peopleInfo = res.usersData;
+            }
+
+            console.log(_this363.peopleInfo);
+          }, function (err) {
+            _this363.apiState = false;
+          });
+        }
+      }, {
+        key: "getTimeLineImage",
+        value: function getTimeLineImage() {
+          var _this364 = this;
+
+          this.apiState = true;
+          this.dataService.getTimeLineImage({
+            userId: localStorage.getItem('userInfo')
+          }).subscribe(function (res) {
+            if (res.status) {
+              _this364.timeLine = res.data;
+            }
+
+            _this364.apiState = false;
+          });
+        }
+      }, {
+        key: "setTimeLineImage",
+        value: function setTimeLineImage(imageBase64) {
+          var _this365 = this;
+
+          this.apiState = true;
+          this.dataService.setTimeLineImage({
+            userId: localStorage.getItem('userInfo'),
+            image: imageBase64,
+            name: this.userInfo['name']
+          }).subscribe(function (res) {
+            if (res.status) {
+              alert('successfully upload');
+              _this365.apiState = false;
+            }
+
+            _this365.apiState = false;
+          });
+        }
+      }, {
+        key: "getChatHistory",
+        value: function getChatHistory() {
+          var _this366 = this;
+
+          this.apiState = true;
+          this.dataService.getChatHistory({
+            userId: localStorage.getItem('userInfo')
+          }).subscribe(function (res) {
+            if (res.status) {
+              _this366.chatHistory = res.data;
+            }
+
+            _this366.apiState = false;
+          });
+        } ////////////////////////////////////////////////////////////////////////////////
+        //                                  HTML
+        ////////////////////////////////////////////////////////////////////////////////
+
+      }, {
+        key: "selectPeople",
+        value: function selectPeople(index) {
+          localStorage.setItem('chatinfo', JSON.stringify({
+            userId: this.peopleInfo[index]['user_id'],
+            name: this.peopleInfo[index]['name'],
+            image: this.peopleInfo[index]['image']
+          }));
+          this.router.navigate(['/ChatPage']);
+        }
+      }, {
+        key: "selectChatHistory",
+        value: function selectChatHistory(index) {
+          localStorage.setItem('chatinfo', JSON.stringify({
+            userId: this.chatHistory[index]['userId'],
+            name: this.chatHistory[index]['name'],
+            image: this.chatHistory[index]['image']
+          }));
+          this.router.navigate(['/ChatPage']);
+        }
+      }, {
+        key: "activeNav",
+        value: function activeNav(state) {
+          if (state === ActiveStatus.HOME) {
+            this.activeHeader = {
+              home: true,
+              chat: false,
+              people: false
+            };
+          }
+
+          if (state === ActiveStatus.CHAT) {
+            this.activeHeader = {
+              home: false,
+              chat: true,
+              people: false
+            };
+          }
+
+          if (state === ActiveStatus.PEOPLE) {
+            this.activeHeader = {
+              home: false,
+              chat: false,
+              people: true
+            };
+          }
+        }
+      }, {
+        key: "showProfile",
+        value: function showProfile() {
+          this.isShowProfile = true;
+        }
+      }, {
+        key: "onUpload",
+        value: function onUpload(event) {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+            var imageBase64;
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    _context2.next = 2;
+                    return src_utility_utility_image__WEBPACK_IMPORTED_MODULE_4__["ImageProcessing"].getCompressedImage(event.target.files[0]);
+
+                  case 2:
+                    imageBase64 = _context2.sent;
+                    this.setTimeLineImage(imageBase64);
+
+                  case 4:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2, this);
+          }));
         }
       }]);
 
@@ -90626,6 +98934,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     LandingPageComponent.ctorParameters = function () {
       return [{
         type: src_app_app_service_service__WEBPACK_IMPORTED_MODULE_2__["AppServiceService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
       }];
     };
 
@@ -90633,10 +98943,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       selector: 'app-landing-page',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./landing-page.component.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/landing-page/landing-page.component.html")).default,
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/landing-page/landing-page.component.html"))["default"],
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./landing-page.component.css */
-      "./src/app/components/landing-page/landing-page.component.css")).default]
+      "./src/app/components/landing-page/landing-page.component.css"))["default"]]
     })], LandingPageComponent);
     /***/
   },
@@ -90657,7 +98967,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".structure {\n  background-color:#c4c4c4;\n  height: 100vh;\n  width: 100vw;\n}\n\n.header {\n  height: 10vh;\n  width: 100vw;\n  background-image: -webkit-gradient(linear, left top, right top, from(#000046), to(#1CB5E0));\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n}\n\n.body {\n  height: 90vh;\n  width: 100vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.login-box {\n  width: calc(100% - 15px);\n  height: calc(100% - 15px);\n  background-color: white;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n}\n\n.login-form-header {\n  text-align: center;\n  font-size: 2rem;\n  margin-top: 3vh;\n}\n\n.login-form {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  display: flex;  \n  -webkit-box-align: center;  \n          align-items: center;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n}\n\n.text-form-field-li {\n  height: 4vh;\n  width: 94%;\n  margin-top: 8vh;\n  border-radius: 15px;\n  border-color: #c4c4c4;\n  padding: 3px 3%;\n  font-size: 14px;\n}\n\n.text-form-field-su {\n  height: 4vh;\n  width: 94%;\n  margin-top: 8vh;\n  border-radius: 15px;\n  border-color: #c4c4c4;\n  padding: 3px 3%;\n  font-size: 14px;\n}\n\n.submit-button {\n  position: absolute;\n  z-index: 1000;\n  top: 85%;\n  height: 8vh;\n  width: 50%;\n  color: white;\n  background-image: -webkit-gradient(linear, left top, right top, from(#000046), to(#1CB5E0));\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n  border-radius: 20px;\n  font-size: 1rem;\n  font-style: italic ;\n}\n\n.submit-button-disable {\n  position: absolute;\n  z-index: 1000;\n  top: 85%;\n  height: 8vh;\n  width: 50%;\n  color: white;\n  background-color: #cccccc;\n  color: #666666;\n  border-radius: 20px;\n  font-size: 1rem;\n  font-style: italic ;\n}\n\n.tab {\n  height: 8%;\n  width: 100%;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n          flex-direction: row;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n  align-self: center;\n}\n\n.tab-cont-not-active {\n  height: 100%;\n  width: calc(50% - 2px);\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n}\n\n.tab-cont-active {\n  height: 100%;\n  width: calc(50% - 2px);\n  background-image: -webkit-gradient(linear, left top, right top, from(#000046), to(#1CB5E0));\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n  color: white;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n}\n\n.popup-signup {\n  z-index: 3000;\n  position: absolute;\n  top: 0;\n  background-color: black;\n  opacity: 0.6;\n  height: 100vh;\n  width: 100vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.popup-content {\n  height: 10vh;\n  width: 55vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n  background-color: white;\n}\n\n.api-progress {\n  z-index: 3000;\n  position: absolute;\n  top: 0;\n  background-color: black;\n  opacity: 0.6;\n  height: 100vh;\n  width: 100vw;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.api-progress-img {\n  height: 40vh;\n}\n\n/* GLOBAL CSS */\n\nmat-card {\n  padding: 0;\n  margin: 0;\n}\n\nmat-form-field {\n  line-height: 1.2;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9sb2dpbi1zaWdudXAvbG9naW4tc2lnbnVwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx3QkFBd0I7RUFDeEIsYUFBYTtFQUNiLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1osMkZBQTZEO0VBQTdELDZEQUE2RDtBQUMvRDs7QUFFQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1osb0JBQWE7RUFBYixhQUFhO0VBQ2IsOEJBQTZCO1VBQTdCLDZCQUE2QjtFQUM3Qix5QkFBbUI7VUFBbkIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0Usd0JBQXdCO0VBQ3hCLHlCQUF5QjtFQUN6Qix1QkFBdUI7RUFDdkIsb0JBQWE7RUFBYixhQUFhO0VBQ2IsNEJBQXNCO0VBQXRCLDZCQUFzQjtVQUF0QixzQkFBc0I7QUFDeEI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsZUFBZTtFQUNmLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxvQkFBYTtFQUFiLGFBQWE7RUFDYiw0QkFBc0I7RUFBdEIsNkJBQXNCO1VBQXRCLHNCQUFzQjtFQUN0QixhQUFhO0VBQ2IseUJBQW1CO1VBQW5CLG1CQUFtQjtFQUNuQiw4QkFBNkI7VUFBN0IsNkJBQTZCO0FBQy9COztBQUVBO0VBQ0UsV0FBVztFQUNYLFVBQVU7RUFDVixlQUFlO0VBQ2YsbUJBQW1CO0VBQ25CLHFCQUFxQjtFQUNyQixlQUFlO0VBQ2YsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxVQUFVO0VBQ1YsZUFBZTtFQUNmLG1CQUFtQjtFQUNuQixxQkFBcUI7RUFDckIsZUFBZTtFQUNmLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsYUFBYTtFQUNiLFFBQVE7RUFDUixXQUFXO0VBQ1gsVUFBVTtFQUNWLFlBQVk7RUFDWiwyRkFBNkQ7RUFBN0QsNkRBQTZEO0VBQzdELG1CQUFtQjtFQUNuQixlQUFlO0VBQ2YsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLGFBQWE7RUFDYixRQUFRO0VBQ1IsV0FBVztFQUNYLFVBQVU7RUFDVixZQUFZO0VBQ1oseUJBQXlCO0VBQ3pCLGNBQWM7RUFDZCxtQkFBbUI7RUFDbkIsZUFBZTtFQUNmLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLFVBQVU7RUFDVixXQUFXO0VBQ1gsb0JBQWE7RUFBYixhQUFhO0VBQ2IsOEJBQW1CO0VBQW5CLDZCQUFtQjtVQUFuQixtQkFBbUI7RUFDbkIsOEJBQTZCO1VBQTdCLDZCQUE2QjtFQUM3Qix5QkFBbUI7VUFBbkIsbUJBQW1CO0VBQ25CLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixzQkFBc0I7RUFDdEIsb0JBQWE7RUFBYixhQUFhO0VBQ2IseUJBQW1CO1VBQW5CLG1CQUFtQjtFQUNuQiw4QkFBNkI7VUFBN0IsNkJBQTZCO0FBQy9COztBQUVBO0VBQ0UsWUFBWTtFQUNaLHNCQUFzQjtFQUN0QiwyRkFBNkQ7RUFBN0QsNkRBQTZEO0VBQzdELFlBQVk7RUFDWixvQkFBYTtFQUFiLGFBQWE7RUFDYix5QkFBbUI7VUFBbkIsbUJBQW1CO0VBQ25CLDhCQUE2QjtVQUE3Qiw2QkFBNkI7QUFDL0I7O0FBRUE7RUFDRSxhQUFhO0VBQ2Isa0JBQWtCO0VBQ2xCLE1BQU07RUFDTix1QkFBdUI7RUFDdkIsWUFBWTtFQUNaLGFBQWE7RUFDYixZQUFZO0VBQ1osb0JBQWE7RUFBYixhQUFhO0VBQ2IsOEJBQTZCO1VBQTdCLDZCQUE2QjtFQUM3Qix5QkFBbUI7VUFBbkIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLFdBQVc7RUFDWCxvQkFBYTtFQUFiLGFBQWE7RUFDYiw4QkFBNkI7VUFBN0IsNkJBQTZCO0VBQzdCLHlCQUFtQjtVQUFuQixtQkFBbUI7RUFDbkIsdUJBQXVCO0FBQ3pCOztBQUVBO0VBQ0UsYUFBYTtFQUNiLGtCQUFrQjtFQUNsQixNQUFNO0VBQ04sdUJBQXVCO0VBQ3ZCLFlBQVk7RUFDWixhQUFhO0VBQ2IsWUFBWTtFQUNaLG9CQUFhO0VBQWIsYUFBYTtFQUNiLDhCQUE2QjtVQUE3Qiw2QkFBNkI7RUFDN0IseUJBQW1CO1VBQW5CLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQSxlQUFlOztBQUNmO0VBQ0UsVUFBVTtFQUNWLFNBQVM7QUFDWDs7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbG9naW4tc2lnbnVwL2xvZ2luLXNpZ251cC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnN0cnVjdHVyZSB7XG4gIGJhY2tncm91bmQtY29sb3I6I2M0YzRjNDtcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgd2lkdGg6IDEwMHZ3O1xufVxuXG4uaGVhZGVyIHtcbiAgaGVpZ2h0OiAxMHZoO1xuICB3aWR0aDogMTAwdnc7XG4gIGJhY2tncm91bmQtaW1hZ2U6IGxpbmVhci1ncmFkaWVudCh0byByaWdodCwgIzAwMDA0NiwgIzFDQjVFMCk7XG59XG5cbi5ib2R5IHtcbiAgaGVpZ2h0OiA5MHZoO1xuICB3aWR0aDogMTAwdnc7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4ubG9naW4tYm94IHtcbiAgd2lkdGg6IGNhbGMoMTAwJSAtIDE1cHgpO1xuICBoZWlnaHQ6IGNhbGMoMTAwJSAtIDE1cHgpO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbn1cblxuLmxvZ2luLWZvcm0taGVhZGVyIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBmb250LXNpemU6IDJyZW07XG4gIG1hcmdpbi10b3A6IDN2aDtcbn1cblxuLmxvZ2luLWZvcm0ge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBkaXNwbGF5OiBmbGV4OyAgXG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xufVxuXG4udGV4dC1mb3JtLWZpZWxkLWxpIHtcbiAgaGVpZ2h0OiA0dmg7XG4gIHdpZHRoOiA5NCU7XG4gIG1hcmdpbi10b3A6IDh2aDtcbiAgYm9yZGVyLXJhZGl1czogMTVweDtcbiAgYm9yZGVyLWNvbG9yOiAjYzRjNGM0O1xuICBwYWRkaW5nOiAzcHggMyU7XG4gIGZvbnQtc2l6ZTogMTRweDtcbn1cblxuLnRleHQtZm9ybS1maWVsZC1zdSB7XG4gIGhlaWdodDogNHZoO1xuICB3aWR0aDogOTQlO1xuICBtYXJnaW4tdG9wOiA4dmg7XG4gIGJvcmRlci1yYWRpdXM6IDE1cHg7XG4gIGJvcmRlci1jb2xvcjogI2M0YzRjNDtcbiAgcGFkZGluZzogM3B4IDMlO1xuICBmb250LXNpemU6IDE0cHg7XG59XG5cbi5zdWJtaXQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB6LWluZGV4OiAxMDAwO1xuICB0b3A6IDg1JTtcbiAgaGVpZ2h0OiA4dmg7XG4gIHdpZHRoOiA1MCU7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgYmFja2dyb3VuZC1pbWFnZTogbGluZWFyLWdyYWRpZW50KHRvIHJpZ2h0LCAjMDAwMDQ2LCAjMUNCNUUwKTtcbiAgYm9yZGVyLXJhZGl1czogMjBweDtcbiAgZm9udC1zaXplOiAxcmVtO1xuICBmb250LXN0eWxlOiBpdGFsaWMgO1xufVxuXG4uc3VibWl0LWJ1dHRvbi1kaXNhYmxlIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB6LWluZGV4OiAxMDAwO1xuICB0b3A6IDg1JTtcbiAgaGVpZ2h0OiA4dmg7XG4gIHdpZHRoOiA1MCU7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2NjY2NjYztcbiAgY29sb3I6ICM2NjY2NjY7XG4gIGJvcmRlci1yYWRpdXM6IDIwcHg7XG4gIGZvbnQtc2l6ZTogMXJlbTtcbiAgZm9udC1zdHlsZTogaXRhbGljIDtcbn1cblxuLnRhYiB7XG4gIGhlaWdodDogOCU7XG4gIHdpZHRoOiAxMDAlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgYWxpZ24tc2VsZjogY2VudGVyO1xufVxuXG4udGFiLWNvbnQtbm90LWFjdGl2ZSB7XG4gIGhlaWdodDogMTAwJTtcbiAgd2lkdGg6IGNhbGMoNTAlIC0gMnB4KTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XG59XG5cbi50YWItY29udC1hY3RpdmUge1xuICBoZWlnaHQ6IDEwMCU7XG4gIHdpZHRoOiBjYWxjKDUwJSAtIDJweCk7XG4gIGJhY2tncm91bmQtaW1hZ2U6IGxpbmVhci1ncmFkaWVudCh0byByaWdodCwgIzAwMDA0NiwgIzFDQjVFMCk7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XG59XG5cbi5wb3B1cC1zaWdudXAge1xuICB6LWluZGV4OiAzMDAwO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMDtcbiAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XG4gIG9wYWNpdHk6IDAuNjtcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgd2lkdGg6IDEwMHZ3O1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLnBvcHVwLWNvbnRlbnQge1xuICBoZWlnaHQ6IDEwdmg7XG4gIHdpZHRoOiA1NXZ3O1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG59XG5cbi5hcGktcHJvZ3Jlc3Mge1xuICB6LWluZGV4OiAzMDAwO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMDtcbiAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XG4gIG9wYWNpdHk6IDAuNjtcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgd2lkdGg6IDEwMHZ3O1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLmFwaS1wcm9ncmVzcy1pbWcge1xuICBoZWlnaHQ6IDQwdmg7XG59XG5cbi8qIEdMT0JBTCBDU1MgKi9cbm1hdC1jYXJkIHtcbiAgcGFkZGluZzogMDtcbiAgbWFyZ2luOiAwO1xufVxuXG5tYXQtZm9ybS1maWVsZCB7XG4gIGxpbmUtaGVpZ2h0OiAxLjI7XG59Il19 */";
+    __webpack_exports__["default"] = ".structure {\n  background-color:#ffffff;\n  height: 100vh;\n  width: 100vw;\n  display: flex;\n  justify-content: space-evenly;\n  align-items: center;\n  overflow: hidden;\n}\n\n.login-box {\n  width: 100%;\n  height: 100%;\n  background-color: #ffffff;\n  display: flex;\n  flex-direction: column;\n  overflow: hidden;\n}\n\n.login-form-header {\n  text-align: center;\n  font-size: 2rem;\n  margin-top: 3vh;\n}\n\n.login-form {\n  display: flex;\n  flex-direction: column;\n  display: flex;  \n  align-items: center;\n  justify-content: space-evenly;\n}\n\n.text-form-field-li {\n  width: 94%;\n  border-radius: 15px;\n  border-color: #c4c4c4;\n  font-size: 14px;\n}\n\n.text-form-field-su {\n  width: 94%;\n  border-radius: 15px;\n  border-color: #c4c4c4;\n  font-size: 14px;\n}\n\n.submit-button {\n  margin: 90px 0 30px;\n  padding: 8px 0;\n  width: 45%;\n  color: white;\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n  border-radius: 20px;\n  font-size: 1rem;\n  font-style: italic ;\n}\n\n.submit-button-disable {\n  margin: 90px 0 30px;\n  padding: 8px 0;\n  width: 45%;\n  color: white;\n  background-color: #cccccc;\n  color: #666666;\n  border-radius: 20px;\n  font-size: 1rem;\n  font-style: italic ;\n}\n\n.tab {\n  width: 100%;\n  display: flex;\n  padding: 4px 0;\n  position: absolute;\n  flex-direction: row;\n  justify-content: space-evenly;\n  align-items: center;\n  bottom: 16px;\n}\n\n.cont-img {\n  width : 100%;\n  margin-top: 15vh;\n}\n\n.tab-items {\n  background-image: linear-gradient(to right, #000046, #1CB5E0);\n  color: white;\n  display: flex;\n  align-items: center;\n  justify-content: space-evenly;\n  width: 40vw;\n  padding: 12px 0;\n  border-radius: 8px;\n}\n\n.popup-signup {\n  z-index: 3000;\n  position: absolute;\n  top: 0;\n  background-color: black;\n  opacity: 0.6;\n  height: 100vh;\n  width: 100vw;\n  display: flex;\n  justify-content: space-evenly;\n  align-items: center;\n}\n\n.popup-content {\n  height: 10vh;\n  width: 55vw;\n  display: flex;\n  justify-content: space-evenly;\n  align-items: center;\n  background-color: white;\n  opacity: 1;\n}\n\n.api-progress, .inv-login {\n  z-index: 3000;\n  position: absolute;\n  top: 0;\n  background-color: black;\n  opacity: 0.6;\n  height: 100vh;\n  width: 100vw;\n  display: flex;\n  justify-content: space-evenly;\n  align-items: center;\n}\n\n.api-progress-img {\n  height: 40vh;\n}\n\n.text {\n  font-weight: bolder;\n  font-family: Arial, Helvetica, sans-serif;\n  width: 100%;\n  text-align: center;\n  padding: 16px 0;\n}\n\n/* GLOBAL CSS */\n\nmat-card {\n  padding: 0;\n  margin: 0;\n}\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9sb2dpbi1zaWdudXAvbG9naW4tc2lnbnVwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx3QkFBd0I7RUFDeEIsYUFBYTtFQUNiLFlBQVk7RUFDWixhQUFhO0VBQ2IsNkJBQTZCO0VBQzdCLG1CQUFtQjtFQUNuQixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsWUFBWTtFQUNaLHlCQUF5QjtFQUN6QixhQUFhO0VBQ2Isc0JBQXNCO0VBQ3RCLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLGtCQUFrQjtFQUNsQixlQUFlO0VBQ2YsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixzQkFBc0I7RUFDdEIsYUFBYTtFQUNiLG1CQUFtQjtFQUNuQiw2QkFBNkI7QUFDL0I7O0FBRUE7RUFDRSxVQUFVO0VBQ1YsbUJBQW1CO0VBQ25CLHFCQUFxQjtFQUNyQixlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsVUFBVTtFQUNWLG1CQUFtQjtFQUNuQixxQkFBcUI7RUFDckIsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLG1CQUFtQjtFQUNuQixjQUFjO0VBQ2QsVUFBVTtFQUNWLFlBQVk7RUFDWiw2REFBNkQ7RUFDN0QsbUJBQW1CO0VBQ25CLGVBQWU7RUFDZixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSxtQkFBbUI7RUFDbkIsY0FBYztFQUNkLFVBQVU7RUFDVixZQUFZO0VBQ1oseUJBQXlCO0VBQ3pCLGNBQWM7RUFDZCxtQkFBbUI7RUFDbkIsZUFBZTtFQUNmLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxhQUFhO0VBQ2IsY0FBYztFQUNkLGtCQUFrQjtFQUNsQixtQkFBbUI7RUFDbkIsNkJBQTZCO0VBQzdCLG1CQUFtQjtFQUNuQixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxZQUFZO0VBQ1osZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0UsNkRBQTZEO0VBQzdELFlBQVk7RUFDWixhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLDZCQUE2QjtFQUM3QixXQUFXO0VBQ1gsZUFBZTtFQUNmLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixrQkFBa0I7RUFDbEIsTUFBTTtFQUNOLHVCQUF1QjtFQUN2QixZQUFZO0VBQ1osYUFBYTtFQUNiLFlBQVk7RUFDWixhQUFhO0VBQ2IsNkJBQTZCO0VBQzdCLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixXQUFXO0VBQ1gsYUFBYTtFQUNiLDZCQUE2QjtFQUM3QixtQkFBbUI7RUFDbkIsdUJBQXVCO0VBQ3ZCLFVBQVU7QUFDWjs7QUFFQTtFQUNFLGFBQWE7RUFDYixrQkFBa0I7RUFDbEIsTUFBTTtFQUNOLHVCQUF1QjtFQUN2QixZQUFZO0VBQ1osYUFBYTtFQUNiLFlBQVk7RUFDWixhQUFhO0VBQ2IsNkJBQTZCO0VBQzdCLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLG1CQUFtQjtFQUNuQix5Q0FBeUM7RUFDekMsV0FBVztFQUNYLGtCQUFrQjtFQUNsQixlQUFlO0FBQ2pCOztBQUVBLGVBQWU7O0FBRWY7RUFDRSxVQUFVO0VBQ1YsU0FBUztBQUNYIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9sb2dpbi1zaWdudXAvbG9naW4tc2lnbnVwLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc3RydWN0dXJlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjojZmZmZmZmO1xuICBoZWlnaHQ6IDEwMHZoO1xuICB3aWR0aDogMTAwdnc7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBvdmVyZmxvdzogaGlkZGVuO1xufVxuXG4ubG9naW4tYm94IHtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZmZmZjtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cblxuLmxvZ2luLWZvcm0taGVhZGVyIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBmb250LXNpemU6IDJyZW07XG4gIG1hcmdpbi10b3A6IDN2aDtcbn1cblxuLmxvZ2luLWZvcm0ge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBkaXNwbGF5OiBmbGV4OyAgXG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xufVxuXG4udGV4dC1mb3JtLWZpZWxkLWxpIHtcbiAgd2lkdGg6IDk0JTtcbiAgYm9yZGVyLXJhZGl1czogMTVweDtcbiAgYm9yZGVyLWNvbG9yOiAjYzRjNGM0O1xuICBmb250LXNpemU6IDE0cHg7XG59XG5cbi50ZXh0LWZvcm0tZmllbGQtc3Uge1xuICB3aWR0aDogOTQlO1xuICBib3JkZXItcmFkaXVzOiAxNXB4O1xuICBib3JkZXItY29sb3I6ICNjNGM0YzQ7XG4gIGZvbnQtc2l6ZTogMTRweDtcbn1cblxuLnN1Ym1pdC1idXR0b24ge1xuICBtYXJnaW46IDkwcHggMCAzMHB4O1xuICBwYWRkaW5nOiA4cHggMDtcbiAgd2lkdGg6IDQ1JTtcbiAgY29sb3I6IHdoaXRlO1xuICBiYWNrZ3JvdW5kLWltYWdlOiBsaW5lYXItZ3JhZGllbnQodG8gcmlnaHQsICMwMDAwNDYsICMxQ0I1RTApO1xuICBib3JkZXItcmFkaXVzOiAyMHB4O1xuICBmb250LXNpemU6IDFyZW07XG4gIGZvbnQtc3R5bGU6IGl0YWxpYyA7XG59XG5cbi5zdWJtaXQtYnV0dG9uLWRpc2FibGUge1xuICBtYXJnaW46IDkwcHggMCAzMHB4O1xuICBwYWRkaW5nOiA4cHggMDtcbiAgd2lkdGg6IDQ1JTtcbiAgY29sb3I6IHdoaXRlO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2NjY2NjO1xuICBjb2xvcjogIzY2NjY2NjtcbiAgYm9yZGVyLXJhZGl1czogMjBweDtcbiAgZm9udC1zaXplOiAxcmVtO1xuICBmb250LXN0eWxlOiBpdGFsaWMgO1xufVxuXG4udGFiIHtcbiAgd2lkdGg6IDEwMCU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIHBhZGRpbmc6IDRweCAwO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBib3R0b206IDE2cHg7XG59XG5cbi5jb250LWltZyB7XG4gIHdpZHRoIDogMTAwJTtcbiAgbWFyZ2luLXRvcDogMTV2aDtcbn1cblxuLnRhYi1pdGVtcyB7XG4gIGJhY2tncm91bmQtaW1hZ2U6IGxpbmVhci1ncmFkaWVudCh0byByaWdodCwgIzAwMDA0NiwgIzFDQjVFMCk7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHk7XG4gIHdpZHRoOiA0MHZ3O1xuICBwYWRkaW5nOiAxMnB4IDA7XG4gIGJvcmRlci1yYWRpdXM6IDhweDtcbn1cblxuLnBvcHVwLXNpZ251cCB7XG4gIHotaW5kZXg6IDMwMDA7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcbiAgb3BhY2l0eTogMC42O1xuICBoZWlnaHQ6IDEwMHZoO1xuICB3aWR0aDogMTAwdnc7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4ucG9wdXAtY29udGVudCB7XG4gIGhlaWdodDogMTB2aDtcbiAgd2lkdGg6IDU1dnc7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgb3BhY2l0eTogMTtcbn1cblxuLmFwaS1wcm9ncmVzcywgLmludi1sb2dpbiB7XG4gIHotaW5kZXg6IDMwMDA7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcbiAgb3BhY2l0eTogMC42O1xuICBoZWlnaHQ6IDEwMHZoO1xuICB3aWR0aDogMTAwdnc7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4uYXBpLXByb2dyZXNzLWltZyB7XG4gIGhlaWdodDogNDB2aDtcbn1cblxuLnRleHQge1xuICBmb250LXdlaWdodDogYm9sZGVyO1xuICBmb250LWZhbWlseTogQXJpYWwsIEhlbHZldGljYSwgc2Fucy1zZXJpZjtcbiAgd2lkdGg6IDEwMCU7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgcGFkZGluZzogMTZweCAwO1xufVxuXG4vKiBHTE9CQUwgQ1NTICovXG5cbm1hdC1jYXJkIHtcbiAgcGFkZGluZzogMDtcbiAgbWFyZ2luOiAwO1xufVxuXG4iXX0= */";
     /***/
   },
 
@@ -90711,18 +99021,26 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /*! src/app/app-service.service */
     "./src/app/app-service.service.ts");
 
-    var LoginSignupComponent =
-    /*#__PURE__*/
-    function () {
+    var Operation;
+
+    (function (Operation) {
+      Operation[Operation["HOME"] = 0] = "HOME";
+      Operation[Operation["LOGIN"] = 1] = "LOGIN";
+      Operation[Operation["SIGNUP"] = 2] = "SIGNUP";
+    })(Operation || (Operation = {}));
+
+    var LoginSignupComponent = /*#__PURE__*/function () {
       function LoginSignupComponent(fb, router, dataService) {
         _classCallCheck(this, LoginSignupComponent);
 
         this.fb = fb;
         this.router = router;
         this.dataService = dataService;
+        this.STATE = Operation;
         this.apiState = false;
-        this.toggle = true;
         this.signupStatus = false;
+        this.invLogIn = false;
+        this.invSignup = false;
         this.loginFormGroup = this.fb.group({
           userId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
           password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
@@ -90737,42 +99055,71 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(LoginSignupComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {} ////////////////////////////////////////////////////////////////////////////////
+        value: function ngOnInit() {
+          this.toggle = this.STATE.HOME;
+
+          if (localStorage.getItem('userInfo') != undefined) {
+            this.router.navigate(['/LandingPage']);
+          }
+        } ////////////////////////////////////////////////////////////////////////////////
         //                          API
         ////////////////////////////////////////////////////////////////////////////////
 
       }, {
         key: "logIn",
         value: function logIn() {
-          var _this359 = this;
+          var _this367 = this;
 
           this.apiState = true;
           this.dataService.logIn(this.loginFormGroup.value).subscribe(function (res) {
-            _this359.apiState = false;
+            _this367.apiState = false;
 
-            _this359.router.navigate(['/LandingPage']);
+            if (res.status) {
+              localStorage.setItem('userInfo', res.data);
+
+              _this367.router.navigate(['/LandingPage']);
+            } else if (res.error == 'INVALID_LOGIN') {
+              _this367.invLogIn = true;
+              setTimeout(function () {
+                _this367.invLogIn = false;
+              }, 2000);
+            }
           }, function (error) {
-            _this359.apiState = false;
+            _this367.apiState = false;
             console.log(error);
           });
         }
       }, {
         key: "signUp",
         value: function signUp() {
-          var _this360 = this;
+          var _this368 = this;
 
           this.apiState = true;
           this.dataService.signUp(this.signupFormFroup.value).subscribe(function (res) {
-            _this360.apiState = false;
+            _this368.apiState = false;
 
             if (res.status) {
-              _this360.signupStatus = true;
+              _this368.signupStatus = true;
+
+              _this368.signupFormFroup.setValue({
+                name: null,
+                userId: null,
+                password: null,
+                phoneNo: null
+              });
+
+              _this368.toggle = _this368.STATE.LOGIN;
               setTimeout(function () {
-                _this360.signupStatus = false;
-              }, 3000);
+                _this368.signupStatus = false;
+              }, 2000);
+            } else {
+              _this368.invSignup = true;
+              setTimeout(function () {
+                _this368.invSignup = false;
+              }, 2000);
             }
           }, function (error) {
-            _this360.apiState = false;
+            _this368.apiState = false;
           });
         } ////////////////////////////////////////////////////////////////////////////////
         //                          HTML
@@ -90781,12 +99128,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "logInForm",
         value: function logInForm(event) {
-          this.toggle = true;
+          this.toggle = this.STATE.LOGIN;
         }
       }, {
         key: "signupForm",
         value: function signupForm(event) {
-          this.toggle = false;
+          this.toggle = this.STATE.SIGNUP;
         }
       }]);
 
@@ -90807,11 +99154,340 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       selector: 'app-login-signup',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./login-signup.component.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/login-signup/login-signup.component.html")).default,
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/login-signup/login-signup.component.html"))["default"],
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./login-signup.component.css */
-      "./src/app/components/login-signup/login-signup.component.css")).default]
+      "./src/app/components/login-signup/login-signup.component.css"))["default"]]
     })], LoginSignupComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/components/profile-info/profile-info.component.css":
+  /*!********************************************************************!*\
+    !*** ./src/app/components/profile-info/profile-info.component.css ***!
+    \********************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppComponentsProfileInfoProfileInfoComponentCss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = ".container {\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  overflow: hidden;\n}\n\n.profile-img-body {\n  height: 30vh;\n  width : 30vh;\n  margin-top: 10vh;\n}\n\n.profile-img {\n  height: 30vh;\n  width : 30vh;\n  border-radius: 60vh;\n}\n\n.upld-profile-img {\n  position: absolute;\n  width: 8vh;\n}\n\n.upld-profile-img>input {\n  display: none;\n}\n\n.profile-name {\n  height: 10vh;\n  display: flex;\n  align-items: center;\n}\n\n.log-out {\n  position: relative;\n  margin-top: 16vh;\n  height: 10vh;\n  display: flex;\n  justify-content: space-evenly;\n  align-items: center;\n}\n\n.log-out-button {\n  position: absolute;\n  color: whitesmoke;\n  background-color: tomato;\n  width: 40vw;\n  text-align: center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9wcm9maWxlLWluZm8vcHJvZmlsZS1pbmZvLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLHNCQUFzQjtFQUN0QixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxZQUFZO0VBQ1osWUFBWTtFQUNaLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1osbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLFVBQVU7QUFDWjs7QUFFQTtFQUNFLGFBQWE7QUFDZjs7QUFFQTtFQUNFLFlBQVk7RUFDWixhQUFhO0VBQ2IsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLGdCQUFnQjtFQUNoQixZQUFZO0VBQ1osYUFBYTtFQUNiLDZCQUE2QjtFQUM3QixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsaUJBQWlCO0VBQ2pCLHdCQUF3QjtFQUN4QixXQUFXO0VBQ1gsa0JBQWtCO0FBQ3BCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9wcm9maWxlLWluZm8vcHJvZmlsZS1pbmZvLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGFpbmVyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cblxuLnByb2ZpbGUtaW1nLWJvZHkge1xuICBoZWlnaHQ6IDMwdmg7XG4gIHdpZHRoIDogMzB2aDtcbiAgbWFyZ2luLXRvcDogMTB2aDtcbn1cblxuLnByb2ZpbGUtaW1nIHtcbiAgaGVpZ2h0OiAzMHZoO1xuICB3aWR0aCA6IDMwdmg7XG4gIGJvcmRlci1yYWRpdXM6IDYwdmg7XG59XG5cbi51cGxkLXByb2ZpbGUtaW1nIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB3aWR0aDogOHZoO1xufVxuXG4udXBsZC1wcm9maWxlLWltZz5pbnB1dCB7XG4gIGRpc3BsYXk6IG5vbmU7XG59XG5cbi5wcm9maWxlLW5hbWUge1xuICBoZWlnaHQ6IDEwdmg7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG59XG5cbi5sb2ctb3V0IHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICBtYXJnaW4tdG9wOiAxNnZoO1xuICBoZWlnaHQ6IDEwdmg7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4ubG9nLW91dC1idXR0b24ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGNvbG9yOiB3aGl0ZXNtb2tlO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB0b21hdG87XG4gIHdpZHRoOiA0MHZ3O1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59Il19 */";
+    /***/
+  },
+
+  /***/
+  "./src/app/components/profile-info/profile-info.component.ts":
+  /*!*******************************************************************!*\
+    !*** ./src/app/components/profile-info/profile-info.component.ts ***!
+    \*******************************************************************/
+
+  /*! exports provided: ProfileInfoComponent */
+
+  /***/
+  function srcAppComponentsProfileInfoProfileInfoComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ProfileInfoComponent", function () {
+      return ProfileInfoComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var src_app_app_service_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/app/app-service.service */
+    "./src/app/app-service.service.ts");
+    /* harmony import */
+
+
+    var src_utility_utility_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/utility/utility-image */
+    "./src/utility/utility-image.ts");
+
+    var ProfileInfoComponent = /*#__PURE__*/function () {
+      function ProfileInfoComponent(router, userService) {
+        _classCallCheck(this, ProfileInfoComponent);
+
+        this.router = router;
+        this.userService = userService;
+        this.apiState = false;
+      }
+
+      _createClass(ProfileInfoComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {} ////////////////////////////////////////////////////////////////////////////////
+        //                            PRIVATE
+        ////////////////////////////////////////////////////////////////////////////////
+
+      }, {
+        key: "setProfileImage",
+        value: function setProfileImage(image) {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            var _this369 = this;
+
+            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                    this.userService.saveUserProfileImage({
+                      userInfo: this.profileInfo.user_id,
+                      base64: image,
+                      status: this.userProfileImage == undefined ? true : false
+                    }).subscribe(function (res) {
+                      if (res.status) {
+                        _this369.getUserProfileImage();
+                      }
+                    });
+
+                  case 1:
+                  case "end":
+                    return _context3.stop();
+                }
+              }
+            }, _callee3, this);
+          }));
+        }
+      }, {
+        key: "getUserProfileImage",
+        value: function getUserProfileImage() {
+          var _this370 = this;
+
+          this.apiState = true;
+          this.userService.getUserProfileImage({
+            userId: localStorage.getItem('userInfo')
+          }).subscribe(function (res) {
+            _this370.apiState = false;
+
+            if (res.status) {
+              _this370.userProfileImage = res.image.image;
+            }
+          }, function (error) {
+            _this370.apiState = false;
+          });
+        } ////////////////////////////////////////////////////////////////////////////////
+        //                            HTML
+        ////////////////////////////////////////////////////////////////////////////////
+
+      }, {
+        key: "onUpload",
+        value: function onUpload(event) {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+            var imageBase64;
+            return regeneratorRuntime.wrap(function _callee4$(_context4) {
+              while (1) {
+                switch (_context4.prev = _context4.next) {
+                  case 0:
+                    _context4.next = 2;
+                    return src_utility_utility_image__WEBPACK_IMPORTED_MODULE_4__["ImageProcessing"].getCompressedImage(event.target.files[0]);
+
+                  case 2:
+                    imageBase64 = _context4.sent;
+                    console.log('image-bro', imageBase64.length);
+                    this.setProfileImage(imageBase64);
+
+                  case 5:
+                  case "end":
+                    return _context4.stop();
+                }
+              }
+            }, _callee4, this);
+          }));
+        }
+      }, {
+        key: "logout",
+        value: function logout() {
+          localStorage.removeItem('userInfo');
+          this.router.navigate(['/LoginSignupPage']);
+        }
+      }]);
+
+      return ProfileInfoComponent;
+    }();
+
+    ProfileInfoComponent.ctorParameters = function () {
+      return [{
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+      }, {
+        type: src_app_app_service_service__WEBPACK_IMPORTED_MODULE_3__["AppServiceService"]
+      }];
+    };
+
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])('profileData')], ProfileInfoComponent.prototype, "profileInfo", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])('userProfileImage')], ProfileInfoComponent.prototype, "userProfileImage", void 0);
+    ProfileInfoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-profile-info',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./profile-info.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/profile-info/profile-info.component.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./profile-info.component.css */
+      "./src/app/components/profile-info/profile-info.component.css"))["default"]]
+    })], ProfileInfoComponent);
+    /***/
+  },
+
+  /***/
+  "./src/utility/utility-image.ts":
+  /*!**************************************!*\
+    !*** ./src/utility/utility-image.ts ***!
+    \**************************************/
+
+  /*! exports provided: ImageProcessing */
+
+  /***/
+  function srcUtilityUtilityImageTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ImageProcessing", function () {
+      return ImageProcessing;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+
+    var ImageProcessing = /*#__PURE__*/function () {
+      function ImageProcessing(domSanitizer) {
+        _classCallCheck(this, ImageProcessing);
+
+        this.domSanitizer = domSanitizer;
+      }
+
+      _createClass(ImageProcessing, null, [{
+        key: "getBase64",
+        value: function getBase64(file) {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+            return regeneratorRuntime.wrap(function _callee5$(_context5) {
+              while (1) {
+                switch (_context5.prev = _context5.next) {
+                  case 0:
+                    return _context5.abrupt("return", new Promise(function (resolve, reject) {
+                      var reader = new FileReader();
+                      reader.readAsDataURL(file);
+
+                      reader.onload = function () {
+                        return resolve(reader.result);
+                      };
+
+                      reader.onerror = function (error) {
+                        return reject(error);
+                      };
+                    }));
+
+                  case 1:
+                  case "end":
+                    return _context5.stop();
+                }
+              }
+            }, _callee5);
+          }));
+        }
+      }, {
+        key: "getArrayBufferToBase64",
+        value: function getArrayBufferToBase64(blob) {
+          var reader = new FileReader();
+          reader.readAsDataURL(blob);
+
+          reader.onloadend = function () {
+            var base64data = reader.result;
+            console.log(base64data);
+          };
+        }
+      }, {
+        key: "getCompressedImage",
+        value: function getCompressedImage(file) {
+          return new Promise(function (resolve, reject) {
+            var resizedImage;
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+
+            reader.onload = function (readerEvent) {
+              var image = new Image();
+              image.src = readerEvent.target.result;
+
+              image.onload = function (imageEvent) {
+                var canvas = document.createElement('canvas'),
+                    maxSize = 800;
+                var width = image.width,
+                    height = image.height;
+
+                if (width > height) {
+                  if (width > maxSize) {
+                    height *= maxSize / width;
+                    width = maxSize;
+                  }
+                } else if (height > maxSize) {
+                  width *= maxSize / height;
+                  height = maxSize;
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+                resizedImage = canvas.toDataURL('image/jpeg', 0.1);
+                resolve(resizedImage);
+              };
+            };
+
+            reader.onerror = function (error) {
+              return reject(error);
+            };
+          });
+        }
+      }]);
+
+      return ImageProcessing;
+    }();
+    /***/
+
+  },
+
+  /***/
+  4:
+  /*!********************!*\
+    !*** ws (ignored) ***!
+    \********************/
+
+  /*! no static exports found */
+
+  /***/
+  function _(module, exports) {
+    /* (ignored) */
+
     /***/
   }
 }]);
