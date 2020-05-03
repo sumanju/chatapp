@@ -6,6 +6,7 @@
     "express-middleware": "^3.4.2",
     "nodemon": "^2.0.2",
     "path": "^0.12.7",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0"
   }
 }
