@@ -26,7 +26,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   chatList    : object[]  = []
   msgForm     : FormGroup 
   interval    : any
-  currLength  : number
+  currNavFlag : boolean   = true
 
   constructor(private chatDetails : AppServiceService,
               private formuilder  : FormBuilder) { 
@@ -37,16 +37,12 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.currLength = 0
     this.chatData = JSON.parse(localStorage.getItem('chatinfo'))
-    this.interval = setInterval(() => {
-      this.getChatList()
-    }, 1000)
     this.getChatList()
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.interval)
+    this.chatDetails.emit('leave', true)
   }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -54,16 +50,18 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 ////////////////////////////////////////////////////////////////////////////////
 
   getChatList() {
-    this.chatDetails.getChatList({sndrId : this.chatData.userId, 
-                                  recvId : localStorage.getItem('userInfo')}).subscribe(res => {
-      if (res.status) {
-        this.chatList = res.data
-      }
-    })
-    if (this.currLength !== this.chatList.length && this.chatList.length > 6) {
-      window.scrollTo(0,document.querySelector(".msg-cont").scrollHeight);
-      this.currLength = this.chatList.length
+    const data = {
+      'userId'  : localStorage.getItem('userInfo'),
+      'frndId'  : this.chatData.userId    
     }
+    this.chatDetails.emit('mesg', data)
+    this.chatDetails.listen('mesg').subscribe((data) => {
+      this.chatList = data
+    })
+    window.scrollBy({
+      top : window.innerHeight,
+      behavior : 'smooth'
+    })
   }
 
   sendMsg(msg : string) {
@@ -74,7 +72,6 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         this.msgForm.setValue({
           msg : null
         })
-        this.getChatList()
       }                        
     })
   }

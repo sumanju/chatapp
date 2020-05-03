@@ -4,6 +4,9 @@ const bodyParser    = require('body-parser')
 const cors          = require('cors')
 const cookieParser  = require('cookie-parser')
 const routeList     = require('./app-server/route-list')
+const socket        = require('socket.io')
+const conn          = require('./app-server/src/db-connection/mysql-db')
+const encrypt       = require('./app-server/src/encrypt/crypto')
 
 const app = express()
       app.use(bodyParser.json())
@@ -28,6 +31,37 @@ app.get('*', function(req,res) {
 
 const port = process.env.PORT || 5000
 
-app.listen(port, (req, res) => {
+const server = app.listen(port, (req, res) => {
   console.log('running ', port)
+})
+
+const io   = socket(server)
+
+io.sockets.on('connection', (socket) => {
+  console.log('connected', socket.id)
+  let timerId = undefined
+
+  socket.on('mesg', (data) => {
+
+    function recur() {
+      queryString = `SELECT * FROM user_msg 
+                 WHERE msg_from = '${data.frndId}' AND msg_to = '${encrypt.decryption(data.userId)}' OR
+                 msg_from ='${encrypt.decryption(data.userId)}' AND msg_to='${data.frndId}'` 
+
+      try {
+        conn.query(queryString, (err, msgInfo) => {
+            socket.emit('mesg' , msgInfo)
+        })
+      } catch (err) {
+        throw new Error(err)
+      }
+    }
+    recur()
+    timerId = setInterval(recur, 2000)
+  })
+  
+  socket.on('leave', (data) => {
+    clearInterval(timerId)
+    timerId = 0
+  })
 })
