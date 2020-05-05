@@ -17,9 +17,15 @@
   <div *ngIf="profileInfo.name != undefined" class="profile-name">
     {{ profileInfo.name }}
   </div>
-  <div class="log-out">
-    <mat-card (click)="logout()" class="log-out-button">
-      Log out
-    </mat-card>
+
+  <div class="time-line-grid">
+    <ng-container *ngFor="let img of timeLineImages">
+      <img class="time-line-img" src="{{ img['image'] }}">
+    </ng-container>
   </div>
+
+  <mat-card (click)="logout()" class="log-out-button">
+    Log out
+  </mat-card>
+
 </div>

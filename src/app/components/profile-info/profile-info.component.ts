@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppServiceService } from 'src/app/app-service.service';
 import { ImageProcessing } from 'src/utility/utility-image';
@@ -12,6 +12,7 @@ export class ProfileInfoComponent implements OnInit {
 
   @Input('profileData') profileInfo
   @Input('userProfileImage') userProfileImage
+  @Input('timeLineImages')  timeLineImages
 
   apiState        : boolean             = false
 
@@ -50,6 +51,8 @@ export class ProfileInfoComponent implements OnInit {
       this.apiState = false
     })
   }
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //                            HTML

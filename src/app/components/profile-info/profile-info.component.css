@@ -6,20 +6,20 @@
 }
 
 .profile-img-body {
-  height: 30vh;
-  width : 30vh;
+  height: 20vh;
+  width : 20vh;
   margin-top: 10vh;
 }
 
 .profile-img {
-  height: 30vh;
-  width : 30vh;
-  border-radius: 60vh;
+  height: 20vh;
+  width : 20vh;
+  border-radius: 40vh;
 }
 
 .upld-profile-img {
   position: absolute;
-  width: 8vh;
+  width: 6vh;
 }
 
 .upld-profile-img>input {
@@ -32,19 +32,25 @@
   align-items: center;
 }
 
-.log-out {
-  position: relative;
-  margin-top: 16vh;
-  height: 10vh;
+.time-line-grid {
+  width: 100vw;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.time-line-img {
+  width: calc(94vw / 3);
+  height: 30vw;
+  padding: 1vw
 }
 
 .log-out-button {
-  position: absolute;
+  position: relative;
   color: whitesmoke;
   background-color: tomato;
   width: 40vw;
+  margin-top: 4vh;
   text-align: center;
 }

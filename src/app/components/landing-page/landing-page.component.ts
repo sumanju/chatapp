@@ -43,7 +43,8 @@ export class LandingPageComponent implements OnInit {
   peopleInfo      : object[]            = []  
   chatData        : ChatData   
   timeLine        : Object[]            = [] 
-  chatHistory     : object[]            = []         
+  chatHistory     : object[]            = [] 
+  timeLineImages  : object[]            = []
 
   constructor(private dataService : AppServiceService,
               private router      : Router) { }
@@ -63,6 +64,7 @@ export class LandingPageComponent implements OnInit {
     this.getPeopleInfo()
     this.getTimeLineImage()
     this.getChatHistory()
+    this.getProfileTimelineImage()
   }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -131,6 +133,18 @@ export class LandingPageComponent implements OnInit {
       if (res.status) {
         this.chatHistory = res.data
       }
+      this.apiState = false
+    })
+  }
+
+  private getProfileTimelineImage() {
+    this.apiState = true
+    this.dataService.getProfileTimelineImage({userId  : localStorage.getItem('userInfo')}).subscribe(res => {
+      this.apiState = false
+      if (res.status){
+        this.timeLineImages = res.data
+      }
+    }, error=> {
       this.apiState = false
     })
   }

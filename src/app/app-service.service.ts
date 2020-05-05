@@ -75,4 +75,8 @@ export class AppServiceService {
   getChatHistory(userId) : Observable<any> {
     return this.httpClient.post<any>(`${this.baseUrl}getchathistory`, userId)
   }
+
+  getProfileTimelineImage(userId) : Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}getProfileTimelineImage`, userId)
+  }
 }
