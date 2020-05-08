@@ -8,7 +8,7 @@
 
 .header {
   width: 100vw;
-  position: sticky;
+  position: fixed;
   z-index: 40000;
   top: 0;
   background-color: #ffffff;
@@ -27,7 +27,7 @@
 
 .footer {
   position: fixed;
-  z-index: 10000;
+  /* z-index: 10000; */
   bottom: 0px;
   width: 100vw;
   display: flex;
@@ -62,7 +62,7 @@
 .msg-cont {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20vw;
+  margin-bottom: calc(10vw + 40px);
 }
 
 .msg-from {
@@ -70,7 +70,7 @@
   max-width: 70vw;
   margin-left: 2vw;
   padding: 6px 8px;
-  background-color: cadetblue;
+  background-color: antiquewhite;
   border-radius: 20px;
   flex-wrap: wrap;
   word-wrap: break-word;
@@ -81,7 +81,7 @@
   max-width: 70vw;
   margin-left: 23vw;
   padding: 6px 8px;
-  background-color: coral;
+  background-color: lightgrey;
   border-radius: 20px;
   flex-wrap: wrap;
   word-wrap: break-word;
