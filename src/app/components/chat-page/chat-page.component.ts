@@ -1,6 +1,7 @@
 import { Component, 
          OnInit,
-         OnDestroy 
+         OnDestroy, 
+         AfterViewInit
        }                      from '@angular/core'
 import { AppServiceService }  from 'src/app/app-service.service'
 import { FormBuilder, 
@@ -20,13 +21,12 @@ export interface ChatPageParams {
   styleUrls   : ['./chat-page.component.css']
 })
 
-export class ChatPageComponent implements OnInit, OnDestroy {
- 
+export class ChatPageComponent implements OnInit , OnDestroy {
+  
   chatData    : any
   chatList    : object[]  = []
   msgForm     : FormGroup 
-  interval    : any
-  currNavFlag : boolean   = true
+  nowVisit    : boolean   = true    
 
   constructor(private chatDetails : AppServiceService,
               private formuilder  : FormBuilder) { 
@@ -56,22 +56,31 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     }
     this.chatDetails.emit('mesg', data)
     this.chatDetails.listen('mesg').subscribe((data) => {
+      if (this.nowVisit) {
+        this.scroll()
+        if (this.chatList.length) {
+          this.nowVisit = false
+        }
+      }
       this.chatList = data
-    })
-    window.scrollBy({
-      top : window.innerHeight,
-      behavior : 'smooth'
     })
   }
 
   sendMsg(msg : string) {
+    this.chatList.push({
+      'msg_from'  : '',
+      'msg_to'    : this.chatData.userId,
+      'msg'       : msg,
+    })
+    this.scroll()
+    this.msgForm.setValue({
+      msg : null
+    })
     this.chatDetails.sendMsg(({ sndrId  : localStorage.getItem('userInfo'),
                                 recvId  : this.chatData.userId,
                                 msg     : msg})).subscribe(res => {
-      if (res.status) {
-        this.msgForm.setValue({
-          msg : null
-        })
+      if (!res.status) {
+        alert('Network Problem')
       }                        
     })
   }
@@ -79,6 +88,14 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 ////////////////////////////////////////////////////////////////////////////////
 //                                  PRIVATE 
 ////////////////////////////////////////////////////////////////////////////////
+
+  scroll() {
+    const ele = document.getElementById('cont')
+    ele.scrollBy({
+      top : ele.scrollHeight,
+      behavior : 'smooth'
+    })
+  }
 
   send() {
     if (this.msgForm.get('msg').value)

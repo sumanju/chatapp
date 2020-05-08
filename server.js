@@ -46,11 +46,13 @@ io.sockets.on('connection', (socket) => {
     function recur() {
       queryString = `SELECT * FROM user_msg 
                  WHERE msg_from = '${data.frndId}' AND msg_to = '${encrypt.decryption(data.userId)}' OR
-                 msg_from ='${encrypt.decryption(data.userId)}' AND msg_to='${data.frndId}'` 
+                 msg_from ='${encrypt.decryption(data.userId)}' AND msg_to='${data.frndId}'
+                 ORDER BY create_ts DESC
+                 LIMIT 20` 
 
       try {
         conn.query(queryString, (err, msgInfo) => {
-            socket.emit('mesg' , msgInfo)
+          socket.emit('mesg' , msgInfo.reverse())
         })
       } catch (err) {
         throw new Error(err)

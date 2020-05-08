@@ -5,10 +5,10 @@
       <div> {{ chatData['name'] }} </div>
     </div>
 
-    <div  class="msg-cont">
+    <div  class="msg-cont" id='cont'>
       <ng-container *ngFor="let data of chatList; index as index">
-        <mat-card *ngIf="chatData.userId == data['msg_from']" class="msg-from"> {{ data['msg']}} </mat-card>
-        <mat-card *ngIf="chatData.userId == data['msg_to']" class="msg-to"> {{ data['msg'] }}</mat-card>
+        <mat-card #foc *ngIf="chatData.userId == data['msg_from']" class="msg-from"> {{ data['msg']}} </mat-card>
+        <mat-card #foc *ngIf="chatData.userId == data['msg_to']" class="msg-to"> {{ data['msg'] }}</mat-card>
       </ng-container>
     </div>
     
@@ -16,5 +16,4 @@
       <input formControlName="msg" matInput placeholder="Type a message" class="text-box" type="text" />
       <img (click)="send()" class="send-button" src="../../../assets/send.jpeg" />
     </div>
-
 </div>
