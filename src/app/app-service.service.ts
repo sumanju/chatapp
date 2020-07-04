@@ -9,8 +9,8 @@ import { HttpsHandlerService } from 'src/network-utils/https-handler.service';
 })
 export class AppServiceService {
 
-  private baseUrl = 'http://localhost:5000/';
-  // private baseUrl = 'https://chatapp212.herokuapp.com/';
+  // private baseUrl = 'http://localhost:5000/';
+  private baseUrl = 'https://chatapp212.herokuapp.com/';
   private socket  : any
 
   constructor(private httpClient : HttpClient,
@@ -19,7 +19,7 @@ export class AppServiceService {
   }
 
   //socket
-  
+
   listen(eventName : string) : Observable<any> {
     return new Observable((subscriber) => {
       this.socket.on(eventName, (data) => {
