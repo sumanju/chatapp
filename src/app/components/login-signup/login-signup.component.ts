@@ -58,31 +58,30 @@ export class LoginSignupComponent implements OnInit {
 //                          API
 ////////////////////////////////////////////////////////////////////////////////
 
-  logIn() {
+  async logInAPI() {
     this.apiState = true
-    this.dataService.logIn(this.loginFormGroup.value).subscribe(res=>{
-      this.apiState = false
-      if (res.status) {
-        localStorage.setItem('userInfo', res.data)
-        this.router.navigate(['/LandingPage'])
-      } else if (res.error == 'INVALID_LOGIN') {
-        this.invLogIn = true
-        setTimeout(()=> {
-          this.invLogIn = false
-        }, 2000)
-      }
-    },error=>{
-      this.apiState = false
-      console.log(error)      
-    })
+    const resp  = await this.dataService.logIn(this.loginFormGroup.value)
+    this.apiState = false
+
+    if (resp.status)  {
+      localStorage.setItem('userInfo', resp.data)
+      this.router.navigate(['/LandingPage'])
+    } else if (resp.error == 'INVALID_LOGIN') {
+      this.invLogIn = true
+      setTimeout(()=> {
+        this.invLogIn = false
+      }, 2000)
+    }
   }
 
-  signUp() {
+  async signUp() {
+
     this.apiState = true
-    this.dataService.signUp(this.signupFormFroup.value).subscribe(res => {
-      this.apiState = false
-      if (res.status) {
-        this.signupStatus = true
+    const resp =  await this.dataService.signUp(this.signupFormFroup.value)
+    this.apiState = false
+
+    if (resp.status)  {
+      this.signupStatus = true
         this.signupFormFroup.setValue({
           name      : null,
           userId    : null,
@@ -93,15 +92,12 @@ export class LoginSignupComponent implements OnInit {
         setTimeout(() => {
           this.signupStatus = false
         }, 2000)
-      } else {
-        this.invSignup = true
-        setTimeout(() => {
-          this.invSignup = false
-        }, 2000)
-      }
-    },error=>{
-      this.apiState = false      
-    })
+    } else {
+      this.invSignup = true
+      setTimeout(() => {
+        this.invSignup = false
+      }, 2000)
+    }
   }
   
 ////////////////////////////////////////////////////////////////////////////////
@@ -116,4 +112,7 @@ export class LoginSignupComponent implements OnInit {
     this.toggle = this.STATE.SIGNUP
   }  
 
+  logIn() {
+    this.logInAPI()
+  }
 }

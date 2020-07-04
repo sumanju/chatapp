@@ -2,22 +2,24 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as io        from 'socket.io-client'
+import { HttpsHandlerService } from 'src/network-utils/https-handler.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppServiceService {
 
-  // private baseUrl = 'http://localhost:5000/';
-  private baseUrl = 'https://chatapp212.herokuapp.com/';
+  private baseUrl = 'http://localhost:5000/';
+  // private baseUrl = 'https://chatapp212.herokuapp.com/';
   private socket  : any
 
-  constructor(private httpClient : HttpClient) { 
+  constructor(private httpClient : HttpClient,
+              private apiHandler : HttpsHandlerService) { 
     this.socket = io.connect(this.baseUrl)
   }
 
   //socket
-
+  
   listen(eventName : string) : Observable<any> {
     return new Observable((subscriber) => {
       this.socket.on(eventName, (data) => {
@@ -32,51 +34,51 @@ export class AppServiceService {
   
   //https
 
-  logIn(logInValues) : Observable<any> {    
-    return this.httpClient.post<any>(`${this.baseUrl}login`, logInValues)
+  logIn(logInValues) : Promise<any> {  
+    return this.apiHandler.requestAPI('login', logInValues)
   }
 
-  signUp(signUpvales) : Observable<any>  {
-    return this.httpClient.post<any>(`${this.baseUrl}signup`, signUpvales)
+  signUp(signUpvales) : Promise<any>  {
+    return this.apiHandler.requestAPI('signup', signUpvales)
   }
 
-  getUserInfo(userinfo) : Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}getuserinfo`, userinfo)
+  getUserInfo(userinfo) : Promise<any> {
+    return  this.apiHandler.requestAPI('getuserinfo', userinfo)
   }
 
-  saveUserProfileImage(userImage) : Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}profileImage`,userImage)
+  getUserProfileImage(userinfo) : Promise<any> {
+    return  this.apiHandler.requestAPI('getProfileImage', userinfo)
   }
 
-  getUserProfileImage(userinfo) : Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}getProfileImage`,userinfo)
+  getPeopleInfo(userId) : Promise<any> {
+    return this.apiHandler.requestAPI('getpeoplelist', userId)
   }
 
-  getPeopleInfo(userId) : Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}getpeoplelist`, userId)
+  getChatList(userInfo) : Promise<any> {
+    return  this.apiHandler.requestAPI('getchatlist', userInfo)
   }
 
-  getChatList(userInfo) : Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}getchatlist`, userInfo)
+  getTimeLineImage(userId)  : Promise<any> {
+    return this.apiHandler.requestAPI('gettimelineimage', userId)
+  }
+
+  getChatHistory(userId) : Promise<any> {
+    return this.apiHandler.requestAPI('getchathistory', userId)
+  }
+
+  getProfileTimelineImage(userId) : Promise<any> {
+    return this.apiHandler.requestAPI('getProfileTimelineImage', userId)
   }
 
   sendMsg(userInfo) : Observable<any> {
     return this.httpClient.post<any>(`${this.baseUrl}sendmsg`, userInfo)
   }
 
-  setTimeLineImage(userImage) : Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}settimelineimage`, userImage)
+  setTimeLineImage(userImage) : Promise<any> {
+    return this.apiHandler.requestAPI('settimelineimage', userImage)
   } 
 
-  getTimeLineImage(userId)  : Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}gettimelineimage`, userId)
-  }
-
-  getChatHistory(userId) : Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}getchathistory`, userId)
-  }
-
-  getProfileTimelineImage(userId) : Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}getProfileTimelineImage`, userId)
+  saveUserProfileImage(userImage) : Promise<any> {
+    return this.apiHandler.requestAPI('profileImage', userImage)
   }
 }

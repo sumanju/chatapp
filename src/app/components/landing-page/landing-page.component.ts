@@ -5,6 +5,7 @@ import { AppServiceService
        }                    from 'src/app/app-service.service';
 import { Router }           from '@angular/router';
 import { ImageProcessing }  from 'src/utility/utility-image';
+import { promise } from 'protractor';
 
 export enum ActiveStatus {
   HOME,
@@ -59,94 +60,43 @@ export class LandingPageComponent implements OnInit {
       chat    : false,
       people  : false
     }
-    this.getUserProfileImage()
-    this.getUserDetailes()
-    this.getPeopleInfo()
-    this.getTimeLineImage()
-    this.getChatHistory()
-    this.getProfileTimelineImage()
+    this.getAllUserDetails()
   }
 
 ////////////////////////////////////////////////////////////////////////////////
 //                                  PRIVATE 
 ////////////////////////////////////////////////////////////////////////////////
-  private getUserDetailes() {
+
+  private async getAllUserDetails() {
     this.apiState = true
-    this.dataService.getUserInfo({userInfo : localStorage.getItem('userInfo')}).subscribe(res => {
-      this.userInfo = res.userInfo
-      this.apiState = false
-    }, error => {
-      this.apiState = false
-    })
+
+    const [userInfo, userProfileImage,  peopleInfo,  timeLine, chatHistory, timeLineImage ] = await Promise.all([ 
+                                    this.dataService.getUserInfo({userInfo : localStorage.getItem('userInfo')}),
+                                    this.dataService.getUserProfileImage({userId : localStorage.getItem('userInfo')}),
+                                    this.dataService.getPeopleInfo({userId : localStorage.getItem('userInfo')}),  
+                                    this.dataService.getTimeLineImage({userId : localStorage.getItem('userInfo')}),
+                                    this.dataService.getChatHistory({userId : localStorage.getItem('userInfo')}),
+                                    this.dataService.getProfileTimelineImage({userId  : localStorage.getItem('userInfo')})
+                                  ])
+    this.userInfo           = userInfo.userInfo
+    this.userProfileImage   = userProfileImage.image.image
+    this.peopleInfo         = peopleInfo.usersData
+    this.timeLine           = timeLine.data
+    this.chatHistory        = chatHistory.data
+    this.timeLineImages     =timeLineImage.data
+
+    this.apiState = false
   }
 
-  private getUserProfileImage() {
+  private async setTimeLineImage(imageBase64) {
     this.apiState = true
-    this.dataService.getUserProfileImage({userId : localStorage.getItem('userInfo')}).subscribe(res => {
-      if (res.status && res.image) {
-        this.userProfileImage = res.image.image
-      }
-      this.apiState = false
-    }, error => {
-      this.apiState = false
-    })
-  }
-
-  private getPeopleInfo() {
-    this.apiState  = true
-    this.dataService.getPeopleInfo({userId : localStorage.getItem('userInfo')}).subscribe(res => {
-      if (res.status) {
-        this.peopleInfo = res.usersData
-      }
-      console.log(this.peopleInfo)
-    }, err => {
-      this.apiState = false
-    })
-  }
-
-  private getTimeLineImage() {
-    this.apiState = true
-    this.dataService.getTimeLineImage({userId : localStorage.getItem('userInfo')}).subscribe(res => {
-      if (res.status) {
-        this.timeLine = res.data
-      }
-      this.apiState = false
-    })
-  }
-
-  private setTimeLineImage(imageBase64) {
-    this.apiState = true
-    this.dataService.setTimeLineImage({userId : localStorage.getItem('userInfo'),
-                                       image  : imageBase64,
-                                       name   : this.userInfo['name']}).subscribe(res => {
-      if (res.status) {
-        alert('successfully upload')
-        this.apiState = false
-      }
-      this.apiState = false
-    })
-  }
-
-  getChatHistory() {
-    this.apiState  = true
-    this.dataService.getChatHistory({userId : localStorage.getItem('userInfo')}).subscribe(res => {
-      if (res.status) {
-        this.chatHistory = res.data
-      }
-      this.apiState = false
-    })
-  }
-
-  private getProfileTimelineImage() {
-    this.apiState = true
-    this.dataService.getProfileTimelineImage({userId  : localStorage.getItem('userInfo')}).subscribe(res => {
-      this.apiState = false
-      if (res.status){
-        this.timeLineImages = res.data
-      }
-    }, error=> {
-      this.apiState = false
-    })
+    const resp =  await this.dataService.setTimeLineImage({userId : localStorage.getItem('userInfo'),
+                                                           image  : imageBase64,
+                                                           name   : this.userInfo['name']})
+    if (resp.status) {
+      alert('successfully upload')
+    }
+    this.apiState = false
   }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -203,6 +153,4 @@ export class LandingPageComponent implements OnInit {
     const imageBase64 = await ImageProcessing.getCompressedImage(event.target.files[0]) as string
     this.setTimeLineImage(imageBase64)
   }
-
-  
 }

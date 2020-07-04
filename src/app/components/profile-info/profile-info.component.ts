@@ -9,7 +9,7 @@ import { ImageProcessing } from 'src/utility/utility-image';
   styleUrls: ['./profile-info.component.css']
 })
 export class ProfileInfoComponent implements OnInit {
-
+  
   @Input('profileData') profileInfo
   @Input('userProfileImage') userProfileImage
   @Input('timeLineImages')  timeLineImages
@@ -29,27 +29,25 @@ export class ProfileInfoComponent implements OnInit {
 ////////////////////////////////////////////////////////////////////////////////
 
   async setProfileImage(image : string) {
-    this.userService.saveUserProfileImage({
-      userInfo : this.profileInfo.user_id,
-      base64   : image,
-      status   : this.userProfileImage == undefined ? true : false
-    }).subscribe(res => {
-      if (res.status) {
-        this.getUserProfileImage()
-      }
-    })
+    this.apiState = true
+    const resp =  await this.userService.saveUserProfileImage({
+                    userInfo : this.profileInfo.user_id,
+                    base64   : image,
+                    status   : this.userProfileImage == undefined ? true : false
+                  })
+    if  (resp.status) {
+      this.getUserProfileImage()
+    }
+    this.apiState = false
   }
 
-  private getUserProfileImage() {
+  private async getUserProfileImage() {
     this.apiState = true
-    this.userService.getUserProfileImage({userId : localStorage.getItem('userInfo')}).subscribe(res => {
-      this.apiState = false
-      if (res.status) {
-        this.userProfileImage = res.image.image
-      }
-    }, error => {
-      this.apiState = false
-    })
+    const resp  = await this.userService.getUserProfileImage({userId : localStorage.getItem('userInfo')})
+    this.apiState = false
+    if (resp.status)  {
+      this.userProfileImage = resp.image.image
+    }
   }
 
 
@@ -60,7 +58,6 @@ export class ProfileInfoComponent implements OnInit {
 
   async onUpload(event) {
     const imageBase64 = await ImageProcessing.getCompressedImage(event.target.files[0]) as string
-    console.log('image-bro', imageBase64.length)
     this.setProfileImage(imageBase64)
   }
 

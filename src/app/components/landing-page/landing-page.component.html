@@ -28,7 +28,7 @@
         HOME
       </div>
       <div (click)="activeNav(activeStatus.CHAT)" [ngClass]=" activeHeader.chat ? 'nav-header-item-active' : 'nav-header-item-inactive'">
-        CHAT
+        FRIEND
       </div>
       <div (click)="activeNav(activeStatus.PEOPLE)" [ngClass]=" activeHeader.people ? 'nav-header-item-active' : 'nav-header-item-inactive'">
         PEOPLE
@@ -45,7 +45,7 @@
       </div>
     </div>
 
-<!-- chat body -->
+<!-- friend body -->
     <div *ngIf="activeHeader.chat" class="chat-body">
       <div *ngFor="let data of chatHistory;index as index" (click)="selectChatHistory(index)">
         <div class="people-rec">
