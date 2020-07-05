@@ -79,11 +79,11 @@ export class LandingPageComponent implements OnInit {
                                     this.dataService.getProfileTimelineImage({userId  : localStorage.getItem('userInfo')})
                                   ])
     this.userInfo           = userInfo.userInfo
-    this.userProfileImage   = userProfileImage.image.image
+    this.userProfileImage   = userProfileImage.image ? userProfileImage.image.image : undefined
     this.peopleInfo         = peopleInfo.usersData
     this.timeLine           = timeLine.data
     this.chatHistory        = chatHistory.data
-    this.timeLineImages     =timeLineImage.data
+    this.timeLineImages     = timeLineImage.data
 
     this.apiState = false
   }
