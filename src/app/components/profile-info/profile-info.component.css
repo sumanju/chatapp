@@ -37,13 +37,12 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .time-line-img {
-  width: calc(94vw / 3);
+  width: calc(96.5vw / 3);
   height: 30vw;
-  padding: 1vw
+  padding: 0.5vw
 }
 
 .log-out-button {
