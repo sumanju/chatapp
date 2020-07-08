@@ -74,7 +74,7 @@ export class LoginSignupComponent implements OnInit {
     }
   }
 
-  async signUp() {
+  private async signUpAPI() {
 
     this.apiState = true
     const resp =  await this.dataService.signUp(this.signupFormFroup.value)
@@ -114,5 +114,9 @@ export class LoginSignupComponent implements OnInit {
 
   logIn() {
     this.logInAPI()
+  }
+
+  signUp()  {
+    this.signUpAPI()
   }
 }

@@ -60,14 +60,14 @@ export class LandingPageComponent implements OnInit {
       chat    : false,
       people  : false
     }
-    this.getAllUserDetails()
+    this.getUserDetails()
   }
 
 ////////////////////////////////////////////////////////////////////////////////
 //                                  PRIVATE 
 ////////////////////////////////////////////////////////////////////////////////
 
-  private async getAllUserDetails() {
+  private async getUserDetails() {
     this.apiState = true
 
     const [userInfo, userProfileImage,  peopleInfo,  timeLine, chatHistory, timeLineImage ] = await Promise.all([ 
@@ -96,7 +96,7 @@ export class LandingPageComponent implements OnInit {
     if (resp.status) {
       alert('successfully upload')
     }
-    this.apiState = false
+    this.getUserDetails()
   }
 
 ////////////////////////////////////////////////////////////////////////////////
