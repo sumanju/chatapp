@@ -53,10 +53,12 @@ export class LandingPageComponent implements OnInit {
 
   @HostListener("document:scroll")
   scrollEmit()  {
-    let ele = document.getElementById("home-body")
-    if (ele.clientHeight - 1300 <= window.scrollY && this.isScroll) {
-      this.isScroll = false
-      this.loadMoreOnTimeLine()
+    if (this.activeHeader.home) {
+      let ele = document.getElementById("home-body")
+      if (ele.clientHeight - 1300 <= window.scrollY && this.isScroll) {
+        this.isScroll = false
+        this.loadMoreOnTimeLine()
+      }
     }
   }
 
@@ -148,7 +150,6 @@ export class LandingPageComponent implements OnInit {
         chat    : false,
         people  : false
       }
-      window.scrollBy({ top : 0 })
     } 
     if (state === ActiveStatus.CHAT) {
       this.activeHeader = {
@@ -156,7 +157,6 @@ export class LandingPageComponent implements OnInit {
         chat    : true,
         people  : false
       }
-      window.scrollBy({ top : 0 })
     }
     if (state === ActiveStatus.PEOPLE) {
       this.activeHeader = {
@@ -164,8 +164,10 @@ export class LandingPageComponent implements OnInit {
         chat    : false,
         people  : true
       }
-      window.scrollBy({ top : 0 })
     }
+    window.scrollTo({
+      top : 0
+    })
   }
 
   showProfile() {
