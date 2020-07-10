@@ -115,9 +115,7 @@ export class LandingPageComponent implements OnInit {
   private async loadMoreOnTimeLine()  {
     this.loadValue  += 6
     const resp       = await this.dataService.getTimeLineImage({ loadValue :  this.loadValue})
-    if  (resp.data.length != this.timeLineImages.length)  {
-      this.timeLine    = resp.data
-    }
+    this.timeLine    = resp.data
     this.isScroll    = true
   }
 
