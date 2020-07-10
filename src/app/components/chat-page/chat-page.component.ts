@@ -1,7 +1,9 @@
 import { Component, 
          OnInit,
          OnDestroy, 
-         AfterViewInit
+         AfterViewInit,
+         ElementRef,
+         ViewChild
        }                      from '@angular/core'
 import { AppServiceService }  from 'src/app/app-service.service'
 import { FormBuilder, 
@@ -26,7 +28,7 @@ export class ChatPageComponent implements OnInit , OnDestroy {
   chatData    : any
   chatList    : object[]  = []
   msgForm     : FormGroup 
-  nowVisit    : boolean   = true    
+  nowVisit    : boolean   = true
 
   constructor(private chatDetails : AppServiceService,
               private formuilder  : FormBuilder) { 
@@ -91,7 +93,7 @@ export class ChatPageComponent implements OnInit , OnDestroy {
 
   scroll() {
     const ele = document.getElementById('cont')
-    ele.scrollBy({
+    ele.scrollTo({
       top : ele.scrollHeight,
       behavior : 'smooth'
     })

@@ -65,11 +65,7 @@
       <mat-form-field class="text-form-field-su"  appearance="outline">
         <mat-label>Password</mat-label>
         <input type="password" formControlName="password" matInput>
-      </mat-form-field>
-      <mat-form-field class="text-form-field-su"  appearance="outline">
-        <mat-label>Contact</mat-label>
-        <input formControlName="phoneNo" type="number" matInput>
-      </mat-form-field>  
+      </mat-form-field> 
       <input [ngClass]="signupFormFroup.valid ? 'submit-button' : 'submit-button-disable'" [disabled]="!signupFormFroup.valid" type="submit"  value="Sign Up">
     </form>
   </div>

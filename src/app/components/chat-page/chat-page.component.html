@@ -5,7 +5,7 @@
       <div> {{ chatData['name'] }} </div>
     </div>
 
-    <div  class="msg-cont" id='cont'>
+    <div  class="msg-cont" id="cont">
       <ng-container *ngFor="let data of chatList; index as index">
         <mat-card #foc *ngIf="chatData.userId == data['msg_from']" class="msg-from"> {{ data['msg']}} </mat-card>
         <mat-card #foc *ngIf="chatData.userId == data['msg_to']" class="msg-to"> {{ data['msg'] }}</mat-card>

@@ -5,7 +5,7 @@ const router  = express.Router()
   router.post('/signup', (req, res) => {
     const data = req.body,
           queryString = `INSERT INTO user_info 
-                         values(\'${data.name}\',\'${data.userId}\',\'${data.password}\',\'${data.phoneNo}\')`
+                         values(\'${data.name}\',\'${data.userId}\',\'${data.password}\')`
     
     try {
       conn.query(queryString, (err) => {

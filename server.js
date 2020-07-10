@@ -48,7 +48,7 @@ io.sockets.on('connection', (socket) => {
                  WHERE msg_from = '${data.frndId}' AND msg_to = '${encrypt.decryption(data.userId)}' OR
                  msg_from ='${encrypt.decryption(data.userId)}' AND msg_to='${data.frndId}'
                  ORDER BY create_ts DESC
-                 LIMIT 20` 
+                 LIMIT 15` 
 
       try {
         conn.query(queryString, (err, msgInfo) => {

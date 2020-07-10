@@ -38,8 +38,6 @@ export class LoginSignupComponent implements OnInit {
     name      : ['', Validators.required],
     userId    : ['', Validators.required],
     password  : ['', Validators.required],
-    phoneNo   : ['', Validators.required],
-
   })
 
   constructor(private fb          : FormBuilder,
@@ -85,8 +83,7 @@ export class LoginSignupComponent implements OnInit {
         this.signupFormFroup.setValue({
           name      : null,
           userId    : null,
-          password  : null,
-          phoneNo   : null
+          password  : null        
         })
         this.toggle = this.STATE.LOGIN
         setTimeout(() => {
