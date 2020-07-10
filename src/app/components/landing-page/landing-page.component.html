@@ -36,13 +36,16 @@
     </div>
 
 <!-- home body  -->
-    <div *ngIf="activeHeader.home" class="home-body">
+    <div *ngIf="activeHeader.home"  class="home-body" id="home-body">
       <div *ngFor="let data of timeLine;index as index">
         <div class="home-cont">
           <div class="body-nm"> {{ data['name'] }} </div>
           <img class="body-img" src="{{ data['image'] }}">
         </div>
       </div>
+    </div>
+    <div class="loading-image" *ngIf="activeHeader.home && !isScroll">
+      <img class="loading-image-img" src="../../../assets/loading-image.gif" />
     </div>
 
 <!-- friend body -->
@@ -65,7 +68,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
 </div>

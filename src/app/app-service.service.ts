@@ -58,8 +58,8 @@ export class AppServiceService {
     return  this.apiHandler.requestAPI('getchatlist', userInfo)
   }
 
-  getTimeLineImage(userId)  : Promise<any> {
-    return this.apiHandler.requestAPI('gettimelineimage', userId)
+  getTimeLineImage(loadValue)  : Promise<any> {
+    return this.apiHandler.requestAPI('gettimelineimage', loadValue)
   }
 
   getChatHistory(userId) : Promise<any> {

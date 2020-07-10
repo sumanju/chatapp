@@ -4,8 +4,8 @@ const encrypt = require('../encrypt/crypto')
 const router  = express.Router()
 
   router.post('/gettimelineimage', (req, res) => {
-    const data        = req.body
-          queryString = `SELECT * FROM user_timeline`
+    const data        = req.body.loadValue
+          queryString = `SELECT * FROM user_timeline ORDER BY create_ts DESC  LIMIT ${data}`
 
     try {
       conn.query(queryString, (err, data) => {
@@ -17,7 +17,7 @@ const router  = express.Router()
         } else {
           res.status(200).send({
             status : true,
-            data   : data.reverse()
+            data   : data
           })
         }
       })

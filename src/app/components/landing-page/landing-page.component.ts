@@ -1,11 +1,11 @@
 import {  Component, 
-          OnInit 
+          OnInit, 
+          HostListener
        }                   from '@angular/core';
 import { AppServiceService 
        }                    from 'src/app/app-service.service';
 import { Router }           from '@angular/router';
 import { ImageProcessing }  from 'src/utility/utility-image';
-import { promise } from 'protractor';
 
 export enum ActiveStatus {
   HOME,
@@ -47,6 +47,19 @@ export class LandingPageComponent implements OnInit {
   chatHistory     : object[]            = [] 
   timeLineImages  : object[]            = []
 
+  //scroll veriable
+  isScroll        : boolean             = true
+  loadValue       : number              = 5
+
+  @HostListener("document:scroll")
+  scrollEmit()  {
+    let ele = document.getElementById("home-body")
+    if (ele.clientHeight - 1300 <= window.scrollY && this.isScroll) {
+      this.isScroll = false
+      this.loadMoreOnTimeLine()
+    }
+  }
+
   constructor(private dataService : AppServiceService,
               private router      : Router) { }
 
@@ -74,7 +87,7 @@ export class LandingPageComponent implements OnInit {
                                     this.dataService.getUserInfo({userInfo : localStorage.getItem('userInfo')}),
                                     this.dataService.getUserProfileImage({userId : localStorage.getItem('userInfo')}),
                                     this.dataService.getPeopleInfo({userId : localStorage.getItem('userInfo')}),  
-                                    this.dataService.getTimeLineImage({userId : localStorage.getItem('userInfo')}),
+                                    this.dataService.getTimeLineImage({ loadValue :  this.loadValue}),
                                     this.dataService.getChatHistory({userId : localStorage.getItem('userInfo')}),
                                     this.dataService.getProfileTimelineImage({userId  : localStorage.getItem('userInfo')})
                                   ])
@@ -97,6 +110,13 @@ export class LandingPageComponent implements OnInit {
       alert('successfully upload')
     }
     this.getUserDetails()
+  }
+
+  private async loadMoreOnTimeLine()  {
+    this.loadValue  += 6
+    const resp          = await this.dataService.getTimeLineImage({ loadValue :  this.loadValue})
+    this.timeLine       = resp.data
+    this.isScroll       = true
   }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -128,6 +148,7 @@ export class LandingPageComponent implements OnInit {
         chat    : false,
         people  : false
       }
+      window.scrollBy({ top : 0 })
     } 
     if (state === ActiveStatus.CHAT) {
       this.activeHeader = {
@@ -135,6 +156,7 @@ export class LandingPageComponent implements OnInit {
         chat    : true,
         people  : false
       }
+      window.scrollBy({ top : 0 })
     }
     if (state === ActiveStatus.PEOPLE) {
       this.activeHeader = {
@@ -142,6 +164,7 @@ export class LandingPageComponent implements OnInit {
         chat    : false,
         people  : true
       }
+      window.scrollBy({ top : 0 })
     }
   }
 
