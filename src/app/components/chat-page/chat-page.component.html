@@ -9,7 +9,6 @@
     <ng-container *ngFor="let data of chatList; index as index, last as last">
       <mat-card *ngIf="chatData.userId == data['msg_from']" class="msg-from"> {{ data['msg']}} </mat-card>
       <mat-card *ngIf="chatData.userId == data['msg_to']" class="msg-to"> {{ data['msg'] }}</mat-card>
-      <mat-card *ngIf="last">  suman  </mat-card>
     </ng-container>
   </div>
     
