@@ -1,9 +1,6 @@
 import { Component, 
          OnInit,
-         OnDestroy, 
-         AfterViewInit,
-         ElementRef,
-         ViewChild
+         OnDestroy
        }                      from '@angular/core'
 import { AppServiceService }  from 'src/app/app-service.service'
 import { FormBuilder, 
@@ -92,9 +89,8 @@ export class ChatPageComponent implements OnInit , OnDestroy {
 ////////////////////////////////////////////////////////////////////////////////
 
   scroll() {
-    const ele = document.getElementById('cont')
-    ele.scrollTo({
-      top : ele.scrollHeight,
+    window.scrollBy({
+      top : 10000,
       behavior : 'smooth'
     })
   }
