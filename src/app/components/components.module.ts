@@ -14,19 +14,22 @@ import { MatCardModule,
 				 MatFormFieldControl,
 				 MatInputModule,
 				 MatDividerModule
-				}                          from '@angular/material';
+				}                          	from '@angular/material';
 import { LandingPageComponent 
-				} 												 from './landing-page/landing-page.component';
+				} 												 	from './landing-page/landing-page.component';
 import { InitialPageComponent 
-				} 												 from './initial-page/initial-page.component';
-import { ProfileInfoComponent } from './profile-info/profile-info.component';
-import { ChatPageComponent } from './chat-page/chat-page.component';
+				} 												 	from './initial-page/initial-page.component';
+import { ProfileInfoComponent } 		from './profile-info/profile-info.component';
+import { ChatPageComponent } 				from './chat-page/chat-page.component';
+import { DateFormatPipe } 					from '../pipes/date-format.pipe';
 
 @NgModule({
 	declarations: [	LoginSignupComponent, 
 									LandingPageComponent, 
 									InitialPageComponent, 
-									ProfileInfoComponent, ChatPageComponent
+									ProfileInfoComponent, 
+									ChatPageComponent,
+									DateFormatPipe
 								],
   imports			: [
     							CommonModule,

@@ -21,7 +21,6 @@ export class ImageProcessing {
     reader.readAsDataURL(blob); 
     reader.onloadend = function() {
         var base64data = reader.result;                
-        console.log(base64data);
     }
   }
 

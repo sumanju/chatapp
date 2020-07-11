@@ -39,7 +39,10 @@
     <div *ngIf="activeHeader.home"  class="home-body" id="home-body">
       <div *ngFor="let data of timeLine;index as index">
         <div class="home-cont">
-          <div class="body-nm"> {{ data['name'] }} </div>
+          <div class="body-hdr">  
+            <div  class="body-nm"> {{ data['name'] }}  </div>
+            <div  class="body-time"> {{ data['create_ts'] | dateFormat }}  </div>
+          </div>
           <img class="body-img" src="{{ data['image'] }}">
         </div>
       </div>
