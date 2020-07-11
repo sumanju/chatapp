@@ -59,7 +59,7 @@ io.sockets.on('connection', (socket) => {
       }
     }
     recur()
-    timerId = setInterval(recur, 2000)
+    timerId = setInterval(recur, 1000)
   })
   
   socket.on('leave', (data) => {

@@ -1,19 +1,19 @@
 <div class="structure">
-    <div class="header">
-      <img *ngIf="chatData['image'] == undefined" class="profile" src="../../../assets/default-image.jpeg"/>
-      <img *ngIf="chatData['image'] != undefined" class="profile" src="{{ chatData['image'] }}"/>
-      <div> {{ chatData['name'] }} </div>
-    </div>
+  <div class="header">
+    <img *ngIf="chatData['image'] == undefined" class="profile" src="../../../assets/default-image.jpeg"/>
+    <img *ngIf="chatData['image'] != undefined" class="profile" src="{{ chatData['image'] }}"/>
+    <div> {{ chatData['name'] }} </div>
+  </div>
 
-    <div  class="msg-cont" id="cont">
-      <ng-container *ngFor="let data of chatList; index as index">
-        <mat-card #foc *ngIf="chatData.userId == data['msg_from']" class="msg-from"> {{ data['msg']}} </mat-card>
-        <mat-card #foc *ngIf="chatData.userId == data['msg_to']" class="msg-to"> {{ data['msg'] }}</mat-card>
-      </ng-container>
-    </div>
+  <div  class="msg-cont" id="cont">
+    <ng-container *ngFor="let data of chatList; index as index">
+      <mat-card #foc *ngIf="chatData.userId == data['msg_from']" class="msg-from"> {{ data['msg']}} </mat-card>
+      <mat-card #foc *ngIf="chatData.userId == data['msg_to']" class="msg-to"> {{ data['msg'] }}</mat-card>
+    </ng-container>
+  </div>
     
-    <div class="footer" [formGroup]="msgForm">
-      <input formControlName="msg" matInput placeholder="Type a message" class="text-box" type="text" />
-      <img (click)="send()" class="send-button" src="../../../assets/send.jpeg" />
-    </div>
+  <div class="footer" [formGroup]="msgForm">
+    <input formControlName="msg" matInput placeholder="Type a message" class="text-box" type="text" />
+    <img (click)="send()" class="send-button" src="../../../assets/send.jpeg" />
+  </div>
 </div>

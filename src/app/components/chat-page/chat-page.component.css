@@ -19,10 +19,10 @@
 
 .profile {
   height: 10vw;
-  width: 5vh;
+  width: 10vw;
   padding: 12px 12px;
-  border-radius: 10vh;
-  margin-left: 15px;
+  border-radius: 10vw;
+  margin-left: 3vw;
 }
 
 .footer {
@@ -42,7 +42,7 @@
   font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
   width: 75vw;
-  height: 5vh;
+  height: 10vw;
   font-weight: 400;
   padding: 2px 10px;
   border-radius: 16px;
@@ -51,7 +51,7 @@
 }
 
 .send-button {
-  height: 5vh;
+  height: 10vw;
   width : 14vw;
   border-radius: 20vw;
   display: flex;
@@ -62,13 +62,14 @@
 .msg-cont {
   display: flex;
   flex-direction: column;
-  margin-top: calc(5vh + 30px);
-  margin-bottom: calc(5vh + 40px);
-  overflow: scroll;
+  margin-top: calc(10vw + 26px);
+  margin-bottom: calc(10vw + 32px);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .msg-from {
-  margin-top: 12px;
+  margin: 8px 0 6px;
   max-width: 70vw;
   margin-left: 2vw;
   padding: 6px 8px;
@@ -80,7 +81,7 @@
 }
 
 .msg-to {
-  margin-top: 12px;
+  margin: 8px 0 6px;
   max-width: 70vw;
   margin-left: 23vw;
   padding: 6px 8px;
