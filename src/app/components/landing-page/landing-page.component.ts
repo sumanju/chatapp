@@ -53,7 +53,7 @@ export class LandingPageComponent implements OnInit {
 
   @HostListener("document:scroll")
   scrollEmit()  {
-    if (this.activeHeader.home) {
+    if (this.activeHeader.home && !this.isShowProfile) {
       let ele = document.getElementById("home-body")
       if (ele.clientHeight - 1300 <= window.scrollY && this.isScroll) {
         this.isScroll = false
@@ -89,7 +89,7 @@ export class LandingPageComponent implements OnInit {
                                     this.dataService.getUserInfo({userInfo : localStorage.getItem('userInfo')}),
                                     this.dataService.getUserProfileImage({userId : localStorage.getItem('userInfo')}),
                                     this.dataService.getPeopleInfo({userId : localStorage.getItem('userInfo')}),  
-                                    this.dataService.getTimeLineImage({ loadValue :  this.loadValue}),
+                                    this.dataService.getTimeLineImage({ loadValue :  this.loadValue, userId : localStorage.getItem('userInfo')}),
                                     this.dataService.getChatHistory({userId : localStorage.getItem('userInfo')}),
                                     this.dataService.getProfileTimelineImage({userId  : localStorage.getItem('userInfo')})
                                   ])
@@ -115,10 +115,19 @@ export class LandingPageComponent implements OnInit {
   }
 
   private async loadMoreOnTimeLine()  {
-    this.loadValue  += 6
-    const resp       = await this.dataService.getTimeLineImage({ loadValue :  this.loadValue})
-    this.timeLine    = resp.data
+    this.loadValue  += 5
+    const resp       = await this.dataService.getTimeLineImage({ loadValue :  this.loadValue,
+                                                                 userId    :  localStorage.getItem('userInfo')})
+    this.timeLine    = this.timeLine.concat((resp.data as Array<any>).slice(this.loadValue - 5, resp.data.length))  
     this.isScroll    = true
+  }
+
+  private async likeStatus(data, index)  {
+    this.timeLine[index]['isLike'] = !this.timeLine[index]['isLike']
+    await this.dataService.likeTimeLineImage({
+      userId      : localStorage.getItem('userInfo'),
+      uniqueId    : data['unique_id']
+    })
   }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -172,6 +181,10 @@ export class LandingPageComponent implements OnInit {
 
   showProfile() {
     this.isShowProfile = true
+  }
+
+  like(event, index)  {
+    this.likeStatus(event, index)
   }
 
   async onUpload(event) {

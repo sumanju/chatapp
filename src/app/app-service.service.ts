@@ -58,8 +58,8 @@ export class AppServiceService {
     return  this.apiHandler.requestAPI('getchatlist', userInfo)
   }
 
-  getTimeLineImage(loadValue)  : Promise<any> {
-    return this.apiHandler.requestAPI('gettimelineimage', loadValue)
+  getTimeLineImage(params)  : Promise<any> {
+    return this.apiHandler.requestAPI('gettimelineimage', params)
   }
 
   getChatHistory(userId) : Promise<any> {
@@ -80,5 +80,9 @@ export class AppServiceService {
 
   saveUserProfileImage(userImage) : Promise<any> {
     return this.apiHandler.requestAPI('profileImage', userImage)
+  }
+
+  likeTimeLineImage(data)  : Promise<any>  {
+    return this.apiHandler.requestAPI('likeTimeLineImage', data)
   }
 }

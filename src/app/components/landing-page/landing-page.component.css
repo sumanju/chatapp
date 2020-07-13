@@ -79,6 +79,11 @@
   padding: 2vh 0;
 }
 
+.like-img {
+  height: 5vh;
+  margin: 3px 0;
+}
+
 .img-size {
   width: 50%;
   height: 50%;
@@ -125,7 +130,7 @@
 /* home cont */
 .home-cont {
   width: 100vw;
-  margin-top: 36px;
+  margin-top: 40px;
 }
 
 .body-hdr {
@@ -143,12 +148,25 @@
 
 .body-time  {
   margin-right: 2vw;
-  font-weight: lighter;
+  font-weight: 400;
 }
 
 .body-img {
   margin-top: 8px;
   width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.border-top {
+  border-top: 1px solid #C1E0FF;
+}
+
+.like-count {
+  width: 94vw;
+  margin: 4px 3vw 0;
+  display: flex;
+  align-items: center;
 }
 
 .loading-image  {

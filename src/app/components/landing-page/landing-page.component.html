@@ -36,14 +36,23 @@
     </div>
 
 <!-- home body  -->
-    <div *ngIf="activeHeader.home"  class="home-body" id="home-body">
-      <div *ngFor="let data of timeLine;index as index">
+    <div *ngIf="activeHeader.home" class="home-body" id="home-body">
+      <div *ngFor="let data of timeLine;index as ind">
         <div class="home-cont">
           <div class="body-hdr">  
             <div  class="body-nm"> {{ data['name'] }}  </div>
             <div  class="body-time"> {{ data['create_ts'] | dateFormat }}  </div>
           </div>
-          <img class="body-img" src="{{ data['image'] }}">
+          <img  class="body-img" src="{{ data['image'] }}">
+          <div  class="like-count">
+            <img style="margin-right: 2vw; height: 4vh; padding: 2px 0;" src="../../../assets/love-img.png" />
+            <span> {{ data['isLike'] ? 'You and ' + data['like_count'] + ' others'  : data['like_count'] }} </span>
+          </div>
+          <div class="body-img border-top" style="height: 6vh;" (click)="like(data, ind)"> 
+            <img class="like-img" *ngIf="data['isLike']" src="../../../assets/like.jpeg" />
+            <img class="like-img" *ngIf="!data['isLike']" src="../../../assets/non-like.png" />
+          </div>
+          <mat-divider  style="margin-top: 4px; border-top-width: 16px;"></mat-divider>
         </div>
       </div>
     </div>
