@@ -47,9 +47,12 @@ export class LandingPageComponent implements OnInit {
   chatHistory     : object[]            = [] 
   timeLineImages  : object[]            = []
 
-  //scroll veriable
+  //scroll variable
   isScroll        : boolean             = true
   loadValue       : number              = 5
+
+  //single click
+  isClicked       : boolean             = false
 
   @HostListener("document:scroll")
   scrollEmit()  {
@@ -123,11 +126,17 @@ export class LandingPageComponent implements OnInit {
   }
 
   private async likeStatus(data, index)  {
-    this.timeLine[index]['isLike'] = !this.timeLine[index]['isLike']
-    await this.dataService.likeTimeLineImage({
-      userId      : localStorage.getItem('userInfo'),
-      uniqueId    : data['unique_id']
-    })
+
+    if (!this.isClicked)  {
+      this.isClicked = true
+      this.timeLine[index]['isLike'] = !this.timeLine[index]['isLike']
+      await this.dataService.likeTimeLineImage({
+        userId      : localStorage.getItem('userInfo'),
+        uniqueId    : data['unique_id']
+      })
+      this.isClicked = false
+    }
+
   }
 
 ////////////////////////////////////////////////////////////////////////////////
