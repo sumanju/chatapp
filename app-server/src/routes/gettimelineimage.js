@@ -42,7 +42,6 @@ const router  = express.Router()
               for (j = i; j < data.length; j++) {
                 if (data[j]['like_by'] != null && data[j]['unique_id'] == id) {
                   count = count + 1
-                  console.log(data[j]['unique_id'], '=>', data[j]['user_id'], '-', data[j]['like_by'])
                   if (userId == data[j]['like_by'])  {
                     isLike = true 
                   }
@@ -56,7 +55,7 @@ const router  = express.Router()
                 image       : data[i]['image'],
                 create_ts   : data[i]['create_ts'],
                 unique_id   : data[i]['unique_id'],
-                like_count  : count,
+                like_count  : isLike ? count - 1 : count,
                 isLike      : isLike
               })
               i = j - 1
