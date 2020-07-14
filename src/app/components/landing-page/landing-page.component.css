@@ -153,6 +153,7 @@
 
 .body-img {
   margin-top: 8px;
+  max-height: 60vh;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
