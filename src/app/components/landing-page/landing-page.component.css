@@ -130,14 +130,14 @@
 /* home cont */
 .home-cont {
   width: 100vw;
-  margin-top: 40px;
+  margin-top: 22px;
 }
 
 .body-hdr {
   width: 100vw;
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: 15px;
   font-family: ProximaNova,Arial,Helvetica Neue,sans-serif;
 }
 
