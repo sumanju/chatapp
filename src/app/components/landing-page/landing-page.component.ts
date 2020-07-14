@@ -136,7 +136,6 @@ export class LandingPageComponent implements OnInit {
       })
       this.isClicked = false
     }
-
   }
 
 ////////////////////////////////////////////////////////////////////////////////
