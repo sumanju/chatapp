@@ -7,7 +7,7 @@ const router  = express.Router()
 router.post('/sendmsg', (req, res) => {
   const data  = req.body,
   queryString = `INSERT INTO user_msg(msg_from, msg_to, msg) VALUES 
-                 ('${encrypt.decryption(data.sndrId)}','${data.recvId}','${data.msg}')`
+                 ("${encrypt.decryption(data.sndrId)}","${data.recvId}","${data.msg}")`
   try {
     conn.query(queryString, (err) => {
       if (!!err) {
