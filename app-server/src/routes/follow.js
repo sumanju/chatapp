@@ -3,24 +3,24 @@ const conn    = require('../db-connection/mysql-db')
 const encrypt = require('../encrypt/crypto')
 const router  = express.Router()
 
-  router.post('/settimelineimage', (req, res) => {
-    const data        = req.body
-          queryString = `INSERT INTO user_timeline(user_id, name, image) VALUE ("${encrypt.decryption(data.userId)}", '${data.name}', '${data.image}')`
-
+  router.post('/getchathistory', (req, res)=> {
+    const data          = req.body,
+          queryString1  = `INSERT INTO follwer_list (user_id, follwing_id) 
+                           VALUES ("${data.userId}", "${data.followingId}")`
     try {
-      conn.query(queryString, (err, data) => {
+      conn.query(queryString1, (err) => {
         if (!!err) {
           res.status(400).send({
-            status : false
+            status : false  
           })
         } else {
           res.status(200).send({
-            status : true
+            status : true,
           })
         }
-      })
+      }) 
     } catch (err) {
-      res.status(200).send({
+      res.status(400).send({
         status : false
       })
     }

@@ -70,8 +70,9 @@ export class AppServiceService {
     return this.apiHandler.requestAPI('getProfileTimelineImage', userId)
   }
 
-  sendMsg(userInfo) : Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}sendmsg`, userInfo)
+  sendMsg(userInfo) : Promise<any> {
+    // return this.httpClient.post<any>(`${this.baseUrl}sendmsg`, userInfo)
+    return this.apiHandler.requestAPI('sendmsg', userInfo)
   }
 
   setTimeLineImage(userImage) : Promise<any> {

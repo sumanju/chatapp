@@ -1,7 +1,7 @@
 <div class="structure">
   <div class="header">
-    <img *ngIf="chatData['image'] == undefined" class="profile" src="../../../assets/default-image.jpeg"/>
-    <img *ngIf="chatData['image'] != undefined" class="profile" src="{{ chatData['image'] }}"/>
+    <img *ngIf="!chatData['image']" class="profile" src="../../../assets/default-image.jpeg"/>
+    <img *ngIf="chatData['image'] " class="profile" src="{{ chatData['image'] }}"/>
     <div> {{ chatData['name'] }} </div>
   </div>
 

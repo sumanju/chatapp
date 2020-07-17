@@ -6,6 +6,7 @@
   justify-content: space-evenly;
   align-items: center;
   overflow: hidden;
+  scroll-behavior: smooth;
 }
 
 .login-box {

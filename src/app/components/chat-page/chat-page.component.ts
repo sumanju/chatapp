@@ -65,7 +65,7 @@ export class ChatPageComponent implements OnInit , OnDestroy {
     })
   }
 
-  sendMsg(msg : string) {
+  private async sendMsg(msg : string) {
     this.chatList.push({
       'msg_from'  : '',
       'msg_to'    : this.chatData.userId,
@@ -75,13 +75,9 @@ export class ChatPageComponent implements OnInit , OnDestroy {
     this.msgForm.setValue({
       msg : null
     })
-    this.chatDetails.sendMsg(({ sndrId  : localStorage.getItem('userInfo'),
-                                recvId  : this.chatData.userId,
-                                msg     : msg})).subscribe(res => {
-      if (!res.status) {
-        alert('Network Problem')
-      }                        
-    })
+    await this.chatDetails.sendMsg({ sndrId  : localStorage.getItem('userInfo'),
+                                     recvId  : this.chatData.userId,
+                                     msg     : msg })
   }
 
 ////////////////////////////////////////////////////////////////////////////////

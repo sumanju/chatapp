@@ -6,16 +6,7 @@ const router  = express.Router()
 router.post('/profileImage', (req, res) => {
   const userId        = req.body.userInfo,
         base64Img     = req.body.base64,
-        status        = req.body.status
-        queryString1  = `INSERT INTO user_image VALUE ('${userId}', '${base64Img}')`,
-        queryString2  = `UPDATE user_image SET image = '${base64Img}' WHERE user_id = '${userId}'`
-  let   queryString
-
-  if (status) {
-    queryString = queryString1
-  } else {
-    queryString = queryString2
-  }
+        queryString   = `UPDATE user_info SET image = '${base64Img}' WHERE user_id = '${userId}'`
 
   try {
     conn.query(queryString, (err, data) => {

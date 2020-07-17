@@ -6,7 +6,7 @@ const router  = express.Router()
 router.post('/login', (req, res) => {
   const data        = req.body,
         queryString = `SELECT * FROM user_info
-                       WHERE user_id = \'${data.userId}\' AND password = \'${data.password}\'`
+                       WHERE user_id = "${data.userId}" AND password = "${data.password}"`
 
   try {
     conn.query(queryString, (err, row) => {

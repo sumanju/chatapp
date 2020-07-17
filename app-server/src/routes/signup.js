@@ -4,11 +4,12 @@ const router  = express.Router()
 
   router.post('/signup', (req, res) => {
     const data = req.body,
-          queryString = `INSERT INTO user_info 
-                         values(\'${data.name}\',\'${data.userId}\',\'${data.password}\')`
+          queryString = `INSERT INTO user_info (name, user_id, password)
+                         values("${data.name}","${data.userId}","${data.password}")`
     
     try {
       conn.query(queryString, (err) => {
+        console.log(err)
         if (!!err) {
           res.status(200).send({
             status : false
