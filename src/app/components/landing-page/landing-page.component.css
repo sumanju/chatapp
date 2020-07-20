@@ -139,13 +139,15 @@
   display: flex;
   justify-content: space-between;
   font-size: 15px;
-  align-items: baseline;
+  align-items: center;
   font-family: ProximaNova,Arial,Helvetica Neue,sans-serif;
 }
 
 .body-nm  {
-  margin-left: 2vw;
   font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .body-time  {
@@ -154,8 +156,15 @@
   font-size: 0.7rem;
 }
 
+.tl-prof-img  {
+  height: 1.7rem;
+  width: 1.7rem;
+  border-radius: 80px;
+  padding:  2vw 2vw;
+}
+
 .body-img {
-  margin-top: 8px;
+  margin-top: 4px;
   max-height: 60vh;
   width: 100%;
   display: flex;

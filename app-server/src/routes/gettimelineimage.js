@@ -8,14 +8,16 @@ const router  = express.Router()
     const loadValue        = req.body.loadValue,
           userId           =  encrypt.decryption(req.body.userId),
           queryString = `SELECT * FROM
-                         (SELECT t1.user_id as user_id, t1.name, t1.image, t1.unique_id, t1.create_ts, t2.user_id as like_by FROM 
+                         (SELECT t1.user_id as user_id, t1.image, t1.unique_id, t1.create_ts, t2.user_id as like_by FROM 
                          (SELECT * FROM user_timeline ORDER BY create_ts DESC LIMIT ${loadValue}) t1 LEFT JOIN user_like_info t2 ON t1.unique_id = t2.unique_id) t3
+                         LEFT JOIN 
+                         (SELECT image as profile_image, user_id AS userID, name FROM user_info) t4
+                         ON t3.user_id = t4.userID
                          ORDER BY create_ts DESC`
 
     try {
       conn.query(queryString, (err, data) => {
         if (!!err) {
-          console.log(err)
           res.status(400).send({
             status : false
           })
@@ -30,6 +32,7 @@ const router  = express.Router()
                 image       : data[i]['image'],
                 create_ts   : data[i]['create_ts'],
                 unique_id   : data[i]['unique_id'],
+                profile_img : data[i]['profile_image'],
                 like_count  : 0,
                 isLike      : false
               })
@@ -55,6 +58,7 @@ const router  = express.Router()
                 image       : data[i]['image'],
                 create_ts   : data[i]['create_ts'],
                 unique_id   : data[i]['unique_id'],
+                profile_img : data[i]['profile_image'],
                 like_count  : isLike ? count - 1 : count,
                 isLike      : isLike
               })

@@ -71,8 +71,11 @@ export class AppServiceService {
   }
 
   sendMsg(userInfo) : Promise<any> {
-    // return this.httpClient.post<any>(`${this.baseUrl}sendmsg`, userInfo)
     return this.apiHandler.requestAPI('sendmsg', userInfo)
+  }
+
+  followUpdate(userInfo)  : Promise<any>  {
+    return this.apiHandler.requestAPI('follow', userInfo)
   }
 
   setTimeLineImage(userImage) : Promise<any> {

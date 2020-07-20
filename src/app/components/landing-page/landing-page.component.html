@@ -40,7 +40,11 @@
       <div *ngFor="let data of timeLine;index as ind">
         <div class="home-cont">
           <div class="body-hdr">  
-            <div  class="body-nm"> {{ data['name'] }}  </div>
+            <div  class="body-nm"> 
+              <img  class="tl-prof-img" *ngIf="data['profile_img']" src="{{ data['profile_img'] }}"/>
+              <img  class="tl-prof-img" *ngIf="!data['profile_img']" src="../../../assets/default-image.jpeg"/>
+              <span> {{ data['name'] }}  </span>
+            </div>
             <div  class="body-time"> {{ data['create_ts'] | dateFormat }}  </div>
           </div>
           <img  class="body-img" src="{{ data['image'] }}">

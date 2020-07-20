@@ -5,7 +5,7 @@ const router  = express.Router()
 
   router.post('/settimelineimage', (req, res) => {
     const data        = req.body
-          queryString = `INSERT INTO user_timeline(user_id, name, image) VALUE ("${encrypt.decryption(data.userId)}", '${data.name}', '${data.image}')`
+          queryString = `INSERT INTO user_timeline(user_id, image) VALUE ("${encrypt.decryption(data.userId)}", "${data.image}")`
 
     try {
       conn.query(queryString, (err, data) => {

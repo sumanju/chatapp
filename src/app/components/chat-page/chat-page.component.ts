@@ -75,9 +75,12 @@ export class ChatPageComponent implements OnInit , OnDestroy {
     this.msgForm.setValue({
       msg : null
     })
-    await this.chatDetails.sendMsg({ sndrId  : localStorage.getItem('userInfo'),
-                                     recvId  : this.chatData.userId,
-                                     msg     : msg })
+    await Promise.all([ this.chatDetails.sendMsg({ sndrId  : localStorage.getItem('userInfo'),
+                                                   recvId  : this.chatData.userId,
+                                                   msg     : msg }),
+                        this.chatDetails.followUpdate({ userId    : localStorage.getItem('userInfo'),
+                                                        following : this.chatData.userId  })
+                      ])  
   }
 
 ////////////////////////////////////////////////////////////////////////////////

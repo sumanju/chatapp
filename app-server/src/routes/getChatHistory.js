@@ -5,15 +5,17 @@ const router  = express.Router()
 
   router.post('/getchathistory', (req, res)=> {
     const data          = req.body,
-          userId        = encrypt.decryption(data.userId)
-          queryString1  = `SELECT DISTINCT(msg_to) as userId, image, name FROM (SELECT * FROM user_msg t4 LEFT JOIN user_info t5 on t4.msg_to = t5.user_id) t1 
-                           WHERE msg_from = '${userId}'`
+          userId        = encrypt.decryption(data.userId),
+          queryString   = `SELECT * FROM
+                            (SELECT t2.user_id as userId, t2.name as name, t2.image as image, t1.create_ts as create_ts FROM follower_list t1 
+                            LEFT JOIN user_info t2 ON t1.following_id = t2.user_id
+                            WHERE t1.user_id = "${userId}") t3
+                           ORDER BY t3.create_ts DESC`
+
     try {
-      conn.query(queryString1, (err , data) => {
+      conn.query(queryString, (err , data) => {
         if (!!err) {
-          res.status(400).send({
-            status : false  
-          })
+          res.sendStatus(400)
         } else {
           res.status(200).send({
             status : true,
@@ -22,9 +24,7 @@ const router  = express.Router()
         }
       }) 
     } catch (err) {
-      res.status(400).send({
-        status : false
-      })
+      res.sendStatus(400)
     }
   })
 

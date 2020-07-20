@@ -3,26 +3,37 @@ const conn    = require('../db-connection/mysql-db')
 const encrypt = require('../encrypt/crypto')
 const router  = express.Router()
 
-  router.post('/getchathistory', (req, res)=> {
+  router.post('/follow', (req, res)=> {
     const data          = req.body,
-          queryString1  = `INSERT INTO follwer_list (user_id, follwing_id) 
-                           VALUES ("${data.userId}", "${data.followingId}")`
+          userId        = encrypt.decryption(data.userId),
+          queryString   = `SELECT * FROM follower_list 
+                           WHERE user_id = "${userId}" AND following_id = "${data.following}"`,
+          queryString1  = `INSERT INTO follower_list (user_id, following_id, create_ts) VALUES ("${userId}", "${data.following}", NOW())`,
+          queryString2  = `UPDATE follower_list SET create_ts = NOW() 
+                           WHERE user_id = "${userId}" AND following_id = "${data.following}"
+                           OR user_id = "${data.following}" AND following_id = "${userId}"`
+
     try {
-      conn.query(queryString1, (err) => {
+      conn.query(queryString, (err, data) => {
         if (!!err) {
-          res.status(400).send({
-            status : false  
-          })
+          res.sendStatus(400)
         } else {
-          res.status(200).send({
-            status : true,
-          })
+          
+          if (data.length ==  0)  {
+            conn.query(queryString1, (err)  =>  {
+              if (!!err)  res.sendStatus(400)
+              else  res.sendStatus(200)
+            })
+          } else  {
+            conn.query(queryString2, (err)  =>  {
+              if  (!!err) res.sendStatus(400)
+              else  res.sendStatus(200)
+            })
+          }
         }
       }) 
     } catch (err) {
-      res.status(400).send({
-        status : false
-      })
+      res.sendStatus(400)
     }
   })
 
