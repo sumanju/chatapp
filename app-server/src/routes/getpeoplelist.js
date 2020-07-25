@@ -7,7 +7,7 @@ const router  = express.Router()
   router.post('/getpeoplelist', (req, res) => {
     const encData     = req.body.userId,
           decryData   = encrypt.decryption(encData),
-          queryString = `SELECT * from user_info WHERE NOT user_id = '${decryData}'`
+          queryString = `SELECT user_id, name, image from user_info WHERE NOT user_id = '${decryData}'`
 
     try {
       conn.query(queryString, (err, usersData) => {

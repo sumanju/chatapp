@@ -7,7 +7,7 @@ const router  = express.Router()
 router.post('/getuserinfo', (req, res) => {
   const encData       = req.body.userInfo,
         decryData     = encrypt.decryption(encData),
-        queryString1  = `SELECT * FROM user_info WHERE user_id  = '${decryData}'`
+        queryString1  = `SELECT user_id, name, image FROM user_info WHERE user_id  = '${decryData}'`
 
   try {
     conn.query(queryString1, (err, userInfo) => {
