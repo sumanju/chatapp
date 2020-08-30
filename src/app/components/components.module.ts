@@ -9,9 +9,7 @@ import { AppComponentRouting
 import { ReactiveFormsModule 
         }                          from '@angular/forms';
 import { MatCardModule, 
-				 MatFormField, 
 				 MatFormFieldModule, 
-				 MatFormFieldControl,
 				 MatInputModule,
 				 MatDividerModule
 				}                          	from '@angular/material';

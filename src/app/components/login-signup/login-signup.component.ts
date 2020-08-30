@@ -6,7 +6,7 @@ import {  FormBuilder,
         }                   from '@angular/forms';
 import { Router 
         }                   from '@angular/router';
-import { AppServiceService } from 'src/app/app-service.service';
+import { AppServiceService } from '../../app-service.service';
 
 enum Operation {
   HOME,

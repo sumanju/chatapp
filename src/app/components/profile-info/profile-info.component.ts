@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppServiceService } from 'src/app/app-service.service';
-import { ImageProcessing } from 'src/utility/utility-image';
+import { AppServiceService } from '../../app-service.service';
+import { ImageProcessing } from '../../../utility/utility-image';
 
 @Component({
   selector: 'app-profile-info',

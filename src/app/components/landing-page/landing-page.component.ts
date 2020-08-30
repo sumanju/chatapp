@@ -3,9 +3,9 @@ import {  Component,
           HostListener
        }                   from '@angular/core';
 import { AppServiceService 
-       }                    from 'src/app/app-service.service';
+       }                    from '../../app-service.service';
 import { Router }           from '@angular/router';
-import { ImageProcessing }  from 'src/utility/utility-image';
+import { ImageProcessing }  from '../../../utility/utility-image';
 
 export enum ActiveStatus {
   HOME,
