@@ -1,1 +1,4 @@
-<router-outlet></router-outlet>
+<div class="device-screen-size" style="color:red" *ngIf="innerWidth > 600px">
+  Please switch to mobile view
+</div>
+<router-outlet *ngIf="innerWidth < 600px"></router-outlet>
